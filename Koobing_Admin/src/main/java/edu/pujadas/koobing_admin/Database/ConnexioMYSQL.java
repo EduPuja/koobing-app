@@ -4,16 +4,19 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 public class ConnexioMYSQL
 {
+    /**
+     * Metode que s'utiliza per poder connectarte a la base de dades MYSQL
+     * @return Statment if successful null if not successful
+     */
     public static Statement connexioMYSQL()
     {
         try
         {
             String url = "jdbc:mysql://localhost:3306/koobing_app";
+            //nom usuari
             String user = "root";
-
-            String password = "123asd123";
-            // Driver
-            //Class.forName("com.mysql.jdbc.Driver");
+            //contrassenya
+            String password = "";
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
             System.out.println("Connection successful! ");
