@@ -7,6 +7,8 @@ module edu.pujadas.koobing_admin {
     requires net.synedra.validatorfx;
     requires org.kordamp.bootstrapfx.core;
 
-    opens edu.pujadas.koobing_admin to javafx.fxml;
-    exports edu.pujadas.koobing_admin;
+    opens edu.pujadas to javafx.fxml;
+    exports edu.pujadas;
+    exports edu.pujadas.View;
+    opens edu.pujadas.View to javafx.fxml;
 }
