@@ -7,26 +7,20 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+import java.util.Objects;
 
 
 public class App extends Application
 {
     @Override
-    public void start(Stage stage) throws IOException
+    public void start(Stage stage) throws Exception
     {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("home.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
-        //String css = this.getClass().getResource("main.css").toExternalForm();
-        //scene.getStylesheets().addAll(css);
-
         stage.setTitle("Koobing App Admin!");
-
-        String libro = getClass().getResource("/img/libro.png").toExternalForm();
-        System.out.println(libro);
-
-
         stage.setScene(scene);
+        stage.getIcons().add(new Image(App.class.getResource("/edu/pujadas/koobing_admin/img/libro.png").toExternalForm())); // Agrega el icono
+        scene.getStylesheets().add(App.class.getResource("/edu/pujadas/koobing_admin/css/main.css").toExternalForm()); // Agrega el archivo CSS
         stage.show();
     }
 
