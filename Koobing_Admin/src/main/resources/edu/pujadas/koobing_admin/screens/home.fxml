@@ -28,7 +28,7 @@
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                      <image>
-                        <Image url="@img/man.png" />
+                        <Image url="@../img/man.png" />
                      </image>
                   </ImageView>
 
@@ -83,7 +83,7 @@
                         </Label>
                         <ImageView fx:id="logo" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
-                              <Image url="@img/libro.png" />
+                              <Image url="@../img/libro.png" />
                            </image>
                         </ImageView>
                      </children>
