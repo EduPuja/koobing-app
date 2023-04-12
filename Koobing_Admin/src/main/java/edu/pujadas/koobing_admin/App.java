@@ -19,8 +19,12 @@ public class App extends Application
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
         stage.setTitle("Koobing App Admin!");
         stage.setScene(scene);
-        stage.getIcons().add(new Image(App.class.getResource("/edu/pujadas/koobing_admin/img/libro.png").toExternalForm())); // Agrega el icono
-        scene.getStylesheets().add(App.class.getResource("/edu/pujadas/koobing_admin/css/main.css").toExternalForm()); // Agrega el archivo CSS
+        //icono
+        String icono ="/edu/pujadas/koobing_admin/img/libro.png";
+        stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
+        //css
+        String css = "/edu/pujadas/koobing_admin/css/main.css";
+        scene.getStylesheets().add(App.class.getResource(css).toExternalForm()); // Agrega el archivo CSS
         stage.show();
     }
 
