@@ -120,12 +120,22 @@
                                     <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
                                     <TableColumn fx:id="titolColum" prefWidth="90.0" text="Titol" />
                                     <TableColumn fx:id="versioColum" prefWidth="90.0" text="Versio" />
-                                    <TableColumn fx:id="dataPubliColum" prefWidth="90.0" text="Data Publi" />
+                                    <TableColumn prefWidth="90.0" text="Data Publi" />
                                  </columns>
                               </TableView2>
                            </content>
                       </Tab>
-                        <Tab fx:id="autorsTap" text="Autors" />
+                        <Tab fx:id="autorsTap" text="Autors">
+                           <content>
+                              <TableView2 prefHeight="439.0" prefWidth="745.0">
+                                 <columns>
+                                    <TableColumn prefWidth="248.0" text="ID Autor" />
+                                    <TableColumn prefWidth="248.0" text="Nom Autor" />
+                                    <TableColumn prefWidth="248.0" text="Data Naixament" />
+                                 </columns>
+                              </TableView2>
+                           </content>
+                        </Tab>
                     </tabs>
                   </TabPane>
                </children>
