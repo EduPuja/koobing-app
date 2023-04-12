@@ -1,0 +1,5 @@
+SELECT l.isbn,a.nom_autor,e.nom_editorial,i.nom_idioma,g.descrip,l.titol,l.versio,l.data_publi FROM llibre l 
+INNER JOIN autor a ON a.id_autor = l.id_autor 
+INNER JOIN editorial e ON e.id_editorial = l.id_editor
+INNER JOIN idioma i ON i.id_idioma = l.id_idioma
+INNER JOIN genere g ON g.id_genere = l.id_genere
