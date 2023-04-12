@@ -96,7 +96,7 @@
                                  <children>
                                     <TableView2 fx:id="taulaUsuaris" prefHeight="440.0" prefWidth="745.0">
                                        <columns>
-                                          <TableColumn fx:id="idColum" minWidth="15.0" prefWidth="105.0" text="ID Usuari" />
+                                          <TableColumn fx:id="idUsuari" minWidth="15.0" prefWidth="105.0" text="ID Usuari" />
                                           <TableColumn fx:id="dniColum" minWidth="15.0" prefWidth="105.0" text="DNI" />
                                           <TableColumn fx:id="nomColum" minWidth="15.0" prefWidth="105.0" text="Nom" />
                                           <TableColumn fx:id="cognomColum" minWidth="15.0" prefWidth="105.0" text="Cognom" />
@@ -109,7 +109,22 @@
                               </VBox>
                            </content>
                       </Tab>
-                      <Tab fx:id="llibresTab" text="Llibres" />
+                      <Tab fx:id="llibresTab" text="Llibres">
+                           <content>
+                              <TableView2>
+                                 <columns>
+                                    <TableColumn fx:id="isbnColum" prefWidth="90.0" text="ISBN" />
+                                    <TableColumn fx:id="autorColum" prefWidth="90.0" text="Autor" />
+                                    <TableColumn fx:id="editorColum" prefWidth="90.0" text="Editor" />
+                                    <TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
+                                    <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
+                                    <TableColumn fx:id="titolColum" prefWidth="90.0" text="Titol" />
+                                    <TableColumn fx:id="versioColum" prefWidth="90.0" text="Versio" />
+                                    <TableColumn fx:id="dataPubliColum" prefWidth="90.0" text="Data Publi" />
+                                 </columns>
+                              </TableView2>
+                           </content>
+                      </Tab>
                         <Tab fx:id="autorsTap" text="Autors" />
                     </tabs>
                   </TabPane>
