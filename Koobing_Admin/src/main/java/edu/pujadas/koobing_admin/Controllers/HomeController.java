@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioAutor;
+import edu.pujadas.koobing_admin.Database.GestioEditorial;
 import edu.pujadas.koobing_admin.Database.GestioLlibre;
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.*;
@@ -175,6 +176,8 @@ public class HomeController implements Initializable
         {
             GestioLlibre gestioLlibre = new GestioLlibre();
             GestioAutor gestioAutor = new GestioAutor();
+            GestioEditorial gestioEditorial = new GestioEditorial();
+            GestioIdioma gestioIdioma = new GestioIdioma();
             ResultSet rs =gestioLlibre.conusltar10Llibres();
 
 
@@ -182,7 +185,11 @@ public class HomeController implements Initializable
             {
 
                 Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
-                Llibre llibre =new Llibre(rs.getInt("ISBN",autor);
+                Editorial  editorial = gestioEditorial.findEditorial(rs.getInt("id_editorial"));
+                Idioma idioma =gestioIdioma.findIdioma(rs.getInt("id_idioma"));
+                Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,);
+                //idioma
+                //genere
                         //gestioAutor.consultarAutor(rs.getInt("idAutor" )));
 
             }
