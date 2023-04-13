@@ -64,26 +64,28 @@ public class HomeController implements Initializable
                 Usuari user = new Usuari(usersResult.getInt("id_usuari"),usersResult.getString("dni")
                         ,avatar,usersResult.getString("nom"),usersResult.getString("cognom"),
                         usersResult.getDate("data_naix"),usersResult.getString("email"),usersResult.getString("password"));
-
-                listsUsuaris.add(user)
-                //observablelist
-                obserListUser = FXCollections.observableArrayList(
-                        user
-                );
-
-
-
-                idUsuari.setCellValueFactory(new PropertyValueFactory<>("id"));
-                dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
-                nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
-                cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
-                dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
-                emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
-                passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
-                taulaUsuaris.setItems(obserListUser);
+                listsUsuaris.add(user);
 
 
             }
+
+
+            //observablelist
+            obserListUser = FXCollections.observableArrayList(
+                    listsUsuaris
+            );
+
+
+
+            idUsuari.setCellValueFactory(new PropertyValueFactory<>("id"));
+            dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
+            nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
+            dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
+            emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
+            passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
+            taulaUsuaris.setItems(obserListUser);
+
         }
         catch (Exception e)
         {
