@@ -16,6 +16,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable
 {
 
+    // todo avatar del treballador quant inicia session
     public ImageView avatarWorker;
 
     // ---- Usuari Stuff ----   //
@@ -33,22 +35,39 @@ public class HomeController implements Initializable
     public TableColumn<Usuari,String> dniColum;
     public TableColumn<Usuari,String> nomColum;
     public TableColumn<Usuari,String> cognomColum;
-    public TableColumn<Usuari, LocalDate> dataNaixColum;
+    public TableColumn<Usuari, Date> dataNaixColum;
     public TableColumn<Usuari,String> emailColum;
     public TableColumn<Usuari,String> passwordColum;
 
+    //arraylist usuaris
     private final ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
   
-    // ---- End usuari Stuff ---- //
+
+
+    // ---- Autors Stuff ---- //
     public Tab autorsTap;
-    public TableColumn idAutorColum;
-    public TableColumn nomAutorColum;
-    public TableColumn dataNaixAutorColum;
+
+    public TableView2<Autor> taulaAutors;
+    public TableColumn<Autor,Integer> idAutorColum;
+    public TableColumn<Autor,String> nomAutorColum;
+    public TableColumn<Autor,Date> dataNaixAutorColum;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        // todo agafar de la base de dades
+
+        infoUsuaris();
+
+
+    }
+
+
+    /**
+     * Metode que es utilizat en el initialize() 
+     */
+    private void infoUsuaris()
+    {
         try
         {   // usuaris
             GestioUsuari gestioUsuari = new GestioUsuari();
@@ -74,12 +93,12 @@ public class HomeController implements Initializable
             }
 
 
-            //observablelist
+            //observablelist usuaris
             ObservableList<Usuari> obserListUser = FXCollections.observableArrayList(
                     listsUsuaris
             );
 
-
+            //stuff taula usuaris
 
             idUsuari.setCellValueFactory(new PropertyValueFactory<>("id"));
             dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
@@ -97,29 +116,6 @@ public class HomeController implements Initializable
         }
 
 
-
-
-       /* Usuari usuari1 = new Usuari("12345678A", null, "Pepe", "García", LocalDate.of(1990, 5, 10), "pepe@gmail.com", "contraseña");
-        Usuari usuari2 = new Usuari("98765432B", null, "María", "Gómez", LocalDate.of(1995, 8, 20), "maria@gmail.com", "contraseña");
-        // Crear un ObservableList de Usuari
-        listaUsuaris = FXCollections.observableArrayList(
-                usuari1,
-                usuari2
-        );
-
-        // Configurar las columnas del TableView
-        //idUsuari.setCellValueFactory(new PropertyValueFactory<>("idUsuari"));
-        dniColum.setCellValueFactory(new PropertyValueFactory<>("DNI"));
-        nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
-        dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
-        emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
-        passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
-
-        // Agregar los datos al TableView
-        taulaUsuaris.setItems(listaUsuaris);
-        //taulaUsuaris.getColumns().addAll(dniColum, nomColum, cognomColum, dataNaixColum, emailColum,passwordColum);
-        */
 
     }
 
