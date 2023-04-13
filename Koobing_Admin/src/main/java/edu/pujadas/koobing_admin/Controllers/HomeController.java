@@ -181,8 +181,8 @@ public class HomeController implements Initializable
             while (rs.next())
             {
 
-
-                //Llibre llibre =new Llibre(rs.getInt("ISBN"),
+                Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
+                Llibre llibre =new Llibre(rs.getInt("ISBN",autor);
                         //gestioAutor.consultarAutor(rs.getInt("idAutor" )));
 
             }
