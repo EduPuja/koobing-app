@@ -104,6 +104,7 @@ public class GestioUsuari
                 System.out.println("Email: " +rs.getString("email"));
                 System.out.println("Password: " +rs.getString("password"));
             }
+            rs.close();
             con.close();
         }
         catch (Exception e)
