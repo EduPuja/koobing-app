@@ -1,6 +1,5 @@
 package edu.pujadas.koobing_admin.Controllers;
 
-import edu.pujadas.koobing_admin.Database.ConnexioMYSQL;
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.Usuari;
 import javafx.collections.FXCollections;
@@ -19,6 +18,7 @@ import java.net.URL;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable
@@ -36,9 +36,9 @@ public class HomeController implements Initializable
     public TableColumn<Usuari, LocalDate> dataNaixColum;
     public TableColumn<Usuari,String> emailColum;
     public TableColumn<Usuari,String> passwordColum;
-    private ObservableList<Usuari> listaUsuaris;
+    private ObservableList<Usuari> obserListUser;
 
-
+    private ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
     // ---- End usuari Stuff ---- //
 
     @Override
@@ -64,21 +64,23 @@ public class HomeController implements Initializable
                 Usuari user = new Usuari(usersResult.getInt("id_usuari"),usersResult.getString("dni")
                         ,avatar,usersResult.getString("nom"),usersResult.getString("cognom"),
                         usersResult.getDate("data_naix"),usersResult.getString("email"),usersResult.getString("password"));
+
+                listsUsuaris.add(user)
                 //observablelist
-                listaUsuaris = FXCollections.observableArrayList(
+                obserListUser = FXCollections.observableArrayList(
                         user
                 );
 
 
 
-                idUsuari.setCellValueFactory(new PropertyValueFactory<>("idUsuari"));
-                dniColum.setCellValueFactory(new PropertyValueFactory<>("DNI"));
+                idUsuari.setCellValueFactory(new PropertyValueFactory<>("id"));
+                dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
                 nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
                 cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
                 dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
                 emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
                 passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
-                taulaUsuaris.setItems(listaUsuaris);
+                taulaUsuaris.setItems(obserListUser);
 
 
             }
