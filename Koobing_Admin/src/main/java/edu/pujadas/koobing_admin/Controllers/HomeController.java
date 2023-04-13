@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioAutor;
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.collections.FXCollections;
@@ -52,19 +53,21 @@ public class HomeController implements Initializable
     public TableColumn<Autor,String> nomAutorColum;
     public TableColumn<Autor,Date> dataNaixAutorColum;
 
+    private final ArrayList<Autor> listAutores = new ArrayList<Autor>();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
 
         infoUsuaris();
-
+        infoAutor();
 
     }
 
 
     /**
-     * Metode que es utilizat en el initialize() 
+     * Metode que es utilizat en el initialize()
      */
     private void infoUsuaris()
     {
@@ -91,7 +94,7 @@ public class HomeController implements Initializable
 
 
             }
-
+            usersResult.close();
 
             //observablelist usuaris
             ObservableList<Usuari> obserListUser = FXCollections.observableArrayList(
@@ -117,6 +120,39 @@ public class HomeController implements Initializable
 
 
 
+    }
+
+    /**
+     * Metode per recollir la info de un autor de la base de dades
+     */
+    private void infoAutor()
+    {
+        try
+        {
+            GestioAutor gestioAutor = new GestioAutor();
+            ResultSet rs = gestioAutor.consultar10Autors();
+
+            while (rs.next())
+            {
+                Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nom_autor"),rs.getDate("data_naix"));
+                listAutores.add(autor);
+            }
+            //observablelist autors
+            ObservableList<Autor> observableListAutors = FXCollections.observableArrayList(
+                    listAutores
+            );
+
+            idAutorColum.setCellValueFactory(new PropertyValueFactory<>("idAutor"));
+            nomAutorColum.setCellValueFactory(new PropertyValueFactory<>("nomAutor"));
+            dataNaixAutorColum.setCellValueFactory(new PropertyValueFactory<>("dataNaixAutor"));
+            taulaAutors.setItems(observableListAutors);
+
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }
