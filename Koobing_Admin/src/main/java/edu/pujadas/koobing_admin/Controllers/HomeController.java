@@ -1,14 +1,10 @@
 package edu.pujadas.koobing_admin.Controllers;
 
-import edu.pujadas.koobing_admin.Database.GestioAutor;
-import edu.pujadas.koobing_admin.Database.GestioEditorial;
-import edu.pujadas.koobing_admin.Database.GestioLlibre;
-import edu.pujadas.koobing_admin.Database.GestioUsuari;
+import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -28,7 +24,6 @@ import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -188,7 +183,7 @@ public class HomeController implements Initializable
                 Editorial  editorial = gestioEditorial.findEditorial(rs.getInt("id_editorial"));
                 Idioma idioma =gestioIdioma.findIdioma(rs.getInt("id_idioma"));
                 Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,);
-                //idioma
+
                 //genere
                         //gestioAutor.consultarAutor(rs.getInt("idAutor" )));
 

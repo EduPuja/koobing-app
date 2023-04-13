@@ -1,4 +1,4 @@
-package edu.pujadas.koobing_admin.Controllers;
+package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Database.ConnexioMYSQL;
 import edu.pujadas.koobing_admin.Models.Idioma;
