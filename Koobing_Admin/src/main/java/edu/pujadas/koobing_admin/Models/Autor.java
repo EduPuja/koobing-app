@@ -1,14 +1,14 @@
 package edu.pujadas.koobing_admin.Models;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Autor
 {
     int idAutor;
     String nomAutor;
-    LocalDate dataNaixAutor;
+    Date dataNaixAutor;
 
-    public Autor(int idAutor, String nomAutor, LocalDate dataNaixAutor)
+    public Autor(int idAutor, String nomAutor, Date dataNaixAutor)
     {
         this.idAutor = idAutor;
         this.nomAutor = nomAutor;
@@ -35,12 +35,12 @@ public class Autor
         this.nomAutor = nomAutor;
     }
 
-    public LocalDate getDataNaixAutor()
+    public Date getDataNaixAutor()
     {
         return dataNaixAutor;
     }
 
-    public void setDataNaixAutor(LocalDate dataNaixAutor)
+    public void setDataNaixAutor(Date dataNaixAutor)
     {
         this.dataNaixAutor = dataNaixAutor;
     }
