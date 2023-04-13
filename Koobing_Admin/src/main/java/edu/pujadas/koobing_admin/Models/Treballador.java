@@ -8,11 +8,11 @@ public class Treballador extends Persona
 {
     private String numSegSocial;
     private boolean isAdmin;
-    public Treballador(String dni, Image avatar, String nom, String cognom, LocalDate dataNaix, String email, String password,
+    public Treballador(int id,String dni, Image avatar, String nom, String cognom, LocalDate dataNaix, String email, String password,
                        String numSegSocial,boolean isAdmin)
     {
 
-        super(dni, avatar, nom, cognom, dataNaix, email, password);
+        super(id,dni, avatar, nom, cognom, dataNaix, email, password);
         this.numSegSocial = numSegSocial;
         this.isAdmin = isAdmin;
 

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 public class Persona
 {
 
+    private int id;
     private String dni;
     private Image avatar;
     private String nom;
@@ -16,8 +17,9 @@ public class Persona
     private String password;
 
 
-    public Persona(String dni, Image avatar, String nom, String cognom, LocalDate dataNaix, String email, String password)
+    public Persona(int id,String dni, Image avatar, String nom, String cognom, LocalDate dataNaix, String email, String password)
     {
+        this.id = id;
         this.dni=dni;
         this.avatar = avatar;
         this.nom = nom;
@@ -27,9 +29,19 @@ public class Persona
         this.password = password;
     }
 
-    public String getDNI()
+    public int getId()
     {
-        return this.dni;
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public String getDni()
+    {
+        return dni;
     }
 
     public void setDni(String dni)

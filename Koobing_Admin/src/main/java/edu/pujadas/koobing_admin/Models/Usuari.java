@@ -7,9 +7,9 @@ import java.time.LocalDate;
 public class Usuari extends Persona
 {
 
-    public Usuari(String dni, Image avatar, String nom, String cognom, LocalDate dataNaix, String email, String password)
+    public Usuari(int id,String dni, Image avatar, String nom, String cognom, LocalDate dataNaix, String email, String password)
     {
-        super(dni, avatar, nom, cognom, dataNaix, email, password);
+        super(id,dni, avatar, nom, cognom, dataNaix, email, password);
     }
 
 
