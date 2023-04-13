@@ -49,8 +49,8 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="homeBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE" />
-                        <Button fx:id="usuariBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" />
+                        <Button fx:id="homeBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE"  />
+                        <Button fx:id="usuariBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" onAction="#switchToUsuari" />
                         <Button fx:id="trebaladorBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
                         <Button fx:id="llibreBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
                         <Button fx:id="autorBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />

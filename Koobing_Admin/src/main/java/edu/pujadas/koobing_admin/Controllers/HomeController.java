@@ -9,11 +9,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.ByteArrayInputStream;
@@ -30,6 +34,11 @@ public class HomeController implements Initializable
 {
 
     // todo avatar del treballador quant inicia session
+
+
+    private Stage stage ;
+    private Scene scene;
+    private Parent root;
     public ImageView avatarWorker;
 
     // ---- Usuari Stuff ----   //
@@ -158,9 +167,13 @@ public class HomeController implements Initializable
         }
     }
 
-    public void switchToUsuari(ActionEvent event)
+    public void switchToUsuari(ActionEvent event) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/usuari.fxml""))
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/usuari.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
