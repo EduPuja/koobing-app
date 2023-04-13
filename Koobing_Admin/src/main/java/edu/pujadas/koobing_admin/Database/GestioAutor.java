@@ -75,4 +75,19 @@ public class GestioAutor
         }
         return null;
     }
+
+    public Autor consultarAutor(int idAutor)
+    {
+        try
+        {
+            Statement con = ConnexioMYSQL.connexioMYSQL();
+            ResultSet rs = con.executeQuery("SELECT * FROM autor where id_autor="+ idAutor);
+            Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nom_autor"),rs.getDate("data_naix"));
+            return autor;
+        }
+        catch (Exception e)
+        {
+            System.out.println("No se ha trobat cap autor :(");
+        }
+    }
 }

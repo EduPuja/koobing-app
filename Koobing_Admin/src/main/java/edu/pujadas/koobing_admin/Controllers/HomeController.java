@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioAutor;
+import edu.pujadas.koobing_admin.Database.GestioLlibre;
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.collections.FXCollections;
@@ -54,7 +55,7 @@ public class HomeController implements Initializable
 
     //arraylist usuaris
     private final ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
-  
+
 
 
     // ---- Autors Stuff ---- //
@@ -170,7 +171,26 @@ public class HomeController implements Initializable
 
     private void infoLlibre()
     {
+        try
+        {
+            GestioLlibre gestioLlibre = new GestioLlibre();
+            GestioAutor gestioAutor = new GestioAutor();
+            ResultSet rs =gestioLlibre.conusltar10Llibres();
 
+
+            while (rs.next())
+            {
+
+
+                Llibre llibre =new Llibre(rs.getInt("ISBN"),
+                        gestioAutor.consultarAutor(rs.getInt("idAutor" )));
+
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
