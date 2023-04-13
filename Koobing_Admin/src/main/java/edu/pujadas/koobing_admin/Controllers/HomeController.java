@@ -5,6 +5,9 @@ import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -153,6 +156,11 @@ public class HomeController implements Initializable
         {
             e.printStackTrace();
         }
+    }
+
+    public void switchToUsuari(ActionEvent event)
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/usuari.fxml""))
     }
 
 }
