@@ -129,9 +129,9 @@
                            <content>
                               <TableView2 prefHeight="439.0" prefWidth="745.0">
                                  <columns>
-                                    <TableColumn prefWidth="248.0" text="ID Autor" />
-                                    <TableColumn prefWidth="248.0" text="Nom Autor" />
-                                    <TableColumn prefWidth="248.0" text="Data Naixament" />
+                                    <TableColumn  fx:id="idAutorColum" prefWidth="248.0" text="ID Autor" />
+                                    <TableColumn fx:id="nomAutorColum" prefWidth="248.0" text="Nom Autor" />
+                                    <TableColumn fx:id="dataNaixAutorColum" prefWidth="248.0" text="Data Naixament" />
                                  </columns>
                               </TableView2>
                            </content>
