@@ -168,6 +168,12 @@ public class HomeController implements Initializable
     }
 
 
+    private void infoLlibre()
+    {
+
+    }
+
+
     // CANVIS DE PANTALLA
 
 
