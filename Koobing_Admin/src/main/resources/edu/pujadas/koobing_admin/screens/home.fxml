@@ -120,7 +120,7 @@
                                     <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
                                     <TableColumn fx:id="titolColum" prefWidth="90.0" text="Titol" />
                                     <TableColumn fx:id="versioColum" prefWidth="90.0" text="Versio" />
-                                    <TableColumn prefWidth="90.0" text="Data Publi" />
+                                    <TableColumn fx:id="dataPubliColum" prefWidth="90.0" text="Data Publi" />
                                  </columns>
                               </TableView2>
                            </content>
