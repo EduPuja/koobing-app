@@ -76,7 +76,7 @@ public class GestioAutor
         return null;
     }
 
-    public Autor consultarAutor(int idAutor)
+    public Autor findAutor(int idAutor)
     {
         try
         {
