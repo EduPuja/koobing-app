@@ -82,7 +82,7 @@ public class GestioUsuari
     /**
      * Metode per consultar els usuaris de la base de dades
      */
-    public void consultarUsuari()
+    public void consultarUsuaris()
     {
         //todo consultar usuari
 
@@ -91,6 +91,9 @@ public class GestioUsuari
             Statement con = ConnexioMYSQL.connexioMYSQL();
             String query = "select * from usuari";
             ResultSet rs = con.executeQuery(query);
+
+
+
             while (rs.next())
             {
                 System.out.println("Id_usuari: " +rs.getInt("id_usuari"));
@@ -107,6 +110,27 @@ public class GestioUsuari
         {
             System.out.println("No se han trobat usuaris ;( ");
 
+
         }
     }
+
+
+    public ResultSet consultar10Usuaris()
+    {
+        try
+        {
+            Statement con = ConnexioMYSQL.connexioMYSQL();
+            String query = "select  * from usuari limit 10 ";
+            ResultSet rs = con.executeQuery(query);
+
+            return  rs;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Hi ha hagut un error ");
+        }
+
+        return null;
+    }
+
 }
