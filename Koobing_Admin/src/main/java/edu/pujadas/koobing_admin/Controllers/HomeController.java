@@ -182,8 +182,8 @@ public class HomeController implements Initializable
             {
 
 
-                Llibre llibre =new Llibre(rs.getInt("ISBN"),
-                        gestioAutor.consultarAutor(rs.getInt("idAutor" )));
+                //Llibre llibre =new Llibre(rs.getInt("ISBN"),
+                        //gestioAutor.consultarAutor(rs.getInt("idAutor" )));
 
             }
         }

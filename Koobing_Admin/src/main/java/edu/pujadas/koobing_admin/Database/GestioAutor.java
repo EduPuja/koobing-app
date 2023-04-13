@@ -89,5 +89,6 @@ public class GestioAutor
         {
             System.out.println("No se ha trobat cap autor :(");
         }
+        return null;
     }
 }
