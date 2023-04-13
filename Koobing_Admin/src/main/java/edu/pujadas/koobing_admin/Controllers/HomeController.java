@@ -65,6 +65,10 @@ public class HomeController implements Initializable
     private final ArrayList<Autor> listAutores = new ArrayList<Autor>();
 
 
+
+    // ---- Llibres stuff ---- //
+
+    private final ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -188,10 +192,15 @@ public class HomeController implements Initializable
                 Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,genere,rs.getString("titol")
                         ,rs.getInt("versio"),rs.getDate("data_publi"));
 
-                //genere
-                        //gestioAutor.consultarAutor(rs.getInt("idAutor" )));
+
 
             }
+
+            //observablelist llibres
+            ObservableList<Llibre> observableListLlibre = FXCollections.observableArrayList(
+                    listLlibres
+            );
+
         }
         catch (Exception e)
         {
