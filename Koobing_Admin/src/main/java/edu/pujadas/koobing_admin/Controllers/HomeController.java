@@ -173,6 +173,8 @@ public class HomeController implements Initializable
             GestioAutor gestioAutor = new GestioAutor();
             GestioEditorial gestioEditorial = new GestioEditorial();
             GestioIdioma gestioIdioma = new GestioIdioma();
+            GestioGenere gestioGenere = new GestioGenere();
+
             ResultSet rs =gestioLlibre.conusltar10Llibres();
 
 
@@ -182,7 +184,9 @@ public class HomeController implements Initializable
                 Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
                 Editorial  editorial = gestioEditorial.findEditorial(rs.getInt("id_editorial"));
                 Idioma idioma =gestioIdioma.findIdioma(rs.getInt("id_idioma"));
-                Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,);
+                Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
+                Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,genere,rs.getString("titol")
+                        ,rs.getInt("versio"),rs.getDate("data_publi"));
 
                 //genere
                         //gestioAutor.consultarAutor(rs.getInt("idAutor" )));
