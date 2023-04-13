@@ -81,7 +81,7 @@ public class GestioAutor
         try
         {
             Statement con = ConnexioMYSQL.connexioMYSQL();
-            ResultSet rs = con.executeQuery("SELECT * FROM autor where id_autor="+ idAutor);
+            ResultSet rs = con.executeQuery("SELECT * FROM `autor` WHERE id_autor= "+ idAutor);
             Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nom_autor"),rs.getDate("data_naix"));
             return autor;
         }

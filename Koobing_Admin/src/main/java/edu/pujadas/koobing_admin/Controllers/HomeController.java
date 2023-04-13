@@ -87,7 +87,7 @@ public class HomeController implements Initializable
 
         infoUsuaris();
         infoAutor();
-
+        infoLlibre();
     }
 
 
@@ -197,13 +197,18 @@ public class HomeController implements Initializable
             while (rs.next())
             {
 
-                Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
-                Editorial  editorial = gestioEditorial.findEditorial(rs.getInt("id_editorial"));
-                Idioma idioma =gestioIdioma.findIdioma(rs.getInt("id_idioma"));
+
                 Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
+                Idioma idioma =gestioIdioma.findIdioma(rs.getInt("id_idioma"));
+                Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
+
+                Editorial  editorial = gestioEditorial.findEditorial(rs.getInt("id_editorial"));
+
                 Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,genere,rs.getString("titol")
                         ,rs.getInt("versio"),rs.getDate("data_publi"));
 
+
+                listLlibres.add(llibre);
 
 
             }
@@ -212,6 +217,19 @@ public class HomeController implements Initializable
             ObservableList<Llibre> observableListLlibre = FXCollections.observableArrayList(
                     listLlibres
             );
+
+
+
+            isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+            autorColum.setCellValueFactory(new PropertyValueFactory<>("autor"));
+            editorColum.setCellValueFactory(new PropertyValueFactory<>("editor"));
+            idiomaColum.setCellValueFactory(new PropertyValueFactory<>("idioma"));
+            genereColum.setCellValueFactory(new PropertyValueFactory<>("genere"));
+            titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
+            versioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
+            dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
+
+            taulaLlibres.setItems(observableListLlibre);
 
         }
         catch (Exception e)
