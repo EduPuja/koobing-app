@@ -36,17 +36,21 @@ public class HomeController implements Initializable
     public TableColumn<Usuari, LocalDate> dataNaixColum;
     public TableColumn<Usuari,String> emailColum;
     public TableColumn<Usuari,String> passwordColum;
-    private ObservableList<Usuari> obserListUser;
 
-    private ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
+    private final ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
+  
     // ---- End usuari Stuff ---- //
+    public Tab autorsTap;
+    public TableColumn idAutorColum;
+    public TableColumn nomAutorColum;
+    public TableColumn dataNaixAutorColum;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         // todo agafar de la base de dades
         try
-        {
+        {   // usuaris
             GestioUsuari gestioUsuari = new GestioUsuari();
             ResultSet usersResult = gestioUsuari.consultar10Usuaris();
 
@@ -71,7 +75,7 @@ public class HomeController implements Initializable
 
 
             //observablelist
-            obserListUser = FXCollections.observableArrayList(
+            ObservableList<Usuari> obserListUser = FXCollections.observableArrayList(
                     listsUsuaris
             );
 
