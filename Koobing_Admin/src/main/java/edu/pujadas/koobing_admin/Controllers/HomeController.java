@@ -1,5 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.ConnexioMYSQL;
+import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.Usuari;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +13,7 @@ import javafx.scene.image.ImageView;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -38,7 +41,25 @@ public class HomeController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         // todo agafar de la base de dades
-        Usuari usuari1 = new Usuari("12345678A", null, "Pepe", "García", LocalDate.of(1990, 5, 10), "pepe@gmail.com", "contraseña");
+        try
+        {
+            GestioUsuari gestioUsuari = new GestioUsuari();
+            ResultSet usersResult = gestioUsuari.consultar10Usuaris();
+
+            while (usersResult.next())
+            {
+                Usuari user = new Usuari(usersResult.)
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+
+       /* Usuari usuari1 = new Usuari("12345678A", null, "Pepe", "García", LocalDate.of(1990, 5, 10), "pepe@gmail.com", "contraseña");
         Usuari usuari2 = new Usuari("98765432B", null, "María", "Gómez", LocalDate.of(1995, 8, 20), "maria@gmail.com", "contraseña");
         // Crear un ObservableList de Usuari
         listaUsuaris = FXCollections.observableArrayList(
@@ -47,7 +68,7 @@ public class HomeController implements Initializable
         );
 
         // Configurar las columnas del TableView
-        idUsuari.setCellValueFactory(new PropertyValueFactory<>("idUsuari"));
+        //idUsuari.setCellValueFactory(new PropertyValueFactory<>("idUsuari"));
         dniColum.setCellValueFactory(new PropertyValueFactory<>("DNI"));
         nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
         cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
@@ -58,7 +79,7 @@ public class HomeController implements Initializable
         // Agregar los datos al TableView
         taulaUsuaris.setItems(listaUsuaris);
         //taulaUsuaris.getColumns().addAll(dniColum, nomColum, cognomColum, dataNaixColum, emailColum,passwordColum);
-
+        */
 
     }
 
