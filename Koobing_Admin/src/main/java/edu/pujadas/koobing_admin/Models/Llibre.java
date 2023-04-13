@@ -1,6 +1,6 @@
 package edu.pujadas.koobing_admin.Models;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Llibre
 {
@@ -11,9 +11,9 @@ public class Llibre
     Genere genere;
     String titol;
     int versio;
-    LocalDate dataPubli;
+    Date dataPubli;
 
-    public Llibre(int ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, LocalDate dataPubli)
+    public Llibre(int ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli)
     {
         this.ISBN = ISBN;
         this.autor = autor;
@@ -95,12 +95,12 @@ public class Llibre
         this.versio = versio;
     }
 
-    public LocalDate getDataPubli()
+    public Date getDataPubli()
     {
         return dataPubli;
     }
 
-    public void setDataPubli(LocalDate dataPubli)
+    public void setDataPubli(Date dataPubli)
     {
         this.dataPubli = dataPubli;
     }
