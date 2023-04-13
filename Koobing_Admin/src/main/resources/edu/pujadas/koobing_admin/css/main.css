@@ -1,7 +1,6 @@
 #homeBtn
 {
-    /*font-family: "Times New Roman", ;*/
-    background-color: red;
+  --fxbackground-color: red;
 
 }
 

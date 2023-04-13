@@ -50,7 +50,7 @@
                      </rowConstraints>
                      <children>
                         <Button fx:id="homeBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" />
+                        <Button fx:id="usuariBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />
