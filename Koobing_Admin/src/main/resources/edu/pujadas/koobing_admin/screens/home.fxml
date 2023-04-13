@@ -51,14 +51,14 @@
                      <children>
                         <Button fx:id="homeBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE" />
                         <Button fx:id="usuariBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Biblioteca" textFill="WHITE" GridPane.rowIndex="5" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="6" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="7" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="8" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Reserva" textFill="WHITE" GridPane.rowIndex="9" />
+                        <Button fx:id="trebaladorBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Button fx:id="llibreBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
+                        <Button fx:id="autorBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />
+                        <Button fx:id="bibliotecaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Biblioteca" textFill="WHITE" GridPane.rowIndex="5" />
+                        <Button fx:id="idiomaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="6" />
+                        <Button fx:id="genereBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="7" />
+                        <Button fx:id="editioralBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="8" />
+                        <Button fx:id="reservaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Reserva" textFill="WHITE" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
                </children>
@@ -129,7 +129,7 @@
                            <content>
                               <TableView2 fx:id="taulaAutors" prefHeight="439.0" prefWidth="745.0">
                                  <columns>
-                                    <TableColumn  fx:id="idAutorColum" prefWidth="248.0" text="ID Autor" />
+                                    <TableColumn fx:id="idAutorColum" prefWidth="248.0" text="ID Autor" />
                                     <TableColumn fx:id="nomAutorColum" prefWidth="248.0" text="Nom Autor" />
                                     <TableColumn fx:id="dataNaixAutorColum" prefWidth="248.0" text="Data Naixament" />
                                  </columns>
