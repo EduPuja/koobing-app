@@ -127,7 +127,7 @@
                       </Tab>
                         <Tab fx:id="autorsTap" text="Autors">
                            <content>
-                              <TableView2 prefHeight="439.0" prefWidth="745.0">
+                              <TableView2 fx:id="taulaAutors" prefHeight="439.0" prefWidth="745.0">
                                  <columns>
                                     <TableColumn  fx:id="idAutorColum" prefWidth="248.0" text="ID Autor" />
                                     <TableColumn fx:id="nomAutorColum" prefWidth="248.0" text="Nom Autor" />
