@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.pujadas.koobing_admin.screens.Autor"
+            fx:controller="edu.pujadas.koobing_admin.Controllers.AutorController"
             prefHeight="400.0" prefWidth="600.0">
 
 </AnchorPane>
