@@ -1,7 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
-import edu.pujadas.koobing_admin.Models.Usuari;
+import edu.pujadas.koobing_admin.Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
