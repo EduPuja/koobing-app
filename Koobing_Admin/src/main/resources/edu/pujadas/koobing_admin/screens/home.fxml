@@ -111,7 +111,7 @@
                       </Tab>
                       <Tab fx:id="llibresTab" text="Llibres">
                            <content>
-                              <TableView2>
+                              <TableView2 fx:id="taulaLlibres">
                                  <columns>
                                     <TableColumn fx:id="isbnColum" prefWidth="90.0" text="ISBN" />
                                     <TableColumn fx:id="autorColum" prefWidth="90.0" text="Autor" />

@@ -30,6 +30,8 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable
 {
 
+
+
     // todo avatar del treballador quant inicia session
 
 
@@ -69,6 +71,16 @@ public class HomeController implements Initializable
     // ---- Llibres stuff ---- //
 
     private final ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
+    public TableView2<Llibre> taulaLlibres;
+    public TableColumn<Llibre,Integer>isbnColum;
+    public TableColumn <Llibre,String>autorColum;
+    public TableColumn<Llibre,String> editorColum;
+    public TableColumn<Llibre,String> idiomaColum;
+    public TableColumn <Llibre,String>genereColum;
+    public TableColumn <Llibre,String>titolColum;
+    public TableColumn <Llibre,Integer>versioColum;
+    public TableColumn <Llibre, Date>dataPubliColum;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
