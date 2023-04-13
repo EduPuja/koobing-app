@@ -9,10 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.tableview2.TableView2;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -48,7 +52,35 @@ public class HomeController implements Initializable
 
             while (usersResult.next())
             {
-                Usuari user = new Usuari(usersResult.)
+                //recullo el avatar amb forma de blob
+                Blob avatarBlob = usersResult.getBlob("avatar");
+                // el converteixo
+                byte[] bytes = avatarBlob.getBytes(1, (int) avatarBlob.length());
+                // Crear un objeto InputStream a partir del arreglo de bytes
+                InputStream is = new ByteArrayInputStream(bytes);
+                //finalment el converteixo en el objecte imatge
+                Image avatar = new Image(is);
+                //usuari
+                Usuari user = new Usuari(usersResult.getInt("id_usuari"),usersResult.getString("dni")
+                        ,avatar,usersResult.getString("nom"),usersResult.getString("cognom"),
+                        usersResult.getDate("data_naix"),usersResult.getString("email"),usersResult.getString("password"));
+                //observablelist
+                listaUsuaris = FXCollections.observableArrayList(
+                        user
+                );
+
+
+
+                idUsuari.setCellValueFactory(new PropertyValueFactory<>("idUsuari"));
+                dniColum.setCellValueFactory(new PropertyValueFactory<>("DNI"));
+                nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
+                dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
+                emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
+                passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
+                taulaUsuaris.setItems(listaUsuaris);
+
+
             }
         }
         catch (Exception e)
