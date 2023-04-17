@@ -33,9 +33,11 @@ public class GestioIdioma
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
             ResultSet rs = stat.executeQuery("SELECT * FROM idioma WHERE id_idioma" + idIdioma);
-            while (rs.next())
+            if (rs.next())
             {
-                return new Idioma(rs.getInt("id_idioma"),rs.getString("nom_idioma"));
+                Idioma idioma =new Idioma(rs.getInt("id_idioma"),rs.getString("nom_idioma"));
+                con.desconectar();
+                return idioma;
             }
             con.desconectar();
         }
