@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Llibre
 {
-    int ISBN;
+    Long ISBN;
     Autor autor;
     Editorial editor;
     Idioma idioma;
@@ -13,7 +13,7 @@ public class Llibre
     int versio;
     Date dataPubli;
 
-    public Llibre(int ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli)
+    public Llibre(Long ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli)
     {
         this.ISBN = ISBN;
         this.autor = autor;
@@ -25,12 +25,12 @@ public class Llibre
         this.dataPubli = dataPubli;
     }
 
-    public int getISBN()
+    public Long getISBN()
     {
         return ISBN;
     }
 
-    public void setISBN(int ISBN)
+    public void setISBN(Long ISBN)
     {
         this.ISBN = ISBN;
     }
