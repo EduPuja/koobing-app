@@ -4,6 +4,7 @@ import edu.pujadas.koobing_admin.Models.Autor;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class GestioAutor
 {
@@ -67,15 +68,27 @@ public class GestioAutor
         }
     }
 
-    public ResultSet consultar10Autors()
+    public ArrayList<Autor> consultar10Autors()
     {
+        ArrayList<Autor> listAutors = new ArrayList<Autor>();
+
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
             ResultSet rs = stat.executeQuery("SELECT * FROM autor Limit 10");
 
-            return rs;
+            while (rs.next())
+            {
+                Autor autor = new Autor(rs.getInt("id_autor"),
+                        rs.getString("nom_autor"),rs.getDate("data_naix"));
+                // afegiexo tost els autos de la base de dades al arraylist
+                listAutors.add(autor);
+            }
+
+            con.desconectar();
+            return listAutors;
+
         }
         catch (Exception e)
         {

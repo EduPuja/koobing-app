@@ -64,7 +64,7 @@ public class HomeController implements Initializable
     public TableColumn<Autor,String> nomAutorColum;
     public TableColumn<Autor,Date> dataNaixAutorColum;
 
-    private final ArrayList<Autor> listAutores = new ArrayList<Autor>();
+    private ArrayList<Autor> listAutores = new ArrayList<Autor>();
 
 
 
@@ -86,8 +86,8 @@ public class HomeController implements Initializable
     {
 
         infoUsuaris();
-       /* infoAutor();
-        infoLlibre();*/
+        infoAutor();
+        //infoLlibre();
     }
 
 
@@ -136,13 +136,7 @@ public class HomeController implements Initializable
         try
         {
             GestioAutor gestioAutor = new GestioAutor();
-            ResultSet rs = gestioAutor.consultar10Autors();
-
-            while (rs.next())
-            {
-                Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nom_autor"),rs.getDate("data_naix"));
-                listAutores.add(autor);
-            }
+            listAutores = gestioAutor.consultar10Autors();
             //observablelist autors
             ObservableList<Autor> observableListAutors = FXCollections.observableArrayList(
                     listAutores
