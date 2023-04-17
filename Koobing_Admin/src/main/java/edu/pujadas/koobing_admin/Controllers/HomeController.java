@@ -102,28 +102,6 @@ public class HomeController implements Initializable
 
             listsUsuaris = gestioUsuari.consultar10Usuaris();
 
-           /* ResultSet usersResult = gestioUsuari.consultar10Usuaris();
-
-            while (usersResult.next())
-            {
-                //recullo el avatar amb forma de blob
-                Blob avatarBlob = usersResult.getBlob("avatar");
-                // el converteixo
-                byte[] bytes = avatarBlob.getBytes(1, (int) avatarBlob.length());
-                // Crear un objeto InputStream a partir del arreglo de bytes
-                InputStream is = new ByteArrayInputStream(bytes);
-                //finalment el converteixo en el objecte imatge
-                Image avatar = new Image(is);
-                //usuari
-                Usuari user = new Usuari(usersResult.getInt("id_usuari"),usersResult.getString("dni")
-                        ,avatar,usersResult.getString("nom"),usersResult.getString("cognom"),
-                        usersResult.getDate("data_naix"),usersResult.getString("email"),usersResult.getString("password"));
-                listsUsuaris.add(user);
-
-
-            }
-            usersResult.close();*/
-
             //observablelist usuaris
             ObservableList<Usuari> obserListUser = FXCollections.observableArrayList(
                     listsUsuaris
@@ -143,7 +121,7 @@ public class HomeController implements Initializable
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Failed to infoUsuaris ..." +e.getMessage());
         }
 
 
@@ -179,7 +157,7 @@ public class HomeController implements Initializable
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Failed to infoAutors ..." +e.getMessage());
         }
     }
 
