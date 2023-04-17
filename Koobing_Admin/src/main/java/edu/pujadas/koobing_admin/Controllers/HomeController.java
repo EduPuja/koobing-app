@@ -194,7 +194,7 @@ public class HomeController implements Initializable
                 String nomEditor = editor.getNomEditor();
                 return new SimpleStringProperty(nomEditor);
             });
-           /* idiomaColum.setCellValueFactory(cellData ->{
+            idiomaColum.setCellValueFactory(cellData ->{
                 Idioma idioma = cellData.getValue().getIdioma();
                 String nomIdioma = idioma.getNomIdioma();
                 return new SimpleStringProperty(nomIdioma);
@@ -203,7 +203,7 @@ public class HomeController implements Initializable
                 Genere genere = cellData.getValue().getGenere();
                 String nomGenere = genere.getNomGenere();
                 return new SimpleStringProperty(nomGenere);
-            });*/
+            });
             titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
             versioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
             dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));

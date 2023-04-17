@@ -30,7 +30,7 @@ public class GestioGenere
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            ResultSet rs = stat.executeQuery("SELECT * FROM genere where id_genere " + idGenere);
+            ResultSet rs = stat.executeQuery("SELECT * FROM genere where id_genere = " + idGenere);
             if (rs.next())
             {   Genere genere =new Genere(rs.getInt("id_genere"),rs.getString("descrip"));
                 con.desconectar();
