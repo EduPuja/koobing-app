@@ -5,6 +5,10 @@ public class Poblacio
     int idPoblacio;
     String nomPoble;
 
+    public Poblacio()
+    {
+    }
+
     public Poblacio(int idPoblacio, String nomPoble)
     {
         this.idPoblacio = idPoblacio;

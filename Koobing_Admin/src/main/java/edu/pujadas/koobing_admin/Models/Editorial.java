@@ -5,6 +5,10 @@ public class Editorial
     int idEditorial;
     String nomEditor;
 
+    public Editorial()
+    {
+    }
+
     public Editorial(int idEditorial, String nomEditor)
     {
         this.idEditorial = idEditorial;
