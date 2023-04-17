@@ -191,8 +191,18 @@ public class HomeController implements Initializable
             ResultSet rs =gestioLlibre.conusltar10Llibres();
             while (rs.next())
             {
-                System.out.println(rs.get);
+                System.out.println(rs.getLong("l.isbn"));
+                System.out.println(rs.getString("a.nom_autor"));
+                System.out.println(rs.getString("e.nom_editorial"));
+                System.out.println(rs.getString("i.nom_idioma"));
+                System.out.println(rs.getString("g.descrip"));
+                System.out.println(rs.getString("l.titol"));
+                System.out.println(rs.getInt("l.versio"));
+                System.out.println(rs.getDate("l.data_publi") +"\n");
+
             }
+
+            rs.close();
             /*if(rs.next())
             {
                 System.out.println("Hi ha info");
