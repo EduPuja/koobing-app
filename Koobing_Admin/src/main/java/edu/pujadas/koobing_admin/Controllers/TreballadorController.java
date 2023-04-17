@@ -1,26 +1,62 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TreballadorController implements Initializable
 {
+
     private Scene scene;
     private Parent root;
     private Stage stage;
+
+    // stuff treballador
+
+    public TableView2<Treballador> taulaTreballadors;
+
+    public TableColumn<Treballador, Integer> idTreballador;
+    public TableColumn<Treballador,String> dniColum;
+    public TableColumn<Treballador,String> nomColum;
+    public TableColumn<Treballador,String> cognomColum;
+    public TableColumn<Treballador, Date> dataNaixColum;
+    public TableColumn <Treballador,String>emailColum;
+    public TableColumn <Treballador,String> passwordColum;
+    public TableColumn <Treballador,Integer> numSegSocialColum;
+    public TableColumn <Treballador,Boolean>isAdminColum;
+
+
+   private ArrayList<Treballador> listTreballador = new ArrayList<Treballador>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("\nTreballador Screen");
+    }
+
+
+    private void loagWorkerData()
+    {
+        try{
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Hi ha hagut un error  '" + e.getMessage() );
+        }
     }
 
     // CANVIS DE PANTALLA
