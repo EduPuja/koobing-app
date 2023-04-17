@@ -36,7 +36,7 @@ public class GestioLlibre
 
 
             ResultSet rs = con.executeQuery(query);
-            con.close();
+
             return rs;
 
         }
