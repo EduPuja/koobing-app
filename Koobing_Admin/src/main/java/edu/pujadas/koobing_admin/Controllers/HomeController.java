@@ -179,7 +179,7 @@ public class HomeController implements Initializable
                     listLlibres
             );
 
-
+            taulaLlibres.setItems(observableListLlibre);
 
             isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
             autorColum.setCellValueFactory(cellData -> {
@@ -210,7 +210,7 @@ public class HomeController implements Initializable
 
 
 
-            taulaLlibres.setItems(observableListLlibre);
+
 
         }
         catch (Exception e)
