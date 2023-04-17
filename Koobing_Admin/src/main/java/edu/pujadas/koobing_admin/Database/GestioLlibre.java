@@ -105,7 +105,7 @@ public class GestioLlibre
                 llibre.setISBN(rs.getLong("ISBN"));
 
                 //buscant el autor , editorials, idioma and genere per poder crear un objeto de cada
-                System.out.println("Buscant Autors ... editorials etc..\n");
+                //System.out.println("Buscant Autors ... editorials etc..\n");
 
                 Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
                 Editorial editor =gestioEditorial.findEditorial(rs.getInt("id_editor"));

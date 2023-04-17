@@ -21,7 +21,7 @@ public class ConnexioMYSQL
         try
         {
             conexion = DriverManager.getConnection(url, usuario, password);
-            System.out.println("Conexión establecida correctamente ✓");
+           // System.out.println("Conexión establecida correctamente ✓");
             return conexion.createStatement();
         }
         catch (SQLException ex) {
@@ -37,7 +37,7 @@ public class ConnexioMYSQL
         try {
             if (conexion != null) {
                 conexion.close();
-                System.out.println("Conexión cerrada correctamente \u2713");
+                //System.out.println("Conexión cerrada correctamente \u2713");
             }
         } catch (SQLException ex) {
             System.out.println("Ha ocurrido un error al cerrar la conexión con la base de datos: " + ex.getMessage());
