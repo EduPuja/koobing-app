@@ -28,12 +28,15 @@ public class GestioGenere
     {
         try
         {
-            Statement con = ConnexioMYSQL.connexioMYSQL();
-            ResultSet rs = con.executeQuery("SELECT * FROM genere where id_genere " + idGenere);
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("SELECT * FROM genere where id_genere " + idGenere);
             while (rs.next())
             {
                 return new Genere(rs.getInt("id_genere"),rs.getString("descrip"));
             }
+
+            con.desconectar();
         }
         catch (Exception e)
         {

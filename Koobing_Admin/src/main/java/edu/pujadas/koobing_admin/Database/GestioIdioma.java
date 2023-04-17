@@ -30,13 +30,14 @@ public class GestioIdioma
     {
         try
         {
-            Statement con = ConnexioMYSQL.connexioMYSQL();
-            ResultSet rs = con.executeQuery("SELECT * FROM idioma WHERE id_idioma" + idIdioma);
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("SELECT * FROM idioma WHERE id_idioma" + idIdioma);
             while (rs.next())
             {
                 return new Idioma(rs.getInt("id_idioma"),rs.getString("nom_idioma"));
             }
-
+            con.desconectar();
         }
         catch (Exception e)
         {

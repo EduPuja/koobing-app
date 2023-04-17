@@ -28,15 +28,18 @@ public class GestioEditorial
     {
         try
         {
-            Statement con = ConnexioMYSQL.connexioMYSQL();
-            ResultSet rs = con.executeQuery("SELECT * FROM editorial WHERE idEditorial"+idEditorial);
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
+
+            ResultSet rs = stat.executeQuery("SELECT * FROM editorial WHERE idEditorial"+idEditorial);
             while(rs.next())
             {
                 Editorial editor = new Editorial(rs.getInt("idEditorial"), rs.getString("nom_editorial"));
                 return editor;
             }
 
-
+            con.desconectar();
         }
         catch (Exception e)
         {

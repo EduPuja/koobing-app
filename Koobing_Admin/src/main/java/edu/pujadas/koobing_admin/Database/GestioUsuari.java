@@ -18,17 +18,20 @@ public class GestioUsuari
         // todo insertar usuari
         try
         {   //connexio usuari
-            Statement con = ConnexioMYSQL.connexioMYSQL();
+
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
 
 
             String query ="INSERT INTO `usuari`( `avatar`, `nom`, `cognom`, `data_naix`, `email`, `password`) " +
                     "VALUES ('"+usuari.getAvatar()+"','"+usuari.getNom()+"','"+usuari.getCognom()+"','"+usuari.getDataNaix()+"','"+usuari.getEmail()+"','"+usuari.getPassword()+") ";
 
-            if(con.executeUpdate(query) == 1)
+            if(stat.executeUpdate(query) == 1)
             {
                 System.out.println("Usuari insertat successfully");
             }
-            else System.out.println("Usuari not inserted"); con.close();
+            else System.out.println("Usuari not inserted"); con.desconectar();
         }
         catch (Exception e)
         {
@@ -42,7 +45,9 @@ public class GestioUsuari
         //todo modificar usuari
         try
         {
-            Statement con = ConnexioMYSQL.connexioMYSQL();
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
 
         }
         catch (Exception e)
@@ -62,15 +67,17 @@ public class GestioUsuari
         try
 
         {
-            Statement con = ConnexioMYSQL.connexioMYSQL();
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
             String query = "DELETE FROM `usuari` WHERE `dni` = '" + dniUsuari + "'";
 
-            if(con.executeUpdate(query) == 1)
+            if(stat.executeUpdate(query) == 1)
             {
                 System.out.println("Usuari eliminat correctament");
             }
             else System.out.println("La baixa no s'ha completat ");
-            con.close();
+            con.desconectar();
         }
         catch (Exception e)
         {
@@ -88,9 +95,13 @@ public class GestioUsuari
 
         try
         {
-            Statement con = ConnexioMYSQL.connexioMYSQL();
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
+
+
             String query = "select * from usuari";
-            ResultSet rs = con.executeQuery(query);
+            ResultSet rs = stat.executeQuery(query);
 
 
 
@@ -104,8 +115,7 @@ public class GestioUsuari
                 System.out.println("Email: " +rs.getString("email"));
                 System.out.println("Password: " +rs.getString("password"));
             }
-            rs.close();
-            con.close();
+           con.desconectar();
         }
         catch (Exception e)
         {
@@ -120,11 +130,15 @@ public class GestioUsuari
     {
         try
         {
-            Statement con = ConnexioMYSQL.connexioMYSQL();
+
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
             String query = "select  * from usuari limit 10 ";
-            ResultSet rs = con.executeQuery(query);
+            ResultSet rs = stat.executeQuery(query);
 
             return  rs;
+
         }
         catch (Exception e)
         {
