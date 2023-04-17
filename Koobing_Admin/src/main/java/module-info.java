@@ -10,6 +10,7 @@ module edu.pujadas.koobing_admin {
     requires java.sql;
 
 
+
     opens edu.pujadas.koobing_admin.screens to javafx.fxml;
 
     exports edu.pujadas.koobing_admin;
