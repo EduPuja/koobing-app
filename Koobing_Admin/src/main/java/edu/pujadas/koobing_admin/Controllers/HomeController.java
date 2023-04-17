@@ -186,32 +186,35 @@ public class HomeController implements Initializable
         try
         {
             GestioLlibre gestioLlibre = new GestioLlibre();
-            GestioAutor gestioAutor = new GestioAutor();
-            GestioEditorial gestioEditorial = new GestioEditorial();
-            GestioIdioma gestioIdioma = new GestioIdioma();
-            GestioGenere gestioGenere = new GestioGenere();
+
 
             ResultSet rs =gestioLlibre.conusltar10Llibres();
-
-
             while (rs.next())
             {
+                System.out.println(rs.get);
+            }
+            /*if(rs.next())
+            {
+                System.out.println("Hi ha info");
+            }
+            else System.out.println("no hi ha info");*/
 
 
-                Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
+
+                /*Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
                 Idioma idioma =gestioIdioma.findIdioma(rs.getInt("id_idioma"));
                 Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
 
                 Editorial  editorial = gestioEditorial.findEditorial(rs.getInt("id_editorial"));
 
                 Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,genere,rs.getString("titol")
-                        ,rs.getInt("versio"),rs.getDate("data_publi"));
+                        ,rs.getInt("versio"),rs.getDate("data_publi"));*/
 
 
-                listLlibres.add(llibre);
+
+                //listLlibres.add(llibre);
 
 
-            }
 
             //observablelist llibres
             ObservableList<Llibre> observableListLlibre = FXCollections.observableArrayList(
