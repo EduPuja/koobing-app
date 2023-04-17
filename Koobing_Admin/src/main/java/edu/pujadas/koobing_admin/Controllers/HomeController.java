@@ -70,7 +70,7 @@ public class HomeController implements Initializable
 
     // ---- Llibres stuff ---- //
 
-    private final ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
+    private  ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
     public TableView2<Llibre> taulaLlibres;
     public TableColumn<Llibre,Integer>isbnColum;
     public TableColumn <Llibre,String>autorColum;
@@ -87,7 +87,7 @@ public class HomeController implements Initializable
 
         infoUsuaris();
         infoAutor();
-        //infoLlibre();
+        infoLlibre();
     }
 
 
@@ -161,21 +161,7 @@ public class HomeController implements Initializable
         try
         {
             GestioLlibre gestioLlibre = new GestioLlibre();
-
-
-            ResultSet rs =gestioLlibre.conusltar10Llibres();
-            while (rs.next())
-            {
-                System.out.println(rs.getLong("l.isbn"));
-                System.out.println(rs.getString("a.nom_autor"));
-                System.out.println(rs.getString("e.nom_editorial"));
-                System.out.println(rs.getString("i.nom_idioma"));
-                System.out.println(rs.getString("g.descrip"));
-                System.out.println(rs.getString("l.titol"));
-                System.out.println(rs.getInt("l.versio"));
-                System.out.println(rs.getDate("l.data_publi") +"\n");
-
-            }
+            listLlibres = gestioLlibre.conusltar10Llibres();
 
 
             /*if(rs.next())
