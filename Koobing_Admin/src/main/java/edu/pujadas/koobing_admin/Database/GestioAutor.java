@@ -103,13 +103,19 @@ public class GestioAutor
         {  ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
             ResultSet rs = stat.executeQuery("SELECT * FROM `autor` WHERE id_autor= "+ idAutor);
-            Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nom_autor"),rs.getDate("data_naix"));
-            con.desconectar();
-            return autor;
+            if(rs.next())
+            {
+                Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nom_autor"),rs.getDate("data_naix"));
+                con.desconectar();
+                return autor;
+            }
+
+
+
         }
         catch (Exception e)
         {
-            System.out.println("No se ha trobat cap autor :(");
+            System.out.println("No se ha trobat cap autor :( " + e.getMessage());
         }
         return null;
     }

@@ -2,6 +2,10 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -96,6 +101,7 @@ public class HomeController implements Initializable
      */
     private void infoUsuaris()
     {
+        System.out.println("info usuaris");
         try
         {   // usuaris
             GestioUsuari gestioUsuari = new GestioUsuari();
@@ -133,6 +139,7 @@ public class HomeController implements Initializable
      */
     private void infoAutor()
     {
+        System.out.println("info autor");
         try
         {
             GestioAutor gestioAutor = new GestioAutor();
@@ -158,32 +165,12 @@ public class HomeController implements Initializable
 
     private void infoLlibre()
     {
+        System.out.println("info llibre");
         try
         {
+            // classe per agafar la info de la base de dades
             GestioLlibre gestioLlibre = new GestioLlibre();
             listLlibres = gestioLlibre.conusltar10Llibres();
-
-
-            /*if(rs.next())
-            {
-                System.out.println("Hi ha info");
-            }
-            else System.out.println("no hi ha info");*/
-
-
-
-                /*Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
-                Idioma idioma =gestioIdioma.findIdioma(rs.getInt("id_idioma"));
-                Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
-
-                Editorial  editorial = gestioEditorial.findEditorial(rs.getInt("id_editorial"));
-
-                Llibre llibre =new Llibre(rs.getInt("ISBN"),autor,editorial,idioma,genere,rs.getString("titol")
-                        ,rs.getInt("versio"),rs.getDate("data_publi"));*/
-
-
-
-                //listLlibres.add(llibre);
 
 
 
@@ -195,13 +182,33 @@ public class HomeController implements Initializable
 
 
             isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-            autorColum.setCellValueFactory(new PropertyValueFactory<>("autor"));
-            editorColum.setCellValueFactory(new PropertyValueFactory<>("editor"));
-            idiomaColum.setCellValueFactory(new PropertyValueFactory<>("idioma"));
-            genereColum.setCellValueFactory(new PropertyValueFactory<>("genere"));
+            autorColum.setCellValueFactory(cellData -> {
+
+                Autor actor = cellData.getValue().getAutor();
+                String nombreAutor = actor.getNomAutor();
+                return new SimpleStringProperty(nombreAutor);
+
+            });
+            editorColum.setCellValueFactory(cellData -> {
+                Editorial editor = cellData.getValue().getEditor();
+                String nomEditor = editor.getNomEditor();
+                return new SimpleStringProperty(nomEditor);
+            });
+            idiomaColum.setCellValueFactory(cellData ->{
+                Idioma idioma = cellData.getValue().getIdioma();
+                String nomIdioma = idioma.getNomIdioma();
+                return new SimpleStringProperty(nomIdioma);
+            });
+            genereColum.setCellValueFactory(cellData ->{
+                Genere genere = cellData.getValue().getGenere();
+                String nomGenere = genere.getNomGenere();
+                return new SimpleStringProperty(nomGenere);
+            });
             titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
             versioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
             dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
+
+
 
             taulaLlibres.setItems(observableListLlibre);
 
