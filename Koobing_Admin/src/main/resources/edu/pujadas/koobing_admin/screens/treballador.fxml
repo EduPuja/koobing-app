@@ -97,7 +97,7 @@
                         <TableColumn fx:id="emailColum" prefWidth="80.0" text="Email" />
                         <TableColumn fx:id="passwordColum" prefWidth="80.0" text="Password" />
                         <TableColumn fx:id="numSegSocialColum" prefWidth="80.0" text="Num Seg Social"/>
-                        <TableColumn fx:id="isAdminColum" prefWidth="80.0" text="isAdmin"
+                        <TableColumn fx:id="isAdminColum" prefWidth="80.0" text="isAdmin"/>
                      </columns>
                   </TableView2>
                </children>
