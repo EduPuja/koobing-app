@@ -32,7 +32,7 @@ public class GestioEditorial
 
             Statement stat = con.conectar();
 
-            ResultSet rs = stat.executeQuery("SELECT * FROM editorial WHERE idEditorial"+idEditorial);
+            ResultSet rs = stat.executeQuery("SELECT * FROM editorial WHERE id_editorial"+idEditorial);
             if(rs.next())
             {
                 Editorial editor = new Editorial(rs.getInt("idEditorial"), rs.getString("nom_editorial"));
