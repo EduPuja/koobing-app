@@ -1,13 +1,7 @@
 package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.Usuari;
-import javafx.scene.image.Image;
 
-import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -139,7 +133,7 @@ public class GestioUsuari
         ArrayList<Usuari> usuarios = new ArrayList<>();
         try
         {
-
+            
             ConnexioMYSQL con = new ConnexioMYSQL();
 
             Statement stat = con.conectar();
@@ -152,23 +146,11 @@ public class GestioUsuari
                 Usuari user = new Usuari();
                 user.setId(rs.getInt("id_usuari"));
 
-                //convertir avatar
-                Blob blopAvatar = rs.getBlob("avatar");
-                byte[] data = blopAvatar.getBytes(1, (int)blopAvatar.length());
-
-                try(InputStream stream = new ByteArrayInputStream(data))
-                {
-                    Blob avatar = new Image(stream);
-                    user.setAvatar(avatar);
-                }
-                catch (IOException e)
-                {
-                    System.out.println("El avatar d'el usuari no ha anat correctament");
-                }
-
+                user.setAvatar(rs.getBlob("avatar"));
+                user.setDni(rs.getString("dni"));
                 user.setNom(rs.getString("nom"));
                 user.setCognom(rs.getString("cognom"));
-                user.setDataNaix(rs.getDate("dataNaix"));
+                user.setDataNaix(rs.getDate("data_naix"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
 
@@ -182,7 +164,9 @@ public class GestioUsuari
         }
         catch (Exception e)
         {
-            System.out.println("Hi ha hagut un error ");
+            System.out.println("Hi ha hagut un error " + e.getMessage());
+
+            //e.printStackTrace();
         }
 
         return null;

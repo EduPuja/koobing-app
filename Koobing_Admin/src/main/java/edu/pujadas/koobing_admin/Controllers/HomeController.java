@@ -86,8 +86,8 @@ public class HomeController implements Initializable
     {
 
         infoUsuaris();
-        infoAutor();
-        infoLlibre();
+       /* infoAutor();
+        infoLlibre();*/
     }
 
 
@@ -205,7 +205,7 @@ public class HomeController implements Initializable
 
             }
 
-            rs.close();
+
             /*if(rs.next())
             {
                 System.out.println("Hi ha info");
