@@ -1,9 +1,17 @@
 package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.Usuari;
+import javafx.scene.image.Image;
 
+import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 
 public class GestioUsuari
 {
@@ -126,8 +134,9 @@ public class GestioUsuari
     }
 
 
-    public ResultSet consultar10Usuaris()
+    public ArrayList<Usuari> consultar10Usuaris()
     {
+        ArrayList<Usuari> usuarios = new ArrayList<>();
         try
         {
 
@@ -137,7 +146,38 @@ public class GestioUsuari
             String query = "select  * from usuari limit 10 ";
             ResultSet rs = stat.executeQuery(query);
 
-            return  rs;
+            while (rs.next())
+            {
+
+                Usuari user = new Usuari();
+                user.setId(rs.getInt("id_usuari"));
+
+                //convertir avatar
+                Blob blopAvatar = rs.getBlob("avatar");
+                byte[] data = blopAvatar.getBytes(1, (int)blopAvatar.length());
+
+                try(InputStream stream = new ByteArrayInputStream(data))
+                {
+                    Blob avatar = new Image(stream);
+                    user.setAvatar(avatar);
+                }
+                catch (IOException e)
+                {
+                    System.out.println("El avatar d'el usuari no ha anat correctament");
+                }
+
+                user.setNom(rs.getString("nom"));
+                user.setCognom(rs.getString("cognom"));
+                user.setDataNaix(rs.getDate("dataNaix"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+
+                usuarios.add(user);
+            }
+
+            con.desconectar();
+            return usuarios;
+
 
         }
         catch (Exception e)

@@ -52,7 +52,7 @@ public class HomeController implements Initializable
     public TableColumn<Usuari,String> passwordColum;
 
     //arraylist usuaris
-    private final ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
+    private ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
 
 
 
@@ -99,7 +99,10 @@ public class HomeController implements Initializable
         try
         {   // usuaris
             GestioUsuari gestioUsuari = new GestioUsuari();
-            ResultSet usersResult = gestioUsuari.consultar10Usuaris();
+
+            listsUsuaris = gestioUsuari.consultar10Usuaris();
+
+           /* ResultSet usersResult = gestioUsuari.consultar10Usuaris();
 
             while (usersResult.next())
             {
@@ -119,7 +122,7 @@ public class HomeController implements Initializable
 
 
             }
-            usersResult.close();
+            usersResult.close();*/
 
             //observablelist usuaris
             ObservableList<Usuari> obserListUser = FXCollections.observableArrayList(
