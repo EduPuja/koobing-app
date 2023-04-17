@@ -1,14 +1,26 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioUsuari;
+import edu.pujadas.koobing_admin.Models.Genere;
+import edu.pujadas.koobing_admin.Models.Usuari;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
+import java.sql.Blob;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UsuariController implements Initializable
@@ -18,11 +30,50 @@ public class UsuariController implements Initializable
     Stage stage;
     Scene scene;
 
+    //stuff taules
+    public TableView2<Usuari> taulaUsuaris;
+    public TableColumn<Usuari,Integer> idUsuariColum;
+    public TableColumn<Usuari,String> dniColum;
+
+    public TableColumn<Usuari,String>nomColum;
+    public TableColumn<Usuari,String>cognomColum;
+    public TableColumn<Usuari, Date>dataNaixColum;
+    public TableColumn<Usuari,String> emailColum;
+
+    public TableColumn<Usuari,String> passwordColum;
+
+
+    private ArrayList<Usuari> listUsuaris = new ArrayList<Usuari>();
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        System.out.println("Carregant el Usuari");
+        loadInfoUser();
+    }
 
+
+    public void loadInfoUser()
+    {
+        GestioUsuari gestioUsuari = new GestioUsuari();
+
+       listUsuaris= gestioUsuari.consultarUsuaris();
+
+       ObservableList<Usuari> obserListUser = FXCollections.observableArrayList(
+                listUsuaris
+        );
+
+       taulaUsuaris.setItems(obserListUser);
+
+        idUsuariColum.setCellValueFactory(new PropertyValueFactory<>("id"));
+        dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
+        dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
+        emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
+        passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
     }
 
 

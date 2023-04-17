@@ -91,9 +91,9 @@ public class GestioUsuari
     /**
      * Metode per consultar els usuaris de la base de dades
      */
-    public void consultarUsuaris()
+    public ArrayList<Usuari> consultarUsuaris()
     {
-        //todo consultar usuari
+        ArrayList<Usuari> listUsuaris  = new ArrayList<Usuari>();
 
         try
         {
@@ -109,22 +109,36 @@ public class GestioUsuari
 
             while (rs.next())
             {
-                System.out.println("Id_usuari: " +rs.getInt("id_usuari"));
+                Usuari usuari = new Usuari();
+                usuari.setId(rs.getInt("id_usuari"));
+                usuari.setDni(rs.getString("dni"));
+                usuari.setAvatar(rs.getBlob("avatar"));
+                usuari.setNom(rs.getString("nom"));
+                usuari.setCognom(rs.getString("cognom"));
+                usuari.setDataNaix(rs.getDate("data_naix"));
+                usuari.setEmail(rs.getString("email"));
+                usuari.setPassword(rs.getString("password"));
+
+                listUsuaris.add(usuari);
+                //debug
+                /*System.out.println("Id_usuari: " +rs.getInt("id_usuari"));
                 System.out.println("DNI: " +rs.getString("dni"));
                 System.out.println("NOM: " +rs.getString("nom"));
                 System.out.println("COGNOM: " +rs.getString("cognom"));
                 System.out.println("Data Naix: " +rs.getDate("data_naix"));
                 System.out.println("Email: " +rs.getString("email"));
-                System.out.println("Password: " +rs.getString("password"));
+                System.out.println("Password: " +rs.getString("password"));*/
             }
            con.desconectar();
+            return listUsuaris;
         }
         catch (Exception e)
         {
-            System.out.println("No se han trobat usuaris ;( ");
+            System.out.println("No se han trobat usuaris ;( " + e.getMessage() );
 
 
         }
+        return null;
     }
 
 

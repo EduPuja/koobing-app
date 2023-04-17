@@ -89,16 +89,15 @@
                         <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Eliminar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
-                  <TableView2>
+                  <TableView2 fx:id="taulaUsuaris">
                      <columns>
-                        <TableColumn prefWidth="94.0" text="idUsuari" />
-                        <TableColumn prefWidth="94.0" text="DNI" />
-                        <TableColumn prefWidth="94.0" text="Avatar" />
-                        <TableColumn prefWidth="94.0" text="Nom" />
-                        <TableColumn prefWidth="94.0" text="Cognom" />
-                        <TableColumn prefWidth="94.0" text="DataNaix" />
-                        <TableColumn prefWidth="94.0" text="Email" />
-                        <TableColumn prefWidth="94.0" text="Password" />
+                        <TableColumn fx:id="idUsuariColum" prefWidth="94.0" text="idUsuari" />
+                        <TableColumn fx:id="dniColum" prefWidth="94.0" text="DNI" />
+                        <TableColumn fx:id="nomColum" prefWidth="94.0" text="Nom" />
+                        <TableColumn fx:id="cognomColum" prefWidth="94.0" text="Cognom" />
+                        <TableColumn fx:id="dataNaixColum" prefWidth="94.0" text="DataNaix" />
+                        <TableColumn fx:id="emailColum" prefWidth="94.0" text="Email" />
+                        <TableColumn fx:id="passwordColum" prefWidth="94.0" text="Password" />
                      </columns>
                   </TableView2>
                </children>
