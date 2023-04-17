@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.tableview2.TableView2?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.UsuariController">
    <children>
       <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
@@ -91,13 +90,13 @@
                   </GridPane>
                   <TableView2 fx:id="taulaUsuaris">
                      <columns>
-                        <TableColumn fx:id="idUsuariColum" prefWidth="94.0" text="idUsuari" />
-                        <TableColumn fx:id="dniColum" prefWidth="94.0" text="DNI" />
-                        <TableColumn fx:id="nomColum" prefWidth="94.0" text="Nom" />
-                        <TableColumn fx:id="cognomColum" prefWidth="94.0" text="Cognom" />
-                        <TableColumn fx:id="dataNaixColum" prefWidth="94.0" text="DataNaix" />
-                        <TableColumn fx:id="emailColum" prefWidth="94.0" text="Email" />
-                        <TableColumn fx:id="passwordColum" prefWidth="94.0" text="Password" />
+                        <TableColumn fx:id="idUsuariColum" prefWidth="108.0" text="idUsuari" />
+                        <TableColumn fx:id="dniColum" prefWidth="108.0" text="DNI" />
+                        <TableColumn fx:id="nomColum" prefWidth="108.0" text="Nom" />
+                        <TableColumn fx:id="cognomColum" prefWidth="108.0" text="Cognom" />
+                        <TableColumn fx:id="dataNaixColum" prefWidth="108.0" text="DataNaix" />
+                        <TableColumn fx:id="emailColum" prefWidth="108.0" text="Email" />
+                        <TableColumn fx:id="passwordColum" prefWidth="108.0" text="Password" />
                      </columns>
                   </TableView2>
                </children>
