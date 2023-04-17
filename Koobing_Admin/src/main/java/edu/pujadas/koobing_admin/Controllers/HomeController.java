@@ -189,7 +189,7 @@ public class HomeController implements Initializable
                 return new SimpleStringProperty(nombreAutor);
 
             });
-            editorColum.setCellValueFactory(cellData -> {
+           editorColum.setCellValueFactory(cellData -> {
                 Editorial editor = cellData.getValue().getEditor();
                 String nomEditor = editor.getNomEditor();
                 return new SimpleStringProperty(nomEditor);

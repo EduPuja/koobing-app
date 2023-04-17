@@ -32,10 +32,10 @@ public class GestioEditorial
 
             Statement stat = con.conectar();
 
-            ResultSet rs = stat.executeQuery("SELECT * FROM `editorial` WHERE id_editorial = "+idEditorial);
+            ResultSet rs = stat.executeQuery("Select * from editorial where id_editorial = "+idEditorial);
             if(rs.next())
             {
-                Editorial editor = new Editorial(rs.getInt("idEditorial"), rs.getString("nom_editorial"));
+                Editorial editor = new Editorial(rs.getInt("id_editorial"), rs.getString("nom_editorial"));
                 con.desconectar();
                 return editor;
             }
@@ -44,7 +44,7 @@ public class GestioEditorial
         }
         catch (Exception e)
         {
-            System.out.println("No he trobat la editorial que me has dit");
+            System.out.println("Editorial not found: " + e.getMessage());
         }
         return null;
     }

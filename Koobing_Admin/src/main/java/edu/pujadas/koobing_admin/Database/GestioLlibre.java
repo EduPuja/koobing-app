@@ -109,14 +109,14 @@ public class GestioLlibre
 
                 Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
                 Editorial editor =gestioEditorial.findEditorial(rs.getInt("id_editor"));
-                Idioma idioma = gestioIdioma.findIdioma(rs.getInt("id_idioma"));
-                Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
+               // Idioma idioma = gestioIdioma.findIdioma(rs.getInt("id_idioma"));
+                //Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
 
                 //afegint tot les dades el objecte llibre
                 llibre.setAutor(autor);
                 llibre.setEditor(editor);
-                llibre.setIdioma(idioma);
-                llibre.setGenere(genere);
+               // llibre.setIdioma(idioma);
+               // llibre.setGenere(genere);
 
                 //afegint les dades que falten
                 llibre.setTitol(rs.getString("titol"));
