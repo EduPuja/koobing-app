@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Llibre
 {
+
     Long ISBN;
     Autor autor;
     Editorial editor;
@@ -12,6 +13,10 @@ public class Llibre
     String titol;
     int versio;
     Date dataPubli;
+
+    public Llibre()
+    {
+    }
 
     public Llibre(Long ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli)
     {

@@ -5,6 +5,10 @@ public class Genere
     int idGenere;
     String nomGenere;
 
+    public Genere()
+    {
+    }
+
     public Genere(int idGenere, String nomGenere)
     {
         this.idGenere = idGenere;

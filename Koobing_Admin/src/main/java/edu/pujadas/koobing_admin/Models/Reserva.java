@@ -13,6 +13,10 @@ public class Reserva
     LocalDateTime dataHoraReserva;
     LocalDateTime dataHoraEntrega;
 
+    public Reserva()
+    {
+    }
+
     public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, LocalDateTime dataHoraReserva, LocalDateTime dataHoraEntrega)
     {
         this.idReserva = idReserva;

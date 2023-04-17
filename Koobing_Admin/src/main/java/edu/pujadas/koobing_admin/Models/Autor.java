@@ -8,6 +8,10 @@ public class Autor
     String nomAutor;
     Date dataNaixAutor;
 
+    public Autor()
+    {
+    }
+
     public Autor(int idAutor, String nomAutor, Date dataNaixAutor)
     {
         this.idAutor = idAutor;

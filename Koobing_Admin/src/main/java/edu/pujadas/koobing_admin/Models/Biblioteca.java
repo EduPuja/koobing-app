@@ -8,6 +8,10 @@ public class Biblioteca
     double latitud;
     double longitud;
 
+    public Biblioteca()
+    {
+    }
+
     public Biblioteca(int idBiblioteca, String nomPoblacio, Poblacio poblacio, double latitud, double longitud)
     {
         this.idBiblioteca = idBiblioteca;

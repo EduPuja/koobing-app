@@ -5,6 +5,10 @@ public class Idioma
     int idIdioma;
     String nomIdioma;
 
+    public Idioma()
+    {
+    }
+
     public Idioma(int idIdioma, String nomIdioma)
     {
         this.idIdioma = idIdioma;

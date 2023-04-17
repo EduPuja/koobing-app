@@ -17,6 +17,11 @@ public class Persona
     private String email;
     private String password;
 
+    public Persona()
+    {
+
+    }
+
 
     public Persona(int id,String dni, Image avatar, String nom, String cognom, Date dataNaix, String email, String password)
     {
