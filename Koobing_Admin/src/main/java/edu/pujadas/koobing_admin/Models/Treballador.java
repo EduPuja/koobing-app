@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Models;
 
 import javafx.scene.image.Image;
 
+import java.sql.Blob;
 import java.sql.Date;
 
 
@@ -15,7 +16,7 @@ public class Treballador extends Persona
     {
 
     }
-    public Treballador(int id, String dni, Image avatar, String nom, String cognom, Date dataNaix, String email, String password,
+    public Treballador(int id, String dni, Blob avatar, String nom, String cognom, Date dataNaix, String email, String password,
                        String numSegSocial, boolean isAdmin)
     {
 

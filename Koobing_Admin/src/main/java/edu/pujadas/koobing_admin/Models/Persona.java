@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Models;
 
 import javafx.scene.image.Image;
 
+import java.sql.Blob;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ public class Persona
 
     private int id;
     private String dni;
-    private Image avatar;
+    private Blob avatar;
     private String nom;
     private String cognom;
     private Date dataNaix;
@@ -23,7 +24,7 @@ public class Persona
     }
 
 
-    public Persona(int id,String dni, Image avatar, String nom, String cognom, Date dataNaix, String email, String password)
+    public Persona(int id, String dni, Blob avatar, String nom, String cognom, Date dataNaix, String email, String password)
     {
         this.id = id;
         this.dni=dni;
@@ -55,12 +56,12 @@ public class Persona
         this.dni = dni;
     }
 
-    public Image getAvatar()
+    public Blob getAvatar()
     {
         return avatar;
     }
 
-    public void setAvatar(Image avatar)
+    public void setAvatar(Blob avatar)
     {
         this.avatar = avatar;
     }
