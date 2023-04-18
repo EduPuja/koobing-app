@@ -138,7 +138,41 @@ public class UsuariController implements Initializable
         Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
         if(user != null)
         {
-            TextInputDialog nomDialeg = new TextInputDialog(user.getNom());
+
+            // Crear el diálogo de entrada de texto
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Modificar el usuari");
+            dialog.setHeaderText("Modificar les dades del usuari seleccionat");
+            dialog.setContentText("Introdueix les dades separades per espais:\nNom Cognom DNI Contrasenya");
+
+            // Mostrar el diálogo y esperar a que el usuario introduzca los datos
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                // Separar los valores introducidos por el usuario por espacios
+                String[] values = result.get().split(" ");
+
+                // Verificar que se hayan introducido los 4 valores requeridos
+                if (values.length != 4) {
+                    // Mostrar un mensaje de error si no se han introducido los valores requeridos
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Introducció incorrecta de les dades");
+                    alert.setContentText("Si us plau, introdueix els següents valors separats per espais:\nNom Cognom DNI Contrasenya");
+                    alert.showAndWait();
+                }
+                else
+                {
+                    // Actualizar los campos del usuario seleccionado
+                    user.setNom(values[0]);
+                    user.setCognom(values[1]);
+                    user.setDni(values[2]);
+                    user.setPassword(values[3]);
+
+                    // Actualizar la tabla
+                    taulaUsuaris.refresh();
+                }
+            /*TextInputDialog nomDialeg = new TextInputDialog(user.getNom());
             TextInputDialog cognomDialeg = new TextInputDialog(user.getCognom());
             TextInputDialog dniDialeg = new TextInputDialog(user.getDni());
             //Dialog<Date> dataNaix = new TextInputDialog(user.getDataNaix());
@@ -168,7 +202,7 @@ public class UsuariController implements Initializable
 
                 gestioUsuari.modificarUsuari(user);
             }
-
+        */
 
         }
     }
