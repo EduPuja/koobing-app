@@ -12,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
@@ -92,25 +89,38 @@ public class UsuariController implements Initializable
     public void onRowDelete()
     {
 
-
+        //como puedo comprovar que la fila este selecionada?
         // eliminar a memoria , aixo no elimina a la base de dades
 
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert wrong  = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("Confirmación");
         alerta.setHeaderText(null);
-        alerta.setContentText("¿Está seguro de que desea continuar?");
+        alerta.setContentText("Estàs segur de que vols continuar?");
 
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK)
         {
 
-            System.out.println("Btn Eliminar Confirmed");
+           System.out.println("Button Eliminar selected");
+
             Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
-            ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
-            itemsUser.remove(user);
-            //part que elimina de la base de dades
-            GestioUsuari gestioUsuari = new GestioUsuari();
-            gestioUsuari.eliminarUsuari(user.getDni());
+            if(user == null)
+            {
+                wrong.setTitle("Error");
+                wrong.setHeaderText(null);
+                wrong.setContentText("Seleciona la fila que vols eliminar");
+            }
+            else
+            {
+                ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
+                itemsUser.remove(user);
+                //part que elimina de la base de dades
+                GestioUsuari gestioUsuari = new GestioUsuari();
+                gestioUsuari.eliminarUsuari(user.getDni());
+
+            }
+
         }
         else
         {
@@ -121,6 +131,30 @@ public class UsuariController implements Initializable
 
 
 
+    }
+
+    public void modificarUsuari()
+    {
+        Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
+        if(user != null)
+        {
+            TextInputDialog dialog = new TextInputDialog(user.getNom());
+            dialog.setTitle("Modificar el nom");
+            dialog.setHeaderText("Modificar el nom del usuari selecionat");
+            dialog.setContentText("Nou nom:");
+            //resultat del dialeg
+            Optional<String> resultado = dialog.showAndWait();
+
+            if (resultado.isPresent()) {
+                // Actualizar el campo 'nombre' de la persona seleccionada
+                user.setNom(resultado.get());
+
+                // Actualizar la tabla
+                taulaUsuaris.refresh();
+            }
+
+
+        }
     }
 
 
