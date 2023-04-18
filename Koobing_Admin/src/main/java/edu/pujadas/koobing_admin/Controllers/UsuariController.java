@@ -188,6 +188,66 @@ public class UsuariController implements Initializable
     }
 
 
+    /**
+     * Aquest metode el crida el buto afegir un usuari.
+     * El que crea es un pantalla temporal amb un formulari, si l'emplenes crees
+     * un nou usuari, aquest es mostra en la taula
+     */
+    public void onInsertarUsuari()
+    {
+        // Creacio dels Textes
+        TextInputDialog nomDialeg = new TextInputDialog();
+        TextInputDialog cognomDialeg = new TextInputDialog();
+        TextInputDialog passwordDialeg = new TextInputDialog();
+
+        //crear el gridpane per posar els 2 camps a l'hora
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+
+        gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
+        gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
+        gridPane.addRow(2, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
+
+        // Mostrar los dos diálogos en la misma ventana
+        Alert alert = new Alert(Alert.AlertType.NONE);
+
+        alert.setTitle("Modificar dades de l'usuari");
+        alert.setHeaderText("Introduïu les noves dades de l'usuari:");
+        alert.getDialogPane().setContent(gridPane);
+        alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        // Esperar a que el usuario presione OK o Cancel
+        Optional<ButtonType> resultat = alert.showAndWait();
+        if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+        {
+            System.out.println("success");
+            /*Usuari user = new Usuari();
+            // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+            user.setNom(nomDialeg.getEditor().getText());
+            user.setCognom(cognomDialeg.getEditor().getText());
+            user.setPassword(passwordDialeg.getEditor().getText());
+
+            // Actualizar la tabla
+            taulaUsuaris.refresh();
+
+            //actualizar la base de dades
+            GestioUsuari gestioUsuari = new GestioUsuari();
+            gestioUsuari.modificarUsuari(user);*/
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+
 
 
     // CANVIS DE PANTALLA
