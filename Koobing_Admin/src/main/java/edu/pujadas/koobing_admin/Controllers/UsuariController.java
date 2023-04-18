@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -26,6 +27,9 @@ import java.util.ResourceBundle;
 public class UsuariController implements Initializable
 {
 
+    public Button addBtn;
+    public Button modifyBtn;
+    public Button deleteBtn;
     Parent root ;
     Stage stage;
     Scene scene;
@@ -76,6 +80,20 @@ public class UsuariController implements Initializable
         passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
     }
 
+
+    public void onRowDelete()
+    {
+        // eliminar a memoria , aixo no elimina a la base de dades
+        Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
+        ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
+        itemsUser.remove(user);
+        //part que elimina de la base de dades
+        GestioUsuari gestioUsuari = new GestioUsuari();
+        gestioUsuari.eliminarUsuari(user.getDni());
+
+
+
+    }
 
 
     // CANVIS DE PANTALLA

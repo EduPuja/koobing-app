@@ -83,9 +83,9 @@
                               <Image url="@../img/libro.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Afegir" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Modificar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Eliminar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Afegir" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="modifyBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Modificar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Eliminar" onAction="#onRowDelete" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                   <TableView2 fx:id="taulaUsuaris">
