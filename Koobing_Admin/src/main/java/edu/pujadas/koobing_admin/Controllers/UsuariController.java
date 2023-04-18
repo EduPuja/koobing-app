@@ -12,7 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -22,6 +24,7 @@ import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UsuariController implements Initializable
@@ -81,19 +84,46 @@ public class UsuariController implements Initializable
     }
 
 
+    /**
+     *Aquesta funció permet eliminar un usuari de la base de dades i la seva taula corresponent.
+     * Es mostra una alerta per confirmar l'eliminació i s'ha de respondre si es vol acceptar o no.
+     * És important tenir en compte que l'eliminació és permanent i les dades de l'usuari seleccionat es perdran definitivament.
+     */
     public void onRowDelete()
     {
+
+
         // eliminar a memoria , aixo no elimina a la base de dades
-        Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
-        ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
-        itemsUser.remove(user);
-        //part que elimina de la base de dades
-        GestioUsuari gestioUsuari = new GestioUsuari();
-        gestioUsuari.eliminarUsuari(user.getDni());
+
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle("Confirmación");
+        alerta.setHeaderText(null);
+        alerta.setContentText("¿Está seguro de que desea continuar?");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK)
+        {
+
+            System.out.println("Btn Eliminar Confirmed");
+            Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
+            ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
+            itemsUser.remove(user);
+            //part que elimina de la base de dades
+            GestioUsuari gestioUsuari = new GestioUsuari();
+            gestioUsuari.eliminarUsuari(user.getDni());
+        }
+        else
+        {
+            // Acción a realizar cuando se hace clic en el botón "Cancelar" o se cierra la alerta
+            System.out.println("El usuario ha hecho clic en Cancelar o ha cerrado la alerta");
+        }
+
 
 
 
     }
+
+
 
 
     // CANVIS DE PANTALLA
