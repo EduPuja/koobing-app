@@ -138,19 +138,35 @@ public class UsuariController implements Initializable
         Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
         if(user != null)
         {
-            TextInputDialog dialog = new TextInputDialog(user.getNom());
-            dialog.setTitle("Modificar el nom");
-            dialog.setHeaderText("Modificar el nom del usuari selecionat");
-            dialog.setContentText("Nou nom:");
-            //resultat del dialeg
-            Optional<String> resultado = dialog.showAndWait();
+            TextInputDialog nomDialeg = new TextInputDialog(user.getNom());
+            TextInputDialog cognomDialeg = new TextInputDialog(user.getCognom());
+            TextInputDialog dniDialeg = new TextInputDialog(user.getDni());
+            //Dialog<Date> dataNaix = new TextInputDialog(user.getDataNaix());
+            TextInputDialog cognomDialeg = new TextInputDialog(user.getCognom());
 
-            if (resultado.isPresent()) {
+            nomDialeg.setTitle("Modificar el nom");
+
+            nomDialeg.setHeaderText("Modificar el nom del usuari selecionat");
+            nomDialeg.setContentText("Nou nom:");
+            //resultat del dialeg
+
+            Optional<String> resultado = nomDialeg.showAndWait();
+
+            if (resultado.isPresent())
+            {
+                //separant amb split el resu
+
                 // Actualizar el campo 'nombre' de la persona seleccionada
                 user.setNom(resultado.get());
 
                 // Actualizar la tabla
                 taulaUsuaris.refresh();
+
+                //actualizar la base de dades
+
+                GestioUsuari gestioUsuari = new GestioUsuari();
+
+                gestioUsuari.modificarUsuari(user);
             }
 
 
