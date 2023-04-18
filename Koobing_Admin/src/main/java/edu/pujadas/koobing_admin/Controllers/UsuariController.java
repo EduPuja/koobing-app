@@ -133,7 +133,7 @@ public class UsuariController implements Initializable
 
     }
 
-    public void modificarUsuari()
+    public void onRowModify()
     {
         Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
         if(user != null)
