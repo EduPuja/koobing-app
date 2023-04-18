@@ -14,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -138,72 +140,50 @@ public class UsuariController implements Initializable
         Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
         if(user != null)
         {
-
-            // Crear el diálogo de entrada de texto
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Modificar el usuari");
-            dialog.setHeaderText("Modificar les dades del usuari seleccionat");
-            dialog.setContentText("Introdueix les dades separades per espais:\nNom Cognom DNI Contrasenya");
-
-            // Mostrar el diálogo y esperar a que el usuario introduzca los datos
-            Optional<String> result = dialog.showAndWait();
-
-            if (result.isPresent()) {
-                // Separar los valores introducidos por el usuario por espacios
-                String[] values = result.get().split(" ");
-
-                // Verificar que se hayan introducido los 4 valores requeridos
-                if (values.length != 4) {
-                    // Mostrar un mensaje de error si no se han introducido los valores requeridos
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Introducció incorrecta de les dades");
-                    alert.setContentText("Si us plau, introdueix els següents valors separats per espais:\nNom Cognom DNI Contrasenya");
-                    alert.showAndWait();
-                }
-                else
-                {
-                    // Actualizar los campos del usuario seleccionado
-                    user.setNom(values[0]);
-                    user.setCognom(values[1]);
-                    user.setDni(values[2]);
-                    user.setPassword(values[3]);
-
-                    // Actualizar la tabla
-                    taulaUsuaris.refresh();
-                }
-            /*TextInputDialog nomDialeg = new TextInputDialog(user.getNom());
+            // Creacio dels Textes
+            TextInputDialog nomDialeg = new TextInputDialog(user.getNom());
             TextInputDialog cognomDialeg = new TextInputDialog(user.getCognom());
-            TextInputDialog dniDialeg = new TextInputDialog(user.getDni());
-            //Dialog<Date> dataNaix = new TextInputDialog(user.getDataNaix());
-            TextInputDialog cognomDialeg = new TextInputDialog(user.getCognom());
+            TextInputDialog passwordDialeg = new TextInputDialog(user.getPassword());
 
-            nomDialeg.setTitle("Modificar el nom");
+            //crear el gridpane per posar els 2 camps a l'hora
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
 
-            nomDialeg.setHeaderText("Modificar el nom del usuari selecionat");
-            nomDialeg.setContentText("Nou nom:");
-            //resultat del dialeg
 
-            Optional<String> resultado = nomDialeg.showAndWait();
 
-            if (resultado.isPresent())
+            gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
+            gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
+            gridPane.addRow(2, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
+
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Modificar dades de l'usuari");
+            alert.setHeaderText("Introduïu les noves dades de l'usuari:");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                //separant amb split el resu
-
-                // Actualizar el campo 'nombre' de la persona seleccionada
-                user.setNom(resultado.get());
+                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+                user.setNom(nomDialeg.getEditor().getText());
+                user.setCognom(cognomDialeg.getEditor().getText());
+                user.setPassword(passwordDialeg.getEditor().getText());
 
                 // Actualizar la tabla
                 taulaUsuaris.refresh();
 
                 //actualizar la base de dades
-
                 GestioUsuari gestioUsuari = new GestioUsuari();
-
                 gestioUsuari.modificarUsuari(user);
             }
-        */
-
         }
     }
 
