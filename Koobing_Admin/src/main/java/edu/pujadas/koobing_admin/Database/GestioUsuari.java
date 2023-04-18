@@ -27,7 +27,7 @@ public class GestioUsuari
 
 
             String query ="INSERT INTO `usuari`( `avatar`, `nom`, `cognom`, `data_naix`, `email`, `password`) " +
-                    "VALUES ('"+usuari.getAvatar()+"','"+usuari.getNom()+"','"+usuari.getCognom()+"','"+usuari.getDataNaix()+"','"+usuari.getEmail()+"','"+usuari.getPassword()+") ";
+                    "VALUES ('"+usuari.getAvatar()+"','"+usuari.getNom()+"','"+usuari.getCognom()+"','"+usuari.getDataNaix()+"','"+usuari.getEmail()+"','"+usuari.getPassword()+")' ";
 
             if(stat.executeUpdate(query) == 1)
             {
@@ -42,14 +42,26 @@ public class GestioUsuari
     }
 
 
-    public void modificarUsuari()
+    public void modificarUsuari(Usuari usuari)
     {
-        //todo modificar usuari
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
 
             Statement stat = con.conectar();
+            String query = "UPDATE `usuari` " +
+                    "SET `id_usuari`="+usuari.getId()+",`dni`='"+usuari.getDni()+"'," +
+                    "`avatar`='"+usuari.getAvatar()+"',`nom`='"+usuari.getNom()+"'," +
+                    "`cognom`='"+usuari.getCognom()+"',`data_naix`='"+usuari.getDataNaix()+"'," +
+                    "`email`='"+usuari.getEmail()+"',`password`='"+usuari.getPassword()+"' WHERE dni= '"+usuari.getDni()+"'";
+
+            if(stat.executeUpdate(query) == 1)
+            {
+                System.out.println("Successfully updated");
+            }
+            else System.out.println("Wrong update :(");
+
+
 
         }
         catch (Exception e)
@@ -64,7 +76,6 @@ public class GestioUsuari
      */
     public void eliminarUsuari(String dniUsuari)
     {
-        //todo eliminar usuari
 
         try
 
