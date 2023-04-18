@@ -17,8 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-import org.controlsfx.control.tableview2.TableView2;
-
+import org.controlsfx.control.tableview2.TableView2;;
+import cs
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
@@ -195,33 +195,35 @@ public class UsuariController implements Initializable
      */
     public void onInsertarUsuari()
     {
-        // Creacio dels Textes
-        TextInputDialog nomDialeg = new TextInputDialog();
-        TextInputDialog cognomDialeg = new TextInputDialog();
-        TextInputDialog passwordDialeg = new TextInputDialog();
-
-        //crear el gridpane per posar els 2 camps a l'hora
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-
-        gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
-        gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
-        gridPane.addRow(2, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
-
-        // Mostrar los dos diálogos en la misma ventana
-        Alert alert = new Alert(Alert.AlertType.NONE);
-
-        alert.setTitle("Modificar dades de l'usuari");
-        alert.setHeaderText("Introduïu les noves dades de l'usuari:");
-        alert.getDialogPane().setContent(gridPane);
-        alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        // Esperar a que el usuario presione OK o Cancel
-        Optional<ButtonType> resultat = alert.showAndWait();
-        if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+        try
         {
-            System.out.println("success");
+            // Creacio dels Textes
+            TextInputDialog nomDialeg = new TextInputDialog();
+            TextInputDialog cognomDialeg = new TextInputDialog();
+            TextInputDialog passwordDialeg = new TextInputDialog();
+
+            //crear el gridpane per posar els 2 camps a l'hora
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+            gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
+            gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
+            gridPane.addRow(2, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Modificar dades de l'usuari");
+            alert.setHeaderText("Introduïu les noves dades de l'usuari:");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                System.out.println("success");
             /*Usuari user = new Usuari();
             // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
             user.setNom(nomDialeg.getEditor().getText());
@@ -234,8 +236,14 @@ public class UsuariController implements Initializable
             //actualizar la base de dades
             GestioUsuari gestioUsuari = new GestioUsuari();
             gestioUsuari.modificarUsuari(user);*/
-        }
+            }
 
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error: "+ e.getMessage());
+        }
 
 
 
