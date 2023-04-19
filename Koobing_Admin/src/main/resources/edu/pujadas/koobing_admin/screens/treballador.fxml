@@ -89,7 +89,7 @@
                   </GridPane>
                   <TableView2 fx:id="taulaTreballadors">
                      <columns>
-                        <TableColumn fx:id="idTreballador" prefWidth="80.0" text="idUsuari" />
+                        <TableColumn fx:id="idTreballador" prefWidth="80.0" text="idTreballador" />
                         <TableColumn fx:id="dniColum" prefWidth="80.0" text="DNI" />
                         <TableColumn fx:id="nomColum" prefWidth="80.0" text="Nom" />
                         <TableColumn fx:id="cognomColum" prefWidth="80.0" text="Cognom" />
