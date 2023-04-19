@@ -25,4 +25,24 @@ public class Treballador extends Persona
         this.isAdmin = isAdmin;
 
     }
+
+    public String getNumSegSocial()
+    {
+        return numSegSocial;
+    }
+
+    public void setNumSegSocial(String numSegSocial)
+    {
+        this.numSegSocial = numSegSocial;
+    }
+
+    public boolean isAdmin()
+    {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin)
+    {
+        isAdmin = admin;
+    }
 }
