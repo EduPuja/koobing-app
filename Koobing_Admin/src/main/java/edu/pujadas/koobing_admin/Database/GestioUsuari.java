@@ -17,7 +17,7 @@ public class GestioUsuari
      */
     public void crearUsuari(Usuari usuari)
     {
-        // todo insertar usuari
+
         try
         {   //connexio usuari
 
@@ -26,8 +26,7 @@ public class GestioUsuari
             Statement stat = con.conectar();
 
 
-            String query ="INSERT INTO `usuari`( `avatar`, `nom`, `cognom`, `data_naix`, `email`, `password`) " +
-                    "VALUES ('"+usuari.getAvatar()+"','"+usuari.getNom()+"','"+usuari.getCognom()+"','"+usuari.getDataNaix()+"','"+usuari.getEmail()+"','"+usuari.getPassword()+")' ";
+            String query ="INSERT INTO usuari(dni,avatar,nom,cognom,data_naix,email,password) VALUES ('"+usuari.getDni()+"','"+usuari.getAvatar()+"','"+usuari.getNom()+"','"+usuari.getCognom()+"','"+usuari.getDataNaix()+"','"+usuari.getEmail()+"','"+usuari.getPassword()+"')";
 
             if(stat.executeUpdate(query) == 1)
             {
@@ -37,7 +36,7 @@ public class GestioUsuari
         }
         catch (Exception e)
         {
-            System.out.println("El usuari no se ha pogut insertar ;(");
+            System.out.println("El usuari no se ha pogut insertar ;(" + e.getMessage());
         }
     }
 
