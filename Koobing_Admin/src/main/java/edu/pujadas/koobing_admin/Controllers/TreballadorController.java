@@ -64,17 +64,10 @@ public class TreballadorController implements Initializable
                 listTreballador
         );
 
-        taulaTreballadors.setItems(obserListUser);
 
-        idTreballador.setCellValueFactory(new PropertyValueFactory<>("id"));
-        dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
-        nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
-        dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
-        emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
-        passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
-        numSegSocialColum.setCellValueFactory(new PropertyValueFactory<>("numSegSocial"));
-        //isAdminColum.setCellFactory(new PropertyValueFactory<>("isAdmin"));
+        idTreballador.setCellValueFactory(new PropertyValueFactory<>("idTreballador"));
+
+        taulaTreballadors.setItems(obserListUser);
     }
 
     // CANVIS DE PANTALLA

@@ -16,11 +16,12 @@ public class Treballador extends Persona
     {
 
     }
-    public Treballador(int id, String dni, Blob avatar, String nom, String cognom, Date dataNaix, String email, String password,
+    public Treballador(int idTreballador, String dniWork, Blob avatarWorker, String nomWorker, String cognomTreballador, Date dataNaixWorker, String emailWorker, String passwordWorker,
                        String numSegSocial, boolean isAdmin)
     {
 
-        super(id,dni, avatar, nom, cognom, dataNaix, email, password);
+
+        super(idTreballador,dniWork, avatarWorker, nomWorker, cognomTreballador, dataNaixWorker, emailWorker, passwordWorker);
         this.numSegSocial = numSegSocial;
         this.isAdmin = isAdmin;
 

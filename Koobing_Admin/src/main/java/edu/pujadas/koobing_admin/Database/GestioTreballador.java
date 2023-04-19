@@ -29,14 +29,23 @@ public class GestioTreballador
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            ResultSet rs = stat.executeQuery("SELECT * FROM treballadors ");
+            ResultSet rs = stat.executeQuery("SELECT * FROM treballador ");
 
             if(rs.next())
             {
                 Treballador t = new Treballador();
                 t.setId(rs.getInt("id_treballador"));
-            }
+                t.setAvatar(rs.getBlob("avatar"));
+                t.setNom(rs.getString("dni"));
+                t.setCognom(rs.getString("cognom"));
+                t.setDataNaix(rs.getDate("data_naix"));
+                t.setEmail(rs.getString("email"));
+                t.setPassword(rs.getString("password"));
+                t.setNumSegSocial(rs.getString("num_seg_social"));
+                t.setAdmin(rs.getBoolean("isAdmin"));
 
+                listTreballs.add(t);
+            }
             con.desconectar();
             return listTreballs;
         }
