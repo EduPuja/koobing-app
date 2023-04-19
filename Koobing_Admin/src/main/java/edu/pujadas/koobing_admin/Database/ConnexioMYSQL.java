@@ -10,22 +10,18 @@ public class ConnexioMYSQL
     private final String usuario = "root";
     private final String password = "";
 
-    /**
-     * Metode per poder connectarte a la base de dates
-     * url = "http://localhost:3306/koobing_app"
-     * usuario = "root"
-     * contraseña = " "
-     */
+
     public Statement conectar()
     {
         try
         {
             conexion = DriverManager.getConnection(url, usuario, password);
-           // System.out.println("Conexión establecida correctamente ✓");
+            //System.out.println("Conexión establecida correctamente ✓");
             return conexion.createStatement();
         }
         catch (SQLException ex) {
-            System.out.println("Ha ocurrido un error al conectar con la base de datos: " + ex.getMessage());
+            //System.out.println("Ha ocurrido un error al conectar con la base de datos: " + ex.getMessage());
+            ex.printStackTrace();
             return null;
         }
     }

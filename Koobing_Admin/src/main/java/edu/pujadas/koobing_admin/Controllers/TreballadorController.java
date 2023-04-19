@@ -1,6 +1,10 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Models.Usuari;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -45,18 +50,31 @@ public class TreballadorController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("\nTreballador Screen");
+        loagWorkerData();
     }
 
 
     private void loagWorkerData()
     {
-        try{
+        GestioTreballador gestioTreballador = new GestioTreballador();
 
-        }
-        catch (Exception e)
-        {
-            System.out.println("Hi ha hagut un error  '" + e.getMessage() );
-        }
+        listTreballador= gestioTreballador.consultarTreballadors();
+
+        ObservableList<Treballador> obserListUser = FXCollections.observableArrayList(
+                listTreballador
+        );
+
+        taulaTreballadors.setItems(obserListUser);
+
+        idTreballador.setCellValueFactory(new PropertyValueFactory<>("id"));
+        dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
+        dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
+        emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
+        passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
+        numSegSocialColum.setCellValueFactory(new PropertyValueFactory<>("numSegSocial"));
+        //isAdminColum.setCellFactory(new PropertyValueFactory<>("isAdmin"));
     }
 
     // CANVIS DE PANTALLA
