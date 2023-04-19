@@ -22,6 +22,7 @@ import org.controlsfx.control.tableview2.TableView2;;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -213,7 +214,7 @@ public class UsuariController implements Initializable
             gridPane.addRow(0, new Label("Digues el Teu DNI: "),dniDialeg.getEditor());
             gridPane.addRow(1,new Label("Nou Nom: ") ,nomDialeg.getEditor());
             gridPane.addRow(2, new Label("Nou Cognom:"), cognomDialeg.getEditor());
-            gridPane.addRow(3, new Label("Data de Naixament:"),dataNaix.getEditor());
+            gridPane.addRow(3, new Label("Data de Naixament:"),dataNaix);
             gridPane.addRow(4, new Label("Correu Electroinc: "),emailDialeg.getEditor());
             gridPane.addRow(5, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
 
@@ -234,17 +235,23 @@ public class UsuariController implements Initializable
                 Usuari user = new Usuari();
                 // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
                 user.setNom(nomDialeg.getEditor().getText());
+                user.setDni(dniDialeg.getEditor().getText());
                 user.setCognom(cognomDialeg.getEditor().getText());
                 user.setEmail(emailDialeg.getEditor().getText());
 
+                LocalDate data= dataNaix.getValue();
+                Date dataSQL = Date.valueOf(data);
+                user.setDataNaix(dataSQL);
                 user.setPassword(passwordDialeg.getEditor().getText());
 
-                // Actualizar la tabla
-                taulaUsuaris.refresh();
+
 
                 //actualizar la base de dades
                 GestioUsuari gestioUsuari = new GestioUsuari();
                 gestioUsuari.crearUsuari(user);
+
+                // Actualizar la tabla
+                taulaUsuaris.refresh();
             }
 
 
