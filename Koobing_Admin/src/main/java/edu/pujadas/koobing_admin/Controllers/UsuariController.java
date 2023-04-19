@@ -201,15 +201,22 @@ public class UsuariController implements Initializable
             TextInputDialog nomDialeg = new TextInputDialog();
             TextInputDialog cognomDialeg = new TextInputDialog();
             TextInputDialog passwordDialeg = new TextInputDialog();
+            TextInputDialog dniDialeg = new TextInputDialog();
+            TextInputDialog emailDialeg = new TextInputDialog();
+            DatePicker dataNaix = new DatePicker();
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
             gridPane.setHgap(10);
             gridPane.setVgap(10);
 
-            gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
-            gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
-            gridPane.addRow(2, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
+            gridPane.addRow(0, new Label("Digues el Teu DNI: "),dniDialeg.getEditor());
+            gridPane.addRow(1,new Label("Nou Nom: ") ,nomDialeg.getEditor());
+            gridPane.addRow(2, new Label("Nou Cognom:"), cognomDialeg.getEditor());
+            gridPane.addRow(3, new Label("Data de Naixament:"),dataNaix.getEditor());
+            gridPane.addRow(4, new Label("Correu Electroinc: "),emailDialeg.getEditor());
+            gridPane.addRow(5, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
+
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
@@ -224,18 +231,20 @@ public class UsuariController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
                 System.out.println("success");
-            /*Usuari user = new Usuari();
-            // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
-            user.setNom(nomDialeg.getEditor().getText());
-            user.setCognom(cognomDialeg.getEditor().getText());
-            user.setPassword(passwordDialeg.getEditor().getText());
+                Usuari user = new Usuari();
+                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+                user.setNom(nomDialeg.getEditor().getText());
+                user.setCognom(cognomDialeg.getEditor().getText());
+                user.setEmail(emailDialeg.getEditor().getText());
 
-            // Actualizar la tabla
-            taulaUsuaris.refresh();
+                user.setPassword(passwordDialeg.getEditor().getText());
 
-            //actualizar la base de dades
-            GestioUsuari gestioUsuari = new GestioUsuari();
-            gestioUsuari.modificarUsuari(user);*/
+                // Actualizar la tabla
+                taulaUsuaris.refresh();
+
+                //actualizar la base de dades
+                GestioUsuari gestioUsuari = new GestioUsuari();
+                gestioUsuari.crearUsuari(user);
             }
 
 
