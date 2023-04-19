@@ -6,6 +6,9 @@ import java.sql.Statement;
 public class ConnexioMYSQL
 {
     private Connection conexion;
+
+    // Servidor institut : jdbc:mysql://192.168.2.143:3306/koobing_app
+    //servidor home : 
     private final String url = "jdbc:mysql://192.168.2.143:3306/koobing_app";
     private final String usuario = "admin";
     private final String password = "";
