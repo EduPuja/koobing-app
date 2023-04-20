@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import org.controlsfx.control.tableview2.TableView2?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.pujadas.koobing_admin.Controllers.TreballadorController"
-            prefHeight="600.0" prefWidth="1000.0">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.tableview2.TableView2?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.TreballadorController">
    <children>
       <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
          <items>
@@ -72,7 +73,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="Treballadors" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Usuari" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -82,22 +83,23 @@
                               <Image url="@../img/libro.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Afegir" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Modificar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Eliminar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Afegir"  GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="modifyBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Modificar"  GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Eliminar"  GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                   <TableView2 fx:id="taulaTreballadors">
                      <columns>
-                        <TableColumn fx:id="idTreballador" prefWidth="80.0" text="idTreballador" />
-                        <TableColumn fx:id="dniColum" prefWidth="80.0" text="DNI" />
-                        <TableColumn fx:id="nomColum" prefWidth="80.0" text="Nom" />
-                        <TableColumn fx:id="cognomColum" prefWidth="80.0" text="Cognom" />
-                        <TableColumn fx:id="dataNaixColum" prefWidth="80.0" text="DataNaix" />
-                        <TableColumn fx:id="emailColum" prefWidth="80.0" text="Email" />
-                        <TableColumn fx:id="passwordColum" prefWidth="80.0" text="Password" />
-                        <TableColumn fx:id="numSegSocialColum" prefWidth="80.0" text="Num Seg Social"/>
-                        <TableColumn fx:id="isAdminColum" prefWidth="80.0" text="isAdmin"/>
+                        <TableColumn fx:id="idTreballador" prefWidth="108.0" text="ID Treballador" />
+                        <TableColumn fx:id="dniColum" prefWidth="108.0" text="DNI" />
+                        <TableColumn fx:id="nomColum" prefWidth="108.0" text="Nom" />
+                        <TableColumn fx:id="cognomColum" prefWidth="108.0" text="Cognom" />
+                        <TableColumn fx:id="dataNaixColum" prefWidth="108.0" text="DataNaix" />
+                        <TableColumn fx:id="emailColum" prefWidth="108.0" text="Email" />
+                        <TableColumn fx:id="passwordColum" prefWidth="108.0" text="Password" />
+                        <TableColumn fx:id="numSegSocialColum" prefWidth="108.0" text="Num SegSOcial"/>
+                        <TableColumn fx:id="isAdminColum" prefWidth="108.0" text="isAdmin"/>
+
                      </columns>
                   </TableView2>
                </children>
@@ -105,5 +107,4 @@
          </items>
       </SplitPane>
    </children>
-
 </AnchorPane>
