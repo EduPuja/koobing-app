@@ -1,6 +1,10 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioReserva;
 import edu.pujadas.koobing_admin.Models.Reserva;
+import edu.pujadas.koobing_admin.Models.Usuari;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,10 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReservaController implements Initializable
@@ -25,9 +31,37 @@ public class ReservaController implements Initializable
     Parent root;
     Stage stage;
     Scene scene;
+
+
+    ArrayList<Reserva> listReserves = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        System.out.println("Reserva Screen!");
+        loadInfoReserves();
+    }
+
+
+
+    public void loadInfoReserves()
+    {
+        System.out.println("Loading info reserva"); // debug testing
+        try
+        {
+            GestioReserva gestioReserva= new GestioReserva();
+            listReserves = gestioReserva.consultarReserves();
+            ObservableList<Reserva> observableListReserva = FXCollections.observableArrayList(
+                    listReserves
+            );
+            //afegint el observable list en el tableview
+            taulaReserves.setItems(observableListReserva);
+            idReserva.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();    //degub error
+        }
     }
 
     // CANVIS DE PANTALLA
