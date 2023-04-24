@@ -10,6 +10,10 @@ public class GestioAutor
 {
 
 
+    /**
+     * Metode per insertar un autor en la base de dades
+     * @param autor Objecte autor
+     */
     public void crearAutor(Autor autor)
     {
         try
@@ -33,6 +37,11 @@ public class GestioAutor
         }
     }
 
+    /**
+     * Metode per buscar un autor de la base de dades i modificar les dades que
+     * el administrador vulgui
+     * @param autor Objecte autor
+     */
     public void modificarAutor(Autor autor)
     {
         try
@@ -56,6 +65,10 @@ public class GestioAutor
         }
     }
 
+    /**
+     * Metode per eliminar un autor de la base de dades
+     * @param idAutor el identifciador del autor a eliminar
+     */
     public void eliminarAutor(int idAutor)
     {
         try
@@ -78,30 +91,47 @@ public class GestioAutor
             System.out.println("El autor NO se ha eliminat correctament");
         }
     }
-    public void consultarAutors()
+
+    /**
+     * Metode que permet de consultar TOTS els autors de la base de dades
+     * @return ArrayList<Autor>
+     */
+    public ArrayList<Autor> consultarAutors()
     {
+        ArrayList<Autor> listAutors = new ArrayList<Autor>();
+
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
             ResultSet rs = stat.executeQuery("SELECT * FROM autor");
 
-            while(rs.next())
+            while (rs.next())
             {
-                System.out.println("ID_Autor: " +rs.getInt("id_autor"));
-                System.out.println("NOM Autor: " +rs.getString("nom_autor"));
-                System.out.println("Data Naix: " +rs.getDate("data_naix"));
-
-
+                Autor autor = new Autor(rs.getInt("id_autor"),
+                        rs.getString("nom_autor"),rs.getDate("data_naix"));
+                // afegiexo tost els autos de la base de dades al arraylist
+                listAutors.add(autor);
             }
+
             con.desconectar();
+            return listAutors;
+
         }
         catch (Exception e)
         {
-            System.out.println("No se ha trobat cap autor :(");
+            System.out.println("Error: No se ha trobat cap autor :(");
         }
+        return null;
+
     }
 
+
+    /**
+     * Metode que permet de consultar els 10 , te un limit dels 10 PRIMERS, primers autors de la base de dades
+     * aquest metode s'utiliza en el homeController
+     * @return ArrayList<Autor>
+     */
     public ArrayList<Autor> consultar10Autors()
     {
         ArrayList<Autor> listAutors = new ArrayList<Autor>();
