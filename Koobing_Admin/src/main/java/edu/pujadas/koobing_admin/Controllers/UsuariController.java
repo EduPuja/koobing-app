@@ -206,7 +206,9 @@ public class UsuariController implements Initializable
             // Creacio dels Textes
             TextInputDialog nomDialeg = new TextInputDialog();
             TextInputDialog cognomDialeg = new TextInputDialog();
-            TextInputDialog passwordDialeg = new TextInputDialog();
+            PasswordField passwordField = new PasswordField();
+
+            TextInputDialog passwordDialeg = new TextInputDialog(passwordField.getText());
             TextInputDialog dniDialeg = new TextInputDialog();
             TextInputDialog emailDialeg = new TextInputDialog();
             DatePicker dataNaix = new DatePicker();
@@ -221,7 +223,7 @@ public class UsuariController implements Initializable
             gridPane.addRow(2, new Label("Nou Cognom:"), cognomDialeg.getEditor());
             gridPane.addRow(3, new Label("Data de Naixament:"),dataNaix);
             gridPane.addRow(4, new Label("Correu Electroinc: "),emailDialeg.getEditor());
-            gridPane.addRow(5, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
+            gridPane.addRow(5, new Label("Contrassenya"),passwordField);
 
 
             // Mostrar los dos diálogos en la misma ventana
