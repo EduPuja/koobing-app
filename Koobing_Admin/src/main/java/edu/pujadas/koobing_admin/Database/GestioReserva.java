@@ -20,7 +20,7 @@ public class GestioReserva
         }
         catch (Exception e)
         {
-            e.printStackTrace();        //debug if error
+            System.out.println("Crearte Reserva Error: "+e.getMessage());
         }
     }
 
@@ -32,7 +32,7 @@ public class GestioReserva
         }
         catch (Exception e)
         {
-            e.printStackTrace();        //debug if error
+            System.out.println("Modificar Reserva Error: "+e.getMessage());
         }
     }
 
@@ -44,7 +44,7 @@ public class GestioReserva
         }
         catch (Exception e)
         {
-            e.printStackTrace();        //debug if error
+            System.out.println("Eliminar Reserva Error: "+e.getMessage());
         }
     }
 
@@ -89,7 +89,7 @@ public class GestioReserva
         }
         catch (Exception e)
         {
-            e.printStackTrace();        //debug if error
+            System.out.println("Error consutarReserves: " + e.getMessage());
         }
 
         return null;
@@ -104,5 +104,7 @@ public class GestioReserva
         {
             System.out.println("Find Reserva Error" + e.getMessage());
         }
+
+        return null;
     }
 }
