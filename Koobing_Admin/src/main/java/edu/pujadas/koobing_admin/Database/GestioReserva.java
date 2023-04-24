@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
+
+//todo falta create, mod , update
 public class GestioReserva
 {
     public void crearReserva(Reserva reserva)
@@ -91,5 +93,16 @@ public class GestioReserva
         }
 
         return null;
+    }
+
+    public Reserva findReserva(int idReserva)
+    {
+        try {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Find Reserva Error" + e.getMessage());
+        }
     }
 }
