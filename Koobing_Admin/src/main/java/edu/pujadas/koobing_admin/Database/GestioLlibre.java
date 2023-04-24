@@ -56,10 +56,14 @@ public class GestioLlibre
         }
         catch (Exception e)
         {
-
+            System.out.println("Error LLibre:"+ e.getMessage());
         }
     }
 
+    /**
+     * Metode per poder eliminar un llibre de la base de dades
+     * @param ISBN long ISBN del llibre a eliminar
+     */
     public void eliminarLlibre(long ISBN)
     {
         try
@@ -234,7 +238,6 @@ public class GestioLlibre
      */
     public Llibre findLLibre(long ISBN)
     {
-
 
         try {
 
