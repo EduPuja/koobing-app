@@ -11,27 +11,39 @@ public class GestioLlibre
 
 
 
-    public void crearLlibre()
+    public void crearLlibre(Llibre l)
     {
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
 
+            String sql = "INSERT INTO `llibre`(`ISBN`, `id_autor`, `id_editor`, `id_idioma`, `id_genere`, `titol`, `versio`, `data_publi`) " +
+                    "VALUES ('"+l.getISBN()+"','"+l.getAutor().getIdAutor()+"','"+l.getEditor().getIdEditorial()+"','"+l.getIdioma().getIdIdioma()+"','"+l.getGenere().getIdGenere()+"','"+l.getTitol()+"','"+l.getVersio()+"','"+l.getDataPubli()+"')";
+
+            if(stat.executeUpdate(sql) ==1)
+            {
+                System.out.println("Llibre insertado correctamente");
+            }
+            else System.out.println("Llibre no insertado correctamente");
 
             con.desconectar();
         }
         catch (Exception e)
         {
-
+            System.out.println("Error LLibre:"+ e.getMessage());
         }
     }
 
-    public void modificarLlibre()
+    public void modificarLlibre(Llibre llibre)
     {
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
-
+            Statement stat = con.conectar();
+            String sql = "UPDATE `llibre` SET `ISBN`='"+llibre.getISBN()+"',`id_autor`='"+llibre.getAutor().getIdAutor()+"'," +
+                    "`id_editor`='"+llibre.getEditor().getIdEditorial()+"',`id_idioma`='"+llibre.getIdioma().getIdIdioma()+"'," +
+                    "`id_genere`='"+llibre.getGenere().getIdGenere()+"',`titol`='"+llibre.getTitol()+"',`versio`='"+llibre.getVersio()+"',`data_publi`='"+llibre.getDataPubli()+"' WHERE ISBN='"+llibre.getISBN()+"'";
 
             con.desconectar();
         }
