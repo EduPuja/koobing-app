@@ -41,6 +41,10 @@ public class GestioUsuari
     }
 
 
+    /**
+     * Metode per modificar un usuar a la base de dades
+     * @param usuari Objecte usuari que és modificat a memória
+     */
     public void modificarUsuari(Usuari usuari)
     {
         try
@@ -75,9 +79,7 @@ public class GestioUsuari
      */
     public void eliminarUsuari(String dniUsuari)
     {
-
         try
-
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
 
@@ -195,6 +197,25 @@ public class GestioUsuari
             System.out.println("Hi ha hagut un error " + e.getMessage());
 
             //e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * Metode per consultar nomes 1 usuari de la base de dades
+     * @param dni dni del usuari
+     * @return Objecte usuari
+     */
+    public Usuari findUser(String dni)
+    {
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Find User Error :(" + e.getMessage());
         }
 
         return null;
