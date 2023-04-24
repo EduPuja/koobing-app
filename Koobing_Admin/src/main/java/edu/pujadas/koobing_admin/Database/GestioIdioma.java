@@ -5,7 +5,7 @@ import edu.pujadas.koobing_admin.Models.Idioma;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+//todo falta create delete mod
 public class GestioIdioma
 {
     public void crearIdioma()
@@ -26,6 +26,11 @@ public class GestioIdioma
 
     }
 
+    /**
+     * Metodo que busca el idioma d'una base de datos ✅'
+     * @param idIdioma identificador de la base de datos
+     * @return Idioma object
+     */
     public Idioma findIdioma(int idIdioma)
     {
         try
