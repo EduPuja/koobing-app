@@ -90,11 +90,11 @@
                         </GridPane>
                         <TableView2 fx:id="taulaReserves">
                             <columns>
-                                <TableColumn fx:id="idReserva" prefWidth="110.0" text="ID Reserva" />
-                                <TableColumn fx:id="nomUser" prefWidth="110.0" text="Nom Usuari" />
-                                <TableColumn fx:id="nomWorker" prefWidth="110.0" text="Nom treballador" />
-                                <TableColumn fx:id="bookTitle" prefWidth="110.0" text="Titol" />
-                                <TableColumn fx:id="nomBiblio" prefWidth="110.0" text="Nom Biblioteca" />
+                                <TableColumn fx:id="idReserva" prefWidth="150.0" text="ID Reserva" />
+                                <TableColumn fx:id="nomUser" prefWidth="150.0" text="Nom Usuari" />
+                                <TableColumn fx:id="nomWorker" prefWidth="150.0" text="Nom treballador" />
+                                <TableColumn fx:id="bookTitle" prefWidth="150.0" text="Titol" />
+                                <TableColumn fx:id="nomBiblio" prefWidth="150.0" text="Nom Biblioteca" />
                             </columns>
                         </TableView2>
                     </children>
