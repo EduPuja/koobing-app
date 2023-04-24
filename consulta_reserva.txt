@@ -1,1 +1,5 @@
-SELECT r.id_reserva,u.nom as nom_usuari,t.nom as nom_treballador,l.titol,b.nom_biblio FROM `reserves` r INNER JOIN usuari u on u.id_usuari=r.id_reserva INNER JOIN treballador t on t.id_treballador=r.id_treballador INNER JOIN llibre l on l.ISBN= r.ISBN INNER JOIN biblioteca b on b.id_biblioteca=r.id_biblioteca
+SELECT r.id_reserva,u.nom as nom_usuari,t.nom as nom_treballador,l.titol,b.nom_biblio
+FROM `reserves` r INNER JOIN usuari u on u.id_usuari=r.id_reserva
+INNER JOIN treballador t on t.id_treballador=r.id_treballador
+INNER JOIN llibre l on l.ISBN= r.ISBN
+INNER JOIN biblioteca b on b.id_biblioteca=r.id_biblioteca

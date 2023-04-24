@@ -88,9 +88,9 @@
                                 <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Eliminar" onAction="#onRowDelete" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
-                        <TableView2 fx:id="taulaUsuaris">
+                        <TableView2 fx:id="taulaReserves">
                             <columns>
-                                <TableColumn fx:id="idReserva" prefWidth="108.0" text="idUsuari" />
+                                <TableColumn fx:id="idReserva" prefWidth="108.0" text="ID Reserva" />
                                 <TableColumn fx:id="" prefWidth="108.0" text="DNI" />
                                 <TableColumn fx:id="nomColum" prefWidth="108.0" text="Nom" />
                                 <TableColumn fx:id="cognomColum" prefWidth="108.0" text="Cognom" />
