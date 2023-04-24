@@ -132,26 +132,29 @@ public class TreballadorController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
                 System.out.println("Success Worker!");
-               /* Usuari user = new Usuari();
-                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
-                user.setNom(nomDialeg.getEditor().getText());
-                user.setDni(dniDialeg.getEditor().getText());
-                user.setCognom(cognomDialeg.getEditor().getText());
-                user.setEmail(emailDialeg.getEditor().getText());
+
+                Treballador worker = new Treballador();
+
+                // posar els camps dels dialegs al objecte per poder-lo insertar a la base de dades
+                worker.setDni(dniDialeg.getEditor().getText());
+                worker.setNom(nomDialeg.getEditor().getText());
+                worker.setCognom(cognomDialeg.getEditor().getText());
+                worker.setEmail(emailDialeg.getEditor().getText());
 
                 LocalDate data= dataNaix.getValue();
                 Date dataSQL = Date.valueOf(data);
-                user.setDataNaix(dataSQL);
-                user.setPassword(passwordDialeg.getEditor().getText());
+                worker.setDataNaix(dataSQL);
+                worker.setPassword(passwordDialeg.getEditor().getText());
+                worker.setNumSegSocial(String.valueOf(Integer.parseInt(numSegSocialDialeg.getEditor().getText())));
+                worker.setAdmin(isAdminDialeg.isSelected());
 
+                //insertar a la base de dades
+                GestioTreballador gestioTreballador = new GestioTreballador();
+                gestioTreballador.crearTreballador(worker);
 
+                // actualizar la tabla
+                taulaTreballadors.refresh();
 
-                //actualizar la base de dades
-               // GestioUsuari gestioUsuari = new GestioUsuari();
-                //gestioUsuari.crearUsuari(user);
-
-                // Actualizar la tabla
-                taulaTreballadors.refresh();*/
             }
 
 
