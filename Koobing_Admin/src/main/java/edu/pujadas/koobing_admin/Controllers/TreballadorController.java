@@ -47,7 +47,7 @@ public class TreballadorController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        System.out.println("\nTreballador Screen");
+        System.out.println("Treballador Screen");
         loagWorkerData();
     }
 

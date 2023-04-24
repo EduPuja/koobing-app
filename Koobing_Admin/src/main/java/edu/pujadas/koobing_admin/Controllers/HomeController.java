@@ -89,7 +89,7 @@ public class HomeController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        System.out.println("Carregant el Home!");
+        System.out.println("Home Screen!");
         infoUsuaris();
         infoAutor();
         infoLlibre();
@@ -101,7 +101,7 @@ public class HomeController implements Initializable
      */
     private void infoUsuaris()
     {
-        System.out.println("info usuaris");
+        //System.out.println("info usuaris"); // degug
         try
         {   // usuaris
             GestioUsuari gestioUsuari = new GestioUsuari();
@@ -139,7 +139,7 @@ public class HomeController implements Initializable
      */
     private void infoAutor()
     {
-        System.out.println("info autor");
+        //System.out.println("info autor");
         try
         {
             GestioAutor gestioAutor = new GestioAutor();
@@ -165,7 +165,7 @@ public class HomeController implements Initializable
 
     private void infoLlibre()
     {
-        System.out.println("info llibre");
+        //System.out.println("info llibre");
         try
         {
             // classe per agafar la info de la base de dades

@@ -57,7 +57,7 @@ public class UsuariController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        System.out.println("Carregant el Usuari");
+        System.out.println("User Screen!");
         loadInfoUser();
     }
 
