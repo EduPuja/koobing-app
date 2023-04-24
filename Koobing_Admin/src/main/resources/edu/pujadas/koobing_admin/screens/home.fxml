@@ -102,7 +102,7 @@
                                           <TableColumn fx:id="cognomColum" minWidth="15.0" prefWidth="105.0" text="Cognom" />
                                           <TableColumn fx:id="dataNaixColum" minWidth="15.0" prefWidth="105.0" text="Data Naix" />
                                           <TableColumn fx:id="emailColum" minWidth="15.0" prefWidth="105.0" text="Email" />
-                                          <TableColumn fx:id="passwordColum" minWidth="15.0" prefWidth="105.0" text="Password" />
+                                          <!--<TableColumn fx:id="passwordColum" minWidth="15.0" prefWidth="105.0" text="Password" />-->
                                        </columns>
                                     </TableView2>
                                  </children>

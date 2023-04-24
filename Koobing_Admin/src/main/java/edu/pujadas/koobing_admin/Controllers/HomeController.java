@@ -54,7 +54,7 @@ public class HomeController implements Initializable
     public TableColumn<Usuari,String> cognomColum;
     public TableColumn<Usuari, Date> dataNaixColum;
     public TableColumn<Usuari,String> emailColum;
-    public TableColumn<Usuari,String> passwordColum;
+    //public TableColumn<Usuari,String> passwordColum;
 
     //arraylist usuaris
     private ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
@@ -121,7 +121,7 @@ public class HomeController implements Initializable
             cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
             dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
             emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
-            passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
+            //passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
             taulaUsuaris.setItems(obserListUser);
 
         }
