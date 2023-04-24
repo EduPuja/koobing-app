@@ -2,9 +2,13 @@ package edu.pujadas.koobing_admin.Models;
 
 import javafx.scene.image.Image;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Base64;
 
 public class Persona
 {
@@ -33,7 +37,9 @@ public class Persona
         this.cognom = cognom;
         this.dataNaix = dataNaix;
         this.email = email;
-        this.password = password;
+        //crido el metode setPassword perque aixi me la encrpiti directament
+        setPassword(password);
+       // this.password = password;
     }
 
     public int getId()
@@ -111,8 +117,44 @@ public class Persona
         return password;
     }
 
+
+    /**
+     * Metode que encripta la contraseña
+     * @param password password sense encriptarla
+     */
     public void setPassword(String password)
     {
-        this.password = password;
+        try {
+            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(passwordBytes);
+            String hash = Base64.getEncoder().encodeToString(hashBytes);
+            this.password = hash;
+        }
+        catch (NoSuchAlgorithmException ex) {
+            throw new RuntimeException("Error al encriptar la contraseña", ex);
+        }
     }
+
+    /**
+     * Metode que verifica la password si es correcta
+     * @param password password sense encriptarla
+     * @return true si la contraseña es correcta and false
+     */
+    public boolean checkPassword(String password)
+    {
+        try
+        {
+            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(passwordBytes);
+            String hash = Base64.getEncoder().encodeToString(hashBytes);
+            return hash.equals(this.password);
+        }
+        catch (NoSuchAlgorithmException ex) {
+            throw new RuntimeException("Error al verificar la contraseña", ex);
+        }
+    }
+
+
 }
