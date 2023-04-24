@@ -1,18 +1,27 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Models.Reserva;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
+import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ReservaController implements Initializable
 {
+    public TableView2<Reserva> taulaReserves;
+    public TableColumn<Reserva,Integer> idReserva;
+    public TableColumn<Reserva,String> nomUser;
+    public TableColumn<Reserva,String>nomWorker;
+    public TableColumn<Reserva,Integer> bookTitle;
+    public TableColumn<Reserva,String> nomBiblio;
     Parent root;
     Stage stage;
     Scene scene;
