@@ -152,6 +152,10 @@ public class GestioUsuari
     }
 
 
+    /**
+     * Meode que et retorna NOMES els 10 primers usuaris de la base de dades
+     * @return ArrayList dels 10  usuaris
+     */
     public ArrayList<Usuari> consultar10Usuaris()
     {
         ArrayList<Usuari> usuarios = new ArrayList<>();
