@@ -3,7 +3,7 @@ package edu.pujadas.koobing_admin.Models;
 public class Biblioteca
 {
     int idBiblioteca;
-    String nomPoblacio;
+    String nomBiblioteca;
     Poblacio poblacio;
     double latitud;
     double longitud;
@@ -12,10 +12,10 @@ public class Biblioteca
     {
     }
 
-    public Biblioteca(int idBiblioteca, String nomPoblacio, Poblacio poblacio, double latitud, double longitud)
+    public Biblioteca(int idBiblioteca, String nomBiblioteca, Poblacio poblacio, double latitud, double longitud)
     {
         this.idBiblioteca = idBiblioteca;
-        this.nomPoblacio = nomPoblacio;
+        this.nomBiblioteca = nomBiblioteca;
         this.poblacio = poblacio;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -31,14 +31,14 @@ public class Biblioteca
         this.idBiblioteca = idBiblioteca;
     }
 
-    public String getNomPoblacio()
+    public String getNomBiblioteca()
     {
-        return nomPoblacio;
+        return nomBiblioteca;
     }
 
-    public void setNomPoblacio(String nomPoblacio)
+    public void setNomBiblioteca(String nomBiblioteca)
     {
-        this.nomPoblacio = nomPoblacio;
+        this.nomBiblioteca = nomBiblioteca;
     }
 
     public Poblacio getPoblacio()
