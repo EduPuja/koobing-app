@@ -6,6 +6,7 @@ import edu.pujadas.koobing_admin.Models.Idioma;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+//todo falta create, update, delete
 public class GestioGenere
 {
     public void crearGenere()
@@ -24,6 +25,12 @@ public class GestioGenere
     {
 
     }
+
+    /**
+     * Metode que et parmet trobar un genere ✅
+     * @param idGenere identificador del genere
+     * @return objecte genere
+     */
     public Genere findGenere(int idGenere)
     {
         try
