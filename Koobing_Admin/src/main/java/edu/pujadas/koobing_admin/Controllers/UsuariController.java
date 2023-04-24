@@ -47,7 +47,7 @@ public class UsuariController implements Initializable
     public TableColumn<Usuari, Date>dataNaixColum;
     public TableColumn<Usuari,String> emailColum;
 
-    public TableColumn<Usuari,String> passwordColum;
+    //public TableColumn<Usuari,String> passwordColum;
 
 
     private ArrayList<Usuari> listUsuaris = new ArrayList<Usuari>();
@@ -80,7 +80,7 @@ public class UsuariController implements Initializable
         cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
         dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
         emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
-        passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
+        //passwordColum.setCellValueFactory(new PropertyValueFactory<>("password"));
     }
 
 
