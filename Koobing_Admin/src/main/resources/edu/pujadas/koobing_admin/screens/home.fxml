@@ -96,13 +96,13 @@
                                  <children>
                                     <TableView2 fx:id="taulaUsuaris" prefHeight="440.0" prefWidth="745.0">
                                        <columns>
-                                          <TableColumn fx:id="idUsuari" minWidth="15.0" prefWidth="105.0" text="ID Usuari" />
-                                          <TableColumn fx:id="dniColum" minWidth="15.0" prefWidth="105.0" text="DNI" />
-                                          <TableColumn fx:id="nomColum" minWidth="15.0" prefWidth="105.0" text="Nom" />
-                                          <TableColumn fx:id="cognomColum" minWidth="15.0" prefWidth="105.0" text="Cognom" />
-                                          <TableColumn fx:id="dataNaixColum" minWidth="15.0" prefWidth="105.0" text="Data Naix" />
-                                          <TableColumn fx:id="emailColum" minWidth="15.0" prefWidth="105.0" text="Email" />
-                                          <!--<TableColumn fx:id="passwordColum" minWidth="15.0" prefWidth="105.0" text="Password" />-->
+                                          <TableColumn fx:id="idUsuari" minWidth="90.0" prefWidth="115.0" text="ID Usuari" />
+                                          <TableColumn fx:id="dniColum" minWidth="90.0" prefWidth="115.0" text="DNI" />
+                                          <TableColumn fx:id="nomColum" minWidth="90.0" prefWidth="115.0" text="Nom" />
+                                          <TableColumn fx:id="cognomColum" minWidth="90.0" prefWidth="115.0" text="Cognom" />
+                                          <TableColumn fx:id="dataNaixColum" minWidth="90.0" prefWidth="115.0" text="Data Naix" />
+                                          <TableColumn fx:id="emailColum" minWidth="90.0" prefWidth="115.0" text="Email" />
+
                                        </columns>
                                     </TableView2>
                                  </children>
