@@ -37,9 +37,19 @@ public class Treballador extends Persona
         this.numSegSocial = numSegSocial;
     }
 
-    public boolean isAdmin()
+
+    /**
+     * Metode que comprova si el valor boolean que li passen es true o false
+     * @return en cas de que sigui true et retorna 1 si es true, 0 si es false.
+     */
+    public int isAdmin()
     {
-        return isAdmin;
+        if(this.isAdmin)
+        {
+            return 1;
+        }
+        else return 0;
+
     }
 
     public void setAdmin(boolean admin)
