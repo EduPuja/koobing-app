@@ -4,7 +4,7 @@ import edu.pujadas.koobing_admin.Models.Editorial;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+//todo falta create delete mod
 public class GestioEditorial
 {
     public void crearEditorial()
@@ -24,6 +24,12 @@ public class GestioEditorial
     {
 
     }
+
+    /**
+     *  Metode que busca un editorial por su id ✅✅✅
+     * @param idEditorial id del editorial
+     * @return Objecte Editorial
+     */
     public Editorial findEditorial(int idEditorial)
     {
         try
