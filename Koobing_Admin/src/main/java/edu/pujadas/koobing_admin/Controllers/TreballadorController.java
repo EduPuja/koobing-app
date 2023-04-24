@@ -37,7 +37,7 @@ public class TreballadorController implements Initializable
     public TableColumn<Treballador,String> cognomColum;
     public TableColumn<Treballador, Date> dataNaixColum;
     public TableColumn <Treballador,String>emailColum;
-    public TableColumn <Treballador,String> passwordColum;
+
     public TableColumn <Treballador,Integer> numSegSocialColum;
     public TableColumn <Treballador,Boolean>isAdminColum;
 
@@ -61,11 +61,17 @@ public class TreballadorController implements Initializable
         ObservableList<Treballador> obserListUser = FXCollections.observableArrayList(
                 listTreballador
         );
-        PropertyValueFactory<Treballador, Integer> idTreballadorFactory = new PropertyValueFactory<>("id");
 
 
-        idTreballador.setCellValueFactory(idTreballadorFactory);
 
+        idTreballador.setCellValueFactory( new PropertyValueFactory<>("id"));
+        dniColum.setCellValueFactory( new PropertyValueFactory<>("dni"));
+        nomColum.setCellValueFactory( new PropertyValueFactory<>("nom"));
+        cognomColum.setCellValueFactory( new PropertyValueFactory<>("cognom"));
+        dataNaixColum.setCellValueFactory( new PropertyValueFactory<>("dataNaix"));
+        emailColum.setCellValueFactory( new PropertyValueFactory<>("email"));
+        numSegSocialColum.setCellValueFactory( new PropertyValueFactory<>("numSegSocial"));
+        isAdminColum.setCellValueFactory( new PropertyValueFactory<>("admin"));
 
 
 
