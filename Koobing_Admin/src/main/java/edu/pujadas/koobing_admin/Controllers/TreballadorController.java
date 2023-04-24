@@ -88,7 +88,7 @@ public class TreballadorController implements Initializable
     /**
      * Metode que el que fa es inserir un Treballador
      */
-    public void onInsertarTreballador()
+    public void onInsertarTreballador(ActionEvent event)
     {
         try
         {
@@ -155,6 +155,8 @@ public class TreballadorController implements Initializable
                 // actualizar la tabla
                 taulaTreballadors.refresh();
 
+                // forma dinamicaper podere veure la info amb temps real
+                switchToTreballador(event);
             }
 
 

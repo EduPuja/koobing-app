@@ -199,7 +199,7 @@ public class UsuariController implements Initializable
      * El que crea es un pantalla temporal amb un formulari, si l'emplenes crees
      * un nou usuari, aquest es mostra en la taula
      */
-    public void onInsertarUsuari()
+    public void onInsertarUsuari(ActionEvent event)
     {
         try
         {
@@ -238,7 +238,7 @@ public class UsuariController implements Initializable
             Optional<ButtonType> resultat = alert.showAndWait();
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                System.out.println("success");
+                //System.out.println("success");
                 Usuari user = new Usuari();
                 // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
                 user.setNom(nomDialeg.getEditor().getText());
@@ -251,14 +251,14 @@ public class UsuariController implements Initializable
                 user.setDataNaix(dataSQL);
                 user.setPassword(passwordDialeg.getEditor().getText());
 
-
+                // Actualizar la tabla
+                taulaUsuaris.refresh();
 
                 //actualizar la base de dades
                 GestioUsuari gestioUsuari = new GestioUsuari();
                 gestioUsuari.crearUsuari(user);
 
-                // Actualizar la tabla
-                taulaUsuaris.refresh();
+                switchToUsuari(event);
             }
 
 
