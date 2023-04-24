@@ -50,6 +50,11 @@ public class GestioReserva
     {
         ArrayList<Reserva> listReserva = new ArrayList<>();
 
+        //gestiors
+
+        GestioUsuari gestioUsuari = new GestioUsuari();
+        GestioTreballador gestioTreballador = new GestioTreballador();
+
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
@@ -68,6 +73,7 @@ public class GestioReserva
             {
                 Reserva reserva = new Reserva();
                 reserva.setIdReserva(rs.getInt("id_reserva"));
+
 
 
 

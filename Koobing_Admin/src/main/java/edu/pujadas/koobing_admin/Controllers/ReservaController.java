@@ -57,6 +57,7 @@ public class ReservaController implements Initializable
             taulaReserves.setItems(observableListReserva);
             idReserva.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
 
+
         }
         catch (Exception e)
         {
