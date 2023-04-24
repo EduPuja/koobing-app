@@ -5,6 +5,7 @@ import edu.pujadas.koobing_admin.Models.Usuari;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.SortedMap;
 
 
 public class GestioUsuari
@@ -36,7 +37,7 @@ public class GestioUsuari
         }
         catch (Exception e)
         {
-            System.out.println("El usuari no se ha pogut insertar ;(" + e.getMessage());
+            System.out.println("Crear usuari error: "+e.getMessage());
         }
     }
 
@@ -69,7 +70,7 @@ public class GestioUsuari
         }
         catch (Exception e)
         {
-            System.out.println("Hi ha hagut una error a la modificacio");
+            System.out.println("Modificar usuari error: "+e.getMessage());
         }
     }
 
@@ -95,13 +96,14 @@ public class GestioUsuari
         }
         catch (Exception e)
         {
-            System.out.println("El usuari no se ha pogut eliminar");
+            System.out.println("Eliminar usuari error: "+e.getMessage());
         }
     }
 
 
     /**
-     * Metode per consultar els usuaris de la base de dades
+     * Metode per consultar la taula dels usuaris de la base de dades
+     * @return ArrayList dels usuaris
      */
     public ArrayList<Usuari> consultarUsuaris()
     {
@@ -132,23 +134,14 @@ public class GestioUsuari
                 usuari.setPassword(rs.getString("password"));
 
                 listUsuaris.add(usuari);
-                //debug
-                /*System.out.println("Id_usuari: " +rs.getInt("id_usuari"));
-                System.out.println("DNI: " +rs.getString("dni"));
-                System.out.println("NOM: " +rs.getString("nom"));
-                System.out.println("COGNOM: " +rs.getString("cognom"));
-                System.out.println("Data Naix: " +rs.getDate("data_naix"));
-                System.out.println("Email: " +rs.getString("email"));
-                System.out.println("Password: " +rs.getString("password"));*/
+
             }
            con.desconectar();
             return listUsuaris;
         }
         catch (Exception e)
         {
-            System.out.println("No se han trobat usuaris ;( " + e.getMessage() );
-
-
+            System.out.println("Consultar usuaris Error: " + e.getMessage());
         }
         return null;
     }
@@ -194,9 +187,7 @@ public class GestioUsuari
         }
         catch (Exception e)
         {
-            System.out.println("Hi ha hagut un error " + e.getMessage());
-
-            //e.printStackTrace();
+            System.out.println("Consultar 10 users Error: " + e.getMessage());
         }
 
         return null;
@@ -211,7 +202,28 @@ public class GestioUsuari
     {
         try
         {
+            ConnexioMYSQL con = new ConnexioMYSQL();
 
+            Statement stat = con.conectar();
+            String query = "select * from usuari where dni = '" + dni + "'";
+            ResultSet rs = stat.executeQuery(query);
+
+            if(rs.next())
+            {
+                Usuari user = new Usuari();
+                user.setId(rs.getInt("id_usuari"));
+                user.setDni(rs.getString("dni"));
+                user.setAvatar(rs.getBlob("avatar"));
+                user.setNom(rs.getString("nom"));
+                user.setCognom(rs.getString("cognom"));
+                user.setDataNaix(rs.getDate("data_naix"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+
+                return user;
+            }
+
+            con.desconectar();
         }
         catch (Exception e)
         {
