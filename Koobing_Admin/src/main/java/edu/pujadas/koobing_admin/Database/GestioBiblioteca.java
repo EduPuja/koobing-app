@@ -59,7 +59,7 @@ public class GestioBiblioteca {
 
     /**
      * Metode per poder eliminar una biblioteca en la base de datos
-     * @param biblioteca Objeto Biblioteca
+     * @param idBiblio Objeto Biblioteca
      */
     public void eliminarBiblioteca(int idBiblio) {
 
@@ -130,11 +130,31 @@ public class GestioBiblioteca {
     public Biblioteca findBiblioteca(int idBiblio) {
 
         try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();;
+            String sql = "SELECT * FROM biblioteca WHERE id_biblioteca = "+idBiblio;
+            ResultSet rs = stat.executeQuery(sql);
+            if(rs.next())
+            {
+                Biblioteca biblioteca = new Biblioteca();
+                biblioteca.setIdBiblioteca(rs.getInt("id_biblioteca"));
+                //todo falta la poblacio
 
+                biblioteca.setNomBiblioteca(rs.getString("nom_biblio"));
+                biblioteca.setLatitud(rs.getDouble("latitud"));
+                biblioteca.setLongitud(rs.getDouble("longitud"));
+                //biblioteca.setIdPoblacio(rs.getInt("id_poblacio"));
+
+
+                return biblioteca;
+            }
+
+            con.desconectar();
         }
         catch (Exception e)
         {
             System.out.println("FindBiblioteca Error :" + e.getMessage());
         }
+        return null;
     }
 }
