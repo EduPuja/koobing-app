@@ -144,7 +144,12 @@ public class UsuariController implements Initializable
             // Creacio dels Textes
             TextInputDialog nomDialeg = new TextInputDialog(user.getNom());
             TextInputDialog cognomDialeg = new TextInputDialog(user.getCognom());
+
+            //poner la contrassenya tipo passwordfield
+            PasswordField passwordField = new PasswordField();
+           //passwordField.setText(user.getPassword());
             TextInputDialog passwordDialeg = new TextInputDialog(user.getPassword());
+
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
@@ -155,7 +160,7 @@ public class UsuariController implements Initializable
 
             gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
             gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
-            gridPane.addRow(2, new Label("Nova Contrassenya"),passwordDialeg.getEditor());
+            gridPane.addRow(2, new Label("Nova Contrassenya"),passwordField);
 
 
             // Mostrar los dos diálogos en la misma ventana
