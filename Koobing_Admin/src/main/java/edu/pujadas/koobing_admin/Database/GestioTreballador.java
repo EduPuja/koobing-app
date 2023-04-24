@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+//gestio worker done ✅
 public class GestioTreballador
 {
 
