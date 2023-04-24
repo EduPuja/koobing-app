@@ -17,22 +17,38 @@ public class GestioAutor
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
 
-            //Todo insertar un autor
+            String sql = "INSERT INTO autor (id_autor,nom_autor, data_naix) VALUES ("+autor.getIdAutor()+",'"+autor.getNomAutor()+"','"+autor.getDataNaixAutor()+"')";
 
+            if(stat.executeUpdate(sql)==1)
+            {
+                System.out.println("El autor se ha insertat correctament");
+            }
+            else System.out.println("El autor NO se ha insertat correctament ;(");
 
             con.desconectar();
         }
         catch (Exception e)
         {
-            System.out.println("El autor NO se ha insertat correctament");
+            System.out.println("ERROR : El autor NO se ha insertat correctament");
         }
     }
 
-    public void modificarAutor(int idAutor)
+    public void modificarAutor(Autor autor)
     {
         try
         {
+                ConnexioMYSQL con = new ConnexioMYSQL();
+                Statement stat = con.conectar();
 
+                String sql = "UPDATE autor SET nom_autor='"+autor.getNomAutor()+"', data_naix='"+autor.getDataNaixAutor()+"' WHERE id_autor="+autor.getIdAutor();
+
+                if(stat.executeUpdate(sql)==1)
+                {
+                    System.out.println("El autor se ha modificat correctament");
+                }
+                else System.out.println("El autor NO se ha modificat correctament ;(");
+
+                con.desconectar();
         }
         catch (Exception e)
         {
@@ -42,7 +58,25 @@ public class GestioAutor
 
     public void eliminarAutor(int idAutor)
     {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
 
+            String sql = "DELETE FROM autor WHERE id_autor="+idAutor;
+
+            if(stat.executeUpdate(sql)==1)
+            {
+                System.out.println("El autor se ha eliminat correctament");
+            }
+            else System.out.println("El autor NO se ha eliminat correctament ;(");
+
+            con.desconectar();
+        }
+        catch (Exception e)
+        {
+            System.out.println("El autor NO se ha eliminat correctament");
+        }
     }
     public void consultarAutors()
     {
