@@ -33,7 +33,7 @@ public class GestioTreballador
         }
         catch (Exception e)
         {
-            System.out.println("Error: El treballador NO se ha insertat :C");
+            System.out.println("crearTreballador Error:" +e.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class GestioTreballador
         }
         catch (Exception e)
         {
-            System.out.println("Error: El treballador NO se ha modificat :C");
+            System.out.println("Modificar Treballador Error:" +e.getMessage());
         }
     }
 
@@ -84,7 +84,7 @@ public class GestioTreballador
         }
         catch (Exception e)
         {
-            System.out.println("Error: El Treballador no se ha eliminat" );
+            System.out.println("Eliminar Treballaddor Error:" + e.getMessage() );
         }
     }
 
@@ -123,7 +123,7 @@ public class GestioTreballador
         }
         catch (Exception e)
         {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Consultar Treballadors Error: " + e.getMessage());
         }
 
         return null;
@@ -161,7 +161,7 @@ public class GestioTreballador
         }
         catch (Exception e)
         {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Find Worker Error: " + e.getMessage());
         }
         return null;
     }
