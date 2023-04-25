@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 
-//todo falta poblacio
+
 public class GestioBiblioteca {
 
     /**
@@ -102,8 +102,8 @@ public class GestioBiblioteca {
                 {
                     Biblioteca biblioteca = new Biblioteca();
                     biblioteca.setIdBiblioteca(rs.getInt("id_biblioteca"));
-                    //todo falta la poblacio
 
+                    biblioteca.setPoblacio(new GestioPoblacio().findPoblacio(rs.getInt("id_poblacio")));
                     biblioteca.setNomBiblioteca(rs.getString("nom_biblio"));
                     biblioteca.setLatitud(rs.getDouble("latitud"));
                     biblioteca.setLongitud(rs.getDouble("longitud"));
