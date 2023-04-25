@@ -26,9 +26,9 @@
 <?import org.controlsfx.control.tableview2.TableView2?>-->
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.HomeController">
+<AnchorPane  prefHeight="600.0" prefWidth="1000"  xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.HomeController">
   <children>
-      <SplitPane dividerPositions="0.25" prefHeight="600.0" prefWidth="1000.0">
+      <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
         <items>
             <VBox alignment="TOP_CENTER">
                <children>
@@ -41,7 +41,7 @@
                      </image>
                   </ImageView>
 
-                  <GridPane prefHeight="459.0" prefWidth="226.0">
+                  <GridPane prefHeight="460.0" prefWidth="230.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
@@ -74,7 +74,7 @@
             </VBox>
             <VBox>
                <children>
-                  <GridPane prefHeight="125.0" prefWidth="675.0">
+                  <GridPane prefHeight="300.0" prefWidth="700.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -97,7 +97,7 @@
                         </ImageView>
                      </children>
                   </GridPane>
-                  <TabPane prefHeight="463.0" prefWidth="745.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="450.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab fx:id="usuarisTab" text="Usuaris">
                            <content>
@@ -122,14 +122,14 @@
                            <content>
                               <TableView2 fx:id="taulaLlibres">
                                  <columns>
-                                    <TableColumn fx:id="isbnColum" prefWidth="90.0" text="ISBN" />
-                                    <TableColumn fx:id="autorColum" prefWidth="90.0" text="Autor" />
-                                    <TableColumn fx:id="editorColum" prefWidth="90.0" text="Editor" />
-                                    <TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
-                                    <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
-                                    <TableColumn fx:id="titolColum" prefWidth="90.0" text="Titol" />
-                                    <TableColumn fx:id="versioColum" prefWidth="90.0" text="Versio" />
-                                    <TableColumn fx:id="dataPubliColum" prefWidth="90.0" text="Data Publi" />
+                                    <TableColumn fx:id="isbnColum" prefWidth="100.0" text="ISBN" />
+                                    <TableColumn fx:id="autorColum" prefWidth="100.0" text="Autor" />
+                                    <TableColumn fx:id="editorColum" prefWidth="100.0" text="Editor" />
+                                    <TableColumn fx:id="idiomaColum" prefWidth="100.0" text="Idioma" />
+                                    <TableColumn fx:id="genereColum" prefWidth="100.0" text="Genere" />
+                                    <TableColumn fx:id="titolColum" prefWidth="100.0" text="Titol" />
+                                    <TableColumn fx:id="versioColum" prefWidth="100.0" text="Versio" />
+                                    <TableColumn fx:id="dataPubliColum" prefWidth="100.0" text="Data Publi" />
                                  </columns>
                               </TableView2>
                            </content>

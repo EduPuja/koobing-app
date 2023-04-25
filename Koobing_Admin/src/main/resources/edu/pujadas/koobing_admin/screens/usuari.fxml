@@ -37,7 +37,7 @@
                         <Image url="@../img/man.png" />
                      </image>
                   </ImageView>
-                  <GridPane prefHeight="459.0" prefWidth="226.0">
+                  <GridPane prefHeight="460.0" prefWidth="230.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
