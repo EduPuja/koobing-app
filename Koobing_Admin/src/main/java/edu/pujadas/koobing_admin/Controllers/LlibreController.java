@@ -1,19 +1,40 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioLlibre;
+import edu.pujadas.koobing_admin.Models.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class LlibreController implements Initializable
 {
 
+    ArrayList<Llibre> listLlibres =new ArrayList<Llibre>();
+    public TableView2<Llibre> taulaLlibres;
+    public TableColumn<Llibre,Long> isbnColum;
+    public TableColumn<Llibre,String> autorColum;
+    public TableColumn<Llibre,String> editorColum;
+
+    public TableColumn <Llibre,String> idiomaColum;
+    public TableColumn<Llibre,String> genereColum;
+    public TableColumn<Llibre,String> titleColum;
+    public TableColumn<Llibre,String> versionColum;
+    public TableColumn<Llibre, Date> dataPubliColum;
     Parent root;
     Stage stage;
     Scene scene;
@@ -22,9 +43,66 @@ public class LlibreController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        System.out.println("Book Screen");
+        loadLlibres();
     }
 
+
+
+    public void loadLlibres()
+    {
+        try
+        {
+            // classe per agafar la info de la base de dades
+            GestioLlibre gestioLlibre = new GestioLlibre();
+            listLlibres = gestioLlibre.conusltar10Llibres();
+
+
+
+            //observablelist llibres
+            ObservableList<Llibre> observableListLlibre = FXCollections.observableArrayList(
+                    listLlibres
+            );
+
+            taulaLlibres.setItems(observableListLlibre);
+
+            isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+            autorColum.setCellValueFactory(cellData -> {
+
+                Autor actor = cellData.getValue().getAutor();
+                String nombreAutor = actor.getNomAutor();
+                return new SimpleStringProperty(nombreAutor);
+
+            });
+            editorColum.setCellValueFactory(cellData -> {
+                Editorial editor = cellData.getValue().getEditor();
+                String nomEditor = editor.getNomEditor();
+                return new SimpleStringProperty(nomEditor);
+            });
+            idiomaColum.setCellValueFactory(cellData ->{
+                Idioma idioma = cellData.getValue().getIdioma();
+                String nomIdioma = idioma.getNomIdioma();
+                return new SimpleStringProperty(nomIdioma);
+            });
+            genereColum.setCellValueFactory(cellData ->{
+                Genere genere = cellData.getValue().getGenere();
+                String nomGenere = genere.getNomGenere();
+                return new SimpleStringProperty(nomGenere);
+            });
+            titleColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
+            versionColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
+            dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
+
+
+
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error loading data LLibres : " + e.getMessage());
+        }
+    }
 
 
     // CANVIS DE PANTALLA
