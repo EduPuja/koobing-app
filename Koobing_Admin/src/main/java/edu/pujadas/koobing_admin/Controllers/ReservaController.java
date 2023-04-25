@@ -1,8 +1,8 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioReserva;
-import edu.pujadas.koobing_admin.Models.Reserva;
-import edu.pujadas.koobing_admin.Models.Usuari;
+import edu.pujadas.koobing_admin.Models.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +26,7 @@ public class ReservaController implements Initializable
     public TableColumn<Reserva,Integer> idReserva;
     public TableColumn<Reserva,String> nomUser;
     public TableColumn<Reserva,String>nomWorker;
-    public TableColumn<Reserva,Integer> bookTitle;
+    public TableColumn<Reserva,String> bookTitle;
     public TableColumn<Reserva,String> nomBiblio;
     Parent root;
     Stage stage;
@@ -45,7 +45,7 @@ public class ReservaController implements Initializable
 
     public void loadInfoReserves()
     {
-        System.out.println("Loading info reserva"); // debug testing
+       // System.out.println("Loading info reserva"); // debug testing
         try
         {
             GestioReserva gestioReserva= new GestioReserva();
@@ -56,6 +56,26 @@ public class ReservaController implements Initializable
             //afegint el observable list en el tableview
             taulaReserves.setItems(observableListReserva);
             idReserva.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+            nomUser.setCellValueFactory(cellData ->{
+                Usuari usuari = cellData.getValue().getUsuari();
+                String nom = usuari.getNom();
+                return new SimpleStringProperty(nom);
+            });
+            nomWorker.setCellValueFactory(cellData->{
+                Treballador treballador = cellData.getValue().getTreballador();
+                String nom = treballador.getNom();
+                return new SimpleStringProperty(nom);
+            });
+            nomBiblio.setCellValueFactory(cellData ->{
+                Biblioteca bilbio = cellData.getValue().getBiblio();
+                String nomBiblio = bilbio.getNomBiblioteca();
+                return new SimpleStringProperty(nomBiblio);
+            });
+            bookTitle.setCellValueFactory(cellData ->{
+                Llibre book = cellData.getValue().getLlibre();
+                String titol = book.getTitol();
+              return new SimpleStringProperty(titol);
+            });
 
 
         }
