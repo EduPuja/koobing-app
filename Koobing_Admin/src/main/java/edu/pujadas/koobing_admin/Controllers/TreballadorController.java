@@ -157,6 +157,57 @@ public class TreballadorController implements Initializable
     }
 
 
+    /**
+     *Aquesta funció permet eliminar un usuari de la base de dades i la seva taula corresponent.
+     * Es mostra una alerta per confirmar l'eliminació i s'ha de respondre si es vol acceptar o no.
+     * És important tenir en compte que l'eliminació és permanent i les dades de l'usuari seleccionat es perdran definitivament.
+     */
+    public void onRowDelete()
+    {
+
+        //como puedo comprovar que la fila este selecionada?
+        // eliminar a memoria , aixo no elimina a la base de dades
+
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert wrong  = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Confirmación");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Estàs segur de que vols continuar?");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK)
+        {
+
+            System.out.println("Button Eliminar selected");
+
+            Treballador treballador = taulaTreballadors.getSelectionModel().getSelectedItem();
+            if(treballador == null)
+            {
+                wrong.setTitle("Error");
+                wrong.setHeaderText(null);
+                wrong.setContentText("Seleciona la fila que vols eliminar");
+            }
+            else
+            {
+                ObservableList<Treballador> itemsTreballador = taulaTreballadors.getItems();
+                itemsTreballador.remove(treballador);
+                //part que elimina de la base de dades
+                GestioTreballador gestioTreballador = new GestioTreballador();
+                gestioTreballador.eliminarTreballador(treballador.getId());
+
+            }
+
+        }
+        else
+        {
+            // Acción a realizar cuando se hace clic en el botón "Cancelar" o se cierra la alerta
+            System.out.println("El usuario ha hecho clic en Cancelar o ha cerrado la alerta");
+        }
+
+
+
+
+    }
 
 
 
