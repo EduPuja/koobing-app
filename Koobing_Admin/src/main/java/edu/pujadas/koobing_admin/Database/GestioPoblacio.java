@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class GestioPoblacio {
 
+    /**
+     * Metode per crear 
+     * @param poble
+     */
     public void crearPoblacio(Poblacio poble)
     {
         try
@@ -29,6 +33,10 @@ public class GestioPoblacio {
 
     }
 
+    /**
+     * Metode per poder modifcar una poblacio de la base de dades
+     * @param poble objecte poble a modificar
+     */
     public void modificarPoblacio(Poblacio poble)
     {
         try
@@ -50,6 +58,10 @@ public class GestioPoblacio {
     }
 
 
+    /**
+     * Metode per eliminar un poble de la base de dades
+     * @param poble
+     */
     public void eliminarPoblacio(Poblacio poble)
     {
         try
@@ -70,6 +82,10 @@ public class GestioPoblacio {
 
     }
 
+    /**
+     * Metode per consultar totes les poblacions de la base de dades
+     * @return ArrayList de poblacions
+     */
     public ArrayList<Poblacio> consultarPoblacions()
     {   ArrayList<Poblacio> poblacions = new ArrayList<Poblacio>();
         try
@@ -95,6 +111,11 @@ public class GestioPoblacio {
         return null;
     }
 
+    /***
+     * Metode per torbar una poblacio en la base de dades
+     * @param idPoblacio idetnificador
+     * @return Objecte poblacio
+     */
     public Poblacio findPoblacio(int idPoblacio)
     {
         try
