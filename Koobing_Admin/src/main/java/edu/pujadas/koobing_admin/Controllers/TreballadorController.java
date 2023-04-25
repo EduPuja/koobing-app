@@ -165,14 +165,64 @@ public class TreballadorController implements Initializable
         {
             System.out.println("Error: "+ e.getMessage());
         }
+    }
+
+
+    public void onEditarTreballador(ActionEvent event)
+    {
+        Treballador treballador = taulaTreballadors.getSelectionModel().getSelectedItem();
+        if(treballador != null)
+        {
+            // Creacio dels Textes
+            TextInputDialog nomDialeg = new TextInputDialog(treballador.getNom());
+            TextInputDialog cognomDialeg = new TextInputDialog(treballador.getCognom());
+
+            //poner la contrassenya tipo passwordfield
+            PasswordField passwordField = new PasswordField();
+            //passwordField.setText(treballador.getPassword());
+            TextInputDialog passwordDialeg = new TextInputDialog(treballador.getPassword());
+
+
+            //crear el gridpane per posar els 2 camps a l'hora
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
 
 
 
+            gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
+            gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
+            gridPane.addRow(2, new Label("Nova Contrassenya"),passwordField);
+
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Modificar Usuari");
+            alert.setHeaderText("Introduïu les noves dades de l'usuari:");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
 
 
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
 
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+                treballador.setNom(nomDialeg.getEditor().getText());
+                treballador.setCognom(cognomDialeg.getEditor().getText());
+                treballador.setPassword(passwordDialeg.getEditor().getText());
 
+                // Actualizar la tabla
+                taulaTreballadors.refresh();
+
+                //actualizar la base de dades
+                GestioTreballador gestioTreballador = new GestioTreballador();
+                gestioTreballador.modificarTreballador(treballador);
+            }
+        }
     }
 
 

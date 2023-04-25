@@ -268,13 +268,6 @@ public class UsuariController implements Initializable
             System.out.println("Error: "+ e.getMessage());
         }
 
-
-
-
-
-
-
-
     }
 
 
