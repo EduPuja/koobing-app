@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- new Imports-->
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import org.controlsfx.control.tableview2.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.tableview2.TableView2?>
 
 <!--older imports-->
 <!--<?import javafx.geometry.Insets?>
@@ -25,8 +37,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.tableview2.TableView2?>-->
 
-
-<AnchorPane  prefHeight="600.0" prefWidth="1000"  xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.HomeController">
+<AnchorPane prefHeight="600.0" prefWidth="1000" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.HomeController">
   <children>
       <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
         <items>
@@ -58,23 +69,23 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="homeBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE"  onAction="#switchToHome"/>
-                        <Button fx:id="usuariBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" onAction="#switchToUsuari" />
-                        <Button fx:id="trebaladorBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" onAction="#switchToTreballador" />
-                        <Button fx:id="llibreBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" onAction="#switchToLlibre" />
-                        <Button fx:id="autorBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" onAction="#switchToAutor"/>
-                        <Button fx:id="bibliotecaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Biblioteca" textFill="WHITE" GridPane.rowIndex="5" onAction="#switchToBiblioteca"/>
-                        <Button fx:id="idiomaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="6" onAction="#switchToIdioma"/>
-                        <Button fx:id="genereBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="7" onAction="#switchToGenere"/>
-                        <Button fx:id="editioralBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="8" onAction="#switchToEditorial"/>
-                        <Button fx:id="reservaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Reserva" textFill="WHITE" GridPane.rowIndex="9" onAction="#switchToReserva"/>
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#switchToHome" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE" />
+                        <Button fx:id="usuariBtn" mnemonicParsing="false" onAction="#switchToUsuari" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" />
+                        <Button fx:id="trebaladorBtn" mnemonicParsing="false" onAction="#switchToTreballador" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Button fx:id="llibreBtn" mnemonicParsing="false" onAction="#switchToLlibre" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
+                        <Button fx:id="autorBtn" mnemonicParsing="false" onAction="#switchToAutor" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />
+                        <Button fx:id="bibliotecaBtn" mnemonicParsing="false" onAction="#switchToBiblioteca" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Biblioteca" textFill="WHITE" GridPane.rowIndex="5" />
+                        <Button fx:id="idiomaBtn" mnemonicParsing="false" onAction="#switchToIdioma" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="6" />
+                        <Button fx:id="genereBtn" mnemonicParsing="false" onAction="#switchToGenere" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="7" />
+                        <Button fx:id="editioralBtn" mnemonicParsing="false" onAction="#switchToEditorial" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="8" />
+                        <Button fx:id="reservaBtn" mnemonicParsing="false" onAction="#switchToReserva" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Reserva" textFill="WHITE" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
                </children>
             </VBox>
             <VBox>
                <children>
-                  <GridPane prefHeight="300.0" prefWidth="700.0">
+                  <GridPane prefHeight="200.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
