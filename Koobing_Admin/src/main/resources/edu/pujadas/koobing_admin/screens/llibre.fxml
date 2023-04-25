@@ -96,7 +96,7 @@
                                 <TableColumn fx:id="isbnColum" prefWidth="90.0" text="ISBN" />
                                 <TableColumn fx:id="autorColum" prefWidth="90.0" text="Autor" />
                                 <TableColumn fx:id="editorColum" prefWidth="90.0" text="Editorial" />
-                                <TableColumn fx:id="idomaColum" prefWidth="90.0" text="Idioma" />
+                                <TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
                                 <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
                                 <TableColumn fx:id="titleColum" prefWidth="90.0" text="Títol" />
                                 <TableColumn fx:id="versionColum" prefWidth="90.0" text="Versio" />
