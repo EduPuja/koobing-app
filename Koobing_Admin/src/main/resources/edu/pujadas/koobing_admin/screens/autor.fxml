@@ -93,14 +93,9 @@
                         </GridPane>
                         <TableView2 fx:id="taulaAutors">
                             <columns>
-                                <TableColumn fx:id="isbnColum" prefWidth="90.0" text="ISBN" />
-                                <TableColumn fx:id="autorColum" prefWidth="90.0" text="Autor" />
-                                <TableColumn fx:id="editorColum" prefWidth="90.0" text="Editorial" />
-                                <TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
-                                <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
-                                <TableColumn fx:id="titleColum" prefWidth="90.0" text="Títol" />
-                                <TableColumn fx:id="versionColum" prefWidth="90.0" text="Versio" />
-                                <TableColumn fx:id="dataPubliColum" prefWidth="90.0" text="DataPublicacio" />
+                                <TableColumn fx:id="idAutor" prefWidth="90.0" text="ID Autor" />
+                                <TableColumn fx:id="nomAutor" prefWidth="90.0" text="Nom" />
+                                <TableColumn fx:id="dataNaix" prefWidth="90.0" text="Data Naix" />
                             </columns>
                         </TableView2>
                     </children>
