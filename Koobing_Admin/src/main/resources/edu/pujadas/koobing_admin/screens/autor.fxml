@@ -93,9 +93,9 @@
                         </GridPane>
                         <TableView2 fx:id="taulaAutors">
                             <columns>
-                                <TableColumn fx:id="idAutor" prefWidth="90.0" text="ID Autor" />
-                                <TableColumn fx:id="nomAutor" prefWidth="90.0" text="Nom" />
-                                <TableColumn fx:id="dataNaix" prefWidth="90.0" text="Data Naix" />
+                                <TableColumn fx:id="idAutor" prefWidth="235.5" text="ID Autor" />
+                                <TableColumn fx:id="nomAutor" prefWidth="235.5" text="Nom" />
+                                <TableColumn fx:id="dataNaix" prefWidth="235.5" text="Data Naix" />
                             </columns>
                         </TableView2>
                     </children>

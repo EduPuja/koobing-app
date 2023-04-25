@@ -1,19 +1,34 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioAutor;
+import edu.pujadas.koobing_admin.Models.Autor;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AutorController implements Initializable
 {
 
+    public TableView2<Autor>taulaAutors;
+    public TableColumn<Autor,Integer> idAutor;
+    public TableColumn<Autor,String> nomAutor;
+    public TableColumn<Autor, Date> dataNaix;
+
+    ArrayList<Autor> listAutores = new ArrayList<>();
     Parent root;
     Scene scene;
     Stage stage;
@@ -22,11 +37,32 @@ public class AutorController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        loadAutorData();
     }
 
+    public void loadAutorData()
+    {
+        try
+        {
+            GestioAutor gestioAutor = new GestioAutor();
+            listAutores = gestioAutor.consultar10Autors();
+            //observablelist autors
+            ObservableList<Autor> observableListAutors = FXCollections.observableArrayList(
+                    listAutores
+            );
+
+            idAutor.setCellValueFactory(new PropertyValueFactory<>("idAutor"));
+            nomAutor.setCellValueFactory(new PropertyValueFactory<>("nomAutor"));
+            dataNaix.setCellValueFactory(new PropertyValueFactory<>("dataNaixAutor"));
+            taulaAutors.setItems(observableListAutors);
 
 
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failed to infoAutors ..." +e.getMessage());
+        }
+    }
 
     // CANVIS DE PANTALLA
 
