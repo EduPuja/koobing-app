@@ -24,6 +24,8 @@ public class GestioPoblacio {
                 System.out.println("Poblacio created successfully");
             }
             else System.out.println("Poblacio not created successfully");
+
+            con.desconectar();
         }
         catch (Exception e)
         {
@@ -49,6 +51,8 @@ public class GestioPoblacio {
                 System.out.println("Poblacio updated successfully");
             }
             else System.out.println("Poblacio not updated successfully");
+
+            con.desconectar();
         }
         catch (Exception e)
         {
@@ -74,6 +78,7 @@ public class GestioPoblacio {
                 System.out.println("Poblacio deleted successfully");
             }
             else System.out.println("Poblacio not deleted successfully");
+            con.desconectar();
         }
         catch (Exception e)
         {
@@ -101,6 +106,8 @@ public class GestioPoblacio {
                 poblacions.add(p);
                 return poblacions;
             }
+
+            con.desconectar();
 
         }
         catch (Exception e)
@@ -130,6 +137,8 @@ public class GestioPoblacio {
                 Poblacio p = new Poblacio(rs.getInt("id_poblacio"), rs.getString("nom_poble"));
                 return p;
             }
+
+            con.desconectar();
         }
         catch (Exception e)
         {
