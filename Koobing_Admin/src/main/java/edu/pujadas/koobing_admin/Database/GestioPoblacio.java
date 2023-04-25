@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GestioPoblacio {
 
     /**
-     * Metode per crear 
+     * Metode per crear una poblacio de la base de dades
      * @param poble
      */
     public void crearPoblacio(Poblacio poble)
