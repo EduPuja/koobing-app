@@ -144,7 +144,7 @@ public class TreballadorController implements Initializable
                 GestioTreballador gestioTreballador = new GestioTreballador();
                 gestioTreballador.crearTreballador(treballador);
 
-                //switchToTreballador(event);
+                switchToTreballador(event);
             }
 
 
