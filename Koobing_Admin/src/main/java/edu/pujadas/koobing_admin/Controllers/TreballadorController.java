@@ -122,7 +122,7 @@ public class TreballadorController implements Initializable
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
 
-            alert.setTitle("Modificar dades del Treballador");
+            alert.setTitle("Insertar nou Treballador");
             alert.setHeaderText("Introduïu les noves dades del Treballador");
             alert.getDialogPane().setContent(gridPane);
             alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);

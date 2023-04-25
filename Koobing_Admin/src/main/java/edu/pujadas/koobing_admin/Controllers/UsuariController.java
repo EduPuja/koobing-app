@@ -166,7 +166,7 @@ public class UsuariController implements Initializable
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
 
-            alert.setTitle("Modificar dades de l'usuari");
+            alert.setTitle("Modificar Usuari");
             alert.setHeaderText("Introduïu les noves dades de l'usuari:");
             alert.getDialogPane().setContent(gridPane);
             alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -229,7 +229,7 @@ public class UsuariController implements Initializable
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
 
-            alert.setTitle("Modificar dades de l'usuari");
+            alert.setTitle("Afegir nou Usuari");
             alert.setHeaderText("Introduïu les noves dades de l'usuari:");
             alert.getDialogPane().setContent(gridPane);
             alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
