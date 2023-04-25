@@ -103,7 +103,7 @@ public class GestioTreballador
             Statement stat = con.conectar();
             ResultSet rs = stat.executeQuery("SELECT * FROM treballador ");
 
-            if(rs.next())
+            while (rs.next())
             {
                 Treballador t = new Treballador();
                 t.setId(rs.getInt("id_treballador"));
@@ -118,9 +118,13 @@ public class GestioTreballador
                 t.setAdmin(rs.getBoolean("isAdmin"));
 
                 listTreballs.add(t);
+
             }
+
+
             con.desconectar();
             return listTreballs;
+
         }
         catch (Exception e)
         {

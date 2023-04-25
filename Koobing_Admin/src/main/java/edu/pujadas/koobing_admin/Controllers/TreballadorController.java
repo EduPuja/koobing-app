@@ -67,26 +67,23 @@ public class TreballadorController implements Initializable
                 listTreballador
         );
 
-
-
-        idTreballador.setCellValueFactory( new PropertyValueFactory<>("id"));
-        dniColum.setCellValueFactory( new PropertyValueFactory<>("dni"));
-        nomColum.setCellValueFactory( new PropertyValueFactory<>("nom"));
-        cognomColum.setCellValueFactory( new PropertyValueFactory<>("cognom"));
-        dataNaixColum.setCellValueFactory( new PropertyValueFactory<>("dataNaix"));
-        emailColum.setCellValueFactory( new PropertyValueFactory<>("email"));
-        numSegSocialColum.setCellValueFactory( new PropertyValueFactory<>("numSegSocial"));
-        isAdminColum.setCellValueFactory( new PropertyValueFactory<>("admin"));
-
-
-
         taulaTreballadors.setItems(obserListUser);
+
+        idTreballador.setCellValueFactory(new PropertyValueFactory<>("id"));
+        dniColum.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        nomColum.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        cognomColum.setCellValueFactory(new PropertyValueFactory<>("cognom"));
+        dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
+        emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
+        numSegSocialColum.setCellValueFactory(new PropertyValueFactory<>("numSegSocial"));
+        isAdminColum.setCellValueFactory(new PropertyValueFactory<>("admin"));
+
     }
 
-
-
     /**
-     * Metode que el que fa es inserir un Treballador
+     * Metode que s'utiliza per inserir un treballador quant un admin fa click en el butó
+     * de afegir un treballador
+     * @param event ActionEvent
      */
     public void onInsertarTreballador(ActionEvent event)
     {
@@ -101,8 +98,6 @@ public class TreballadorController implements Initializable
             TextInputDialog dniDialeg = new TextInputDialog();
             TextInputDialog emailDialeg = new TextInputDialog();
             DatePicker dataNaix = new DatePicker();
-            TextInputDialog numSegSocialDialeg = new TextInputDialog();
-            CheckBox isAdminDialeg = new CheckBox();
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
@@ -115,15 +110,13 @@ public class TreballadorController implements Initializable
             gridPane.addRow(3, new Label("Data de Naixament:"),dataNaix);
             gridPane.addRow(4, new Label("Correu Electroinc: "),emailDialeg.getEditor());
             gridPane.addRow(5, new Label("Contrassenya"),passwordField);
-            gridPane.addRow(6, new Label("Numero de SegSocial: "),numSegSocialDialeg.getEditor());
-            gridPane.addRow(7, new Label("Es Administrador? "),isAdminDialeg);
 
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
 
-            alert.setTitle("Insertar nou Treballador");
-            alert.setHeaderText("Introduïu les noves dades del Treballador");
+            alert.setTitle("Afegir nou Usuari");
+            alert.setHeaderText("Introduïu les noves dades de l'usuari:");
             alert.getDialogPane().setContent(gridPane);
             alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
@@ -131,32 +124,27 @@ public class TreballadorController implements Initializable
             Optional<ButtonType> resultat = alert.showAndWait();
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                System.out.println("Success Worker!");
-
-                Treballador worker = new Treballador();
-
-                // posar els camps dels dialegs al objecte per poder-lo insertar a la base de dades
-                worker.setDni(dniDialeg.getEditor().getText());
-                worker.setNom(nomDialeg.getEditor().getText());
-                worker.setCognom(cognomDialeg.getEditor().getText());
-                worker.setEmail(emailDialeg.getEditor().getText());
+                //System.out.println("success");
+                Treballador treballador = new Treballador();
+                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+                treballador.setNom(nomDialeg.getEditor().getText());
+                treballador.setDni(dniDialeg.getEditor().getText());
+                treballador.setCognom(cognomDialeg.getEditor().getText());
+                treballador.setEmail(emailDialeg.getEditor().getText());
 
                 LocalDate data= dataNaix.getValue();
                 Date dataSQL = Date.valueOf(data);
-                worker.setDataNaix(dataSQL);
-                worker.setPassword(passwordDialeg.getEditor().getText());
-                worker.setNumSegSocial(String.valueOf(Integer.parseInt(numSegSocialDialeg.getEditor().getText())));
-                worker.setAdmin(isAdminDialeg.isSelected());
+                treballador.setDataNaix(dataSQL);
+                treballador.setPassword(passwordDialeg.getEditor().getText());
 
-                //insertar a la base de dades
-                GestioTreballador gestioTreballador = new GestioTreballador();
-                gestioTreballador.crearTreballador(worker);
-
-                // actualizar la tabla
+                // Actualizar la tabla
                 taulaTreballadors.refresh();
 
-                // forma dinamicaper podere veure la info amb temps real
-                switchToTreballador(event);
+                //actualizar la base de dades
+                GestioTreballador gestioTreballador = new GestioTreballador();
+                gestioTreballador.crearTreballador(treballador);
+
+                //switchToTreballador(event);
             }
 
 
@@ -165,7 +153,12 @@ public class TreballadorController implements Initializable
         {
             System.out.println("Error: "+ e.getMessage());
         }
+
     }
+
+
+
+  
 
 
     public void onEditarTreballador(ActionEvent event)
