@@ -75,10 +75,12 @@ public class GestioReserva
             {
                 Reserva reserva = new Reserva();
                 reserva.setIdReserva(rs.getInt("id_reserva"));
-
-
-
-
+                reserva.setUsuari(new GestioUsuari().findUserID(rs.getInt("id_usuari")));
+                reserva.setTreballador(new GestioTreballador().findTreballador(rs.getInt("id_treballador")));
+                reserva.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
+                reserva.setLlibre(new GestioLlibre().findLLibre(rs.getLong("ISBN")));
+                reserva.setDataHoraReserva(rs.getTimestamp("data_hora_reserva"));
+                reserva.setDataHoraEntrega(rs.getTimestamp("data_hora_entrega"));
 
                 //addin the object into the arraylist
                 listReserva.add(reserva);

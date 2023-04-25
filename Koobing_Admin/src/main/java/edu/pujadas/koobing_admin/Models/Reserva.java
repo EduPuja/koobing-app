@@ -1,7 +1,6 @@
 package edu.pujadas.koobing_admin.Models;
 
-import java.time.LocalDateTime;
-import java.util.function.LongConsumer;
+import java.sql.Timestamp;
 
 public class Reserva
 {
@@ -10,14 +9,14 @@ public class Reserva
     Treballador treballador;
     Biblioteca biblio;
     Llibre llibre;
-    LocalDateTime dataHoraReserva;
-    LocalDateTime dataHoraEntrega;
+    Timestamp dataHoraReserva;
+    Timestamp dataHoraEntrega;
 
     public Reserva()
     {
     }
 
-    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, LocalDateTime dataHoraReserva, LocalDateTime dataHoraEntrega)
+    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, Timestamp dataHoraReserva, Timestamp dataHoraEntrega)
     {
         this.idReserva = idReserva;
         this.usuari = usuari;
@@ -78,22 +77,22 @@ public class Reserva
         this.llibre = llibre;
     }
 
-    public LocalDateTime getDataHoraReserva()
+    public Timestamp getDataHoraReserva()
     {
         return dataHoraReserva;
     }
 
-    public void setDataHoraReserva(LocalDateTime dataHoraReserva)
+    public void setDataHoraReserva(Timestamp dataHoraReserva)
     {
         this.dataHoraReserva = dataHoraReserva;
     }
 
-    public LocalDateTime getDataHoraEntrega()
+    public Timestamp getDataHoraEntrega()
     {
         return dataHoraEntrega;
     }
 
-    public void setDataHoraEntrega(LocalDateTime dataHoraEntrega)
+    public void setDataHoraEntrega(Timestamp dataHoraEntrega)
     {
         this.dataHoraEntrega = dataHoraEntrega;
     }

@@ -233,4 +233,46 @@ public class GestioUsuari
         return null;
     }
 
+    /**
+     * Metode per consultar nomes 1 usuari de la base de dades
+     * @param dni dni del usuari
+     * @return Objecte usuari
+     */
+    public Usuari findUserID(int idUsuari)
+    {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
+            String query = "select * from usuari where id_usuari = " + idUsuari ;
+            ResultSet rs = stat.executeQuery(query);
+
+            if(rs.next())
+            {
+                Usuari user = new Usuari();
+                user.setId(rs.getInt("id_usuari"));
+                user.setDni(rs.getString("dni"));
+                user.setAvatar(rs.getBlob("avatar"));
+                user.setNom(rs.getString("nom"));
+                user.setCognom(rs.getString("cognom"));
+                user.setDataNaix(rs.getDate("data_naix"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+
+                return user;
+            }
+
+            con.desconectar();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Find User Error :(" + e.getMessage());
+        }
+
+        return null;
+    }
+
+
+
 }
