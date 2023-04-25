@@ -102,7 +102,7 @@
                            </image>
                         </ImageView>
                         <Button fx:id="addBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onInsertarTreballador" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onEditarTreballador" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
@@ -114,7 +114,6 @@
                         <TableColumn fx:id="cognomColum" prefWidth="90.0" text="Cognom" />
                         <TableColumn fx:id="dataNaixColum" prefWidth="90.0" text="DataNaix" />
                         <TableColumn fx:id="emailColum" prefWidth="90.0" text="Email" />
-                      <!--  <TableColumn fx:id="passwordColum" prefWidth="90.0" text="Password" />-->
                         <TableColumn fx:id="numSegSocialColum" prefWidth="90.0" text="Num SegSocial" />
                         <TableColumn fx:id="isAdminColum" prefWidth="90.0" text="isAdmin" />
 

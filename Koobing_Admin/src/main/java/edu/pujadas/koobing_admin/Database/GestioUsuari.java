@@ -65,7 +65,7 @@ public class GestioUsuari
             }
             else System.out.println("Wrong update :(");
 
-
+        con.desconectar();
 
         }
         catch (Exception e)
@@ -235,7 +235,7 @@ public class GestioUsuari
 
     /**
      * Metode per consultar nomes 1 usuari de la base de dades
-     * @param dni dni del usuari
+     * @param idUsuari dni del usuari
      * @return Objecte usuari
      */
     public Usuari findUserID(int idUsuari)
