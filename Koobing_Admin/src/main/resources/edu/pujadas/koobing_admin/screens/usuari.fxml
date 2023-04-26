@@ -103,7 +103,7 @@
                         </ImageView>
                         <Button fx:id="addBtn" mnemonicParsing="false" onAction="#onInsertarUsuari" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <Button fx:id="modifyBtn" mnemonicParsing="false" onAction="#onRowModify" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onRowDelete" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onDeleteUser" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                   <TableView2 fx:id="taulaUsuaris">

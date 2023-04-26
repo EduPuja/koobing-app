@@ -1,9 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
-import edu.pujadas.koobing_admin.Models.Genere;
 import edu.pujadas.koobing_admin.Models.Usuari;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,12 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;;
 //import com.sun.javafx.scene.traversal.Traversal;
 import java.net.URL;
-import java.sql.Blob;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,7 +85,7 @@ public class UsuariController implements Initializable
      * Es mostra una alerta per confirmar l'eliminació i s'ha de respondre si es vol acceptar o no.
      * És important tenir en compte que l'eliminació és permanent i les dades de l'usuari seleccionat es perdran definitivament.
      */
-    public void onRowDelete()
+    public void onDeleteUser()
     {
 
 
@@ -119,8 +115,8 @@ public class UsuariController implements Initializable
                 ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
                 itemsUser.remove(user);
                 //part que elimina de la base de dades
-                GestioUsuari gestioUsuari = new GestioUsuari();
-                gestioUsuari.eliminarUsuari(user.getDni());
+                //GestioUsuari gestioUsuari = new GestioUsuari();
+                //gestioUsuari.eliminarUsuari(user.getDni());
 
             }
 

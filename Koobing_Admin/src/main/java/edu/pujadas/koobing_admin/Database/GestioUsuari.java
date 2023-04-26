@@ -273,29 +273,29 @@ public class GestioUsuari
         return null;
     }
 
-  /*  public boolean isUserReserved(int idUsuari)
+    public boolean isUserReserved(int idUsuari)
     {
+        boolean existe = false;
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
-
             Statement stat = con.conectar();
-            String query = "select from usuari where id_usuari = " + idUsuari ;
-            ResultSet rs = stat.executeQuery(query);
-
-            if(rs.next())
-            {
-                return true;
+            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE id_usuari="+idUsuari;
+            ResultSet result = stat.executeQuery(sql);
+            if(result.next()) {
+                int count = result.getInt("count");
+                if(count > 0) {
+                    existe = true;
+                }
             }
-
-            con.desconectar();
-            return false;
         }
         catch (Exception e)
         {
             System.out.println("UsuariReserver Error: " + e.getMessage());
         }
-    }*/
+
+        return existe;
+    }
 
 
 }
