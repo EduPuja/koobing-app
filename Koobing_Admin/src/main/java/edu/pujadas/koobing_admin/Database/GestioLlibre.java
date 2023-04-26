@@ -3,6 +3,7 @@ package edu.pujadas.koobing_admin.Database;
 import edu.pujadas.koobing_admin.Models.*;
 
 import java.sql.ResultSet;
+import java.sql.SQLData;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -71,19 +72,28 @@ public class GestioLlibre
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql = "DELETE FROM `llibre` WHERE ISBN='"+ISBN+"'";
 
-            if(stat.executeUpdate(sql) == 1)
+
+            if(this.existeLlibre(ISBN))
             {
-                System.out.println("Llibre eliminado correctamente");
-            }
-            else System.out.println("Llibre no eliminado correctamente");
+                String sql = "DELETE FROM `llibre` WHERE ISBN='"+ISBN+"'";
+                if(stat.executeUpdate(sql) == 1)
+                {
+                    System.out.println("Llibre eliminado correctamente");
+                }
+                else System.out.println("Llibre no eliminado correctamente");
 
-            con.desconectar();
+            }
+            else{
+                System.out.println("Llibre Not found");
+                con.desconectar();
+            }
+
         }
         catch (Exception e)
         {
             System.out.println("Error in Eliminar LLibre:"+ e.getMessage());
+
         }
     }
 
@@ -277,5 +287,26 @@ public class GestioLlibre
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public boolean existeLlibre(long ISBN) {
+        boolean existe = false;
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql = "SELECT COUNT(*) AS count FROM llibre WHERE ISBN='"+ISBN+"'";
+            ResultSet result = stat.executeQuery(sql);
+            if(result.next()) {
+                int count = result.getInt("count");
+                if(count > 0) {
+                    existe = true;
+                }
+            }
+            con.desconectar();
+        } catch(Exception e) {
+            System.out.println("Error al comprobar si el libro existe: " + e.getMessage());
+        }
+        return existe;
     }
 }
