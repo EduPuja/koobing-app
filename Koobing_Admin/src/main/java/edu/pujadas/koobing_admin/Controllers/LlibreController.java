@@ -140,10 +140,12 @@ public class LlibreController implements Initializable
                     wrong.setContentText("Aquest llibre no es pot eliminar, esta en una reserva activa");
                     wrong.show();
                 }
-                /*else {
-                    alerta.setTitle("Success!");
-                    alerta.setHeaderText("LLibre eliminat correctament");
-                    alerta.show();
+                else {
+                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    sucessAlert.setTitle("Success!");
+                    sucessAlert.setHeaderText("Has eliminat llibre!");
+                    sucessAlert.setContentText("Llibre s'ha eliminat correctament");
+                    sucessAlert.show();
 
                     try
 
@@ -160,7 +162,7 @@ public class LlibreController implements Initializable
                         System.out.println("Error deleting llibre : " + e.getMessage());
                     }
 
-                }*/
+                }
             }
 
         }
