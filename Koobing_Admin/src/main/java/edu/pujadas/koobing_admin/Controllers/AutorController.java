@@ -64,6 +64,14 @@ public class AutorController implements Initializable
         }
     }
 
+
+    public void onDeleteAutor(ActionEvent event)
+    {
+
+        // todo important comprovar a vereu si el autor esta vinculat amb la taula llibres
+
+    }
+
     // CANVIS DE PANTALLA
 
 
