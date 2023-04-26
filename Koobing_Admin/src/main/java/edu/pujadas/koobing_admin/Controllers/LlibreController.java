@@ -1,7 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioLlibre;
-import edu.pujadas.koobing_admin.Database.GestioUsuari;
+
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,12 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
