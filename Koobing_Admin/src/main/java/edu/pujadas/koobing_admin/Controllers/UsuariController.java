@@ -92,7 +92,7 @@ public class UsuariController implements Initializable
     public void onRowDelete()
     {
 
-        
+
         // eliminar a memoria , aixo no elimina a la base de dades
 
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);

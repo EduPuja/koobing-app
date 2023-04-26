@@ -108,7 +108,39 @@ public class LlibreController implements Initializable
     }
 
 
+    public void deleteBook(ActionEvent event)
+    {
 
+        // eliminar a memoria , aixo no elimina a la base de dades
+
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert wrong  = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Confirmación");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Estàs segur de que vols continuar?");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+
+            System.out.println("Button Eliminar selected");
+
+            Llibre llibre = taulaLlibres.getSelectionModel().getSelectedItem();
+            if (llibre == null) {
+                wrong.setTitle("Error");
+                wrong.setHeaderText(null);
+                wrong.setContentText("Seleciona la fila que vols eliminar");
+            } else {
+                ObservableList<Llibre> itemsLlibres = taulaLlibres.getItems();
+                itemsLlibres.remove(llibre);
+
+                // eliminar de base de dades el llibre
+
+
+
+            }
+
+        }
+    }
     // CANVIS DE PANTALLA
 
 
