@@ -1,9 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
-import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.Treballador;
-import edu.pujadas.koobing_admin.Models.Usuari;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -162,7 +160,7 @@ public class TreballadorController implements Initializable
      * Es mostra una alerta per confirmar l'eliminació i s'ha de respondre si es vol acceptar o no.
      * És important tenir en compte que l'eliminació és permanent i les dades de l'usuari seleccionat es perdran definitivament.
      */
-    public void onRowDelete()
+    public void onDeleteTreballador()
     {
 
         //como puedo comprovar que la fila este selecionada?
