@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -134,6 +135,22 @@ public class LlibreController implements Initializable
                 itemsLlibres.remove(llibre);
 
                 // eliminar de base de dades el llibre
+
+                    try
+                    {
+                        GestioLlibre gestioLlibre = new GestioLlibre();
+                        gestioLlibre.eliminarLlibre(llibre.getISBN());
+                    }
+                    catch (Exception e)
+                    {
+                        // error si hay una foreingkey
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("No se puede eliminar el libro debido a una clave foránea en la base de datos.");
+                        alert.showAndWait();
+                    }
+
 
 
 
