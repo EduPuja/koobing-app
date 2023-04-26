@@ -112,55 +112,59 @@ public class LlibreController implements Initializable
 
     public void deleteBook(ActionEvent event)
     {
-
-        // eliminar a memoria , aixo no elimina a la base de dades
-
+        //gestio llibre per poder comprovar si el llibre esta en la base de dades
+        // and per poder eliminar desde la base de dades
+        GestioLlibre gestioLlibre = new GestioLlibre();
+        //confirmacion
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-        Alert wrong  = new Alert(Alert.AlertType.ERROR);
+        //error
+        Alert wrong = new Alert(Alert.AlertType.ERROR);
+
+        // mostrar el una alerta de tipus confirmacio per poder eliminar el llibre
         alerta.setTitle("Confirmación");
         alerta.setHeaderText(null);
         alerta.setContentText("Estàs segur de que vols continuar?");
 
+
         Optional<ButtonType> resultado = alerta.showAndWait();
+
+
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-
-            System.out.println("Button Eliminar selected");
-
             Llibre llibre = taulaLlibres.getSelectionModel().getSelectedItem();
-            if (llibre == null) {
-                wrong.setTitle("Error");
-                wrong.setHeaderText(null);
-                wrong.setContentText("Seleciona la fila que vols eliminar");
-            } else {
-                ObservableList<Llibre> itemsLlibres = taulaLlibres.getItems();
-                itemsLlibres.remove(llibre);
+            if (llibre != null) {
+                boolean isReserved = gestioLlibre.hayReservasActivas(llibre.getISBN());
 
-                // eliminar de base de dades el llibre
-
-                //comprovar la taula reserva , si el ISN is the same
-                // enviar un error i no se elimina el llibre
+                if (isReserved) {
+                    wrong.setTitle("Error");
+                    wrong.setHeaderText(null);
+                    wrong.setContentText("Aquest llibre no es pot eliminar, esta en una reserva activa");
+                    wrong.show();
+                }
+                /*else {
+                    alerta.setTitle("Success!");
+                    alerta.setHeaderText("LLibre eliminat correctament");
+                    alerta.show();
 
                     try
+
                     {
-                        GestioLlibre gestioLlibre = new GestioLlibre();
+                        //eliminar llibre de la base de dades
                         gestioLlibre.eliminarLlibre(llibre.getISBN());
+
+                        //actualitzar la base de dades
+                        loadLlibres();
+                        switchToLlibre(event);
                     }
                     catch (Exception e)
                     {
-                        // error si hay una foreingkey
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText(null);
-                        alert.setContentText("No se puede eliminar el libro debido a una clave foránea en la base de datos.");
-                        alert.showAndWait();
+                        System.out.println("Error deleting llibre : " + e.getMessage());
                     }
 
-
-
-
+                }*/
             }
 
         }
+
     }
     // CANVIS DE PANTALLA
 
