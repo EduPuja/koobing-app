@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioLlibre;
+import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,14 +12,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LlibreController implements Initializable
@@ -104,6 +107,80 @@ public class LlibreController implements Initializable
         }
     }
 
+
+    public void onAddLlibre(ActionEvent event) 
+    {
+        System.out.println("hola aqui es el boto");
+
+
+        Llibre llibre = taulaLlibres.getSelectionModel().getSelectedItem();
+        if(llibre!=null)
+        {
+            // observable lists per poder poder crear els combobox
+            ObservableList<Autor> observableAutor = FXCollections.observableArrayList();
+            ObservableList<Idioma> observListIdioma = FXCollections.observableArrayList();
+            ObservableList<Genere> observableGenere = FXCollections.observableArrayList();
+            ObservableList<Editorial> observableEditorial = FXCollections.observableArrayList();
+
+            //afegint cada observable list el seu objecte corresponent
+            observableAutor.add(llibre.getAutor());
+            observListIdioma.add(llibre.getIdioma());
+            observableGenere.add(llibre.getGenere());
+            observableEditorial.add(llibre.getEditor());
+
+
+            //Dialegs
+            TextInputDialog titolDialog = new TextInputDialog(llibre.getTitol());
+
+            // Combobox de idiomas, autors,genere i editorial
+
+            ComboBox<Autor> autors = new ComboBox<Autor>(observableAutor);
+            ComboBox<Idioma> idiomas = new ComboBox<Idioma>(observListIdioma);
+            ComboBox <Genere>generes = new ComboBox<Genere>(observableGenere);
+            ComboBox <Editorial>editorials = new ComboBox<Editorial>(observableEditorial);
+
+
+            //crear el gridpane per posar els 2 camps a l'hora
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+
+
+            gridPane.addRow(0,new Label("Digues el Autor: ") ,autors.getEditor());
+            gridPane.addRow(1, new Label("Digues el Idioma:"), idiomas.getEditor());
+            gridPane.addRow(2, new Label("Digues el Genere:"),generes.getEditor());
+            gridPane.addRow(3, new Label("Digues la Editorial:"),editorials.getEditor());
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Afegir Llibre");
+            alert.setHeaderText("Introduïu les noves dades per afegir un llibre");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+                llibre.setTitol(titolDialog.getEditor().getText());
+                llibre.setAutor(observableAutor.get(0));
+
+
+                // Actualizar la tabla
+                taulaLlibres.refresh();
+
+                //actualizar la base de dades
+                //GestioLlibre gestioLlibre = new GestioLlibre();
+                //gestioLlibre.crearLlibre(llibre);
+
+            }
+
+        }
+    }
 
     // CANVIS DE PANTALLA
 
