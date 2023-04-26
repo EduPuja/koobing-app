@@ -136,6 +136,9 @@ public class LlibreController implements Initializable
 
                 // eliminar de base de dades el llibre
 
+                //comprovar la taula reserva , si el ISN is the same
+                // enviar un error i no se elimina el llibre
+
                     try
                     {
                         GestioLlibre gestioLlibre = new GestioLlibre();
