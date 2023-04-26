@@ -184,8 +184,8 @@ public class TreballadorController implements Initializable
                 {
                     // no es pot elimianr :(
                     wrong.setTitle("Error");
-                    wrong.setHeaderText(null);
-                    wrong.setContentText("No es pot eliminar el treballador");
+                    wrong.setHeaderText("No es pot eliminar el treballador");
+                    wrong.setContentText("El treballador ha fet reserves");
                     wrong.show();
                 }
                 else {
