@@ -105,7 +105,7 @@ public class UsuariController implements Initializable
         if (resultado.isPresent() && resultado.get() == ButtonType.OK)
         {
 
-           System.out.println("Button Eliminar selected");
+           //System.out.println("Button Eliminar selected");
 
             Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
             if(user == null)

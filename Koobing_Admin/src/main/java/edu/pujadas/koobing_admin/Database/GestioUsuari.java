@@ -273,6 +273,29 @@ public class GestioUsuari
         return null;
     }
 
+  /*  public boolean isUserReserved(int idUsuari)
+    {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
+            String query = "select from usuari where id_usuari = " + idUsuari ;
+            ResultSet rs = stat.executeQuery(query);
+
+            if(rs.next())
+            {
+                return true;
+            }
+
+            con.desconectar();
+            return false;
+        }
+        catch (Exception e)
+        {
+            System.out.println("UsuariReserver Error: " + e.getMessage());
+        }
+    }*/
 
 
 }
