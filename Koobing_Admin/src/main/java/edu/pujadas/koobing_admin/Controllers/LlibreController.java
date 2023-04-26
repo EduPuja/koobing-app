@@ -147,15 +147,18 @@ public class LlibreController implements Initializable
                     sucessAlert.setContentText("Llibre s'ha eliminat correctament");
                     sucessAlert.show();
 
+
+                    //delte to memory
+                    ObservableList<Llibre> itemsLlibres = taulaLlibres.getItems();
+                    itemsLlibres.remove(llibre);
+
+                    // delete bd
                     try
-
                     {
-                        //eliminar llibre de la base de dades
+                        //eliminar llibre de la base de dades and refrescar la taula
                         gestioLlibre.eliminarLlibre(llibre.getISBN());
+                        taulaLlibres.refresh();
 
-                        //actualitzar la base de dades
-                        loadLlibres();
-                        switchToLlibre(event);
                     }
                     catch (Exception e)
                     {

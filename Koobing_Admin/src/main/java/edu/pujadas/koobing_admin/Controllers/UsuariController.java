@@ -87,12 +87,13 @@ public class UsuariController implements Initializable
      */
     public void onDeleteUser()
     {
+        GestioUsuari gestioUsuari = new GestioUsuari();
 
-
-        // eliminar a memoria , aixo no elimina a la base de dades
+        //alerta per si passa algun error per poder mostrar per pantalla
+        Alert wrong  = new Alert(Alert.AlertType.ERROR);
 
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-        Alert wrong  = new Alert(Alert.AlertType.ERROR);
+        //alerta de confirmacio
         alerta.setTitle("Confirmación");
         alerta.setHeaderText(null);
         alerta.setContentText("Estàs segur de que vols continuar?");
@@ -101,24 +102,49 @@ public class UsuariController implements Initializable
         if (resultado.isPresent() && resultado.get() == ButtonType.OK)
         {
 
-           //System.out.println("Button Eliminar selected");
+
 
             Usuari user = taulaUsuaris.getSelectionModel().getSelectedItem();
-            if(user == null)
+            if(user != null)
             {
-                wrong.setTitle("Error");
-                wrong.setHeaderText(null);
-                wrong.setContentText("Seleciona la fila que vols eliminar");
-            }
-            else
-            {
-                ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
-                itemsUser.remove(user);
-                //part que elimina de la base de dades
-                //GestioUsuari gestioUsuari = new GestioUsuari();
-                //gestioUsuari.eliminarUsuari(user.getDni());
+                boolean userReserved = gestioUsuari.isUserReserved(user.getId());
+
+                if(userReserved)
+                {
+                    // esta reservat no et pot eliminar
+                    wrong.setTitle("Error");
+                    wrong.setHeaderText(null);
+                    wrong.setContentText("Aquest Usuari té una o més reserves ... No es pot eliminar!!");
+                    wrong.show();
+                }
+                else
+                {
+                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    sucessAlert.setTitle("Success!");
+                    sucessAlert.setHeaderText("Has eliminat el usuari!");
+                    sucessAlert.setContentText("El usuari se ha eliminat correctament");
+                    sucessAlert.show();
+
+                    //delte to memory
+                    ObservableList<Usuari> itemsUser = taulaUsuaris.getItems();
+                    itemsUser.remove(user);
+                    // delete from database
+                    try
+                    {
+                        gestioUsuari.eliminarUsuari(user.getDni());
+                        taulaUsuaris.refresh();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error deleting user :" +e.getMessage());
+                    }
+
+                }
+
+
 
             }
+
 
         }
         else
