@@ -163,8 +163,8 @@ public class TreballadorController implements Initializable
     public void onDeleteTreballador()
     {
 
-        //como puedo comprovar que la fila este selecionada?
-        // eliminar a memoria , aixo no elimina a la base de dades
+        GestioTreballador gestioTreballador = new GestioTreballador();
+
 
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
         Alert wrong  = new Alert(Alert.AlertType.ERROR);
@@ -175,26 +175,45 @@ public class TreballadorController implements Initializable
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK)
         {
-
-            System.out.println("Button Eliminar selected");
-
+            //objecte treballador
             Treballador treballador = taulaTreballadors.getSelectionModel().getSelectedItem();
-            if(treballador == null)
-            {
-                wrong.setTitle("Error");
-                wrong.setHeaderText(null);
-                wrong.setContentText("Seleciona la fila que vols eliminar");
-            }
-            else
-            {
-                ObservableList<Treballador> itemsTreballador = taulaTreballadors.getItems();
-                itemsTreballador.remove(treballador);
-                //part que elimina de la base de dades
-                GestioTreballador gestioTreballador = new GestioTreballador();
-                gestioTreballador.eliminarTreballador(treballador.getId());
+            if(treballador != null) {
+                //comprovar si no esta en la taula reserves
+                boolean workerReserved = gestioTreballador.isTreballadorReserved(treballador.getId());
+                if(workerReserved)
+                {
+                    // no es pot elimianr :(
+                    wrong.setTitle("Error");
+                    wrong.setHeaderText(null);
+                    wrong.setContentText("No es pot eliminar el treballador");
+                    wrong.show();
+                }
+                else {
+                    //alerta succes
+                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    sucessAlert.setTitle("Success!");
+                    sucessAlert.setHeaderText("Has eliminat el treballador!");
+                    sucessAlert.setContentText("El treballador ha sigut eliminat correctament");
+                    sucessAlert.show();
+
+                    //delete memory
+                    ObservableList<Treballador> itemsTreballador = taulaTreballadors.getItems();
+                    itemsTreballador.remove(treballador);
+
+                    try
+                    {
+                        //delete database
+                        gestioTreballador.eliminarTreballador(treballador.getId());
+                        taulaTreballadors.refresh();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error Deleting a Worker: "+ e.getMessage());
+                    }
+                }
+
 
             }
-
         }
         else
         {

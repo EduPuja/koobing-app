@@ -173,4 +173,33 @@ public class GestioTreballador
     }
 
 
+    public boolean isTreballadorReserved(int idWorker)
+    {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+
+            String query = "SELECT COUNT(*) AS count FROM reserves WHERE id_treballador="+idWorker;
+            ResultSet rs = stat.executeQuery(query);
+            if(rs.next())
+            {
+                int count = rs.getInt("count");
+                if(count>0)
+                {
+                    return true;
+                }
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("isWorkerReserved Error: " + e.getMessage());
+        }
+
+        return false;
+    }
+
+
 }
