@@ -5,6 +5,7 @@ import edu.pujadas.koobing_admin.Models.Idioma;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 //todo falta create, update, delete
 public class GestioGenere
@@ -21,9 +22,26 @@ public class GestioGenere
     {
 
     }
-    public void consultarGeneres()
+    public ArrayList<Genere> consultarGeneres()
     {
-
+        ArrayList<Genere> list = new ArrayList<Genere>();
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("SELECT * FROM genere");
+            while (rs.next())
+            {
+                list.add(new Genere(rs.getInt("id_genere"),rs.getString("descrip")));
+            }
+            con.desconectar();
+            return list;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Erorr consultar generes :" + e.getMessage());
+        }
+        return null;
     }
 
     /**

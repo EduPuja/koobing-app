@@ -178,7 +178,15 @@ public class LlibreController implements Initializable
             //afegint la info dels idiomas
 
             GestioIdioma gestioIdioma = new GestioIdioma();
+            ArrayList<Idioma> listIdiomas = gestioIdioma.consultarIdiomes();
+            for (int i=0;i<listIdiomas.size();i++)
+            {
+                idiomaComboBox.getItems().addAll(listIdiomas.get(i).getNomIdioma());
+            }
 
+            //afegint la info dels generes
+
+            GestioGenere gestioGenere = new GestioGenere();
 
             //  Creacio dels Textes
 
