@@ -23,7 +23,7 @@ import java.net.URL;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -187,6 +187,11 @@ public class LlibreController implements Initializable
             //afegint la info dels generes
 
             GestioGenere gestioGenere = new GestioGenere();
+            ArrayList<Genere> listGeneres = gestioGenere.consultarGeneres();
+            for (int i=0;i<listGeneres.size();i++)
+            {
+                genereComboBox.getItems().addAll(listGeneres.get(i).getNomGenere());
+            }
 
             //  Creacio dels Textes
 
@@ -226,14 +231,21 @@ public class LlibreController implements Initializable
             Optional<ButtonType> resultat = alert.showAndWait();
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-
+                //insertar tot el introduit al formulari en el objecte llibre
                 Llibre llibre = new Llibre();
 
-                //insertar tot el introduit al formulari en el objecte llibre
                 llibre.setISBN(Long.parseLong(isbnInput.getText()));
+                //autor
+                //editorial
+                //genere
+                //idoma
+                llibre.setTitol(titolInput.getEditor().getText());
+                llibre.setVersio(Integer.parseInt(versionInput.getText()));
+                LocalDate data = dataPubliInput.getValue();
+                Date d = Date.valueOf(data);
+                llibre.setDataPubli(d);
 
-                System.out.println("llibre ISBN: " + llibre.getISBN());
-
+                
 
                 // Actualizar la tabla
                 taulaLlibres.refresh();
