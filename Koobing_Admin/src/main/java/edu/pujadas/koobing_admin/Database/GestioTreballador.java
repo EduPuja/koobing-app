@@ -202,4 +202,37 @@ public class GestioTreballador
     }
 
 
+    public Treballador findWorkerByEmail(String email)
+    {
+       try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("SELECT * FROM treballador WHERE email='"+email+"'");
+
+            if(rs.next())
+            {
+                Treballador t = new Treballador();
+                t.setId(rs.getInt("id_treballador"));
+                t.setAvatar(rs.getBlob("avatar"));
+                t.setNom(rs.getString("nom"));
+                t.setDni(rs.getString("dni"));
+                t.setCognom(rs.getString("cognom"));
+                t.setDataNaix(rs.getDate("data_naix"));
+                t.setEmail(rs.getString("email"));
+                t.setPassword(rs.getString("password"));
+                t.setNumSegSocial(rs.getString("num_seg_social"));
+                t.setAdmin(rs.getBoolean("isAdmin"));
+
+                return  t;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Find Worker Error: " + e.getMessage());
+        }
+        return null;
+    }
+
+
 }
