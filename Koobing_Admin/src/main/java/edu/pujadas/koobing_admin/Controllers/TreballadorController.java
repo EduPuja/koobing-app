@@ -3,6 +3,7 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Genere;
 import edu.pujadas.koobing_admin.Models.Treballador;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,18 +81,11 @@ public class TreballadorController implements Initializable
             int isAdmin = cellData.getValue().isAdmin();
             if(isAdmin == 1)
             {
-                boolean admin = true;
-                return admin;
+                return new SimpleBooleanProperty(true);
             }
-            return new SimpleStringProperty("No");
+            return new SimpleBooleanProperty(false);
         });
 
-
-        genereColum.setCellValueFactory(cellData ->{
-            Genere genere = cellData.getValue().getGenere();
-            String nomGenere = genere.getNomGenere();
-            return new SimpleStringProperty(nomGenere);
-        });
 
     }
 
