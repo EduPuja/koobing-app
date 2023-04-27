@@ -1,7 +1,9 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
+import edu.pujadas.koobing_admin.Models.Genere;
 import edu.pujadas.koobing_admin.Models.Treballador;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,7 +76,22 @@ public class TreballadorController implements Initializable
         dataNaixColum.setCellValueFactory(new PropertyValueFactory<>("dataNaix"));
         emailColum.setCellValueFactory(new PropertyValueFactory<>("email"));
         numSegSocialColum.setCellValueFactory(new PropertyValueFactory<>("numSegSocial"));
-        isAdminColum.setCellValueFactory(new PropertyValueFactory<>("admin"));
+        isAdminColum.setCellValueFactory(cellData ->{
+            int isAdmin = cellData.getValue().isAdmin();
+            if(isAdmin == 1)
+            {
+                boolean admin = true;
+                return admin;
+            }
+            return new SimpleStringProperty("No");
+        });
+
+
+        genereColum.setCellValueFactory(cellData ->{
+            Genere genere = cellData.getValue().getGenere();
+            String nomGenere = genere.getNomGenere();
+            return new SimpleStringProperty(nomGenere);
+        });
 
     }
 
