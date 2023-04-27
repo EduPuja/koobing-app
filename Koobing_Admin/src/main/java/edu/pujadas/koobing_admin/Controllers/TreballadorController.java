@@ -142,6 +142,9 @@ public class TreballadorController implements Initializable
                 treballador.setNumSegSocial(numSegSocialDialeg.getEditor().getText());
                 treballador.setAdmin(adminDialeg.isSelected());
 
+
+                //todo mirar de comprovar les dades entrades 
+
                 // Actualizar la tabla
                 taulaTreballadors.refresh();
 
