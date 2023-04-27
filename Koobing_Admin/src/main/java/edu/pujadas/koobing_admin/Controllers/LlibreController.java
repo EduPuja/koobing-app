@@ -115,7 +115,6 @@ public class LlibreController implements Initializable
 
     public void onAddBook(ActionEvent event)
     {
-        //todo mirar de comprovar les dades entrades
         try
         {
 
@@ -146,17 +145,12 @@ public class LlibreController implements Initializable
             isbnInput.setTextFormatter(isbnFormat);
             versionInput.setTextFormatter(versionFormat);
 
-
-
-
-
             //comboboxes
 
             ComboBox<String> autorComboBox = new ComboBox<String>();
             ComboBox<String> editorialComboBox = new ComboBox<String>();
             ComboBox<String>idiomaComboBox = new ComboBox<String>();
             ComboBox<String> genereComboBox = new ComboBox<String>();
-
 
             //afegint la info dels autors
             GestioAutor gestioAutor = new GestioAutor();
@@ -166,7 +160,6 @@ public class LlibreController implements Initializable
             {
                 autorComboBox.getItems().addAll(listAutors.get(i).getNomAutor());
             }
-
 
             //afegint la info dels editorials
             GestioEditorial gestioEditorial = new GestioEditorial();
@@ -194,14 +187,9 @@ public class LlibreController implements Initializable
             }
 
             //  Creacio dels Textes
-
-
             TextInputDialog titolInput = new TextInputDialog();
-
-
             //data
             DatePicker dataPubliInput = new DatePicker();
-
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
@@ -216,8 +204,6 @@ public class LlibreController implements Initializable
             gridPane.addRow(5, new Label("Titol: "),titolInput.getEditor());
             gridPane.addRow(6, new Label("Versio: "),versionInput);
             gridPane.addRow(7, new Label("Data Publi "),dataPubliInput);
-
-
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
@@ -235,6 +221,9 @@ public class LlibreController implements Initializable
                 Llibre llibre = new Llibre();
 
                 llibre.setISBN(Long.parseLong(isbnInput.getText()));
+                String nomAutor =autorComboBox.getValue();
+
+
                 //autor
                 //editorial
                 //genere
@@ -244,8 +233,6 @@ public class LlibreController implements Initializable
                 LocalDate data = dataPubliInput.getValue();
                 Date d = Date.valueOf(data);
                 llibre.setDataPubli(d);
-
-
 
                 // Actualizar la tabla
                 taulaLlibres.refresh();
