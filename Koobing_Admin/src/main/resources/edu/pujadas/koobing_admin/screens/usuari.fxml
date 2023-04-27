@@ -108,12 +108,12 @@
                   </GridPane>
                   <TableView2 fx:id="taulaUsuaris">
                      <columns>
-                        <TableColumn fx:id="idUsuariColum" prefWidth="115.0" text="idUsuari" />
-                        <TableColumn fx:id="dniColum" prefWidth="115.0" text="DNI" />
-                        <TableColumn fx:id="nomColum" prefWidth="115.0" text="Nom" />
-                        <TableColumn fx:id="cognomColum" prefWidth="115.0" text="Cognom" />
-                        <TableColumn fx:id="dataNaixColum" prefWidth="115.0" text="DataNaix" />
-                        <TableColumn fx:id="emailColum" prefWidth="115.0" text="Email" />
+                        <TableColumn fx:id="idUsuariColum" prefWidth="125.0" text="idUsuari" />
+                        <TableColumn fx:id="dniColum" prefWidth="125.0" text="DNI" />
+                        <TableColumn fx:id="nomColum" prefWidth="125.0" text="Nom" />
+                        <TableColumn fx:id="cognomColum" prefWidth="125.0" text="Cognom" />
+                        <TableColumn fx:id="dataNaixColum" prefWidth="125.0" text="DataNaix" />
+                        <TableColumn fx:id="emailColum" prefWidth="125.0" text="Email" />
                         <!--<TableColumn fx:id="passwordColum" prefWidth="108.0" text="Password" />-->
                      </columns>
                   </TableView2>
