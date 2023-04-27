@@ -4,6 +4,8 @@ import edu.pujadas.koobing_admin.Models.Editorial;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 //todo falta create delete mod
 public class GestioEditorial
 {
@@ -20,9 +22,29 @@ public class GestioEditorial
     {
 
     }
-    public void consultarEditorials()
+    public ArrayList<Editorial> consultarEditorials()
     {
+        ArrayList<Editorial> list = new ArrayList<Editorial>();
+        try
+        {
 
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("Select * from editorial");
+            while(rs.next())
+            {
+                list.add(new Editorial(rs.getInt("id_editorial"), rs.getString("nom_editorial")));
+            }
+
+            con.desconectar();
+            return list;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Consultar Editorials: " + e.getMessage());
+        }
+
+        return null;
     }
 
     /**
