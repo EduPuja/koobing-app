@@ -28,22 +28,26 @@ public class LoginController {
 
 
 
-        boolean okaEmail = isEmailValid(email);
-        if(okaEmail)
-        {
-            System.out.println("Email correcto");
+        boolean workerOka = checkWorker(email, password);
 
-            System.out.println("Email: " + email + " Password: " + password);;
+        if(workerOka)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Bienvenido");
+            alert.setHeaderText(null);
+            alert.setContentText("Bienvenido " + email);
+            alert.show();
         }
         else
         {
-            System.out.println("Email incorrect");
-            Alert wrongAlert = new Alert(Alert.AlertType.ERROR);
-            wrongAlert.setTitle("Error");
-            wrongAlert.setHeaderText("Correu incorrect");
-            wrongAlert.setContentText("Introduce una dirección de correo electrónico válida");
-            wrongAlert.show();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Usuario o contraseña incorrecta");
+            alert.show();
+
         }
+
 
 
     }
@@ -56,25 +60,48 @@ public class LoginController {
     }
 
     private boolean checkWorker(String email, String password) {
-        GestioTreballador gestioTreballador = new GestioTreballador();
-        Treballador treballador = gestioTreballador.findWorkerByEmail(email);
-        if (treballador != null) {
-            // Obtener el hash almacenado en la base de datos
-            String hashedPassword = treballador.getPassword();
-            // Generar un hash de la contraseña ingresada
-            String hashedInputPassword = hashPassword(password);
-            // Verificar si el hash generado es igual al hash almacenado
-            return hashedPassword.equals(hashedInputPassword);
-        } else {
+
+        boolean okaEmail = isEmailValid(email);
+
+        if(okaEmail)
+        {
+            System.out.println("Correu valid");
+            GestioTreballador gestioTreballador = new GestioTreballador();
+            Treballador treballador = gestioTreballador.findWorkerByEmail(email);
+            if (treballador != null) {
+
+                System.out.println("treballador not vuit");
+                System.out.println("password: "+ treballador.getPassword());
+                // Obtener el hash almacenado en la base de datos
+                String hashedPassword = treballador.getPassword();
+                // Generar un hash de la contraseña ingresada
+                String hashedInputPassword = hashPassword(password);
+                // Verificar si el hash generado es igual al hash almacenado
+
+                if(hashedPassword.equals(hashedInputPassword))
+                {
+                    System.out.println("nASHE");
+                    return true;
+                }
+               // return hashedPassword.equals(hashedInputPassword);
+            }
+            else {
+                return false;
+            }
+        }
+        else
+        {
             return false;
         }
+        return false;
+
     }
 
 
     private String hashPassword(String password) {
         try {
             // Obtener una instancia de MessageDigest para generar el hash
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            MessageDigest md = MessageDigest.getInstance("HASH");
             // Generar el hash de la contraseña
             byte[] hashedBytes = md.digest(password.getBytes());
             // Codificar el hash en Base64 para almacenarlo como texto
