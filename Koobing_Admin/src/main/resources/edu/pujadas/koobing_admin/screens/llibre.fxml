@@ -98,9 +98,9 @@
                                 <TableColumn fx:id="editorColum" prefWidth="90.0" text="Editorial" />
                                 <TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
                                 <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
-                                <TableColumn fx:id="titleColum" prefWidth="90.0" text="Títol" />
-                                <TableColumn fx:id="versionColum" prefWidth="90.0" text="Versio" />
-                                <TableColumn fx:id="dataPubliColum" prefWidth="90.0" text="DataPublicacio" />
+                                <TableColumn fx:id="titleColum" prefWidth="100.0" text="Títol" />
+                                <TableColumn fx:id="versionColum" prefWidth="100.0" text="Versio" />
+                                <TableColumn fx:id="dataPubliColum" prefWidth="100.0" text="DataPublicacio" />
                             </columns>
                         </TableView2>
                     </children>
