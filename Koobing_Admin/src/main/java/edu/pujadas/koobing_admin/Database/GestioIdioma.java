@@ -5,6 +5,8 @@ import edu.pujadas.koobing_admin.Models.Idioma;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 //todo falta create delete mod
 public class GestioIdioma
 {
@@ -21,9 +23,28 @@ public class GestioIdioma
     {
 
     }
-    public void consultarIdiomes()
+    public ArrayList<Idioma> consultarIdiomes()
     {
+        ArrayList<Idioma> idiomas = new ArrayList<>();
 
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("SELECT * FROM idioma");
+            while (rs.next())
+            {
+                idiomas.add(new Idioma(rs.getInt("id_idioma"),rs.getString("nom_idioma")));
+            }
+            con.desconectar();
+            return idiomas;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error consultar idiomes: " + e.getMessage());
+        }
+
+        return null;
     }
 
     /**

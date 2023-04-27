@@ -1,10 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
-import edu.pujadas.koobing_admin.Database.GestioAutor;
-import edu.pujadas.koobing_admin.Database.GestioEditorial;
-import edu.pujadas.koobing_admin.Database.GestioLlibre;
+import edu.pujadas.koobing_admin.Database.*;
 
-import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -178,6 +175,10 @@ public class LlibreController implements Initializable
             {
                 editorialComboBox.getItems().addAll(listEditorials.get(i).getNomEditor());
             }
+            //afegint la info dels idiomas
+
+            GestioIdioma gestioIdioma = new GestioIdioma();
+
 
             //  Creacio dels Textes
 
@@ -197,10 +198,11 @@ public class LlibreController implements Initializable
             gridPane.addRow(0, new Label("Digues el ISBN del llibre: "),isbnInput);
             gridPane.addRow(1,new Label("Digues el autor") ,autorComboBox);
             gridPane.addRow(2, new Label("Entra la Editorial: "), editorialComboBox);
-            gridPane.addRow(3, new Label("Genere: "),genereComboBox);
-            gridPane.addRow(4, new Label("Titol: "),titolInput.getEditor());
-            gridPane.addRow(5, new Label("Versio: "),versionInput);
-            gridPane.addRow(6, new Label("Data Publi "),dataPubliInput);
+            gridPane.addRow(3, new Label("Idioma: "),idiomaComboBox);
+            gridPane.addRow(4, new Label("Genere: "),genereComboBox);
+            gridPane.addRow(5, new Label("Titol: "),titolInput.getEditor());
+            gridPane.addRow(6, new Label("Versio: "),versionInput);
+            gridPane.addRow(7, new Label("Data Publi "),dataPubliInput);
 
 
 
