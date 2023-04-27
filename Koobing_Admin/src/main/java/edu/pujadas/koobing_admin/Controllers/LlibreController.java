@@ -1,7 +1,10 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioAutor;
+import edu.pujadas.koobing_admin.Database.GestioEditorial;
 import edu.pujadas.koobing_admin.Database.GestioLlibre;
 
+import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,6 +24,7 @@ import org.controlsfx.control.tableview2.TableView2;
 
 import java.net.URL;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -53,7 +57,9 @@ public class LlibreController implements Initializable
     }
 
 
-
+    /**
+     * Metode per carregar les dades del llibre desde la base de dades MYSQL
+     */
     public void loadLlibres()
     {
         try
@@ -110,6 +116,129 @@ public class LlibreController implements Initializable
     }
 
 
+    public void onAddBook(ActionEvent event)
+    {
+        //todo mirar de comprovar les dades entrades
+        try
+        {
+
+            // test isbn
+            TextField isbnInput = new TextField();
+            TextField versionInput = new TextField();
+
+            //format per el isbn
+            TextFormatter<Integer> isbnFormat = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+            });
+
+            //format per la versio que nomes utilizi un numeric
+            TextFormatter<Integer> versionFormat = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+            });
+
+
+            //inputs number format in this case Long
+            isbnInput.setTextFormatter(isbnFormat);
+            versionInput.setTextFormatter(versionFormat);
+
+
+
+
+
+            //comboboxes
+
+            ComboBox<String> autorComboBox = new ComboBox<String>();
+            ComboBox<Editorial> editorialComboBox = new ComboBox<Editorial>();
+            ComboBox<Idioma>idiomaComboBox = new ComboBox<Idioma>();
+            ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
+
+
+            //afegint la info dels autors
+            GestioAutor gestioAutor = new GestioAutor();
+            ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
+
+            for(int i=0;i<listAutors.size();i++)
+            {
+                autorComboBox.getItems().addAll(listAutors.get(i).getNomAutor());
+            }
+            //afegint la info dels editorials
+            GestioEditorial gestioEditorial = new GestioEditorial();
+            ArrayList<Editorial> listEditorials = gestioEditorial.consultarEditorials();
+
+
+            //  Creacio dels Textes
+
+
+            TextInputDialog titolInput = new TextInputDialog();
+
+
+            //data
+            DatePicker dataPubliInput = new DatePicker();
+
+
+            //crear el gridpane per posar els 2 camps a l'hora
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+            gridPane.addRow(0, new Label("Digues el ISBN del llibre: "),isbnInput);
+            gridPane.addRow(1,new Label("Digues el autor") ,autorComboBox);
+            gridPane.addRow(2, new Label("Entra la Editorial: "), editorialComboBox);
+            gridPane.addRow(3, new Label("Genere: "),genereComboBox);
+            gridPane.addRow(4, new Label("Titol: "),titolInput.getEditor());
+            gridPane.addRow(5, new Label("Versio: "),versionInput);
+            gridPane.addRow(6, new Label("Data Publi "),dataPubliInput);
+
+
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Afegir nou Llibre");
+            alert.setHeaderText("Introduïu les noves dades del llibre:");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+
+                Llibre llibre = new Llibre();
+
+                //insertar tot el introduit al formulari en el objecte llibre
+                llibre.setISBN(Long.parseLong(isbnInput.getText()));
+
+                System.out.println("llibre ISBN: " + llibre.getISBN());
+
+
+                // Actualizar la tabla
+                taulaLlibres.refresh();
+
+                //actualizar la base de dades
+                //GestioLlibre gestioLlibre = new GestioLlibre()
+                //gestioLlibre.crearLlibre(llibre);
+
+                switchToLlibre(event);
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Insert Llibre: "+ e.getMessage());
+        }
+
+
+    }
     public void deleteBook(ActionEvent event)
     {
         //gestio llibre per poder comprovar si el llibre esta en la base de dades

@@ -88,6 +88,7 @@ public class TreballadorController implements Initializable
         try
         {
             // Creacio dels Textes
+
             TextInputDialog nomDialeg = new TextInputDialog();
             TextInputDialog cognomDialeg = new TextInputDialog();
             PasswordField passwordField = new PasswordField();
@@ -143,7 +144,7 @@ public class TreballadorController implements Initializable
                 treballador.setAdmin(adminDialeg.isSelected());
 
 
-                //todo mirar de comprovar les dades entrades 
+                //todo mirar de comprovar les dades entrades
 
                 // Actualizar la tabla
                 taulaTreballadors.refresh();
