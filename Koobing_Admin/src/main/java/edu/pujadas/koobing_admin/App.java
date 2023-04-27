@@ -29,6 +29,7 @@ public class App extends Application
         //boostrap
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setResizable(false);
+
         stage.show();
     }
 
