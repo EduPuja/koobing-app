@@ -245,7 +245,7 @@ public class LlibreController implements Initializable
                 Date d = Date.valueOf(data);
                 llibre.setDataPubli(d);
 
-                
+
 
                 // Actualizar la tabla
                 taulaLlibres.refresh();
