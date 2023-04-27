@@ -156,9 +156,9 @@ public class LlibreController implements Initializable
             //comboboxes
 
             ComboBox<String> autorComboBox = new ComboBox<String>();
-            ComboBox<Editorial> editorialComboBox = new ComboBox<Editorial>();
-            ComboBox<Idioma>idiomaComboBox = new ComboBox<Idioma>();
-            ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
+            ComboBox<String> editorialComboBox = new ComboBox<String>();
+            ComboBox<String>idiomaComboBox = new ComboBox<String>();
+            ComboBox<String> genereComboBox = new ComboBox<String>();
 
 
             //afegint la info dels autors
@@ -169,10 +169,15 @@ public class LlibreController implements Initializable
             {
                 autorComboBox.getItems().addAll(listAutors.get(i).getNomAutor());
             }
+
+
             //afegint la info dels editorials
             GestioEditorial gestioEditorial = new GestioEditorial();
             ArrayList<Editorial> listEditorials = gestioEditorial.consultarEditorials();
-
+            for (int i=0;i<listEditorials.size();i++)
+            {
+                editorialComboBox.getItems().addAll(listEditorials.get(i).getNomEditor());
+            }
 
             //  Creacio dels Textes
 
