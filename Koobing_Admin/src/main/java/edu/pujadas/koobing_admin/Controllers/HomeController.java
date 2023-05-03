@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
+import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -90,6 +91,9 @@ public class HomeController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("Home Screen!");
+
+
+
         infoUsuaris();
         infoAutor();
         infoLlibre();

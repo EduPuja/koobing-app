@@ -27,6 +27,7 @@ public class LoginController {
 
     public void login(ActionEvent event) 
     {
+        System.out.println("Login");
         String email = emailField.getText();
         String password = passwordField.getText();
 
@@ -64,13 +65,13 @@ public class LoginController {
              {
                  showAlert("Bienvenido Administrador: " + treballador.getNom());
                  switchToHome(event);
-                 //todo anar a la pantalla home
+
                  return;
              }
              else {
                  showAlert("Bienvenido Treballador: " + treballador.getNom());
                  switchToHome(event);
-                 //todo anar a la pantalla home
+
                  return;
              }
 

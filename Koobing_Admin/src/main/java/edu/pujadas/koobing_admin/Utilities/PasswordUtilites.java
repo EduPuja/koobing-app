@@ -31,28 +31,16 @@ public class PasswordUtilites {
      * @return true si la contraseña es correcta, false en caso contrario
      */
     public static boolean checkPassword(String password, String hashedPassword) {
-        try {
+        try
+        {
             String passwordEnpryt = encryptPassword(password);
+             return passwordEnpryt.equals(hashedPassword);
 
-            System.out.println(passwordEnpryt);
-            if(passwordEnpryt.equals(hashedPassword))
-            {
-                return true;
-            }
-
-            /*byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(passwordBytes);
-            String hash = Base64.getEncoder().encodeToString(hashBytes);
-
-            System.out.println("Checking password : " + password);
-            System.out.println("hash : " + hash);
-            return hash.equals(hashedPassword);*/
         }
         catch (Exception ex) {
 
             System.out.println("Checking password ERROR : " + ex.getMessage());
-            //throw new RuntimeException("Error al comprobar la contraseña", ex);
+
         }
         return false;
     }

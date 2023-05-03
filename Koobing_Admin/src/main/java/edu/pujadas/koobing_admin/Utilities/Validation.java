@@ -1,5 +1,9 @@
 package edu.pujadas.koobing_admin.Utilities;
 
+import edu.pujadas.koobing_admin.Database.GestioLlibre;
+import edu.pujadas.koobing_admin.Database.GestioTreballador;
+import edu.pujadas.koobing_admin.Models.Treballador;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -75,5 +79,6 @@ public class Validation {
         char letraDniIntroducida = dniLetra.toUpperCase().charAt(0);
         return letraDniCalculada == letraDniIntroducida;
     }
+
 
 }
