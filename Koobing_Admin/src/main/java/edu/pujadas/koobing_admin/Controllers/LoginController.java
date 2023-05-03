@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.App;
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Utilities.PasswordUtilites;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
-
+    private App app;
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -25,6 +26,10 @@ public class LoginController {
     public PasswordField passwordField;
 
 
+
+    public void setMainActivity(App app) {
+        this.app = app;
+    }
     public void login(ActionEvent event) 
     {
         System.out.println("Login");
@@ -60,17 +65,18 @@ public class LoginController {
                  return;
              }
 
-             // todo validar si es administrador
+
              if(treballador.isAdmin() ==1)
              {
                  showAlert("Bienvenido Administrador: " + treballador.getNom());
-                 switchToHome(event);
+                 //crido a la aplicacio per canviar de pantalla
+                 app.switchHome(treballador);
 
                  return;
              }
              else {
                  showAlert("Bienvenido Treballador: " + treballador.getNom());
-                 switchToHome(event);
+                 app.switchHome(treballador);
 
                  return;
              }
@@ -104,19 +110,7 @@ public class LoginController {
 
 
 
-    /**
-     * Funcio per canviar a la pantalla de home
-     * @param event action evnet
-     * @throws Exception exeception
-     */
-    public void switchToHome(ActionEvent event) throws Exception
-    {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+ 
 
 
 

@@ -87,6 +87,16 @@ public class HomeController implements Initializable
     public TableColumn <Llibre,Integer>versioColum;
     public TableColumn <Llibre, Date>dataPubliColum;
 
+    // ---- Treballador stuff ---- //
+    private Treballador treballador;
+
+
+    public void setTreballador(Treballador treballador)
+    {
+        this.treballador = treballador;
+        System.out.println("Welcome to Treballador: "+ treballador.getNom());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -98,6 +108,9 @@ public class HomeController implements Initializable
         infoAutor();
         infoLlibre();
     }
+
+
+
 
 
     /**
