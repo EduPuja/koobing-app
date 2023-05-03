@@ -145,6 +145,7 @@ public class TreballadorController implements Initializable
                 boolean okaDNI = Validation.isValidDni(dniDialeg.getEditor().getText());
 
                 if(okaDNI) {
+                    System.out.println("DNI CORRECT");
                     treballador.setDni(dniDialeg.getEditor().getText());
                     treballador.setNom(nomDialeg.getEditor().getText());
                     treballador.setCognom(cognomDialeg.getEditor().getText());
@@ -154,6 +155,21 @@ public class TreballadorController implements Initializable
                     if(okaEmail)
                     {
                         treballador.setEmail(emailDialeg.getEditor().getText());
+                        treballador.setPassword(passwordField.getText());
+                        LocalDate data= dataNaix.getValue();
+                        Date dataSQL = Date.valueOf(data);
+                        treballador.setDataNaix(dataSQL);
+                        treballador.setNumSegSocial(numSegSocialDialeg.getEditor().getText());
+                        treballador.setAdmin(adminDialeg.isSelected());
+
+                        // Actualizar la tabla
+                        taulaTreballadors.refresh();
+
+                        //actualitzar la base de dades
+                        GestioTreballador gestioTreballador = new GestioTreballador();
+                        gestioTreballador.crearTreballador(treballador);
+                        System.out.println("Treballador afegit correctament");
+
                     }
                     else
                     {
@@ -163,6 +179,7 @@ public class TreballadorController implements Initializable
                 }
                 else
                 {
+                    //todo posar una alert
                     System.out.println("DNI INVALID ");
                 }
 
