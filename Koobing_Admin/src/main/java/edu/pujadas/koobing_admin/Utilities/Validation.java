@@ -1,16 +1,31 @@
 package edu.pujadas.koobing_admin.Utilities;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class PasswordUtils {
+public class Validation {
 
+    public static boolean isValidDni(String dni) {
+        String pattern = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(dni);
+
+        if (!m.matches()) {
+            return false;
+        }
+
+        String letter = Character.toString(dni.charAt(8));
+        int number = Integer.parseInt(dni.substring(0, 8));
+
+        String letters = "TRWAGMYFPDXBNJZSQVHLCKE";
+        String expectedLetter = Character.toString(letters.charAt(number % 23));
+
+        return letter.equals(expectedLetter);
+    }
 
     public static String encryptPassword(String password) {
         try {
@@ -26,6 +41,7 @@ public class PasswordUtils {
             throw new RuntimeException("Error al encriptar la contraseña", ex);
         }
     }
+
 
     /**
      * Metode per comprovar la contrassenya
@@ -59,6 +75,4 @@ public class PasswordUtils {
         }
         return false;
     }
-
 }
-

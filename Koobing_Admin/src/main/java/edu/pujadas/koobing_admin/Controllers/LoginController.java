@@ -1,7 +1,6 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
-import edu.pujadas.koobing_admin.Utilities.PasswordUtils;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

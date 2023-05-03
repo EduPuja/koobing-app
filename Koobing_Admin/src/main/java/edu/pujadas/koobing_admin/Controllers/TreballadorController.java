@@ -1,10 +1,9 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
-import edu.pujadas.koobing_admin.Models.Genere;
 import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -140,10 +139,20 @@ public class TreballadorController implements Initializable
             {
                 //System.out.println("success");
                 Treballador treballador = new Treballador();
+
+                // validacio del dni
+                if(Validation.isValidDni(dniDialeg.getEditor().getText()))
+                {
+                    treballador.setDni(dniDialeg.getEditor().getText());
+                }
                 // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+
+
+
                 treballador.setNom(nomDialeg.getEditor().getText());
-                treballador.setDni(dniDialeg.getEditor().getText());
                 treballador.setCognom(cognomDialeg.getEditor().getText());
+
+
                 treballador.setEmail(emailDialeg.getEditor().getText());
 
                 LocalDate data= dataNaix.getValue();
