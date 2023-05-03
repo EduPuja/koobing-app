@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Utilities.PasswordUtilites;
 import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -27,7 +28,7 @@ public class LoginController {
             return;
         }
 
-        boolean isEmailValid = Validation.isValidPassword(email);
+        boolean isEmailValid = Validation.isValidEmail(email);
 
         if(!isEmailValid)
         {
@@ -36,6 +37,17 @@ public class LoginController {
         }
         GestioTreballador gestioTreballador = new GestioTreballador();
         Treballador treballador = gestioTreballador.findWorkerByEmail(email);
+
+        if(treballador !=null)
+        {
+            boolean isValidPassword = PasswordUtilites.checkPassword(password, treballador.getPassword());
+            if(!isValidPassword)
+            {
+                showAlert("La contrasenya no és vàlid");
+                return;
+            }
+            showAlert("Bienvenido: " + treballador.getNom());
+        }
       
 
 
