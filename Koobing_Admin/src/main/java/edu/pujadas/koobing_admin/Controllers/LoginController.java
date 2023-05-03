@@ -46,7 +46,22 @@ public class LoginController {
                 showAlert("La contrasenya no és vàlid");
                 return;
             }
-            showAlert("Bienvenido: " + treballador.getNom());
+
+            // todo validar si es administrador
+            if(treballador.isAdmin() ==1)
+            {
+                showAlert("Bienvenido Administrador: " + treballador.getNom());
+
+                //todo anar a la pantalla home
+                return;
+            }
+            else {
+                showAlert("Bienvenido Treballador: " + treballador.getNom());
+
+                //todo anar a la pantalla home
+                return;
+            }
+
         }
       
 
