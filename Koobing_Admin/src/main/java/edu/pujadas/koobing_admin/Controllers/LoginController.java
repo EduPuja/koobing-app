@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.ResourceBundle;
 
@@ -27,31 +28,51 @@ public class LoginController {
         String password = passwordField.getText();
 
 
-
-        boolean workerOka = checkWorker(email, password);
-
-        if(workerOka)
+        if(email.isEmpty() || password.isEmpty() )
         {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Bienvenido");
-            alert.setHeaderText(null);
-            alert.setContentText("Bienvenido " + email);
-            alert.show();
+            showAlert("Emplena els camp necessaris");
+            return;
         }
-        else
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Usuario o contraseña incorrecta");
-            alert.show();
 
+        boolean isEmailValid = isEmailValid(email);
+
+        if(!isEmailValid)
+        {
+            showAlert("El correu no és vàlid");
+            return;
         }
 
 
+        GestioTreballador gestioTreballador = new GestioTreballador();
+
+        Treballador treballador = gestioTreballador.findWorkerByEmail(email);
+
+        if(treballador == null)
+        {
+            System.out.println("Worker empty");
+            return;
+        }
+
+
+       //todo comprovar la contrasenya
+
+        String workerPassword = treballador.getPassword();
+
+        if(treballador.checkPassword(workerPassword))
+        {
+            System.out.println("nices");
+        }
+        else {
+            System.out.println("false");
+        }
 
     }
 
+    /**
+     * Metode que comrpvoa la validació de correos electronics
+     * @param email String correuElectronic
+     * @return un true si el correu és vàlid
+     */
     private boolean isEmailValid(String email) {
         // Expresión regular para validar correos electrónicos
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
@@ -59,59 +80,21 @@ public class LoginController {
         return email.matches(emailRegex);
     }
 
-    private boolean checkWorker(String email, String password) {
-
-        boolean okaEmail = isEmailValid(email);
-
-        if(okaEmail)
-        {
-            System.out.println("Correu valid");
-            GestioTreballador gestioTreballador = new GestioTreballador();
-            Treballador treballador = gestioTreballador.findWorkerByEmail(email);
-            if (treballador != null) {
-
-                System.out.println("treballador not vuit");
-                System.out.println("password: "+ treballador.getPassword());
-                // Obtener el hash almacenado en la base de datos
-                String hashedPassword = treballador.getPassword();
-                // Generar un hash de la contraseña ingresada
-                String hashedInputPassword = hashPassword(password);
-                // Verificar si el hash generado es igual al hash almacenado
-
-                if(hashedPassword.equals(hashedInputPassword))
-                {
-                    System.out.println("nASHE");
-                    return true;
-                }
-               // return hashedPassword.equals(hashedInputPassword);
-            }
-            else {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-        return false;
-
+    /***
+     * Metode per fer una Alerta de tipus informacio
+     * @param message missatge d'alerta
+     */
+    private void showAlert(String message)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 
-    private String hashPassword(String password) {
-        try {
-            // Obtener una instancia de MessageDigest para generar el hash
-            MessageDigest md = MessageDigest.getInstance("HASH");
-            // Generar el hash de la contraseña
-            byte[] hashedBytes = md.digest(password.getBytes());
-            // Codificar el hash en Base64 para almacenarlo como texto
-            return Base64.getEncoder().encodeToString(hashedBytes);
-        } catch (Exception e) {
-            // Manejar cualquier error que pueda ocurrir al generar el hash
-            //  e.printStackTrace();
-            System.out.println("Error hashing password : " + e.getMessage());
-            return null;
-        }
-    }
+
+
 
 }

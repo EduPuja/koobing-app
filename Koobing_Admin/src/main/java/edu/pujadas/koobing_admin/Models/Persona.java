@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_admin.Models;
 
+import edu.pujadas.koobing_admin.Database.PasswordUtils;
 import javafx.scene.image.Image;
 
 import java.nio.charset.StandardCharsets;
@@ -114,7 +115,16 @@ public class Persona
 
     public String getPassword()
     {
-        return password;
+        try
+        {
+            return PasswordUtils.decryptPassword(this.password);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error getting the woker password: " + e.getMessage());
+            return null;
+        }
+
     }
 
 
@@ -124,7 +134,17 @@ public class Persona
      */
     public void setPassword(String password)
     {
-        try {
+
+        try
+        {
+            this.password = PasswordUtils.encryptPassword(password);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error setting the woker password: " + e.getMessage());
+        }
+
+       /* try {
             byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(passwordBytes);
@@ -133,28 +153,11 @@ public class Persona
         }
         catch (NoSuchAlgorithmException ex) {
             throw new RuntimeException("Error al encriptar la contraseña", ex);
-        }
+        }*/
     }
 
-    /**
-     * Metode que verifica la password si es correcta
-     * @param password password sense encriptarla
-     * @return true si la contraseña es correcta and false
-     */
-    public boolean checkPassword(String password)
-    {
-        try
-        {
-            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(passwordBytes);
-            String hash = Base64.getEncoder().encodeToString(hashBytes);
-            return hash.equals(this.password);
-        }
-        catch (NoSuchAlgorithmException ex) {
-            throw new RuntimeException("Error al verificar la contraseña", ex);
-        }
-    }
+
+
 
 
 }
