@@ -137,7 +137,38 @@ public class TreballadorController implements Initializable
             Optional<ButtonType> resultat = alert.showAndWait();
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                //System.out.println("success");
+                // creacio d'un treballador
+                Treballador treballador = new Treballador();
+
+
+                // ---- START VALIDATION-- //
+                boolean okaDNI = Validation.isValidDni(dniDialeg.getEditor().getText());
+
+                if(okaDNI) {
+                    treballador.setDni(dniDialeg.getEditor().getText());
+                    treballador.setNom(nomDialeg.getEditor().getText());
+                    treballador.setCognom(cognomDialeg.getEditor().getText());
+
+                    boolean okaEmail = Validation.isValidEmail(emailDialeg.getEditor().getText());
+
+                    if(okaEmail)
+                    {
+                        treballador.setEmail(emailDialeg.getEditor().getText());
+                    }
+                    else
+                    {
+                        //todo posar una alert
+                        System.out.println("Email correu electrònic no és un correu electrònic valid");
+                    }
+                }
+                else
+                {
+                    System.out.println("DNI INVALID ");
+                }
+
+
+
+
                 /*Treballador treballador = new Treballador();
 
                 // validacio del dni
