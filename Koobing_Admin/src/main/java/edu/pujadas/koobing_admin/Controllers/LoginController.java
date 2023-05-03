@@ -1,21 +1,12 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
-import edu.pujadas.koobing_admin.Database.PasswordUtils;
+import edu.pujadas.koobing_admin.Utilities.PasswordUtils;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
-
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.ResourceBundle;
 
 public class LoginController {
 

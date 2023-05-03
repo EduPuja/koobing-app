@@ -1,15 +1,7 @@
 package edu.pujadas.koobing_admin.Models;
 
-import edu.pujadas.koobing_admin.Database.PasswordUtils;
-import javafx.scene.image.Image;
-
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Base64;
 
 public class Persona {
 

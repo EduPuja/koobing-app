@@ -100,14 +100,13 @@ public class TreballadorController implements Initializable
         {
             // Creacio dels Textes
 
+            TextInputDialog dniDialeg = new TextInputDialog();
             TextInputDialog nomDialeg = new TextInputDialog();
             TextInputDialog cognomDialeg = new TextInputDialog();
+            DatePicker dataNaix = new DatePicker();
+            TextInputDialog emailDialeg = new TextInputDialog();
             PasswordField passwordField = new PasswordField();
 
-            TextInputDialog passwordDialeg = new TextInputDialog(passwordField.getText());
-            TextInputDialog dniDialeg = new TextInputDialog();
-            TextInputDialog emailDialeg = new TextInputDialog();
-            DatePicker dataNaix = new DatePicker();
             //stuff treballador
             TextInputDialog numSegSocialDialeg = new TextInputDialog();
             CheckBox adminDialeg = new CheckBox();
@@ -150,12 +149,14 @@ public class TreballadorController implements Initializable
                 LocalDate data= dataNaix.getValue();
                 Date dataSQL = Date.valueOf(data);
                 treballador.setDataNaix(dataSQL);
-                treballador.setPassword(passwordDialeg.getEditor().getText());
+                treballador.setPassword(passwordField.getText());
+
+
                 treballador.setNumSegSocial(numSegSocialDialeg.getEditor().getText());
                 treballador.setAdmin(adminDialeg.isSelected());
 
 
-                //todo mirar de comprovar les dades entrades
+
 
                 // Actualizar la tabla
                 taulaTreballadors.refresh();

@@ -16,4 +16,5 @@ module edu.pujadas.koobing_admin {
     exports edu.pujadas.koobing_admin.Models;
     exports edu.pujadas.koobing_admin.Controllers;
     exports edu.pujadas.koobing_admin.Database;
+    exports edu.pujadas.koobing_admin.Utilities;
 }

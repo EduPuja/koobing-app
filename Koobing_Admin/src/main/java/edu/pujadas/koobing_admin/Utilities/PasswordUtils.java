@@ -1,4 +1,4 @@
-package edu.pujadas.koobing_admin.Database;
+package edu.pujadas.koobing_admin.Utilities;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
