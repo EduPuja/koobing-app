@@ -5,18 +5,27 @@ import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Utilities.PasswordUtilites;
 import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class LoginController {
 
+
+    private Parent root;
+    private Scene scene;
+    private Stage stage;
 
     public TextField emailField;
     public PasswordField passwordField;
 
 
-    public void login(ActionEvent event)
+    public void login(ActionEvent event) 
     {
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -35,35 +44,43 @@ public class LoginController {
             showAlert("El correu no és vàlid");
             return;
         }
+
         GestioTreballador gestioTreballador = new GestioTreballador();
         Treballador treballador = gestioTreballador.findWorkerByEmail(email);
 
-        if(treballador !=null)
-        {
-            boolean isValidPassword = PasswordUtilites.checkPassword(password, treballador.getPassword());
-            if(!isValidPassword)
-            {
-                showAlert("La contrasenya no és vàlid");
-                return;
-            }
+     try
+     {
+         if(treballador !=null)
+         {
+             boolean isValidPassword = PasswordUtilites.checkPassword(password, treballador.getPassword());
+             if(!isValidPassword)
+             {
+                 showAlert("La contrasenya no és vàlid");
+                 return;
+             }
 
-            // todo validar si es administrador
-            if(treballador.isAdmin() ==1)
-            {
-                showAlert("Bienvenido Administrador: " + treballador.getNom());
+             // todo validar si es administrador
+             if(treballador.isAdmin() ==1)
+             {
+                 showAlert("Bienvenido Administrador: " + treballador.getNom());
+                 switchToHome(event);
+                 //todo anar a la pantalla home
+                 return;
+             }
+             else {
+                 showAlert("Bienvenido Treballador: " + treballador.getNom());
+                 switchToHome(event);
+                 //todo anar a la pantalla home
+                 return;
+             }
 
-                //todo anar a la pantalla home
-                return;
-            }
-            else {
-                showAlert("Bienvenido Treballador: " + treballador.getNom());
+         }
 
-                //todo anar a la pantalla home
-                return;
-            }
-
-        }
-      
+     }
+     catch (Exception e)
+     {
+         System.out.println("Failed to login error : " + e.getMessage());
+     }
 
 
     }
@@ -86,6 +103,19 @@ public class LoginController {
 
 
 
+    /**
+     * Funcio per canviar a la pantalla de home
+     * @param event action evnet
+     * @throws Exception exeception
+     */
+    public void switchToHome(ActionEvent event) throws Exception
+    {
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 
