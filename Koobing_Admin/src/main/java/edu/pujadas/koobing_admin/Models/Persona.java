@@ -36,7 +36,7 @@ public class Persona {
         this.dataNaix = dataNaix;
         this.email = email;
         this.password = password;
-        
+
     }
 
     public int getId() {

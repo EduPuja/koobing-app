@@ -22,7 +22,7 @@ public class GestioTreballador
             Statement stat = con.conectar();
             String sql = "INSERT INTO treballador (id_treballador, avatar, dni,nom,cognom, data_naix, email,password, num_seg_social, isAdmin) " +
                     "VALUES ("+treballador.getId()+", '"+treballador.getAvatar()+"', '"+treballador.getDni()+"'"+", '"+treballador.getNom()+"', '"+treballador.getCognom()+"'"+
-                    ", '"+treballador.getDataNaix()+"', '"+treballador.getEmail()+"', '"+ PasswordUtils.encryptPassword(treballador.getPassword())+"', '"+treballador.getNumSegSocial()+"', '"+treballador.isAdmin()+"')";
+                    ", '"+treballador.getDataNaix()+"', '"+treballador.getEmail()+"', '"+ treballador.getPassword()+"', '"+treballador.getNumSegSocial()+"', '"+treballador.isAdmin()+"')";
 
 
 
