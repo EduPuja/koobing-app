@@ -35,19 +35,7 @@ public class LoginController {
         }
         GestioTreballador gestioTreballador = new GestioTreballador();
         Treballador treballador = gestioTreballador.findWorkerByEmail(email);
-        if (treballador !=null)
-        {
-            System.out.println("Password Treballador: "+treballador.getPassword());
-            System.out.println("Password Entrada: "+password);
-
-
-            //todo comprovar el password
-            boolean isPasswordValid = PasswordUtils.checkPassword(password, treballador.getPassword());
-
-            System.out.println("Is valid password: "+isPasswordValid);
-
-        }
-
+      
 
 
     }
