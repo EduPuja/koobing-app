@@ -95,11 +95,13 @@ public class TreballadorController implements Initializable
      */
     public void onInsertarTreballador(ActionEvent event)
     {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+
         try
         {
             // Creacio dels Textes
 
-            TextInputDialog dniDialeg = new TextInputDialog();
+            TextField dniDialeg = new TextField();  
             TextInputDialog nomDialeg = new TextInputDialog();
             TextInputDialog cognomDialeg = new TextInputDialog();
             DatePicker dataNaix = new DatePicker();
@@ -107,6 +109,8 @@ public class TreballadorController implements Initializable
             PasswordField passwordField = new PasswordField();
 
             //stuff treballador
+
+            // format de numSeguretatsocial es perque nomes entrin un numero
             TextFormatter<Integer> numSegSocialFormat = new TextFormatter<>(change -> {
                 if (change.getControlNewText().matches("\\d*")) {
                     return change;
@@ -181,59 +185,27 @@ public class TreballadorController implements Initializable
                         gestioTreballador.crearTreballador(treballador);
                         System.out.println("Treballador afegit correctament");
 
+                        switchToTreballador(event);
                     }
                     else
                     {
-                        //todo posar una alert
-                        System.out.println("Email correu electrònic no és un correu electrònic valid");
+                        error.setTitle("Error");
+                        error.setHeaderText(null);
+                        error.setContentText("Correu electrònic no és valid o és vuit");
+                        error.showAndWait();
+
                     }
                 }
                 else
                 {
-                    //todo posar una alert
-                    System.out.println("DNI INVALID ");
+                    error.setTitle("Error");
+                    error.setHeaderText(null);
+                    error.setContentText("El dni és incorrecte o vuit");
+                    error.showAndWait();
                 }
 
 
-
-
-                /*Treballador treballador = new Treballador();
-
-                // validacio del dni
-                if(Validation.isValidDni(dniDialeg.getEditor().getText()))
-                {
-                    treballador.setDni(dniDialeg.getEditor().getText());
-                }
-
-
-
-
-                treballador.setNom(nomDialeg.getEditor().getText());
-                treballador.setCognom(cognomDialeg.getEditor().getText());
-
-
-                treballador.setEmail(emailDialeg.getEditor().getText());
-
-                LocalDate data= dataNaix.getValue();
-                Date dataSQL = Date.valueOf(data);
-                treballador.setDataNaix(dataSQL);
-                treballador.setPassword(passwordField.getText());
-
-
-                treballador.setNumSegSocial(numSegSocialDialeg.getEditor().getText());
-                treballador.setAdmin(adminDialeg.isSelected());
-
-
-
-
-                // Actualizar la tabla
-                taulaTreballadors.refresh();
-
-                //actualizar la base de dades
-               // GestioTreballador gestioTreballador = new GestioTreballador();
-                //gestioTreballador.crearTreballador(treballador);
-
-               // switchToTreballador(event);*/
+                // ---- END VALIDATION-- //
             }
 
 
