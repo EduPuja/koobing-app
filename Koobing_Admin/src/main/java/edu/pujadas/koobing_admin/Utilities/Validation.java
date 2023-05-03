@@ -9,70 +9,71 @@ import java.util.regex.Pattern;
 
 public class Validation {
 
-    public static boolean isValidDni(String dni) {
-        String pattern = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$";
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(dni);
-
-        if (!m.matches()) {
+    /**
+     * Validacio  del correo electrónico
+     * @param email string
+     * @return true si es valido, false en caso contrario
+     */
+    public static boolean isValidEmail(String email) {
+        if (email == null || email.isEmpty()) {
             return false;
         }
 
-        String letter = Character.toString(dni.charAt(8));
-        int number = Integer.parseInt(dni.substring(0, 8));
-
-        String letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-        String expectedLetter = Character.toString(letters.charAt(number % 23));
-
-        return letter.equals(expectedLetter);
-    }
-
-    public static String encryptPassword(String password) {
-        try {
-            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(passwordBytes);
-            String hash = Base64.getEncoder().encodeToString(hashBytes);
-            password = hash;
-
-            return password;
-        }
-        catch (NoSuchAlgorithmException ex) {
-            throw new RuntimeException("Error al encriptar la contraseña", ex);
-        }
+        Pattern pattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
 
     /**
-     * Metode per comprovar la contrassenya
-     * @param password password a not encrtypted
-     * @param hashedPassword passwordEncrypted
-     * @return true si la contraseña es correcta, false en caso contrario
+     *  Metode per comrvar la contraseña tingui 8 caracteres, incluir al menos una letra mayúscula, una minúscula y un número
+     * @param password String contraseña
+     * @return true si es valido, false en caso contrario
      */
-    public static boolean checkPassword(String password, String hashedPassword) {
-        try {
-            String passwordEnpryt = encryptPassword(password);
-
-            System.out.println(passwordEnpryt);
-            if(passwordEnpryt.equals(hashedPassword))
-            {
-                return true;
-            }
-
-            /*byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(passwordBytes);
-            String hash = Base64.getEncoder().encodeToString(hashBytes);
-
-            System.out.println("Checking password : " + password);
-            System.out.println("hash : " + hash);
-            return hash.equals(hashedPassword);*/
+    public static boolean isValidPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            return false;
         }
-        catch (Exception ex) {
 
-            System.out.println("Checking password ERROR : " + ex.getMessage());
-            //throw new RuntimeException("Error al comprobar la contraseña", ex);
-        }
-        return false;
+        // La contraseña debe tener al menos 8 caracteres, incluir al menos una letra mayúscula, una minúscula y un número
+        Pattern pattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
     }
+
+    /**
+     * Metode per validar el DNI
+     * @param dni String DNI
+     * @return true si es valido, false en caso contrario
+     */
+    public static boolean isValidDni(String dni) {
+        if (dni == null || dni.isEmpty()) {
+            return false;
+        }
+
+        // La longitud del DNI debe ser 9 (8 dígitos y una letra)
+        if (dni.length() != 9) {
+            return false;
+        }
+
+        // Los primeros 8 caracteres deben ser dígitos
+        String dniNumeros = dni.substring(0, 8);
+        if (!dniNumeros.matches("\\d+")) {
+            return false;
+        }
+
+        // El último carácter debe ser una letra (mayúscula o minúscula)
+        String dniLetra = dni.substring(8);
+        if (!dniLetra.matches("[a-zA-Z]")) {
+            return false;
+        }
+
+        // Comprobar la letra del DNI
+        String letrasDni = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int numeroDni = Integer.parseInt(dniNumeros) % 23;
+        char letraDniCalculada = letrasDni.charAt(numeroDni);
+        char letraDniIntroducida = dniLetra.toUpperCase().charAt(0);
+        return letraDniCalculada == letraDniIntroducida;
+    }
+
 }
