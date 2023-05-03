@@ -35,16 +35,29 @@ public class PasswordUtils {
      */
     public static boolean checkPassword(String password, String hashedPassword) {
         try {
-            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
+            String passwordEnpryt = encryptPassword(password);
+
+            System.out.println(passwordEnpryt);
+            if(passwordEnpryt.equals(hashedPassword))
+            {
+                return true;
+            }
+
+            /*byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(passwordBytes);
             String hash = Base64.getEncoder().encodeToString(hashBytes);
 
-            return hash.equals(hashedPassword);
+            System.out.println("Checking password : " + password);
+            System.out.println("hash : " + hash);
+            return hash.equals(hashedPassword);*/
         }
-        catch (NoSuchAlgorithmException ex) {
-            throw new RuntimeException("Error al comprobar la contraseña", ex);
+        catch (Exception ex) {
+
+            System.out.println("Checking password ERROR : " + ex.getMessage());
+            //throw new RuntimeException("Error al comprobar la contraseña", ex);
         }
+        return false;
     }
 
 }
