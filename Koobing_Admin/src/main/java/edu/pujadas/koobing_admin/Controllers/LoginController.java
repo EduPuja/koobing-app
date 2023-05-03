@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -43,28 +44,8 @@ public class LoginController {
         }
 
 
-        GestioTreballador gestioTreballador = new GestioTreballador();
-
-        Treballador treballador = gestioTreballador.findWorkerByEmail(email);
-
-        if(treballador == null)
-        {
-            System.out.println("Worker empty");
-            return;
-        }
 
 
-       //todo comprovar la contrasenya
-
-        String workerPassword = treballador.getPassword();
-
-        if(treballador.checkPassword(workerPassword))
-        {
-            System.out.println("nices");
-        }
-        else {
-            System.out.println("false");
-        }
 
     }
 
@@ -91,6 +72,25 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+
+    private void checkPassword(String password)
+    {
+        try {
+            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(passwordBytes);
+            String hash = Base64.getEncoder().encodeToString(hashBytes);
+            password = hash;
+
+
+
+        }
+        catch (NoSuchAlgorithmException ex) {
+            throw new RuntimeException("Error al encriptar la contraseña", ex);
+        }
+    }
     }
 
 
