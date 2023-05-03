@@ -35,9 +35,8 @@ public class Persona {
         this.cognom = cognom;
         this.dataNaix = dataNaix;
         this.email = email;
-        //crido el metode setPassword perque aixi me la encrpiti directament
-        setPassword(password);
-        // this.password = password;
+        this.password = password;
+        
     }
 
     public int getId() {
