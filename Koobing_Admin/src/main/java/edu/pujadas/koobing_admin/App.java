@@ -28,8 +28,8 @@ public class App extends Application
         //icono
         String icono ="/edu/pujadas/koobing_admin/img/libro.png";
         stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
-
-        switchToLogin();
+        //switchTreballador();
+       switchToLogin();
 
 
       /*  FXMLLoader loader   = new FXMLLoader(App.class.getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
@@ -71,6 +71,17 @@ public class App extends Application
         stage.show();
     }
 
+    public void switchTreballador() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/treballador.fxml"));
+        Parent root = loader.load();
+
+
+        //todo treballador
+        Scene scene = new Scene(root, 1000, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
     public static void main(String[] args)
     {
         launch();
