@@ -30,7 +30,7 @@ public class App extends Application
         stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
 
         switchToLogin();
-        
+
 
       /*  FXMLLoader loader   = new FXMLLoader(App.class.getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
         Parent root = loader.load();
