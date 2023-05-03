@@ -101,7 +101,7 @@ public class TreballadorController implements Initializable
         {
             // Creacio dels Textes
 
-            TextField dniDialeg = new TextField();  
+            TextInputDialog dniDialeg = new TextInputDialog();
             TextInputDialog nomDialeg = new TextInputDialog();
             TextInputDialog cognomDialeg = new TextInputDialog();
             DatePicker dataNaix = new DatePicker();
