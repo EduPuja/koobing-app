@@ -107,7 +107,15 @@ public class TreballadorController implements Initializable
             PasswordField passwordField = new PasswordField();
 
             //stuff treballador
-            TextInputDialog numSegSocialDialeg = new TextInputDialog();
+            TextFormatter<Integer> numSegSocialFormat = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+            });
+            TextField numSegSocialDialeg = new TextField();
+            numSegSocialDialeg.setTextFormatter(numSegSocialFormat);
             CheckBox adminDialeg = new CheckBox();
 
             //crear el gridpane per posar els 2 camps a l'hora
@@ -121,7 +129,7 @@ public class TreballadorController implements Initializable
             gridPane.addRow(3, new Label("Data de Naixament:"),dataNaix);
             gridPane.addRow(4, new Label("Correu Electroinc: "),emailDialeg.getEditor());
             gridPane.addRow(5, new Label("Contrassenya"),passwordField);
-            gridPane.addRow(6, new Label("Num Seguretat Social: "),numSegSocialDialeg.getEditor());
+            gridPane.addRow(6, new Label("Num Seguretat Social: "),numSegSocialDialeg);
             gridPane.addRow(7, new Label("Admin: "),adminDialeg);
 
 
@@ -159,7 +167,10 @@ public class TreballadorController implements Initializable
                         LocalDate data= dataNaix.getValue();
                         Date dataSQL = Date.valueOf(data);
                         treballador.setDataNaix(dataSQL);
-                        treballador.setNumSegSocial(numSegSocialDialeg.getEditor().getText());
+
+
+                        treballador.setNumSegSocial(numSegSocialDialeg.getText());
+
                         treballador.setAdmin(adminDialeg.isSelected());
 
                         // Actualizar la tabla

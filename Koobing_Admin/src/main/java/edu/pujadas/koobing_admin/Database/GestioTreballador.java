@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Utilities.PasswordUtilites;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -22,7 +23,7 @@ public class GestioTreballador
             Statement stat = con.conectar();
             String sql = "INSERT INTO treballador (id_treballador, avatar, dni,nom,cognom, data_naix, email,password, num_seg_social, isAdmin) " +
                     "VALUES ("+treballador.getId()+", '"+treballador.getAvatar()+"', '"+treballador.getDni()+"'"+", '"+treballador.getNom()+"', '"+treballador.getCognom()+"'"+
-                    ", '"+treballador.getDataNaix()+"', '"+treballador.getEmail()+"', '"+ treballador.getPassword()+"', '"+treballador.getNumSegSocial()+"', '"+treballador.isAdmin()+"')";
+                    ", '"+treballador.getDataNaix()+"', '"+treballador.getEmail()+"', '"+ PasswordUtilites.encryptPassword(treballador.getPassword())+"', '"+treballador.getNumSegSocial()+"', '"+treballador.isAdmin()+"')";
 
 
 
