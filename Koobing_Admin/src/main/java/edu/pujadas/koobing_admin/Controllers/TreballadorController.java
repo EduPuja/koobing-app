@@ -138,14 +138,14 @@ public class TreballadorController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
                 //System.out.println("success");
-                Treballador treballador = new Treballador();
+                /*Treballador treballador = new Treballador();
 
                 // validacio del dni
                 if(Validation.isValidDni(dniDialeg.getEditor().getText()))
                 {
                     treballador.setDni(dniDialeg.getEditor().getText());
                 }
-                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+
 
 
 
@@ -171,10 +171,10 @@ public class TreballadorController implements Initializable
                 taulaTreballadors.refresh();
 
                 //actualizar la base de dades
-                GestioTreballador gestioTreballador = new GestioTreballador();
-                gestioTreballador.crearTreballador(treballador);
+               // GestioTreballador gestioTreballador = new GestioTreballador();
+                //gestioTreballador.crearTreballador(treballador);
 
-                switchToTreballador(event);
+               // switchToTreballador(event);*/
             }
 
 
