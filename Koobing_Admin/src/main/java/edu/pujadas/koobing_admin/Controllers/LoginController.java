@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
+import edu.pujadas.koobing_admin.Database.PasswordUtils;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -75,23 +76,7 @@ public class LoginController {
     }
 
 
-    private void checkPassword(String password)
-    {
-        try {
-            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(passwordBytes);
-            String hash = Base64.getEncoder().encodeToString(hashBytes);
-            password = hash;
 
-
-
-        }
-        catch (NoSuchAlgorithmException ex) {
-            throw new RuntimeException("Error al encriptar la contraseña", ex);
-        }
-    }
-    }
 
 
 
