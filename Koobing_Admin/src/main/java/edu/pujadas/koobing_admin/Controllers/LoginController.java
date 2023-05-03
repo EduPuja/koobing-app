@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -26,7 +27,7 @@ public class LoginController {
             return;
         }
 
-        boolean isEmailValid = isEmailValid(email);
+        boolean isEmailValid = Validation.isValidPassword(email);
 
         if(!isEmailValid)
         {
@@ -40,17 +41,7 @@ public class LoginController {
 
     }
 
-    /**
-     * Metode que comrpvoa la validació de correos electronics
-     * @param email String correuElectronic
-     * @return un true si el correu és vàlid
-     */
-    private boolean isEmailValid(String email) {
-        // Expresión regular para validar correos electrónicos
-        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
-        // Validar correo electrónico con la expresión regular
-        return email.matches(emailRegex);
-    }
+
 
     /***
      * Metode per fer una Alerta de tipus informacio

@@ -15,7 +15,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/pujadas/koobing_admin/screens/treballador.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
         stage.setTitle("Koobing App Admin!");
         stage.setScene(scene);
