@@ -1,7 +1,10 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
+import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Models.Usuari;
+import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -223,73 +226,99 @@ public class UsuariController implements Initializable
      */
     public void onInsertarUsuari(ActionEvent event)
     {
-        try
-        {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+
+        try {
             // Creacio dels Textes
+
+            TextInputDialog dniDialeg = new TextInputDialog();
             TextInputDialog nomDialeg = new TextInputDialog();
             TextInputDialog cognomDialeg = new TextInputDialog();
+            DatePicker dataNaix = new DatePicker();
+            TextInputDialog emailDialeg = new TextInputDialog();
             PasswordField passwordField = new PasswordField();
 
-            TextInputDialog passwordDialeg = new TextInputDialog(passwordField.getText());
-            TextInputDialog dniDialeg = new TextInputDialog();
-            TextInputDialog emailDialeg = new TextInputDialog();
-            DatePicker dataNaix = new DatePicker();
+
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
             gridPane.setHgap(10);
             gridPane.setVgap(10);
 
-            gridPane.addRow(0, new Label("Digues el Teu DNI: "),dniDialeg.getEditor());
-            gridPane.addRow(1,new Label("Nou Nom: ") ,nomDialeg.getEditor());
+            gridPane.addRow(0, new Label("Digues el Teu DNI: "), dniDialeg.getEditor());
+            gridPane.addRow(1, new Label("Nou Nom: "), nomDialeg.getEditor());
             gridPane.addRow(2, new Label("Nou Cognom:"), cognomDialeg.getEditor());
-            gridPane.addRow(3, new Label("Data de Naixament:"),dataNaix);
-            gridPane.addRow(4, new Label("Correu Electroinc: "),emailDialeg.getEditor());
-            gridPane.addRow(5, new Label("Contrassenya"),passwordField);
+            gridPane.addRow(3, new Label("Data de Naixament:"), dataNaix);
+            gridPane.addRow(4, new Label("Correu Electroinc: "), emailDialeg.getEditor());
+            gridPane.addRow(5, new Label("Contrassenya"), passwordField);
+
 
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
 
             alert.setTitle("Afegir nou Usuari");
-            alert.setHeaderText("Introduïu les noves dades de l'usuari:");
+            alert.setHeaderText("Introduïu les noves dades del usuari:");
             alert.getDialogPane().setContent(gridPane);
             alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
             // Esperar a que el usuario presione OK o Cancel
             Optional<ButtonType> resultat = alert.showAndWait();
-            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
-            {
-                //System.out.println("success");
-                Usuari user = new Usuari();
-                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
-                user.setNom(nomDialeg.getEditor().getText());
-                user.setDni(dniDialeg.getEditor().getText());
-                user.setCognom(cognomDialeg.getEditor().getText());
-                user.setEmail(emailDialeg.getEditor().getText());
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
+                // creacio d'un usuari
+                Usuari usuari = new Usuari();
 
-                LocalDate data= dataNaix.getValue();
-                Date dataSQL = Date.valueOf(data);
-                user.setDataNaix(dataSQL);
-                user.setPassword(passwordDialeg.getEditor().getText());
 
-                // Actualizar la tabla
-                taulaUsuaris.refresh();
+                // ---- START VALIDATION-- //
+                boolean okaDNI = Validation.isValidDni(dniDialeg.getEditor().getText());
 
-                //actualizar la base de dades
-                GestioUsuari gestioUsuari = new GestioUsuari();
-                gestioUsuari.crearUsuari(user);
+                if (okaDNI) {
+                    System.out.println("DNI CORRECT");
+                    usuari.setDni(dniDialeg.getEditor().getText());
+                    usuari.setNom(nomDialeg.getEditor().getText());
+                    usuari.setCognom(cognomDialeg.getEditor().getText());
 
-                switchToUsuari(event);
+                    boolean okaEmail = Validation.isValidEmail(emailDialeg.getEditor().getText());
+
+                    if (okaEmail) {
+                        usuari.setEmail(emailDialeg.getEditor().getText());
+                        usuari.setPassword(passwordField.getText());
+                        LocalDate data = dataNaix.getValue();
+                        Date dataSQL = Date.valueOf(data);
+                        usuari.setDataNaix(dataSQL);
+
+
+                        // Actualizar la tabla
+                        taulaUsuaris.refresh();
+
+                        //actualitzar la base de dades
+                        GestioUsuari gestioUsuari = new GestioUsuari();
+                        gestioUsuari.crearUsuari(usuari);
+                        System.out.println("Usuari afegit correctament");
+
+                        switchToUsuari(event);
+
+                    } else {
+                        error.setTitle("Error");
+                        error.setHeaderText(null);
+                        error.setContentText("Correu electrònic no és valid o és vuit");
+                        error.showAndWait();
+
+                    }
+                } else {
+                    error.setTitle("Error");
+                    error.setHeaderText(null);
+                    error.setContentText("El dni és incorrecte o vuit");
+                    error.showAndWait();
+                }
+
+
+                // ---- END VALIDATION-- //
             }
-
-
         }
-        catch (Exception e)
-        {
-            System.out.println("Error: "+ e.getMessage());
+        catch (Exception e) {
+            System.out.println("Error Inserting a User: " + e.getMessage());
         }
-
     }
 
 

@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.Usuari;
+import edu.pujadas.koobing_admin.Utilities.PasswordUtilites;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -27,7 +28,8 @@ public class GestioUsuari
             Statement stat = con.conectar();
 
 
-            String query ="INSERT INTO usuari(dni,avatar,nom,cognom,data_naix,email,password) VALUES ('"+usuari.getDni()+"','"+usuari.getAvatar()+"','"+usuari.getNom()+"','"+usuari.getCognom()+"','"+usuari.getDataNaix()+"','"+usuari.getEmail()+"','"+usuari.getPassword()+"')";
+            String query ="INSERT INTO usuari(dni,avatar,nom,cognom,data_naix,email,password) VALUES " +
+                    "('"+usuari.getDni()+"','"+usuari.getAvatar()+"','"+usuari.getNom()+"','"+usuari.getCognom()+"','"+usuari.getDataNaix()+"','"+usuari.getEmail()+"','"+ PasswordUtilites.encryptPassword(usuari.getPassword())+"')";
 
             if(stat.executeUpdate(query) == 1)
             {
