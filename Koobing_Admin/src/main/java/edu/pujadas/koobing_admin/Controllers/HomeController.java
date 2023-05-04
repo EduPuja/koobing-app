@@ -132,8 +132,6 @@ public class HomeController implements Initializable
     {
         System.out.println("Home Screen!");
 
-
-
         infoUsuaris();
         infoAutor();
         infoLlibre();
@@ -278,12 +276,12 @@ public class HomeController implements Initializable
     public void switchToHome(ActionEvent event) throws Exception
     {
 
-        app.switchHome(treballador);
-        /*root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
+
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
     }
 
     /**
