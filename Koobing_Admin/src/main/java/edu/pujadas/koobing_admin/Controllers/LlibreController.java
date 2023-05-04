@@ -19,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
+import java.io.IOException;
 import java.net.URL;
 
 import java.time.LocalDate;
@@ -314,6 +315,68 @@ public class LlibreController implements Initializable
         }
 
     }
+
+    public void onModifyLLibre(ActionEvent event) throws Exception
+    {
+        Llibre book = taulaLlibres.getSelectionModel().getSelectedItem();
+        if(book != null)
+        {
+            // Creacio dels Textes
+
+            ComboBox<String > autors = new ComboBox<String>();
+            ComboBox<String > editorials = new ComboBox<String>();
+            ComboBox<String > idioma = new ComboBox<String>();
+            ComboBox<String > genere = new ComboBox<String>();
+            TextField titol = new TextField();
+            TextField version = new TextField();
+            DatePicker dataPublicacio = new DatePicker();
+
+
+
+            //crear el gridpane per posar els 2 camps a l'hora
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+
+
+            gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
+            gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
+            gridPane.addRow(2, new Label("Nova Contrassenya"),passwordField);
+
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Modificar el LLibre");
+            alert.setHeaderText("Introduïu les noves dades del Lllibre selecionat:");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
+                book.setNom(nomDialeg.getEditor().getText());
+                book.setCognom(cognomDialeg.getEditor().getText());
+                book.setPassword(passwordDialeg.getEditor().getText());
+
+                // Actualizar la tabla
+                taulaLlibres.refresh();
+
+                //actualizar la base de dades
+               /*GestioLlibre gestioLlibre = new GestioLlibre();
+                gestioLlibre.modificarLlibre(book);*/
+            }
+    }
+
+
+
+
     // CANVIS DE PANTALLA
 
 
