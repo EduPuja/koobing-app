@@ -69,30 +69,30 @@ public class GestioIdioma
         }
         catch (Exception e)
         {
-            System.out.println("No he trobat l'idioma");
+            System.out.println("Error consultar idioma: " + e.getMessage());
         }
         return null;
     }
 
     public Idioma findIdiomaByName(String nomIdioma)
     {
-        try
-        {
+
+        try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            ResultSet rs = stat.executeQuery("SELECT * FROM idioma WHERE nom_idioma '=" + nomIdioma+"'");
+            ResultSet rs = stat.executeQuery("SELECT * FROM idioma WHERE nom_idioma ='" + nomIdioma+"'");
             if (rs.next())
             {
                 Idioma idioma =new Idioma(rs.getInt("id_idioma"),rs.getString("nom_idioma"));
                 con.desconectar();
                 return idioma;
             }
-            con.desconectar();
+
         }
         catch (Exception e)
         {
-            System.out.println("No he trobat l'idioma");
+            System.out.println("Error find idioma name: " + e.getMessage());
         }
-        return null;
+      return  null;
     }
 }

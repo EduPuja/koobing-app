@@ -216,9 +216,10 @@ public class LlibreController implements Initializable
                 String nomGenere = genereComboBox.getValue();
                 GestioGenere gestioGenere = new GestioGenere();
                 Genere genere = gestioGenere.findGenereByName(nomGenere);
+                llibre.setGenere(genere);
 
-                //genere
-                //idoma
+
+                // final stuff llibre
                 llibre.setTitol(titolInput.getEditor().getText());
                 llibre.setVersio(Integer.parseInt(versionInput.getText()));
                 LocalDate data = dataPubliInput.getValue();
