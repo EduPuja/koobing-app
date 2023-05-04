@@ -154,41 +154,10 @@ public class LlibreController implements Initializable
             ComboBox<String> genereComboBox = new ComboBox<String>();
 
             //afegint la info dels autors
-            //addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
+            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
 
-            GestioAutor gestioAutor = new GestioAutor();
-            ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
 
-            for(int i=0;i<listAutors.size();i++)
-            {
-                autorComboBox.getItems().addAll(listAutors.get(i).getNomAutor());
-            }
 
-            //afegint la info dels editorials
-            GestioEditorial gestioEditorial = new GestioEditorial();
-            ArrayList<Editorial> listEditorials = gestioEditorial.consultarEditorials();
-            for (int i=0;i<listEditorials.size();i++)
-            {
-                editorialComboBox.getItems().addAll(listEditorials.get(i).getNomEditor());
-            }
-            //afegint la info dels idiomas
-
-            GestioIdioma gestioIdioma = new GestioIdioma();
-            ArrayList<Idioma> listIdiomas = gestioIdioma.consultarIdiomes();
-            for (int i=0;i<listIdiomas.size();i++)
-            {
-                idiomaComboBox.getItems().addAll(listIdiomas.get(i).getNomIdioma());
-            }
-
-            //afegint la info dels generes
-
-            GestioGenere gestioGenere = new GestioGenere();
-            ArrayList<Genere> listGeneres = gestioGenere.consultarGeneres();
-            for (int i=0;i<listGeneres.size();i++)
-            {
-                genereComboBox.getItems().addAll(listGeneres.get(i).getNomGenere());
-            }
-            
             //  Creacio dels Textes
             TextInputDialog titolInput = new TextInputDialog();
             //data
@@ -224,11 +193,30 @@ public class LlibreController implements Initializable
                 Llibre llibre = new Llibre();
 
                 llibre.setISBN(Long.parseLong(isbnInput.getText()));
-                String nomAutor =autorComboBox.getValue();
-
 
                 //autor
+                String nomAutor =autorComboBox.getValue();
+                GestioAutor gestioAutor = new GestioAutor();
+                Autor autor = gestioAutor.findAutorByNom(nomAutor);
+                llibre.setAutor(autor);
+
                 //editorial
+                String nomEditorial = editorialComboBox.getValue();
+                GestioEditorial gestioEditorial = new GestioEditorial();
+                Editorial editorial = gestioEditorial.findEditorialByNom(nomEditorial);
+                llibre.setEditor(editorial);
+
+                //idioma
+                String nomIdioma = idiomaComboBox.getValue();
+                GestioIdioma gestioIdioma = new GestioIdioma();
+                Idioma idioma = gestioIdioma.findIdiomaByNom(nomIdioma);
+                llibre.setIdioma(idioma);
+
+                //genere
+                String nomGenere = genereComboBox.getValue();
+                GestioGenere gestioGenere = new GestioGenere();
+                Genere genere = gestioGenere.findGenereByNom(nomGenere);
+
                 //genere
                 //idoma
                 llibre.setTitol(titolInput.getEditor().getText());
