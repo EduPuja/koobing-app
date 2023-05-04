@@ -95,7 +95,36 @@ public class HomeController implements Initializable
     {
         this.treballador = treballador;
         System.out.println("Welcome to Treballador: "+ treballador.getNom());
+
+        try
+        {
+            Blob blob = treballador.getAvatar();
+            if(blob != null)
+            {
+                byte[] byteArray = blob.getBytes(1, (int)blob.length());
+                ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
+                Image avatar = new Image(bis);
+                avatarWorker.setImage(avatar);
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("error Setting the avatar worker : "+e.getMessage());
+        }
+
     }
+
+    public Treballador getTreballador()
+    {
+            return this.treballador;
+    }
+
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)

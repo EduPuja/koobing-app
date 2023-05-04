@@ -114,6 +114,10 @@ public class LlibreController implements Initializable
     }
 
 
+    /**
+     * Metode per afegir un llibre a la base de dades
+     * @param event ActionEvent
+     */
     public void onAddBook(ActionEvent event)
     {
         try
@@ -245,6 +249,11 @@ public class LlibreController implements Initializable
 
 
     }
+
+    /**
+     * Metode per eliminar un llibre
+     * @param event
+     */
     public void deleteBook(ActionEvent event)
     {
         //gestio llibre per poder comprovar si el llibre esta en la base de dades
@@ -307,6 +316,11 @@ public class LlibreController implements Initializable
 
     }
 
+    /**
+     * Metode per modifcar un llibre
+     * @param event Action evnet
+     * @throws Exception exception
+     */
     public void onModifyLLibre(ActionEvent event) throws Exception
     {
         Llibre book = taulaLlibres.getSelectionModel().getSelectedItem();
