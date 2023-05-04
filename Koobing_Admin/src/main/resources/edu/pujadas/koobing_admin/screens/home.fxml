@@ -67,7 +67,7 @@
                      <children>
                         <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#switchToHome" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE" />
                         <Button fx:id="usuariBtn" mnemonicParsing="false" onAction="#switchToUsuari" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Usuari" textFill="WHITE" GridPane.rowIndex="1" />
-                        <Button fx:id="trebaladorBtn" mnemonicParsing="false" onAction="#switchToTreballador" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Button fx:id="treballadorBtn" mnemonicParsing="false" onAction="#switchToTreballador" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
                         <Button fx:id="llibreBtn" mnemonicParsing="false" onAction="#switchToLlibre" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
                         <Button fx:id="autorBtn" mnemonicParsing="false" onAction="#switchToAutor" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />
                         <Button fx:id="bibliotecaBtn" mnemonicParsing="false" onAction="#switchToBiblioteca" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Biblioteca" textFill="WHITE" GridPane.rowIndex="5" />
