@@ -16,12 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -37,15 +39,33 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable
 {
 
-
-
-
-    private App app;
-
+    // Stage and parent stuff//
     private Stage stage ;
     private Scene scene;
     private Parent root;
+
+    /***XML STUFF**/
+
+    // --- buttons navbar--//
+    public Button homeBtn;
+    public Button usuariBtn;
+    public Button treballadorBtn;
+    public Button llibreBtn;
+    public Button autorBtn;
+    public Button bibliotecaBtn;
+    public Button idiomaBtn;
+    public Button genereBtn;
+    public Button editioralBtn;
+    public Button reservaBtn;
+    public VBox container;
+
+    public ImageView logo;
+
+    // ---- Treballador stuff ---- //
+
     public ImageView avatarWorker;
+    private Treballador treballador;
+
 
     // ---- Usuari Stuff ----   //
     public Tab usuarisTab;
@@ -56,10 +76,8 @@ public class HomeController implements Initializable
     public TableColumn<Usuari,String> cognomColum;
     public TableColumn<Usuari, Date> dataNaixColum;
     public TableColumn<Usuari,String> emailColum;
-    //public TableColumn<Usuari,String> passwordColum;
-
-    //arraylist usuaris
-    private ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
+    
+    private  ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
 
 
 
@@ -88,8 +106,6 @@ public class HomeController implements Initializable
     public TableColumn <Llibre,Integer>versioColum;
     public TableColumn <Llibre, Date>dataPubliColum;
 
-    // ---- Treballador stuff ---- //
-    private Treballador treballador;
 
 
     public void setTreballador(Treballador treballador)
@@ -132,9 +148,9 @@ public class HomeController implements Initializable
     {
         System.out.println("Home Screen!");
 
-        infoUsuaris();
+       /* infoUsuaris();
         infoAutor();
-        infoLlibre();
+        infoLlibre();*/
     }
 
 
