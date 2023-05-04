@@ -154,6 +154,8 @@ public class LlibreController implements Initializable
             ComboBox<String> genereComboBox = new ComboBox<String>();
 
             //afegint la info dels autors
+            //addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
+
             GestioAutor gestioAutor = new GestioAutor();
             ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
 
@@ -186,7 +188,7 @@ public class LlibreController implements Initializable
             {
                 genereComboBox.getItems().addAll(listGeneres.get(i).getNomGenere());
             }
-
+            
             //  Creacio dels Textes
             TextInputDialog titolInput = new TextInputDialog();
             //data
@@ -239,8 +241,8 @@ public class LlibreController implements Initializable
                 taulaLlibres.refresh();
 
                 //actualizar la base de dades
-                //GestioLlibre gestioLlibre = new GestioLlibre()
-                //gestioLlibre.crearLlibre(llibre);
+                GestioLlibre gestioLlibre = new GestioLlibre();
+                gestioLlibre.crearLlibre(llibre);
 
                 switchToLlibre(event);
             }
@@ -374,6 +376,49 @@ public class LlibreController implements Initializable
     }
 
 
+    /**
+     * Metode per poder emplanar les dades dels comboboxes de forma més rapida
+     * @param autorComboBox Combobox de Autors
+     * @param editorialComboBox Combobox de Editorials
+     * @param idiomaComboBox ComboBox de Idiomas
+     * @param genereComboBox Combobox de Generes
+     */
+    private void addDataAllComboBox(ComboBox<String> autorComboBox, ComboBox<String> editorialComboBox, ComboBox<String> idiomaComboBox,ComboBox<String> genereComboBox)
+    {
+        //afegint la info dels autors
+        GestioAutor gestioAutor = new GestioAutor();
+        ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
+
+        for(int i=0;i<listAutors.size();i++)
+        {
+            autorComboBox.getItems().addAll(listAutors.get(i).getNomAutor());
+        }
+
+        //afegint la info dels editorials
+        GestioEditorial gestioEditorial = new GestioEditorial();
+        ArrayList<Editorial> listEditorials = gestioEditorial.consultarEditorials();
+        for (int i=0;i<listEditorials.size();i++)
+        {
+            editorialComboBox.getItems().addAll(listEditorials.get(i).getNomEditor());
+        }
+        //afegint la info dels idiomas
+
+        GestioIdioma gestioIdioma = new GestioIdioma();
+        ArrayList<Idioma> listIdiomas = gestioIdioma.consultarIdiomes();
+        for (int i=0;i<listIdiomas.size();i++)
+        {
+            idiomaComboBox.getItems().addAll(listIdiomas.get(i).getNomIdioma());
+        }
+
+        //afegint la info dels generes
+
+        GestioGenere gestioGenere = new GestioGenere();
+        ArrayList<Genere> listGeneres = gestioGenere.consultarGeneres();
+        for (int i=0;i<listGeneres.size();i++)
+        {
+            genereComboBox.getItems().addAll(listGeneres.get(i).getNomGenere());
+        }
+    }
 
 
 
