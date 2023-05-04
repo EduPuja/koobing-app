@@ -203,19 +203,19 @@ public class LlibreController implements Initializable
                 //editorial
                 String nomEditorial = editorialComboBox.getValue();
                 GestioEditorial gestioEditorial = new GestioEditorial();
-                Editorial editorial = gestioEditorial.findEditorialByNom(nomEditorial);
+                Editorial editorial = gestioEditorial.findEditorialByName(nomEditorial);
                 llibre.setEditor(editorial);
 
                 //idioma
                 String nomIdioma = idiomaComboBox.getValue();
                 GestioIdioma gestioIdioma = new GestioIdioma();
-                Idioma idioma = gestioIdioma.findIdiomaByNom(nomIdioma);
+                Idioma idioma = gestioIdioma.findIdiomaByName(nomIdioma);
                 llibre.setIdioma(idioma);
 
                 //genere
                 String nomGenere = genereComboBox.getValue();
                 GestioGenere gestioGenere = new GestioGenere();
-                Genere genere = gestioGenere.findGenereByNom(nomGenere);
+                Genere genere = gestioGenere.findGenereByName(nomGenere);
 
                 //genere
                 //idoma

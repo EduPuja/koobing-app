@@ -73,4 +73,26 @@ public class GestioIdioma
         }
         return null;
     }
+
+    public Idioma findIdiomaByName(String nomIdioma)
+    {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("SELECT * FROM idioma WHERE nom_idioma '=" + nomIdioma+"'");
+            if (rs.next())
+            {
+                Idioma idioma =new Idioma(rs.getInt("id_idioma"),rs.getString("nom_idioma"));
+                con.desconectar();
+                return idioma;
+            }
+            con.desconectar();
+        }
+        catch (Exception e)
+        {
+            System.out.println("No he trobat l'idioma");
+        }
+        return null;
+    }
 }

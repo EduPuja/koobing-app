@@ -70,4 +70,24 @@ public class GestioGenere
         }
         return null;
     }
+
+
+    public Genere findGenereByName(String name)
+    {
+        try {
+        ConnexioMYSQL con = new ConnexioMYSQL();
+        Statement stat = con.conectar();
+        ResultSet rs = stat.executeQuery("SELECT * FROM genere where descrip = '" + name + "'");
+        if (rs.next())
+            {   Genere genere =new Genere(rs.getInt("id_genere"),rs.getString("descrip"));
+                con.desconectar();
+                return genere;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Find genere by name error : " + e.getMessage());
+        }
+        return null;
+    }
 }
