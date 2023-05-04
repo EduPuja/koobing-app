@@ -76,7 +76,7 @@ public class HomeController implements Initializable
     public TableColumn<Usuari,String> cognomColum;
     public TableColumn<Usuari, Date> dataNaixColum;
     public TableColumn<Usuari,String> emailColum;
-    
+
     private  ArrayList<Usuari> listsUsuaris = new ArrayList<Usuari>();
 
 
