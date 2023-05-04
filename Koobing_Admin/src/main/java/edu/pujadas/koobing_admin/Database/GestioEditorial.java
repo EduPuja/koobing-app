@@ -76,4 +76,36 @@ public class GestioEditorial
         }
         return null;
     }
+
+
+    /**
+     * Metode que una editorial por su nombre.
+     * Necessari perque els combobox utilizen el nom
+     * @param name nom del editorial
+     * @return Objecte Editorial
+     */
+    public Editorial findEditorialByName(String name)
+    {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+
+            Statement stat = con.conectar();
+
+            ResultSet rs = stat.executeQuery("Select * from editorial where nom_editorial = '"+name+"'");
+            if(rs.next())
+            {
+                Editorial editor = new Editorial(rs.getInt("id_editorial"), rs.getString("nom_editorial"));
+                con.desconectar();
+                return editor;
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Editorial not found: " + e.getMessage());
+        }
+        return null;
+    }
 }
