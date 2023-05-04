@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.App;
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.Validation;
@@ -38,8 +39,8 @@ public class HomeController implements Initializable
 
 
 
-    // todo avatar del treballador quant inicia session
 
+    private App app;
 
     private Stage stage ;
     private Scene scene;
@@ -276,11 +277,13 @@ public class HomeController implements Initializable
      */
     public void switchToHome(ActionEvent event) throws Exception
     {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
+
+        app.switchHome(treballador);
+        /*root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
     /**
