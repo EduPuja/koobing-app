@@ -184,4 +184,34 @@ public class GestioAutor
         }
         return null;
     }
+
+
+    /**
+     * Metode que busca el autor per el nom.
+     * És necessari degut que els combox han de mostrar el nom del autor.
+     * @param nomAutor String nom del autor
+     * @return Objecte autor
+     */
+    public Autor findAutorByNom(String nomAutor)
+    {
+        try
+        {  ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery("SELECT * FROM `autor` WHERE nom_autor= '"+nomAutor+"'");
+            if(rs.next())
+            {
+                Autor autor = new Autor(rs.getInt("id_autor"),rs.getString("nom_autor"),rs.getDate("data_naix"));
+                con.desconectar();
+                return autor;
+            }
+
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("No se ha trobat cap autor :( " + e.getMessage());
+        }
+        return null;
+    }
 }
