@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin;
 
 import edu.pujadas.koobing_admin.Controllers.HomeController;
 import edu.pujadas.koobing_admin.Controllers.LoginController;
+import edu.pujadas.koobing_admin.Controllers.MainController;
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.application.Application;
@@ -57,8 +58,8 @@ public class App extends Application
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
         Parent root = loader.load();
 
-        HomeController homeController = loader.getController();
-        homeController.setTreballador(worker);
+       /* MainController homeController = loader.getController();
+        homeController.setTreballador(worker);*/
 
         Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
