@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin;
 
 import edu.pujadas.koobing_admin.Controllers.HomeController;
 import edu.pujadas.koobing_admin.Controllers.LoginController;
+import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,25 +29,16 @@ public class App extends Application
         //icono
         String icono ="/edu/pujadas/koobing_admin/img/libro.png";
         stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
-        //switchTreballador();
-       switchToLogin();
+
+        GestioTreballador gestio = new GestioTreballador();
+        Treballador worker = gestio.findWorkerByEmail("edu@mail.com");
+        switchHome(worker);
 
 
-      /*  FXMLLoader loader   = new FXMLLoader(App.class.getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root, 1000, 600);
-        stage.setTitle("Koobing App Admin!");
-        stage.setScene(scene);
-        //icono
-        String icono ="/edu/pujadas/koobing_admin/img/libro.png";
-        stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
-        //boostrap
-        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-        stage.setResizable(false);
 
-        stage.show();*/
+
     }
-    public void switchToLogin() throws IOException {
+   /* public void switchToLogin() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
         Parent root = loader.load();
 
@@ -56,7 +48,7 @@ public class App extends Application
         Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
         stage.show();
-    }
+    }*/
 
     public void switchHome(Treballador worker) throws IOException
     {
@@ -71,7 +63,7 @@ public class App extends Application
         stage.show();
     }
 
-    public void switchTreballador() throws IOException
+   /* public void switchTreballador() throws IOException
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/treballador.fxml"));
         Parent root = loader.load();
@@ -81,7 +73,7 @@ public class App extends Application
         Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
         stage.show();
-    }
+    }*/
     public static void main(String[] args)
     {
         launch();
