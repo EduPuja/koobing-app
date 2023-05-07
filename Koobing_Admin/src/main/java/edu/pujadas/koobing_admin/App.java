@@ -54,7 +54,7 @@ public class App extends Application
 
     public void switchHome(Treballador worker) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/homeBackUp.fxml"));
         Parent root = loader.load();
 
         HomeController homeController = loader.getController();

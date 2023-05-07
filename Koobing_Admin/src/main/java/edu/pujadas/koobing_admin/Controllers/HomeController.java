@@ -110,8 +110,12 @@ public class HomeController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("Home Screen!");
-
+        infoAutor();
+        infoUsuaris();
+        infoLlibre();
     }
+
+
 
 
 
