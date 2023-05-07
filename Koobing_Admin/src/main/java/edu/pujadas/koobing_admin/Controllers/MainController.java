@@ -11,6 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -76,13 +77,14 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Main Controller....");
-
+        loadLabelFXML();
     }
 
     public void loadLabelFXML() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/homeTabs.fxml"));
             tabPane = loader.load();
+            containerBox.getChildren().removeAll();
             containerBox.getChildren().add(tabPane);
         } catch (IOException e) {
             e.printStackTrace();
