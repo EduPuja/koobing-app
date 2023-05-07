@@ -30,6 +30,8 @@ public class App extends Application
         String icono ="/edu/pujadas/koobing_admin/img/libro.png";
         stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
 
+
+        // switch hom directly
         GestioTreballador gestio = new GestioTreballador();
         Treballador worker = gestio.findWorkerByEmail("edu@mail.com");
         switchHome(worker);

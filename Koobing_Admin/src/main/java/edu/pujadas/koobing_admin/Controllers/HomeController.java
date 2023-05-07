@@ -57,7 +57,7 @@ public class HomeController implements Initializable
     public Button genereBtn;
     public Button editioralBtn;
     public Button reservaBtn;
-    public VBox container;
+    public VBox container = new VBox();
 
     public ImageView logo;
 
@@ -110,27 +110,10 @@ public class HomeController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("Home Screen!");
-       // openHome();
-       /* infoUsuaris();
-        infoAutor();
-        infoLlibre();*/
+
     }
 
 
-    public void openHome()
-    {
-        try
-        {
-            Parent fxml = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/tabsHome.fxml"));
-            container.getChildren().removeAll();
-            container.getChildren().setAll(fxml);
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     public void setTreballador(Treballador treballador)
     {
@@ -162,13 +145,6 @@ public class HomeController implements Initializable
     {
             return this.treballador;
     }
-
-
-
-
-
-
-
 
 
 
