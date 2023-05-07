@@ -68,7 +68,7 @@ public class HomeController implements Initializable
 
 
     // ---- Usuari Stuff ----   //
-    public Tab usuarisTab;
+
     public TableView2<Usuari> taulaUsuaris;
     public TableColumn<Usuari,Integer> idUsuari;
     public TableColumn<Usuari,String> dniColum;
@@ -82,7 +82,7 @@ public class HomeController implements Initializable
 
 
     // ---- Autors Stuff ---- //
-    public Tab autorsTap;
+
 
     public TableView2<Autor> taulaAutors;
     public TableColumn<Autor,Integer> idAutorColum;
