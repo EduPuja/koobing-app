@@ -22,7 +22,7 @@ public class GestioAutor
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
 
-            String sql = "INSERT INTO autor (id_autor,nom_autor, data_naix) VALUES ("+autor.getIdAutor()+",'"+autor.getNomAutor()+"','"+autor.getDataNaixAutor()+"')";
+            String sql = "INSERT INTO autor (nom_autor, data_naix) VALUES (''"+autor.getNomAutor()+"','"+autor.getDataNaixAutor()+"')";
 
             if(stat.executeUpdate(sql)==1)
             {

@@ -51,7 +51,7 @@ public class AutorController implements Initializable
         try
         {
             GestioAutor gestioAutor = new GestioAutor();
-            listAutores = gestioAutor.consultar10Autors();
+            listAutores = gestioAutor.consultarAutors();
             //observablelist autors
             ObservableList<Autor> observableListAutors = FXCollections.observableArrayList(
                     listAutores
@@ -76,16 +76,7 @@ public class AutorController implements Initializable
 
         try
         {
-            TextFormatter<Integer> idAutorFormatt = new TextFormatter<>(change -> {
-                if (change.getControlNewText().matches("\\d*")) {
-                    return change;
-                } else {
-                    return null;
-                }
-            });
 
-            TextField idAutor = new TextField();
-            idAutor.setTextFormatter(idAutorFormatt);
 
             TextField nomAutor = new TextField();
             DatePicker dataNaix = new DatePicker();
@@ -94,7 +85,7 @@ public class AutorController implements Initializable
             gridPane.setHgap(10);
             gridPane.setVgap(10);
 
-            gridPane.addRow( 0,new Label("Digues el id de autor "),idAutor);
+            //gridPane.addRow( 0,new Label("Digues el id de autor "),idAutor);
             gridPane.addRow(1, new Label("Digues el nom de autor "),nomAutor);
             gridPane.addRow(2,new Label("Digues la data de naixament del autor") ,dataNaix);
 
@@ -109,7 +100,7 @@ public class AutorController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
                 Autor autor = new Autor();
-                autor.setIdAutor(Integer.parseInt(idAutor.getText()));
+
                 autor.setNomAutor(nomAutor.getText());
                 LocalDate data = dataNaix.getValue();
                 Date d = Date.valueOf(data);
