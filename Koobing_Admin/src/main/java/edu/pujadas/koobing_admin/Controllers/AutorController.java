@@ -4,6 +4,8 @@ import edu.pujadas.koobing_admin.Database.GestioAutor;
 import edu.pujadas.koobing_admin.Database.GestioLlibre;
 import edu.pujadas.koobing_admin.Models.Autor;
 import edu.pujadas.koobing_admin.Models.Llibre;
+import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,12 +16,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,6 +39,7 @@ public class AutorController implements Initializable
     public TableColumn<Autor,Integer> idAutor;
     public TableColumn<Autor,String> nomAutor;
     public TableColumn<Autor, Date> dataNaix;
+    public ImageView avatarWorker;
 
     ArrayList<Autor> listAutores = new ArrayList<>();
     Parent root;
@@ -43,7 +50,47 @@ public class AutorController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Autor Screen! :D");
+        loadWorkerInfo();
         loadAutorData();
+    }
+    /**
+     * Metode que carrega la info del treballador
+     */
+    private void loadWorkerInfo()
+    {
+        try {
+            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+            if(worker != null)
+            {
+                Blob blob = worker.getAvatar();
+                if (blob != null) {
+                    byte[] byteArray = blob.getBytes(1, (int) blob.length());
+                    ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
+                    Image avatar = new Image(bis);
+                    avatarWorker.setImage(avatar);
+                }
+
+
+
+                if(worker.isAdmin() == 1)
+                {
+                    System.out.println("admin ");
+                }
+                else
+                {
+                    System.out.println("worker");
+                }
+
+
+
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error loading worker info: " + e.getMessage());
+        }
     }
 
     public void loadAutorData()
