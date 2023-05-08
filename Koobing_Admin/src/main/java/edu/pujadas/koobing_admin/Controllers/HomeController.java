@@ -110,18 +110,38 @@ public class HomeController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        System.out.println("Home Screen!");
+
        Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
        if(worker != null)
        {
-           System.out.println("Success");
+           System.out.println("Home Screen!");
+
+           try
+           {
+               Blob blob = treballador.getAvatar();
+               if(blob != null)
+               {
+                   byte[] byteArray = blob.getBytes(1, (int)blob.length());
+                   ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
+                   Image avatar = new Image(bis);
+                   avatarWorker.setImage(avatar);
+               }
+
+
+           }
+           catch (Exception e)
+           {
+               System.out.println("error Setting the avatar worker : "+e.getMessage());
+           }
+
            infoAutor();
            infoUsuaris();
            infoLlibre();
        }
        else
        {
-           System.out.println("MAL");
+           System.out.println("Worker is null");
        }
 
     }
@@ -130,31 +150,6 @@ public class HomeController implements Initializable
 
 
 
-    public void setTreballador(Treballador treballador)
-    {
-        this.treballador = treballador;
-        System.out.println("Welcome to Treballador: "+ treballador.getNom());
-
-        try
-        {
-            Blob blob = treballador.getAvatar();
-            if(blob != null)
-            {
-                byte[] byteArray = blob.getBytes(1, (int)blob.length());
-                ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
-
-                Image avatar = new Image(bis);
-                avatarWorker.setImage(avatar);
-            }
-
-
-        }
-        catch (Exception e)
-        {
-            System.out.println("error Setting the avatar worker : "+e.getMessage());
-        }
-
-    }
 
     public Treballador getTreballador()
     {

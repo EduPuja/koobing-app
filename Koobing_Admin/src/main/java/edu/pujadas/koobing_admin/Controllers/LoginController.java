@@ -80,7 +80,7 @@ public class LoginController {
              }
              else {
                  showAlert("Bienvenido Treballador: " + treballador.getNom());
-                 app.switchHome(treballador);
+                 switchToHome(event);
 
                  return;
              }

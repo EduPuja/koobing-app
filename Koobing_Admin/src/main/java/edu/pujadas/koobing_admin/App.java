@@ -7,7 +7,9 @@ import edu.pujadas.koobing_admin.Controllers.TreballadorController;
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -32,8 +34,8 @@ public class App extends Application
         String icono ="/edu/pujadas/koobing_admin/img/libro.png";
         stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
 
-
         switchToLogin();
+       // switchToLogin();
         // switch hom directly
        /*GestioTreballador gestio = new GestioTreballador();
         Treballador worker = gestio.findWorkerByEmail("edu@mail.com");
@@ -55,31 +57,8 @@ public class App extends Application
         stage.show();
     }
 
-    public void switchHome(Treballador worker) throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
-        Parent root = loader.load();
 
-       HomeController homeController = loader.getController();
-        homeController.setTreballador(worker);
 
-        Scene scene = new Scene(root, 1000, 600);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void swtichToTreballador(Treballador worker) throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/treballador.fxml"));
-        Parent root = loader.load();
-
-        TreballadorController treballadorController = loader.getController();
-        treballadorController.setTreballador(worker);
-
-        Scene scene = new Scene(root, 1000, 600);
-        stage.setScene(scene);
-        stage.show();
-    }
 
    /* public void switchTreballador() throws IOException
     {
