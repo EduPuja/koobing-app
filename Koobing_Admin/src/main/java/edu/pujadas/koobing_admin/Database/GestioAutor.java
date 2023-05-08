@@ -214,4 +214,26 @@ public class GestioAutor
         }
         return null;
     }
+
+    public boolean hayReservasAutor(int idAutor)
+    {
+        boolean existe = false;
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql = "SELECT COUNT(*) AS count FROM autor WHERE id_autor="+idAutor;
+            ResultSet result = stat.executeQuery(sql);
+            if(result.next()) {
+                int count = result.getInt("count");
+                if(count > 0) {
+                    existe = true;
+                }
+            }
+            con.desconectar();
+        } catch(Exception e) {
+            System.out.println("Error al comprobar si el autor existe: " + e.getMessage());
+        }
+        return existe;
+
+    }
 }
