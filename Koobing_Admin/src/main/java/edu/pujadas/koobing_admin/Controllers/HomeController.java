@@ -65,7 +65,7 @@ public class HomeController implements Initializable
     // ---- Treballador stuff ---- //
 
     public ImageView avatarWorker;
-    private Treballador treballador;
+
 
 
     // ---- Usuari Stuff ----   //
@@ -110,53 +110,43 @@ public class HomeController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        System.out.println("Home Screen!");
 
-       Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
-       if(worker != null)
-       {
-           System.out.println("Home Screen!");
-
-           try
-           {
-               Blob blob = treballador.getAvatar();
-               if(blob != null)
-               {
-                   byte[] byteArray = blob.getBytes(1, (int)blob.length());
-                   ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
-
-                   Image avatar = new Image(bis);
-                   avatarWorker.setImage(avatar);
-               }
+        loadWorkerInfo();
+        infoAutor();
+        infoUsuaris();
+        infoLlibre();
 
 
-           }
-           catch (Exception e)
-           {
-               System.out.println("error Setting the avatar worker : "+e.getMessage());
-           }
-
-           infoAutor();
-           infoUsuaris();
-           infoLlibre();
-       }
-       else
-       {
-           System.out.println("Worker is null");
-       }
 
     }
 
 
-
-
-
-
-    public Treballador getTreballador()
+    /**
+     * Metode que carrega la info del treballador
+     */
+    private void loadWorkerInfo()
     {
-            return this.treballador;
+            try {
+                Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+                if(worker != null)
+                {
+                    Blob blob = worker.getAvatar();
+                    if (blob != null) {
+                        byte[] byteArray = blob.getBytes(1, (int) blob.length());
+                        ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
+                        Image avatar = new Image(bis);
+                        avatarWorker.setImage(avatar);
+                    }
+
+                }
+
+            }
+            catch (Exception e) {
+                System.out.println("Error loading worker info: " + e.getMessage());
+            }
     }
-
-
 
 
     /**
