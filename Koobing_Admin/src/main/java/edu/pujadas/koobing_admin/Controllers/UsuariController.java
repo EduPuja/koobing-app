@@ -4,6 +4,7 @@ import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Models.Usuari;
+import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,11 +16,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;;
 //import com.sun.javafx.scene.traversal.Traversal;
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,9 +34,26 @@ import java.util.ResourceBundle;
 public class UsuariController implements Initializable
 {
 
+    //buttons del mig per elimianar modificar i afegir un usuari
     public Button addBtn;
     public Button modifyBtn;
     public Button deleteBtn;
+
+
+
+    public ImageView avatarWorker;
+
+    // navabar lateral
+    public Button homeBtn;
+    public Button usuariBtn;
+    public Button trebaladorBtn;
+    public Button llibreBtn;
+    public Button autorBtn;
+    public Button bibliotecaBtn;
+    public Button idiomaBtn;
+    public Button genereBtn;
+    public Button editioralBtn;
+    public Button reservaBtn;
     Parent root ;
     Stage stage;
     Scene scene;
@@ -57,7 +79,47 @@ public class UsuariController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("User Screen!");
+        loadWorkerInfo();
         loadInfoUser();
+    }
+
+    /**
+     * Metode que carrega la info del treballador
+     */
+    private void loadWorkerInfo()
+    {
+        try {
+            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+            if(worker != null)
+            {
+                Blob blob = worker.getAvatar();
+                if (blob != null) {
+                    byte[] byteArray = blob.getBytes(1, (int) blob.length());
+                    ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
+                    Image avatar = new Image(bis);
+                    avatarWorker.setImage(avatar);
+                }
+
+
+
+                if(worker.isAdmin() == 1)
+                {
+                    System.out.println("admin ");
+                }
+                else
+                {
+                    System.out.println("worker");
+                }
+
+
+
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error loading worker info: " + e.getMessage());
+        }
     }
 
 
