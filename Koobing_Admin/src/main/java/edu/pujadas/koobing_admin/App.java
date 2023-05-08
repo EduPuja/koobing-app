@@ -41,7 +41,7 @@ public class App extends Application
 
 
     }
-   /* public void switchToLogin() throws IOException {
+   public void switchToLogin() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
         Parent root = loader.load();
 
@@ -51,7 +51,7 @@ public class App extends Application
         Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
         stage.show();
-    }*/
+    }
 
     public void switchHome(Treballador worker) throws IOException
     {

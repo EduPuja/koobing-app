@@ -121,6 +121,10 @@ public class AutorController implements Initializable
     }
 
 
+    /**
+     * Metode per elimianr un autor de la base de dades y de la taula
+     * @param event
+     */
     public void onDeleteAutor(ActionEvent event)
     {
         GestioAutor gestioAutor = new GestioAutor();
