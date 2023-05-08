@@ -58,8 +58,8 @@ public class App extends Application
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
         Parent root = loader.load();
 
-       /* MainController homeController = loader.getController();
-        homeController.setTreballador(worker);*/
+       HomeController homeController = loader.getController();
+        homeController.setTreballador(worker);
 
         Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
