@@ -12,15 +12,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
+import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -66,6 +67,65 @@ public class AutorController implements Initializable
         catch (Exception e)
         {
             System.out.println("Failed to infoAutors ..." +e.getMessage());
+        }
+    }
+
+    public void onAddAutor(ActionEvent event)
+    {
+
+
+        try
+        {
+            TextFormatter<Integer> idAutorFormatt = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+            });
+
+            TextField idAutor = new TextField();
+            idAutor.setTextFormatter(idAutorFormatt);
+
+            TextField nomAutor = new TextField();
+            DatePicker dataNaix = new DatePicker();
+
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+            gridPane.addRow( 0,new Label("Digues el id de autor "),idAutor);
+            gridPane.addRow(1, new Label("Digues el nom de autor "),nomAutor);
+            gridPane.addRow(2,new Label("Digues la data de naixament del autor") ,dataNaix);
+
+            //mostra alerta
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Afegir nou autor");
+            alert.setHeaderText("Introdueix les dades del autor");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+            Optional<ButtonType> resultat = alert.showAndWait();
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                Autor autor = new Autor();
+                autor.setIdAutor(Integer.parseInt(idAutor.getText()));
+                autor.setNomAutor(nomAutor.getText());
+                LocalDate data = dataNaix.getValue();
+                Date d = Date.valueOf(data);
+                autor.setDataNaixAutor(d);
+
+                //actualizar la taula
+                taulaAutors.refresh();;
+                GestioAutor gestioAutor = new GestioAutor();
+                gestioAutor.crearAutor(autor);
+                switchToAutor(event);
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error al añadir autor: " +e.getMessage());
         }
     }
 
