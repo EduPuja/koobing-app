@@ -221,7 +221,7 @@ public class GestioAutor
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql = "SELECT COUNT(*) AS count FROM autor WHERE id_autor="+idAutor;
+            String sql = "SELECT COUNT(*) AS count FROM llibre WHERE id_autor="+idAutor;
             ResultSet result = stat.executeQuery(sql);
             if(result.next()) {
                 int count = result.getInt("count");

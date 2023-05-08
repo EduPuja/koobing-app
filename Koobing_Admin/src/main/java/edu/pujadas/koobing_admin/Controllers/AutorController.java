@@ -97,7 +97,7 @@ public class AutorController implements Initializable
                 {
                     wrong.setTitle("Error");
                     wrong.setHeaderText(null);
-                    wrong.setContentText("Aquest Autor no es pot eliminar, esta en una reserva activa");
+                    wrong.setContentText("Aquest autor no es pot eliminar perque te llibres ");
                     wrong.show();
                 }
                 else
