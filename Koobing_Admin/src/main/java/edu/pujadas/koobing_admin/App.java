@@ -35,29 +35,16 @@ public class App extends Application
         stage.getIcons().add(new Image(App.class.getResource(icono).toExternalForm())); // Agrega el icono
 
         switchToLogin();
-       // switchToLogin();
-        // switch hom directly
-       /*GestioTreballador gestio = new GestioTreballador();
-        Treballador worker = gestio.findWorkerByEmail("edu@mail.com");
-       switchHome(worker);*/
-
-
-
 
     }
-   public void switchToLogin() throws IOException {
+   public void switchToLogin() throws IOException
+   {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
         Parent root = loader.load();
-
-        LoginController loginController = loader.getController();
-        loginController.setMainActivity(this);
-
         Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
         stage.show();
     }
-
-
 
 
    /* public void switchTreballador() throws IOException

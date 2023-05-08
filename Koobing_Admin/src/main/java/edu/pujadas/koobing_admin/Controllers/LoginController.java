@@ -16,9 +16,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class LoginController {
 
-    private App app;
+
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -28,9 +30,6 @@ public class LoginController {
 
 
 
-    public void setMainActivity(App app) {
-        this.app = app;
-    }
     public void login(ActionEvent event) 
     {
         System.out.println("Login");
@@ -116,7 +115,7 @@ public class LoginController {
     {
 
 
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
