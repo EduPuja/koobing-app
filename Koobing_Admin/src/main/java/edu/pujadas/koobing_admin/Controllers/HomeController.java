@@ -3,6 +3,7 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.App;
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
+import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
@@ -110,10 +111,19 @@ public class HomeController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("Home Screen!");
-        setTreballador(treballador);
-        infoAutor();
-        infoUsuaris();
-        infoLlibre();
+       Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+       if(worker != null)
+       {
+           System.out.println("Success");
+           infoAutor();
+           infoUsuaris();
+           infoLlibre();
+       }
+       else
+       {
+           System.out.println("MAL");
+       }
+
     }
 
 

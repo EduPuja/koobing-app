@@ -4,6 +4,7 @@ import edu.pujadas.koobing_admin.App;
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Utilities.PasswordUtilites;
+import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -69,8 +70,11 @@ public class LoginController {
              if(treballador.isAdmin() ==1)
              {
                  showAlert("Bienvenido Administrador: " + treballador.getNom());
+                 TrabajadorSingleton.getInstance().setTrabajador(treballador);
+                 switchToHome(event);
+
                  //crido a la aplicacio per canviar de pantalla
-                 app.switchHome(treballador);
+
 
                  return;
              }
@@ -105,6 +109,18 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+
+    public void switchToHome(ActionEvent event) throws Exception
+    {
+
+
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
