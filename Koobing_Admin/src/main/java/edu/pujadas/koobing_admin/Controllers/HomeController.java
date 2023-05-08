@@ -140,6 +140,19 @@ public class HomeController implements Initializable
                         avatarWorker.setImage(avatar);
                     }
 
+
+
+                    if(worker.isAdmin() == 1)
+                    {
+                        System.out.println("admin ");
+                    }
+                    else
+                    {
+                        System.out.println("worker");
+                    }
+
+
+
                 }
 
             }
