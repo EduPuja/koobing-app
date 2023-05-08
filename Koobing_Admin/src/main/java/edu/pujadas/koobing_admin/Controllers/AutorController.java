@@ -1,7 +1,9 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioAutor;
+import edu.pujadas.koobing_admin.Database.GestioLlibre;
 import edu.pujadas.koobing_admin.Models.Autor;
+import edu.pujadas.koobing_admin.Models.Llibre;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -18,6 +22,7 @@ import org.controlsfx.control.tableview2.TableView2;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AutorController implements Initializable
@@ -67,8 +72,63 @@ public class AutorController implements Initializable
 
     public void onDeleteAutor(ActionEvent event)
     {
+        GestioAutor gestioAutor = new GestioAutor();
 
-        // todo important comprovar a vereu si el autor esta vinculat amb la taula llibres
+        //confirmacion
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        //error
+        Alert wrong = new Alert(Alert.AlertType.ERROR);
+        // mostrar el una alerta de tipus confirmacio per poder eliminar el llibre
+        alerta.setTitle("Confirmación");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Estàs segur de que vols continuar?");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+
+        if(resultado.isPresent() && resultado.get() == ButtonType.OK)
+        {
+            Autor autor = taulaAutors.getSelectionModel().getSelectedItem();
+
+
+            if(autor !=null)
+            {
+                boolean reservas = gestioAutor.hayReservasAutor(autor.getIdAutor());
+                if(reservas)
+                {
+                    wrong.setTitle("Error");
+                    wrong.setHeaderText(null);
+                    wrong.setContentText("Aquest Autor no es pot eliminar, esta en una reserva activa");
+                    wrong.show();
+                }
+                else
+                {
+                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    sucessAlert.setTitle("Success!");
+                    sucessAlert.setHeaderText("Has eliminat llibre!");
+                    sucessAlert.setContentText("Llibre s'ha eliminat correctament");
+                    sucessAlert.show();
+
+
+                    //delte to memory
+                    ObservableList<Autor> itmesAutors = taulaAutors.getItems();
+                    itmesAutors.remove(autor);
+
+                    // delete bd
+                    try
+                    {
+                        //eliminar llibre de la base de dades and refrescar la taula
+                        gestioAutor.eliminarAutor(autor.getIdAutor());
+                        taulaAutors.refresh();
+
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error deleting llibre : " + e.getMessage());
+                    }
+                }
+            }
+        }
+
 
     }
 
