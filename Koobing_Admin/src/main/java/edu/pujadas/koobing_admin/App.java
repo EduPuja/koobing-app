@@ -1,22 +1,13 @@
 package edu.pujadas.koobing_admin;
 
-import edu.pujadas.koobing_admin.Controllers.HomeController;
-import edu.pujadas.koobing_admin.Controllers.LoginController;
-import edu.pujadas.koobing_admin.Controllers.MainController;
-import edu.pujadas.koobing_admin.Controllers.TreballadorController;
-import edu.pujadas.koobing_admin.Database.GestioTreballador;
-import edu.pujadas.koobing_admin.Models.Treballador;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
+
 import java.io.IOException;
-import java.util.Objects;
 
 
 public class App extends Application
