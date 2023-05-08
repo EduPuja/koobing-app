@@ -49,10 +49,14 @@ public class TreballadorController implements Initializable
 
    private ArrayList<Treballador> listTreballador = new ArrayList<Treballador>();
 
+   private Treballador worker;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("Treballador Screen");
+
+
         loagWorkerData();
     }
 
@@ -492,5 +496,11 @@ public class TreballadorController implements Initializable
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void setTreballador(Treballador worker) {
+        this.worker = worker;
+        System.out.println("Welcome : " + worker.getNom());
+
     }
 }
