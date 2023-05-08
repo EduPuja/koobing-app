@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import edu.pujadas.koobing_admin.Utilities.Validation;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -14,11 +15,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,6 +33,7 @@ import java.util.ResourceBundle;
 public class TreballadorController implements Initializable
 {
 
+    public ImageView avatarWorker;
     private Scene scene;
     private Parent root;
     private Stage stage;
@@ -55,9 +61,47 @@ public class TreballadorController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         System.out.println("Treballador Screen");
-
+        loadWorkerInfo();   // metode per carregar les dades del treballador que utlizar la app
 
         loagWorkerData();
+    }
+    /**
+     * Metode que carrega la info del treballador
+     */
+    private void loadWorkerInfo()
+    {
+        try {
+            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+            if(worker != null)
+            {
+                Blob blob = worker.getAvatar();
+                if (blob != null) {
+                    byte[] byteArray = blob.getBytes(1, (int) blob.length());
+                    ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
+                    Image avatar = new Image(bis);
+                    avatarWorker.setImage(avatar);
+                }
+
+
+
+                if(worker.isAdmin() == 1)
+                {
+                    System.out.println("admin ");
+                }
+                else
+                {
+                    System.out.println("worker");
+                }
+
+
+
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error loading worker info: " + e.getMessage());
+        }
     }
 
 
