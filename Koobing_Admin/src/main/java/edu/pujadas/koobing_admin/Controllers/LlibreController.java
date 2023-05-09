@@ -5,6 +5,7 @@ import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.AutorStringConverter;
 import edu.pujadas.koobing_admin.Utilities.EditorialStringConverter;
+import edu.pujadas.koobing_admin.Utilities.IdiomaStringConverter;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -399,9 +400,17 @@ public class LlibreController implements Initializable
 
             //idioma
             ComboBox<Idioma> idioma = new ComboBox<Idioma>();
+            IdiomaStringConverter idoiomaConverter = new IdiomaStringConverter();
+            GestioIdioma gestioIdioma = new GestioIdioma();
+            ArrayList<Idioma> listIdiomes = gestioIdioma.consultarIdiomes();
+            idioma.getItems().addAll(listIdiomes);
+            idioma.setConverter(idoiomaConverter);  //convertidor de idioma
 
             //genere
-            ComboBox<String> genere = new ComboBox<String>();
+            ComboBox<Genere> genere = new ComboBox<Genere>();
+
+
+
             TextField version = new TextField(Integer.toString(book.getVersio()));
 
             DatePicker dataPublicacio = new DatePicker(book.getDataPubli().toLocalDate());
