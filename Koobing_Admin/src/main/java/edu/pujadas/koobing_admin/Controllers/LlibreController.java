@@ -376,40 +376,16 @@ public class LlibreController implements Initializable
 
             //autor
             ComboBox<Autor> autors = new ComboBox<Autor>();
-
-            AutorStringConverter converterAutor = new AutorStringConverter();
-            GestioAutor gestioAutor = new GestioAutor();
-            ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
-
-            autors.getItems().addAll(listAutors);
-            autors.setConverter(converterAutor);
-
             // editorial
-
             ComboBox<Editorial> editorials = new ComboBox<Editorial>();
-            EditorialStringConverter converterEditorial = new EditorialStringConverter();
-            GestioEditorial gestioEditorial = new GestioEditorial();
-            ArrayList<Editorial> listEditorials = gestioEditorial.consultarEditorials();
-            editorials.getItems().addAll(listEditorials);
-            editorials.setConverter(converterEditorial);
-
-
-
             //idioma
             ComboBox<Idioma> idioma = new ComboBox<Idioma>();
-            IdiomaStringConverter idoiomaConverter = new IdiomaStringConverter();
-            GestioIdioma gestioIdioma = new GestioIdioma();
-            ArrayList<Idioma> listIdiomes = gestioIdioma.consultarIdiomes();
-            idioma.getItems().addAll(listIdiomes);
-            idioma.setConverter(idoiomaConverter);  //convertidor de idioma
 
             //genere
             ComboBox<Genere> genere = new ComboBox<Genere>();
-            GenereStringConverter genereConverter = new GenereStringConverter();
-            GestioGenere  gestioGenre =  new GestioGenere();
-            ArrayList<Genere> listGeneres = gestioGenre.consultarGeneres();
-            genere.getItems().addAll(listGeneres);
-            genere.setConverter(genereConverter);
+
+
+            addDataAllComboBox(autors,editorials,idioma,genere);
 
 
             TextField version = new TextField(Integer.toString(book.getVersio()));
@@ -447,13 +423,17 @@ public class LlibreController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
                //Actualizar les dades del llibre selecionat
 
+
+                //converters
+                AutorStringConverter converterAutor = new AutorStringConverter();
+
                 //titol
                 book.setTitol(titol.getText());
 
                 //autor
                 int id = converterAutor.getIdAutor(autors.getValue());
-                Autor a =gestioAutor.findAutor(id);
-                book.setAutor(a);
+                System.out.println(id);
+
 
 
                 /*
@@ -501,44 +481,42 @@ public class LlibreController implements Initializable
      * @param idiomaComboBox ComboBox de Idiomas
      * @param genereComboBox Combobox de Generes
      */
-    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<String> editorialComboBox, ComboBox<String> idiomaComboBox,ComboBox<String> genereComboBox)
+    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox,ComboBox<Genere> genereComboBox)
     {
-        //afegint la info dels autors
+        AutorStringConverter converterAutor = new AutorStringConverter();
         GestioAutor gestioAutor = new GestioAutor();
         ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
 
-        AutorStringConverter autorConverter = new AutorStringConverter();
+        autorComboBox.getItems().addAll(listAutors);
+        autorComboBox.setConverter(converterAutor);
 
-        for(int i=0;i<listAutors.size();i++)
-        {
-            autorComboBox.getItems().addAll(listAutors.get(i));
-        }
+        // editorial
 
 
-        //afegint la info dels editorials
+        EditorialStringConverter converterEditorial = new EditorialStringConverter();
         GestioEditorial gestioEditorial = new GestioEditorial();
         ArrayList<Editorial> listEditorials = gestioEditorial.consultarEditorials();
-        for (int i=0;i<listEditorials.size();i++)
-        {
-            editorialComboBox.getItems().addAll(listEditorials.get(i).getNomEditor());
-        }
-        //afegint la info dels idiomas
+        editorialComboBox.getItems().addAll(listEditorials);
+        editorialComboBox.setConverter(converterEditorial);
 
+
+
+        //idioma
+
+        IdiomaStringConverter idoiomaConverter = new IdiomaStringConverter();
         GestioIdioma gestioIdioma = new GestioIdioma();
-        ArrayList<Idioma> listIdiomas = gestioIdioma.consultarIdiomes();
-        for (int i=0;i<listIdiomas.size();i++)
-        {
-            idiomaComboBox.getItems().addAll(listIdiomas.get(i).getNomIdioma());
-        }
+        ArrayList<Idioma> listIdiomes = gestioIdioma.consultarIdiomes();
+        idiomaComboBox.getItems().addAll(listIdiomes);
+        idiomaComboBox.setConverter(idoiomaConverter);  //convertidor de idioma
 
-        //afegint la info dels generes
+        //genere
 
-        GestioGenere gestioGenere = new GestioGenere();
-        ArrayList<Genere> listGeneres = gestioGenere.consultarGeneres();
-        for (int i=0;i<listGeneres.size();i++)
-        {
-            genereComboBox.getItems().addAll(listGeneres.get(i).getNomGenere());
-        }
+        GenereStringConverter genereConverter = new GenereStringConverter();
+        GestioGenere  gestioGenre =  new GestioGenere();
+        ArrayList<Genere> listGeneres = gestioGenre.consultarGeneres();
+        genereComboBox.getItems().addAll(listGeneres);
+        genereComboBox.setConverter(genereConverter);
+
     }
 
 
