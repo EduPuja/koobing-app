@@ -338,8 +338,11 @@ public class TreballadorController implements Initializable
     }
 
 
-
-
+    /**
+     *
+     *  Metode per modifcar el treballador
+     * @param event
+     */
     public void onEditarTreballador(ActionEvent event)
     {
         Treballador treballador = taulaTreballadors.getSelectionModel().getSelectedItem();
@@ -348,6 +351,12 @@ public class TreballadorController implements Initializable
             // Creacio dels Textes
             TextInputDialog nomDialeg = new TextInputDialog(treballador.getNom());
             TextInputDialog cognomDialeg = new TextInputDialog(treballador.getCognom());
+            CheckBox isAdmin = new CheckBox();
+            if(treballador.isAdmin() == 1 )
+            {
+                isAdmin.setSelected(true);
+            }
+            else isAdmin.setSelected(false);
 
             //poner la contrassenya tipo passwordfield
             PasswordField passwordField = new PasswordField();
@@ -365,6 +374,7 @@ public class TreballadorController implements Initializable
             gridPane.addRow(0,new Label("Nou Nom: ") ,nomDialeg.getEditor());
             gridPane.addRow(1, new Label("Nou Cognom:"), cognomDialeg.getEditor());
             gridPane.addRow(2, new Label("Nova Contrassenya"),passwordField);
+            gridPane.addRow(3, new Label("Administrador ? "), isAdmin);
 
 
             // Mostrar los dos diálogos en la misma ventana
@@ -386,7 +396,11 @@ public class TreballadorController implements Initializable
                 treballador.setNom(nomDialeg.getEditor().getText());
                 treballador.setCognom(cognomDialeg.getEditor().getText());
                 treballador.setPassword(passwordDialeg.getEditor().getText());
-
+                if(isAdmin.isSelected())
+                {
+                    treballador.setAdmin(true);
+                }
+                else  treballador.setAdmin(false);
                 // Actualizar la tabla
                 taulaTreballadors.refresh();
 
