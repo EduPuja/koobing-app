@@ -1,18 +1,25 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.util.ResourceBundle;
 
 public class BibliotecaController implements Initializable
 {
+    public ImageView avatarWorker;
     Parent root;
     Scene scene;
     Stage stage;
@@ -23,6 +30,55 @@ public class BibliotecaController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    /**
+     * Metode que carrega la info del treballador
+     */
+    private void loadWorkerInfo()
+    {
+        try {
+            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+            if(worker != null)
+            {
+                Blob blob = worker.getAvatar();
+                if (blob != null) {
+                    byte[] byteArray = blob.getBytes(1, (int) blob.length());
+                    ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
+                    Image avatar = new Image(bis);
+                    avatarWorker.setImage(avatar);
+                }
+
+                if(worker.isAdmin() == 1)
+                {
+                    System.out.println("admin ");
+                }
+                else
+                {
+                    System.out.println("worker");
+                }
+
+
+
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error loading worker info: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     // CANVIS DE PANTALLA
 
