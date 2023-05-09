@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -28,7 +29,8 @@ public class BibliotecaController implements Initializable
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        System.out.println("Bilioteca Screen !");
+        loadWorkerInfo();
     }
 
     /**
@@ -65,6 +67,18 @@ public class BibliotecaController implements Initializable
         }
         catch (Exception e) {
             System.out.println("Error loading worker info: " + e.getMessage());
+        }
+    }
+
+    public void onAddBiblioteca(ActionEvent event)
+    {
+        try
+        {
+            TextField nomBilio = new TextField();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error adding a biblio :" + e.getMessage());
         }
     }
 
