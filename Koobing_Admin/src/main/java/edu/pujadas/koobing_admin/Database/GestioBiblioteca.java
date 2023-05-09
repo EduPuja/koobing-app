@@ -98,7 +98,7 @@ public class GestioBiblioteca {
                 Statement stat = con.conectar();;
                 String sql = "SELECT * FROM biblioteca";
                 ResultSet rs = stat.executeQuery(sql);
-                if(rs.next())
+                while (rs.next())
                 {
                     Biblioteca biblioteca = new Biblioteca();
                     biblioteca.setIdBiblioteca(rs.getInt("id_biblioteca"));
