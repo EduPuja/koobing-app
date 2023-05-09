@@ -393,6 +393,7 @@ public class LlibreController implements Initializable
             gridPane.addRow(3, new Label("Idioma: "), idioma);
             gridPane.addRow(4, new Label("Genere: "), genere);
             gridPane.addRow(5, new Label("Versio: "), version);
+            gridPane.addRow(6, new Label ("Data Publicicación: "), dataPublicacio);
 
 
             // Mostrar los dos diálogos en la misma ventana
