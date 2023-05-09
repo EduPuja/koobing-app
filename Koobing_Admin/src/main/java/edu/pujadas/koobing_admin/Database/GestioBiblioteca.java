@@ -20,8 +20,8 @@ public class GestioBiblioteca {
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();;
-            String sql = "INSERT INTO biblioteca (id_biblioteca,id_poblacio,nom_biblio,latitud,longitud) VALUES"+
-                    biblioteca.getIdBiblioteca()+","+biblioteca.getPoblacio().getIdPoblacio()+",'"+biblioteca.getNomBiblioteca()+"','"+biblioteca.getLatitud()+"','"+biblioteca.getLatitud()+"')";
+            String sql = "INSERT INTO biblioteca (id_poblacio,nom_biblio,latitud,longitud) VALUES ("+biblioteca.getPoblacio().getIdPoblacio()+",'"+
+                    biblioteca.getNomBiblioteca()+"','"+biblioteca.getLatitud()+"','"+biblioteca.getLatitud()+"')";
 
             if(stat.executeUpdate(sql) == 1)
             {

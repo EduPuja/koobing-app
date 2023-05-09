@@ -174,7 +174,7 @@ public class GestioPoblacio {
         }
         catch (Exception e)
         {
-            System.out.println("Find poblacio Error : " + e.getMessage());
+            System.out.println("Find by name poblacio Error : " + e.getMessage());
         }
 
         return null;
