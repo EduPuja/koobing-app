@@ -433,9 +433,26 @@ public class LlibreController implements Initializable
                 Idioma i = gestioIdioma.findIdiomaByName(nomIdioma);
                 book.setIdioma(i);
 
-                //
+                //genere
+                String descrip = genere.getValue();
+                GestioGenere gestioGenere = new GestioGenere();
+                Genere g = gestioGenere.findGenereByName(descrip);
+                book.setGenere(g);
+
+                //versio
+                book.setVersio(Integer.parseInt(version.getText()));
+                //data
+                LocalDate data = dataPublicacio.getValue();
+                Date d = Date.valueOf(data);
+                book.setDataPubli(d);
 
 
+                //refresh
+                taulaLlibres.refresh();
+
+                //update database
+                GestioLlibre gest = new GestioLlibre();
+                gest.modificarLlibre(book);
             }
         }
     }

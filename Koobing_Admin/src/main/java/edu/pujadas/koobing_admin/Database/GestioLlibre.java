@@ -54,6 +54,12 @@ public class GestioLlibre
                     "`id_editor`='"+llibre.getEditor().getIdEditorial()+"',`id_idioma`='"+llibre.getIdioma().getIdIdioma()+"'," +
                     "`id_genere`='"+llibre.getGenere().getIdGenere()+"',`titol`='"+llibre.getTitol()+"',`versio`='"+llibre.getVersio()+"',`data_publi`='"+llibre.getDataPubli()+"' WHERE ISBN='"+llibre.getISBN()+"'";
 
+            if(stat.executeUpdate(sql) ==1)
+            {
+                System.out.println("Llibre modificat correctament");
+            }
+
+            else System.out.println("Llibre not updated");
             con.desconectar();
         }
         catch (Exception e)
