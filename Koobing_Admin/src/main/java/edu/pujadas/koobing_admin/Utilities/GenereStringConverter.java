@@ -3,7 +3,9 @@ package edu.pujadas.koobing_admin.Utilities;
 import edu.pujadas.koobing_admin.Models.Genere;
 import javafx.util.StringConverter;
 
-public class GenereStringConverter extends StringConverter<Genere> {
+public class GenereStringConverter extends StringConverter<Genere>
+{
+
     @Override
     public String toString(Genere genere) {
         if(genere !=null)
@@ -21,7 +23,7 @@ public class GenereStringConverter extends StringConverter<Genere> {
     /**
      * metode per tenir el id del genere
      * @param genere objecte gener
-     * @return id genere , en cas que no -1 
+     * @return id genere , en cas que no -1
      */
     public int getIdGenere(Genere genere)
     {
