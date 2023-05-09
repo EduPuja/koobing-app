@@ -204,81 +204,56 @@ public class BibliotecaController implements Initializable
         }
     }
 
-    public void onEditBiblioteca(ActionEvent event)
-    {
+    public void onEditBiblioteca(ActionEvent event) {
         Biblioteca biblioteca = taulaBiblio.getSelectionModel().getSelectedItem();
-        if(biblioteca != null)
-        {
-            ComboBox<String> poblacio= new ComboBox<String>();
+        if (biblioteca != null) {
+            ComboBox<String> poblacio = new ComboBox<String>();
             TextField nomBiblio = new TextField(biblioteca.getNomBiblioteca());
-            TextField latitudField =  new TextField();
-            TextField longitudField =  new TextField();
+            TextField latitudField = new TextField(Double.toString(biblioteca.getLatitud()));
+            TextField longitudField = new TextField(Double.toString(biblioteca.getLongitud()));
 
-
-            //emplenar el combobox
+            // Emplenar el ComboBox
             addPoblacioCombo(poblacio);
-
-            //comprovar el logintud i latitud siguin decimals
-            TextFormatter<Double> latitudFormat = new TextFormatter<>(change -> {
-                if (change.getControlNewText().matches("\\d*\\.?\\d*")) {
-                    return change;
-                } else {
-                    return null;
-                }
-            });
-            //format per la longitud especific per poder posar decimals
-            TextFormatter<Double> longitudFormat = new TextFormatter<>(change -> {
-                if (change.getControlNewText().matches("\\d*\\.?\\d*")) {
-                    return change;
-                } else {
-                    return null;
-                }
-
-            });
-
-            latitudField.setTextFormatter(latitudFormat);
-            longitudField.setTextFormatter(longitudFormat);
 
             GridPane gridPane = new GridPane();
             gridPane.setVgap(10);
             gridPane.setHgap(10);
 
-            gridPane.addRow(0,new Label("Nou nom de biblioteca"),nomBiblio);
-            gridPane.addRow(1,new Label("Poblacio"),poblacio);
-            gridPane.addRow(2, new Label("Latitud"),latitudField);
-            gridPane.addRow(3,new Label("Longitud"), longitudField);
+            gridPane.addRow(0, new Label("Nou nom de biblioteca"), nomBiblio);
+            gridPane.addRow(1, new Label("Poblacio"), poblacio);
+            gridPane.addRow(2, new Label("Latitud"), latitudField);
+            gridPane.addRow(3, new Label("Longitud"), longitudField);
 
-            //creant el popup alias alerta
-
+            // Creant el popup alias alerta
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Modificar la Biblioteca");
             alert.setHeaderText("Introdueix les noves dades de la biblioteca");
             alert.getDialogPane().setContent(gridPane);
-            alert.getButtonTypes().addAll(ButtonType.OK,ButtonType.CANCEL);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
-            //esperar resposta
+            // Esperar resposta
             Optional<ButtonType> resultat = alert.showAndWait();
 
-            if(resultat.isPresent() && resultat.get() == ButtonType.OK)
-            {
-                //update de bilbioteca
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
+                // Update de bilbioteca
                 biblioteca.setNomBiblioteca(nomBiblio.getText());
                 GestioPoblacio gestioPoblacio = new GestioPoblacio();
                 Poblacio p = gestioPoblacio.findPoblacioByName(poblacio.getValue());
                 biblioteca.setPoblacio(p);
-                //biblioteca.setLatitud(Double.parseDouble(latitud.getText()));
-                //biblioteca.setLongitud(Double.parseDouble(longitud.getText()));
-                //refrescar la taula
+
+                double latitut = Double.parseDouble(latitudField.getText());
+                double longitut = Double.parseDouble(longitudField.getText());
+
+                biblioteca.setLatitud(latitut);
+                biblioteca.setLongitud(longitut);
+
+                // Refrescar la taula
                 taulaBiblio.refresh();
 
-                //actualizar a la base de dades
-               // GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-                //gestioBiblioteca.modificarBiblioteca(biblioteca);
-
-
+                // Actualitzar a la base de dades
+                /*GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+                gestioBiblioteca.modificarBiblioteca(biblioteca);*/
             }
-
-
         }
     }
 
