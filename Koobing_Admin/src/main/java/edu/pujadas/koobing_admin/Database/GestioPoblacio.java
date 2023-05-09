@@ -147,4 +147,36 @@ public class GestioPoblacio {
 
         return null;
     }
+
+    /***
+     * Metode per consultar una poblacio amb el nom en concret
+     * @param nomPoble
+     * @return
+     */
+    public Poblacio findPoblacioByName(String nomPoble)
+    {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String query = "Select * from poblacio where nom_poble = '"+ nomPoble+"'";
+            ResultSet rs = stat.executeQuery(query);
+
+            if(rs.next())
+            {
+                Poblacio p = new Poblacio(rs.getInt("id_poblacio"), rs.getString("nom_poble"));
+                return p;
+            }
+
+            con.desconectar();
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Find poblacio Error : " + e.getMessage());
+        }
+
+        return null;
+    }
+
 }

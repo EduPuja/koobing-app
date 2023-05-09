@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioBiblioteca;
+import edu.pujadas.koobing_admin.Database.GestioPoblacio;
 import edu.pujadas.koobing_admin.Models.Autor;
 import edu.pujadas.koobing_admin.Models.Biblioteca;
 import edu.pujadas.koobing_admin.Models.Poblacio;
@@ -15,11 +16,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -27,6 +28,7 @@ import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class BibliotecaController implements Initializable
@@ -129,6 +131,65 @@ public class BibliotecaController implements Initializable
         try
         {
             TextField nomBilio = new TextField();
+            ComboBox<String> poblacions = new ComboBox<String>();
+            TextField latitudBilio = new TextField();
+            TextField longitudBilio = new TextField();
+
+            //afegint un fomrat de tipus doble que no es pugi insertar text
+            TextFormatter<Double> latitudFormat = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*\\.?\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+            });
+            //format per la longitud especific per poder posar decimals
+            TextFormatter<Double> longitudFormat = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*\\.?\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+
+            });
+
+            latitudBilio.setTextFormatter(latitudFormat);
+            longitudBilio.setTextFormatter(longitudFormat);
+
+
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setTitle("Afegir Bilioteca");
+            alert.setHeaderText("Introdueix les dades de la biblioteca");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK)
+            {
+                Biblioteca biblioteca = new Biblioteca();
+                biblioteca.setNomBiblioteca(nomBilio.getText());
+               biblioteca.setLatitud(Double.parseDouble(latitudBilio.getText()));
+               biblioteca.setLongitud(Double.parseDouble(longitudBilio.getText()));
+               //poblacio
+                String nomPoblacio = poblacions.getValue();
+                GestioPoblacio gestioPoblacio = new GestioPoblacio();
+                Poblacio p =gestioPoblacio.findPoblacioByName(nomPoblacio);
+                biblioteca.setPoblacio(p);
+
+                //actualizar la taula
+                taulaBiblio.refresh();
+                //insertar a la base de dades
+                GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+                gestioBiblioteca.crearBiblioteca(biblioteca);
+
+                //tornar a carregar la pantalla de biblioteca debut a que no s'actulaiza bé la taual
+                switchToBiblioteca(event);
+            }
+
+
+
         }
         catch (Exception e)
         {
