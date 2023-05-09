@@ -112,10 +112,11 @@ public class GestioBiblioteca {
 
                     listBiblioteques.add(biblioteca);
 
-                    return listBiblioteques;
+
                 }
 
-                con.desconectar();
+            con.desconectar();
+            return listBiblioteques;
         }
         catch (Exception e){
             System.out.println("ConsultarBiblioteques Error :" + e.getMessage());
