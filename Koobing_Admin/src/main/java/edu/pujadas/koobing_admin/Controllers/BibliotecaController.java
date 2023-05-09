@@ -92,6 +92,9 @@ public class BibliotecaController implements Initializable
     }
 
 
+    /**
+     * Metode per carregar la info de la biblioteca a la taulaBilioteca
+     */
     private void loadBibliotecaInfo()
     {
         try
@@ -131,6 +134,16 @@ public class BibliotecaController implements Initializable
         {
             System.out.println("Error adding a biblio :" + e.getMessage());
         }
+    }
+
+    public void onEditBiblioteca(ActionEvent event)
+    {
+
+    }
+
+    public void onDeleteBiblioteca(ActionEvent event)
+    {
+
     }
 
 
