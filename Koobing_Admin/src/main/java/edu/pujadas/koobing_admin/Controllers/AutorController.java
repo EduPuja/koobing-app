@@ -232,6 +232,47 @@ public class AutorController implements Initializable
 
     }
 
+
+    public void onModifyAutor(ActionEvent event)
+    {
+        Autor autor = taulaAutors.getSelectionModel().getSelectedItem();
+        if(autor!=null)
+        {
+            TextField nomAutor = new TextField(autor.getNomAutor());
+
+            DatePicker dataNaix = new DatePicker();
+
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+            gridPane.addRow(0,new Label("Digues el nom del autor "),nomAutor);
+            gridPane.addRow(1,new Label("Digues la data de naixament del autor"),dataNaix);
+
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setTitle("Modificar autor");
+            alert.setHeaderText("Introdueix les noves dades del autor");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+            Optional<ButtonType> resultat = alert.showAndWait();
+            if(resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                //actualizar els camps del autor
+                autor.setNomAutor(nomAutor.getText());
+                Date data = Date.valueOf(dataNaix.getValue());
+                autor.setDataNaixAutor(data);
+
+                //update de table
+                taulaAutors.refresh();
+
+                //update in bbdd
+                GestioAutor gestioAutor = new GestioAutor();
+                gestioAutor.modificarAutor(autor);
+            }
+        }
+    }
+
+
     // CANVIS DE PANTALLA
 
 

@@ -22,7 +22,7 @@ public class GestioAutor
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
 
-            String sql = "INSERT INTO autor (nom_autor, data_naix) VALUES (''"+autor.getNomAutor()+"','"+autor.getDataNaixAutor()+"')";
+            String sql = "INSERT INTO autor (nom_autor, data_naix) VALUES ('"+autor.getNomAutor()+"','"+autor.getDataNaixAutor()+"')";
 
             if(stat.executeUpdate(sql)==1)
             {
@@ -34,7 +34,8 @@ public class GestioAutor
         }
         catch (Exception e)
         {
-            System.out.println("ERROR : El autor NO se ha insertat correctament");
+
+            System.out.println("ERROR crear autor : " + e.getMessage());
         }
     }
 
