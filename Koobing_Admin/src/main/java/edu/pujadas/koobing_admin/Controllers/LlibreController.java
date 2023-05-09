@@ -372,15 +372,16 @@ public class LlibreController implements Initializable
         if(book != null) {
             // Creacio dels Textes
 
+            TextField titol = new TextField(book.getTitol());
             ComboBox<String> autors = new ComboBox<String>();
             ComboBox<String> editorials = new ComboBox<String>();
             ComboBox<String> idioma = new ComboBox<String>();
             ComboBox<String> genere = new ComboBox<String>();
-            TextField titol = new TextField();
-            TextField version = new TextField();
-            DatePicker dataPublicacio = new DatePicker();
+            TextField version = new TextField(Integer.toString(book.getVersio()));
 
+            DatePicker dataPublicacio = new DatePicker(book.getDataPubli().toLocalDate());
 
+            addDataAllComboBox(autors, editorials, idioma,genere);
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
             gridPane.setHgap(10);
@@ -388,12 +389,12 @@ public class LlibreController implements Initializable
 
 
             gridPane.addRow(0, new Label("Nou Tittol: "), titol);
-            gridPane.addRow(1, new Label("Nou Autor:"), autors);
-            gridPane.addRow(2, new Label("Editorial: "), editorials);
-            gridPane.addRow(3, new Label("Idioma: "), idioma);
-            gridPane.addRow(4, new Label("Genere: "), genere);
+            gridPane.addRow(1, new Label("Escull nou Autor:"), autors);
+            gridPane.addRow(2, new Label("Escull nova Editorial: "), editorials);
+            gridPane.addRow(3, new Label("Escull el nou Idioma: "), idioma);
+            gridPane.addRow(4, new Label("Escull el nou Genere: "), genere);
             gridPane.addRow(5, new Label("Versio: "), version);
-            gridPane.addRow(6, new Label ("Data Publicicación: "), dataPublicacio);
+            gridPane.addRow(6, new Label ("Data Publicicació: "), dataPublicacio);
 
 
             // Mostrar los dos diálogos en la misma ventana
@@ -409,17 +410,32 @@ public class LlibreController implements Initializable
             Optional<ButtonType> resultat = alert.showAndWait();
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
-                // Actualizar los campos 'nombre' y 'cognom' de la persona seleccionada
-                //book.setNom(nomDialeg.getEditor().getText());
-                //book.setCognom(cognomDialeg.getEditor().getText());
-                //book.setPassword(passwordDialeg.getEditor().getText());
+               //Actualizar les dades del llibre selecionat
 
-                // Actualizar la tabla
-                taulaLlibres.refresh();
+                //titol
+                book.setTitol(titol.getText());
 
-                //actualizar la base de dades
-               /*GestioLlibre gestioLlibre = new GestioLlibre();
-                gestioLlibre.modificarLlibre(book);*/
+                //autor
+                String nomAutor = autors.getValue();
+                GestioAutor gestioAutor = new GestioAutor();
+                Autor a = gestioAutor.findAutorByNom(nomAutor);
+                book.setAutor(a);
+
+                //editorial
+                String nomEditor = editorials.getValue();
+                GestioEditorial gestioEditorial = new GestioEditorial();
+                Editorial e =gestioEditorial.findEditorialByName(nomEditor);
+                book.setEditor(e);
+
+                //idioma
+                String nomIdioma = idioma.getValue();
+                GestioIdioma gestioIdioma = new GestioIdioma();
+                Idioma i = gestioIdioma.findIdiomaByName(nomIdioma);
+                book.setIdioma(i);
+
+                //
+
+
             }
         }
     }
