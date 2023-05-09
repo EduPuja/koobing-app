@@ -153,6 +153,14 @@ public class BibliotecaController implements Initializable
 
             });
 
+            //afegir dades al combox
+            GestioPoblacio gestioPoblacio = new GestioPoblacio();
+            ArrayList<Poblacio> listaPoblacio = gestioPoblacio.consultarPoblacions();
+            for (int i = 0; i < listaPoblacio.size(); i++)
+            {
+                poblacions.getItems().add(listaPoblacio.get(i).getNomPoble());
+            }
+
             latitudBilio.setTextFormatter(latitudFormat);
             longitudBilio.setTextFormatter(longitudFormat);
 
@@ -160,6 +168,13 @@ public class BibliotecaController implements Initializable
             GridPane gridPane = new GridPane();
             gridPane.setHgap(10);
             gridPane.setVgap(10);
+
+            //add textfields to grid
+            gridPane.addRow(0,new Label("Nom de la biblioteca"),nomBilio);
+            gridPane.addRow(1,new Label("Poblacio"),poblacions);
+            gridPane.addRow(2,new Label("Latitud"),latitudBilio);
+            gridPane.addRow(3,new Label("Longitud"),longitudBilio);
+
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Afegir Bilioteca");
             alert.setHeaderText("Introdueix les dades de la biblioteca");
@@ -174,7 +189,7 @@ public class BibliotecaController implements Initializable
                biblioteca.setLongitud(Double.parseDouble(longitudBilio.getText()));
                //poblacio
                 String nomPoblacio = poblacions.getValue();
-                GestioPoblacio gestioPoblacio = new GestioPoblacio();
+
                 Poblacio p =gestioPoblacio.findPoblacioByName(nomPoblacio);
                 biblioteca.setPoblacio(p);
 
