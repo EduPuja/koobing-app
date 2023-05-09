@@ -211,8 +211,8 @@ public class BibliotecaController implements Initializable
         {
             ComboBox<String> poblacio= new ComboBox<String>();
             TextField nomBiblio = new TextField(biblioteca.getNomBiblioteca());
-            TextField latitudField =  new TextField(String.valueOf(biblioteca.getLatitud()));
-            TextField longitudField =  new TextField(String.valueOf(biblioteca.getLongitud()));
+            TextField latitudField =  new TextField();
+            TextField longitudField =  new TextField();
 
 
             //emplenar el combobox
