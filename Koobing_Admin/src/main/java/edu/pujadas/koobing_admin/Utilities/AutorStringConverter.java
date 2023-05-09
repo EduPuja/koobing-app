@@ -7,12 +7,26 @@ public class AutorStringConverter extends StringConverter<Autor>
 {
     @Override
     public String toString(Autor autor) {
-        return autor.getNomAutor();
+
+        try
+        {
+            if(autor !=null)
+            {
+                return autor.getNomAutor();
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+
     }
 
     @Override
     public Autor fromString(String s) {
-    
+
         return null;
     }
 

@@ -3,6 +3,7 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.*;
 
 import edu.pujadas.koobing_admin.Models.*;
+import edu.pujadas.koobing_admin.Utilities.AutorStringConverter;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -203,7 +204,7 @@ public class LlibreController implements Initializable
             ComboBox<String> genereComboBox = new ComboBox<String>();
 
             //afegint la info dels autors
-            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
+            //addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
 
 
 
@@ -373,7 +374,22 @@ public class LlibreController implements Initializable
             // Creacio dels Textes
 
             TextField titol = new TextField(book.getTitol());
-            ComboBox<String> autors = new ComboBox<String>();
+            ComboBox<Autor> autors = new ComboBox<Autor>();
+            AutorStringConverter converter = new AutorStringConverter();
+
+
+
+
+            //afegint la info dels autors
+            GestioAutor gestioAutor = new GestioAutor();
+            ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
+
+            autors.getItems().addAll(listAutors);
+            autors.setConverter(converter);
+            
+
+
+
             ComboBox<String> editorials = new ComboBox<String>();
             ComboBox<String> idioma = new ComboBox<String>();
             ComboBox<String> genere = new ComboBox<String>();
@@ -381,7 +397,7 @@ public class LlibreController implements Initializable
 
             DatePicker dataPublicacio = new DatePicker(book.getDataPubli().toLocalDate());
 
-            addDataAllComboBox(autors, editorials, idioma,genere);
+           // addDataAllComboBox(autors, editorials, idioma,genere);
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
             gridPane.setHgap(10);
@@ -416,10 +432,7 @@ public class LlibreController implements Initializable
                 book.setTitol(titol.getText());
 
                 //autor
-                String nomAutor = autors.getValue();
-                GestioAutor gestioAutor = new GestioAutor();
-                Autor a = gestioAutor.findAutorByNom(nomAutor);
-                book.setAutor(a);
+
 
                 //editorial
                 String nomEditor = editorials.getValue();
@@ -465,16 +478,19 @@ public class LlibreController implements Initializable
      * @param idiomaComboBox ComboBox de Idiomas
      * @param genereComboBox Combobox de Generes
      */
-    private void addDataAllComboBox(ComboBox<String> autorComboBox, ComboBox<String> editorialComboBox, ComboBox<String> idiomaComboBox,ComboBox<String> genereComboBox)
+    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<String> editorialComboBox, ComboBox<String> idiomaComboBox,ComboBox<String> genereComboBox)
     {
         //afegint la info dels autors
         GestioAutor gestioAutor = new GestioAutor();
         ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
 
+        AutorStringConverter autorConverter = new AutorStringConverter();
+
         for(int i=0;i<listAutors.size();i++)
         {
-            autorComboBox.getItems().addAll(listAutors.get(i).getNomAutor());
+            autorComboBox.getItems().addAll(listAutors.get(i));
         }
+
 
         //afegint la info dels editorials
         GestioEditorial gestioEditorial = new GestioEditorial();
