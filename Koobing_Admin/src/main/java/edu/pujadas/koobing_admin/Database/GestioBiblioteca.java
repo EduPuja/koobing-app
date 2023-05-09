@@ -160,4 +160,27 @@ public class GestioBiblioteca {
         }
         return null;
     }
+
+    public boolean isReservat(int idBiblioteca) {
+
+        try {
+            ConnexioMYSQL connexioMYSQL = new ConnexioMYSQL();
+            Statement stat = connexioMYSQL.conectar();
+            String sql = "SELECT COUNT(*) FROM reserves WHERE id_biblioteca = " + idBiblioteca;
+            ResultSet rs = stat.executeQuery(sql);
+
+            if(rs.next()){
+                int count = rs.getInt("count");
+                if(count > 0){
+                    return true;
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error isReservat :" + e.getMessage());
+        }
+        return false;
+    }
 }

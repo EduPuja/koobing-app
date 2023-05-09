@@ -2,10 +2,7 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioBiblioteca;
 import edu.pujadas.koobing_admin.Database.GestioPoblacio;
-import edu.pujadas.koobing_admin.Models.Autor;
-import edu.pujadas.koobing_admin.Models.Biblioteca;
-import edu.pujadas.koobing_admin.Models.Poblacio;
-import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -219,6 +216,53 @@ public class BibliotecaController implements Initializable
 
     public void onDeleteBiblioteca(ActionEvent event)
     {
+        GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+        //confirmacion
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        //error
+        Alert wrong = new Alert(Alert.AlertType.ERROR);
+
+        // mostrar el una alerta de tipus confirmacio per poder eliminar el llibre
+        alerta.setTitle("Confirmación");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Estàs segur de que vols continuar?");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            Biblioteca biblioteca = taulaBiblio.getSelectionModel().getSelectedItem();
+            if(biblioteca != null)
+            {
+                boolean reservat = gestioBiblioteca.isReservat(biblioteca.getIdBiblioteca());
+                if(reservat)
+                {
+                    wrong.setTitle("Error");
+                    wrong.setHeaderText(null);
+                    wrong.setContentText("En aquesta bilioteca té reserves!");
+                    wrong.show();
+                }
+                else {
+                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    sucessAlert.setTitle("Success!");
+                    sucessAlert.setHeaderText("Has eliminat la biblioteca!");
+                    sucessAlert.setContentText("La biblioteca ha sigut eliminat correctament!");
+                    sucessAlert.show();
+
+                    //delte to memory
+                    ObservableList<Biblioteca> itemsBiblio = taulaBiblio.getItems();
+                    itemsBiblio.remove(biblioteca);
+
+                    //delte to base data
+                    gestioBiblioteca.eliminarBiblioteca(biblioteca.getIdBiblioteca());
+
+                    //referescar la taula
+                    taulaBiblio.refresh();
+
+
+                }
+
+            }
+        }
 
     }
 
