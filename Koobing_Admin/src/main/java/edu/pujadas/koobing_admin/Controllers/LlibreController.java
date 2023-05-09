@@ -386,7 +386,7 @@ public class LlibreController implements Initializable
 
             autors.getItems().addAll(listAutors);
             autors.setConverter(converter);
-            
+
 
 
 
@@ -432,8 +432,10 @@ public class LlibreController implements Initializable
                 book.setTitol(titol.getText());
 
                 //autor
+                int id = converter.getIdAutor(autors.getValue());
 
-
+                System.out.println("ID AUTOR: "+ id);
+                /*
                 //editorial
                 String nomEditor = editorials.getValue();
                 GestioEditorial gestioEditorial = new GestioEditorial();
@@ -465,7 +467,7 @@ public class LlibreController implements Initializable
 
                 //update database
                 GestioLlibre gest = new GestioLlibre();
-                gest.modificarLlibre(book);
+                gest.modificarLlibre(book);*/
             }
         }
     }
