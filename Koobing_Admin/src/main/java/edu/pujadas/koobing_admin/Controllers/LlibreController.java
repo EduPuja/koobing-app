@@ -4,6 +4,7 @@ import edu.pujadas.koobing_admin.Database.*;
 
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.AutorStringConverter;
+import edu.pujadas.koobing_admin.Utilities.EditorialStringConverter;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -374,24 +375,32 @@ public class LlibreController implements Initializable
             // Creacio dels Textes
 
             TextField titol = new TextField(book.getTitol());
+
+            //autor
             ComboBox<Autor> autors = new ComboBox<Autor>();
+
             AutorStringConverter converterAutor = new AutorStringConverter();
-
-
-
-
-            //afegint la info dels autors
             GestioAutor gestioAutor = new GestioAutor();
             ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
 
             autors.getItems().addAll(listAutors);
             autors.setConverter(converterAutor);
 
+            // editorial
+
+            ComboBox<Editorial> editorials = new ComboBox<Editorial>();
+            EditorialStringConverter converterEditorial = new EditorialStringConverter();
+            GestioEditorial gestioEditorial = new GestioEditorial();
+            ArrayList<Editorial> listEditorials = gestioEditorial.consultarEditorials();
+            editorials.getItems().addAll(listEditorials);
+            editorials.setConverter(converterEditorial);
 
 
 
-            ComboBox<String> editorials = new ComboBox<String>();
-            ComboBox<String> idioma = new ComboBox<String>();
+            //idioma
+            ComboBox<Idioma> idioma = new ComboBox<Idioma>();
+
+            //genere
             ComboBox<String> genere = new ComboBox<String>();
             TextField version = new TextField(Integer.toString(book.getVersio()));
 

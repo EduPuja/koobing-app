@@ -5,22 +5,23 @@ import javafx.util.StringConverter;
 
 public class AutorStringConverter extends StringConverter<Autor>
 {
+    /**
+     * Metode per convertir un autor amb el nom
+     * @param autor Objecte autor
+     * @return el nom del autor
+     */
     @Override
     public String toString(Autor autor) {
 
-        try
+        if(autor !=null)
         {
-            if(autor !=null)
-            {
-                return autor.getNomAutor();
-            }
+            return autor.getNomAutor();
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        else {
+            return null;
         }
 
-        return null;
+
 
     }
 
@@ -30,20 +31,21 @@ public class AutorStringConverter extends StringConverter<Autor>
         return null;
     }
 
+    /**
+     * Metode que et retorna el id del autor
+     * @param autor object autor
+     * @return id , -1 si no el troba
+     */
     public int getIdAutor(Autor autor)
     {
-        try
+        if(autor !=null)
         {
-            if(autor !=null)
-            {
-                return autor.getIdAutor();
-            }
+            return autor.getIdAutor();
         }
-        catch (Exception e)
+        else
         {
-            e.printStackTrace();
+            return -1;
         }
-        return -1;
 
     }
 }
