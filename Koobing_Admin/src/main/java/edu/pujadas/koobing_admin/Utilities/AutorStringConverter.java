@@ -32,6 +32,18 @@ public class AutorStringConverter extends StringConverter<Autor>
 
     public int getIdAutor(Autor autor)
     {
-        return autor.getIdAutor();
+        try
+        {
+            if(autor !=null)
+            {
+                return autor.getIdAutor();
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return -1;
+
     }
 }

@@ -375,7 +375,7 @@ public class LlibreController implements Initializable
 
             TextField titol = new TextField(book.getTitol());
             ComboBox<Autor> autors = new ComboBox<Autor>();
-            AutorStringConverter converter = new AutorStringConverter();
+            AutorStringConverter converterAutor = new AutorStringConverter();
 
 
 
@@ -385,7 +385,7 @@ public class LlibreController implements Initializable
             ArrayList<Autor> listAutors = gestioAutor.consultarAutors();
 
             autors.getItems().addAll(listAutors);
-            autors.setConverter(converter);
+            autors.setConverter(converterAutor);
 
 
 
@@ -432,9 +432,11 @@ public class LlibreController implements Initializable
                 book.setTitol(titol.getText());
 
                 //autor
-                int id = converter.getIdAutor(autors.getValue());
+                int id = converterAutor.getIdAutor(autors.getValue());
+                Autor a =gestioAutor.findAutor(id);
+                book.setAutor(a);
 
-                System.out.println("ID AUTOR: "+ id);
+
                 /*
                 //editorial
                 String nomEditor = editorials.getValue();
