@@ -204,6 +204,11 @@ public class BibliotecaController implements Initializable
         }
     }
 
+
+    /**
+     * Metode per editar una biblioteca
+     * @param event ActionEvent
+     */
     public void onEditBiblioteca(ActionEvent event) {
         Biblioteca biblioteca = taulaBiblio.getSelectionModel().getSelectedItem();
         if (biblioteca != null) {
@@ -235,24 +240,33 @@ public class BibliotecaController implements Initializable
             Optional<ButtonType> resultat = alert.showAndWait();
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
-                // Update de bilbioteca
+               //Actuaizar els camps de biblioteca
+
+                //nom biblioteca
                 biblioteca.setNomBiblioteca(nomBiblio.getText());
+
+                //poblacio
+                String nomPoble = poblacio.getValue();
                 GestioPoblacio gestioPoblacio = new GestioPoblacio();
-                Poblacio p = gestioPoblacio.findPoblacioByName(poblacio.getValue());
+                Poblacio p = gestioPoblacio.findPoblacioByName(nomPoble);
                 biblioteca.setPoblacio(p);
 
-                double latitut = Double.parseDouble(latitudField.getText());
-                double longitut = Double.parseDouble(longitudField.getText());
+                //latitud
 
-                biblioteca.setLatitud(latitut);
-                biblioteca.setLongitud(longitut);
+                double lat = Double.parseDouble(latitudField.getText());
+                biblioteca.setLatitud(lat);
 
-                // Refrescar la taula
+                //logintud
+                double lon = Double.parseDouble(longitudField.getText());
+                biblioteca.setLongitud(lon);
+
+
+                //actualizar la taula
                 taulaBiblio.refresh();
 
-                // Actualitzar a la base de dades
-                /*GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-                gestioBiblioteca.modificarBiblioteca(biblioteca);*/
+                //actualiar la base de dadesP
+
+
             }
         }
     }
@@ -309,7 +323,10 @@ public class BibliotecaController implements Initializable
 
     }
 
-
+    /**
+     * Metode que afegiex la info en els comboboxes de poblacio
+     * @param poble Combox
+     */
     private void addPoblacioCombo(ComboBox<String> poble)
     {
         //afegir dades al combox
