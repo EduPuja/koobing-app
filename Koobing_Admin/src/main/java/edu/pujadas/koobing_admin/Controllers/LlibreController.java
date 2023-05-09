@@ -296,6 +296,9 @@ public class LlibreController implements Initializable
                 gest.crearLlibre(llibre);
 
 
+                //actualiar la pagina
+                switchToLlibre(event);
+
             }
 
 
