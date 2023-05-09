@@ -197,13 +197,13 @@ public class LlibreController implements Initializable
 
             //comboboxes
 
-            ComboBox<String> autorComboBox = new ComboBox<String>();
-            ComboBox<String> editorialComboBox = new ComboBox<String>();
-            ComboBox<String>idiomaComboBox = new ComboBox<String>();
-            ComboBox<String> genereComboBox = new ComboBox<String>();
+            ComboBox<Autor> autorComboBox = new ComboBox<Autor>();
+            ComboBox<Editorial> editorialComboBox = new ComboBox<Editorial>();
+            ComboBox<Idioma>idiomaComboBox = new ComboBox<Idioma>();
+            ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
 
             //afegint la info dels autors
-            //addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
+            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
 
 
 
@@ -243,46 +243,59 @@ public class LlibreController implements Initializable
 
                 llibre.setISBN(Long.parseLong(isbnInput.getText()));
 
-                //autor
-                String nomAutor =autorComboBox.getValue();
+                //Actualizar les dades del llibre selecionat
+
+                //gestors
                 GestioAutor gestioAutor = new GestioAutor();
-                Autor autor = gestioAutor.findAutorByNom(nomAutor);
-                llibre.setAutor(autor);
+                GestioEditorial gestioEditorial = new GestioEditorial();
+                GestioIdioma  gestioIdioma = new GestioIdioma();
+                GestioGenere gestioGenere = new GestioGenere();
+
+
+                //converters
+                AutorStringConverter converterAutor = new AutorStringConverter();
+                EditorialStringConverter converterEditorial = new EditorialStringConverter();
+                GenereStringConverter converterGenere = new GenereStringConverter();
+                IdiomaStringConverter converterIdioma = new IdiomaStringConverter();
+
+                //titol
+                llibre.setTitol(titolInput.getEditor().getText());
+
+                //autor
+                int idAutor = converterAutor.getIdAutor(autorComboBox.getValue());
+                Autor a = gestioAutor.findAutor(idAutor);
+                llibre.setAutor(a);
 
                 //editorial
-                String nomEditorial = editorialComboBox.getValue();
-                GestioEditorial gestioEditorial = new GestioEditorial();
-                Editorial editorial = gestioEditorial.findEditorialByName(nomEditorial);
-                llibre.setEditor(editorial);
-
-                //idioma
-                String nomIdioma = idiomaComboBox.getValue();
-                GestioIdioma gestioIdioma = new GestioIdioma();
-                Idioma idioma = gestioIdioma.findIdiomaByName(nomIdioma);
-                llibre.setIdioma(idioma);
+                int idEditorial = converterEditorial.getIdEditor(editorialComboBox.getValue());
+                Editorial e = gestioEditorial.findEditorial(idEditorial);
+                llibre.setEditor(e);
 
                 //genere
-                String nomGenere = genereComboBox.getValue();
-                GestioGenere gestioGenere = new GestioGenere();
-                Genere genere = gestioGenere.findGenereByName(nomGenere);
-                llibre.setGenere(genere);
+                int idGenere = converterGenere.getIdGenere(genereComboBox.getValue());
+                Genere g = gestioGenere.findGenere(idGenere);
+                llibre.setGenere(g);
 
+                //idioma
+                int idIdioma = converterIdioma.getIdIdioma(idiomaComboBox.getValue());
+                Idioma i = gestioIdioma.findIdioma(idIdioma);
+                llibre.setIdioma(i);
 
-                // final stuff llibre
-                llibre.setTitol(titolInput.getEditor().getText());
+                //versio
                 llibre.setVersio(Integer.parseInt(versionInput.getText()));
+                //data
                 LocalDate data = dataPubliInput.getValue();
                 Date d = Date.valueOf(data);
                 llibre.setDataPubli(d);
 
-                // Actualizar la tabla
+                //refresh
                 taulaLlibres.refresh();
 
-                //actualizar la base de dades
-                GestioLlibre gestioLlibre = new GestioLlibre();
-                gestioLlibre.crearLlibre(llibre);
+                //update database
+                GestioLlibre gest = new GestioLlibre();
+                gest.crearLlibre(llibre);
 
-                switchToLlibre(event);
+
             }
 
 
@@ -423,37 +436,41 @@ public class LlibreController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
                //Actualizar les dades del llibre selecionat
 
+                //gestors
+                GestioAutor gestioAutor = new GestioAutor();
+                GestioEditorial gestioEditorial = new GestioEditorial();
+                GestioIdioma  gestioIdioma = new GestioIdioma();
+                GestioGenere gestioGenere = new GestioGenere();
+
 
                 //converters
                 AutorStringConverter converterAutor = new AutorStringConverter();
+                EditorialStringConverter converterEditorial = new EditorialStringConverter();
+                GenereStringConverter converterGenere = new GenereStringConverter();
+                IdiomaStringConverter converterIdioma = new IdiomaStringConverter();
 
                 //titol
                 book.setTitol(titol.getText());
 
                 //autor
-                int id = converterAutor.getIdAutor(autors.getValue());
-                System.out.println(id);
+                int idAutor = converterAutor.getIdAutor(autors.getValue());
+                Autor a = gestioAutor.findAutor(idAutor);
+                book.setAutor(a);
 
-
-
-                /*
                 //editorial
-                String nomEditor = editorials.getValue();
-                GestioEditorial gestioEditorial = new GestioEditorial();
-                Editorial e =gestioEditorial.findEditorialByName(nomEditor);
+                int idEditorial = converterEditorial.getIdEditor(editorials.getValue());
+                Editorial e = gestioEditorial.findEditorial(idEditorial);
                 book.setEditor(e);
 
-                //idioma
-                String nomIdioma = idioma.getValue();
-                GestioIdioma gestioIdioma = new GestioIdioma();
-                Idioma i = gestioIdioma.findIdiomaByName(nomIdioma);
-                book.setIdioma(i);
-
                 //genere
-                String descrip = genere.getValue();
-                GestioGenere gestioGenere = new GestioGenere();
-                Genere g = gestioGenere.findGenereByName(descrip);
+                int idGenere = converterGenere.getIdGenere(genere.getValue());
+                Genere g = gestioGenere.findGenere(idGenere);
                 book.setGenere(g);
+
+                //idioma
+                int idIdioma = converterIdioma.getIdIdioma(idioma.getValue());
+                Idioma i = gestioIdioma.findIdioma(idIdioma);
+                book.setIdioma(i);
 
                 //versio
                 book.setVersio(Integer.parseInt(version.getText()));
@@ -462,13 +479,15 @@ public class LlibreController implements Initializable
                 Date d = Date.valueOf(data);
                 book.setDataPubli(d);
 
-
                 //refresh
                 taulaLlibres.refresh();
 
                 //update database
                 GestioLlibre gest = new GestioLlibre();
-                gest.modificarLlibre(book);*/
+                gest.modificarLlibre(book);
+
+
+
             }
         }
     }
