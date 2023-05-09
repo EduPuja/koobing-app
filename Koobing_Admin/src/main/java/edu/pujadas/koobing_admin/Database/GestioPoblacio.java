@@ -100,14 +100,15 @@ public class GestioPoblacio {
             String query = "Select * from poblacio;";
             ResultSet rs = stat.executeQuery(query);
 
-            if(rs.next())
+            while (rs.next())
             {
                 Poblacio p = new Poblacio(rs.getInt("id_poblacio"), rs.getString("nom_poble"));
                 poblacions.add(p);
-                return poblacions;
+
             }
 
             con.desconectar();
+            return poblacions;
 
         }
         catch (Exception e)
