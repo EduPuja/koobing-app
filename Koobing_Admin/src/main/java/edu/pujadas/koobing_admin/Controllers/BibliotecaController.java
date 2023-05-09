@@ -150,13 +150,8 @@ public class BibliotecaController implements Initializable
 
             });
 
-            //afegir dades al combox
-            GestioPoblacio gestioPoblacio = new GestioPoblacio();
-            ArrayList<Poblacio> listaPoblacio = gestioPoblacio.consultarPoblacions();
-            for (int i = 0; i < listaPoblacio.size(); i++)
-            {
-                poblacions.getItems().add(listaPoblacio.get(i).getNomPoble());
-            }
+            //enplenar el combobox
+            addPoblacioCombo(poblacions);
 
             latitudBilio.setTextFormatter(latitudFormat);
             longitudBilio.setTextFormatter(longitudFormat);
@@ -186,7 +181,7 @@ public class BibliotecaController implements Initializable
                biblioteca.setLongitud(Double.parseDouble(longitudBilio.getText()));
                //poblacio
                 String nomPoblacio = poblacions.getValue();
-
+                GestioPoblacio gestioPoblacio = new GestioPoblacio();
                 Poblacio p =gestioPoblacio.findPoblacioByName(nomPoblacio);
                 biblioteca.setPoblacio(p);
 
@@ -211,7 +206,80 @@ public class BibliotecaController implements Initializable
 
     public void onEditBiblioteca(ActionEvent event)
     {
+        Biblioteca biblioteca = taulaBiblio.getSelectionModel().getSelectedItem();
+        if(biblioteca != null)
+        {
+            ComboBox<String> poblacio= new ComboBox<String>();
+            TextField nomBiblio = new TextField(biblioteca.getNomBiblioteca());
+            TextField latitudField =  new TextField(String.valueOf(biblioteca.getLatitud()));
+            TextField longitudField =  new TextField(String.valueOf(biblioteca.getLongitud()));
 
+
+            //emplenar el combobox
+            addPoblacioCombo(poblacio);
+
+            //comprovar el logintud i latitud siguin decimals
+            TextFormatter<Double> latitudFormat = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*\\.?\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+            });
+            //format per la longitud especific per poder posar decimals
+            TextFormatter<Double> longitudFormat = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*\\.?\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+
+            });
+
+            latitudField.setTextFormatter(latitudFormat);
+            longitudField.setTextFormatter(longitudFormat);
+
+            GridPane gridPane = new GridPane();
+            gridPane.setVgap(10);
+            gridPane.setHgap(10);
+
+            gridPane.addRow(0,new Label("Nou nom de biblioteca"),nomBiblio);
+            gridPane.addRow(1,new Label("Poblacio"),poblacio);
+            gridPane.addRow(2, new Label("Latitud"),latitudField);
+            gridPane.addRow(3,new Label("Longitud"), longitudField);
+
+            //creant el popup alias alerta
+
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setTitle("Modificar la Biblioteca");
+            alert.setHeaderText("Introdueix les noves dades de la biblioteca");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK,ButtonType.CANCEL);
+
+            //esperar resposta
+            Optional<ButtonType> resultat = alert.showAndWait();
+
+            if(resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                //update de bilbioteca
+                biblioteca.setNomBiblioteca(nomBiblio.getText());
+                GestioPoblacio gestioPoblacio = new GestioPoblacio();
+                Poblacio p = gestioPoblacio.findPoblacioByName(poblacio.getValue());
+                biblioteca.setPoblacio(p);
+                //biblioteca.setLatitud(Double.parseDouble(latitud.getText()));
+                //biblioteca.setLongitud(Double.parseDouble(longitud.getText()));
+                //refrescar la taula
+                taulaBiblio.refresh();
+
+                //actualizar a la base de dades
+               // GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+                //gestioBiblioteca.modificarBiblioteca(biblioteca);
+
+
+            }
+
+
+        }
     }
 
     public void onDeleteBiblioteca(ActionEvent event)
@@ -264,6 +332,18 @@ public class BibliotecaController implements Initializable
             }
         }
 
+    }
+
+
+    private void addPoblacioCombo(ComboBox<String> poble)
+    {
+        //afegir dades al combox
+        GestioPoblacio gestioPoblacio = new GestioPoblacio();
+        ArrayList<Poblacio> listaPoblacio = gestioPoblacio.consultarPoblacions();
+        for (int i = 0; i < listaPoblacio.size(); i++)
+        {
+            poble.getItems().add(listaPoblacio.get(i).getNomPoble());
+        }
     }
 
 
