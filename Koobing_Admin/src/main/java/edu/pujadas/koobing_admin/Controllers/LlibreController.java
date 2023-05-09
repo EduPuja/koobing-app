@@ -3,10 +3,7 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.*;
 
 import edu.pujadas.koobing_admin.Models.*;
-import edu.pujadas.koobing_admin.Utilities.AutorStringConverter;
-import edu.pujadas.koobing_admin.Utilities.EditorialStringConverter;
-import edu.pujadas.koobing_admin.Utilities.IdiomaStringConverter;
-import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
+import edu.pujadas.koobing_admin.Utilities.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -408,7 +405,11 @@ public class LlibreController implements Initializable
 
             //genere
             ComboBox<Genere> genere = new ComboBox<Genere>();
-
+            GenereStringConverter genereConverter = new GenereStringConverter();
+            GestioGenere  gestioGenre =  new GestioGenere();
+            ArrayList<Genere> listGeneres = gestioGenre.consultarGeneres();
+            genere.getItems().addAll(listGeneres);
+            genere.setConverter(genereConverter);
 
 
             TextField version = new TextField(Integer.toString(book.getVersio()));
