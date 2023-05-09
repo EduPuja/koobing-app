@@ -72,8 +72,6 @@ public class AutorController implements Initializable
                     avatarWorker.setImage(avatar);
                 }
 
-
-
                 if(worker.isAdmin() == 1)
                 {
                     System.out.println("admin ");
@@ -206,8 +204,8 @@ public class AutorController implements Initializable
                 {
                     Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
                     sucessAlert.setTitle("Success!");
-                    sucessAlert.setHeaderText("Has eliminat llibre!");
-                    sucessAlert.setContentText("Llibre s'ha eliminat correctament");
+                    sucessAlert.setHeaderText("Has eliminat el autor!");
+                    sucessAlert.setContentText("Autor eliminat correctament");
                     sucessAlert.show();
 
 
