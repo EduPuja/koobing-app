@@ -1,4 +1,5 @@
-# koobing-app ![Logo](./libro.png)
+# koobing-app 
+![Logo](./libro.png)
 
 Repositori del projecte final . Aplicacio de reserva de llibres 
 Aquesta aplicacio es distribueix en 2 projectes
