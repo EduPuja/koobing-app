@@ -213,10 +213,49 @@ public class GenereController implements Initializable
         }
     }
 
+    /**
+     * Funcio que al fer clcik a un item de la taula genere el pots modifcar
+     * @param event ActionEvent
+     */
     public void onModifyGenere(ActionEvent event)
     {
         try {
+            Genere genere = taulaGenere.getSelectionModel().getSelectedItem();
+            if(genere != null)
+            {
+                TextField nouGenere = new  TextField(genere.getNomGenere());
+                GridPane gridPane = new GridPane();
+                gridPane.setVgap(10);
+                gridPane.setHgap(10);
 
+                gridPane.addRow(0,new Label("Modificar Genere"),nouGenere);
+
+
+                // Mostrar los dos diálogos en la misma ventana
+                Alert alert = new Alert(Alert.AlertType.NONE);
+
+                alert.setTitle("Modificar Treballador");
+                alert.setHeaderText("Introduïu les noves dades del treballador:");
+                alert.getDialogPane().setContent(gridPane);
+                alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+                Optional<ButtonType> resultat = alert.showAndWait();
+
+                if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+                {
+                    genere.setNomGenere(nouGenere.getText());
+
+                    //base de dades
+                    GestioGenere gestioGenere = new GestioGenere();
+                    gestioGenere.modificarGenere(genere);
+
+                    //refresh taula
+
+                    taulaGenere.refresh();
+                    switchToGenere(event);
+                }
+
+            }
         }
         catch (Exception e)
         {
