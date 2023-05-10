@@ -15,29 +15,55 @@ public class GestioGenere
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat =con.conectar();
-            String sql = "INSERT INTO genere vaues"
+            String sql = "INSERT INTO genere (descrip) VALUES ('"+genere.getNomGenere()+"')";
+
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Genere insert successfully");
+            }
+            else System.out.println("Gener not inserted ");
+
+            con.desconectar();
         }
         catch (Exception e)
         {
             System.out.println("Error adding genere " +e.getMessage());
         }
     }
-    public void modificarGenere()
+    public void modificarGenere(Genere genere)
     {
         try
         {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat =con.conectar();
+            String sql = "UPDATE genere Set descrip =" + genere.getNomGenere()+"' WHERE id_genere ="+genere.getIdGenere();
 
+            if (stat.executeUpdate(sql) ==1)
+            {
+                System.out.println("Genere s'ha actualizat correctament");
+            }
+            else System.out.println("Genere not actualizat");
+
+            con.desconectar();
         }
         catch (Exception e)
         {
             System.out.println("Error Modfiy genere " +e.getMessage());
         }
     }
-    public void eliminarGenere()
+    public void eliminarGenere(int idGenere)
     {
         try
         {
-
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat =con.conectar();
+            String sql = "DELETE FROM genere WHERE id_genere ="+ idGenere;
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Genere eliminat succesfully!");
+            }
+            else System.out.println("Genere not deleted");
+            con.desconectar();
         }
         catch (Exception e)
         {
