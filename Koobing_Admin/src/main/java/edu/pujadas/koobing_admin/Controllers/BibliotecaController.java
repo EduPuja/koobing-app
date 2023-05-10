@@ -3,6 +3,7 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.GestioBiblioteca;
 import edu.pujadas.koobing_admin.Database.GestioPoblacio;
 import edu.pujadas.koobing_admin.Models.*;
+import edu.pujadas.koobing_admin.Utilities.PoblacioStringConverter;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -212,7 +213,7 @@ public class BibliotecaController implements Initializable
     public void onEditBiblioteca(ActionEvent event) {
         Biblioteca biblioteca = taulaBiblio.getSelectionModel().getSelectedItem();
         if (biblioteca != null) {
-            ComboBox<String> poblacio = new ComboBox<String>();
+            ComboBox<Poblacio> poblacio = new ComboBox<Poblacio>();
             TextField nomBiblio = new TextField(biblioteca.getNomBiblioteca());
             TextField latitudField = new TextField(Double.toString(biblioteca.getLatitud()));
             TextField longitudField = new TextField(Double.toString(biblioteca.getLongitud()));
@@ -242,15 +243,17 @@ public class BibliotecaController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
                //Actuaizar els camps de biblioteca
 
+
+
                 //nom biblioteca
                 biblioteca.setNomBiblioteca(nomBiblio.getText());
 
                 //poblacio
-                String nomPoble = poblacio.getValue();
-                GestioPoblacio gestioPoblacio = new GestioPoblacio();
-                Poblacio p = gestioPoblacio.findPoblacioByName(nomPoble);
+                PoblacioStringConverter converterPoblacio = new PoblacioStringConverter();
+                int idPoblacio = converterPoblacio.getIdPoblacio(poblacio.getValue());
+                GestioPoblacio gestio = new GestioPoblacio();
+                Poblacio p  = gestio.findPoblacio(idPoblacio);
                 biblioteca.setPoblacio(p);
-
                 //latitud
 
                 double lat = Double.parseDouble(latitudField.getText());
@@ -327,15 +330,15 @@ public class BibliotecaController implements Initializable
      * Metode que afegiex la info en els comboboxes de poblacio
      * @param poble Combox
      */
-    private void addPoblacioCombo(ComboBox<String> poble)
+    private void addPoblacioCombo(ComboBox<Poblacio> poble)
     {
         //afegir dades al combox
         GestioPoblacio gestioPoblacio = new GestioPoblacio();
         ArrayList<Poblacio> listaPoblacio = gestioPoblacio.consultarPoblacions();
-        for (int i = 0; i < listaPoblacio.size(); i++)
-        {
-            poble.getItems().add(listaPoblacio.get(i).getNomPoble());
-        }
+        //converter
+        PoblacioStringConverter converterPoblacio = new PoblacioStringConverter();
+        poble.getItems().addAll(listaPoblacio);
+        poble.setConverter(converterPoblacio);
     }
 
 
