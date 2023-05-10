@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioReserva;
 import edu.pujadas.koobing_admin.Models.*;
+import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,10 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -28,6 +33,9 @@ public class ReservaController implements Initializable
     public TableColumn<Reserva,String>nomWorker;
     public TableColumn<Reserva,String> bookTitle;
     public TableColumn<Reserva,String> nomBiblio;
+
+
+    public ImageView avatarWorker;
     Parent root;
     Stage stage;
     Scene scene;
@@ -38,10 +46,48 @@ public class ReservaController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         System.out.println("Reserva Screen!");
+        loadWorkerInfo();
         loadInfoReserves();
     }
 
+    /**
+     * Metode que carrega la info del treballador
+     */
+    private void loadWorkerInfo()
+    {
+        try {
+            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+            if(worker != null)
+            {
+                Blob blob = worker.getAvatar();
+                if (blob != null) {
+                    byte[] byteArray = blob.getBytes(1, (int) blob.length());
+                    ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
 
+                    Image avatar = new Image(bis);
+                    avatarWorker.setImage(avatar);
+                }
+
+
+
+                if(worker.isAdmin() == 1)
+                {
+                    System.out.println("admin ");
+                }
+                else
+                {
+                    System.out.println("worker");
+                }
+
+
+
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error loading worker info: " + e.getMessage());
+        }
+    }
 
     public void loadInfoReserves()
     {
