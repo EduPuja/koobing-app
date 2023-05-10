@@ -130,7 +130,7 @@ public class IdiomaController implements Initializable
             if(resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
                 Idioma idioma = new Idioma();
-                idioma.setNomIdioma(nomIdioma.getText());
+                idioma.setNomIdioma(nomText.getText());
 
                 GestioIdioma gestioIdioma = new GestioIdioma();
                 gestioIdioma.crearIdioma(idioma);
