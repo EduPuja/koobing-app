@@ -119,23 +119,28 @@ public class GestioGenere
         return null;
     }
 
-
-    public Genere findGenereByName(String name)
+    public boolean isGenereInBook(int idGenere)
     {
-        try {
-        ConnexioMYSQL con = new ConnexioMYSQL();
-        Statement stat = con.conectar();
-        ResultSet rs = stat.executeQuery("SELECT * FROM genere where descrip = '" + name + "'");
-        if (rs.next())
-            {   Genere genere =new Genere(rs.getInt("id_genere"),rs.getString("descrip"));
-                con.desconectar();
-                return genere;
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+
+            String query = "SELECT COUNT(*) AS count FROM llibre WHERE id_genere="+ idGenere;
+            ResultSet rs = stat.executeQuery(query);
+            if(rs.next())
+            {
+                int count = rs.getInt("count");
+                if(count>0)
+                {
+                    return true;
+                }
             }
         }
         catch (Exception e)
         {
-            System.out.println("Find genere by name error : " + e.getMessage());
+            System.out.println("Error isGenreInBook : " +e.getMessage());
         }
-        return null;
+        return false;
     }
 }
