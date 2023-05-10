@@ -34,7 +34,7 @@ public class GestioEditorial
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat =con.conectar();
-            String sql ="DELETE FROM editorial where id_editorial = "+idEditor;
+            String sql ="DELETE FROM editorial  WHERE id_editorial = " + idEditor;
             if(stat.executeUpdate(sql) == 1)
             {
                 System.out.println("Editorial eliminat correctament");
