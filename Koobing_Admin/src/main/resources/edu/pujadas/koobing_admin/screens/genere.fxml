@@ -17,7 +17,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.tableview2.TableView2?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.GenereController">
     <children>
         <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
@@ -86,16 +85,16 @@
                                         <Image url="@../img/libro.png" />
                                     </image>
                                 </ImageView>
-                                <Button fx:id="addBtn" alignment="CENTER" mnemonicParsing="false"  prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false"  prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false"  prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <Button fx:id="addBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                         <TableView2 fx:id="taulaGenere">
                             <columns>
-                                <TableColumn fx:id="idGenereColum" prefWidth="95.0" text="ID Genere" />
+                                <TableColumn fx:id="idGenereColum" prefWidth="200.0" text="ID Genere" />
 
-                                <TableColumn fx:id="descripGenereColum" prefWidth="95.0" text="Descripcio" />
+                                <TableColumn fx:id="descripGenereColum" prefWidth="550.0" text="Descripcio" />
 
 
                             </columns>
