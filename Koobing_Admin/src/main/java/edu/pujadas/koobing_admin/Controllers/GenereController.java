@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioGenere;
 import edu.pujadas.koobing_admin.Models.Genere;
+import edu.pujadas.koobing_admin.Models.Idioma;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.collections.FXCollections;
@@ -147,6 +148,51 @@ public class GenereController implements Initializable
     {
         try
         {
+            GestioGenere gestioGenere = new GestioGenere();
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert wrong  = new Alert(Alert.AlertType.ERROR);
+
+            alerta.setTitle("Confirmación");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Estàs segur de que vols continuar?");
+
+
+            Optional<ButtonType> resultado = alerta.showAndWait();
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK)
+            {
+                Genere genere = taulaGenere.getSelectionModel().getSelectedItem();
+                if(genere!= null)
+                {
+                    boolean isGenereInBook = gestioGenere.isGenereInBook(genere.getIdGenere());
+                    if(isGenereInBook)
+                    {
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("No es pot eliminar aquest Genere");
+                        wrong.setContentText("Aquest genere està assignat a un llibre o a varis");
+                        wrong.show();
+                    }
+                    else
+                    {
+                        //alerta succes
+                        Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                        sucessAlert.setTitle("Success!");
+                        sucessAlert.setHeaderText("Has eliminat el idioma");
+                        sucessAlert.setContentText("El idioma ha sigut eliminat correctament");
+                        sucessAlert.show();
+
+                        //delete memory
+                        ObservableList<Idioma> idiomas = taulaIdioma.getItems();
+                        idiomas.remove(idiomas);
+
+                        gestioIdioma.eliminarIdioma(idioma.getIdIdioma());
+
+                        //actualizar la taula
+                        taulaIdioma.refresh();
+
+                        switchToIdioma(event);
+                    }
+                }
+            }
 
         }
         catch (Exception e)
