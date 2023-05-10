@@ -6,21 +6,52 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//todo falta create delete mod
+
 public class GestioEditorial
 {
-    public void crearEditorial()
+    public void crearEditorial(Editorial editorial)
     {
-
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat =con.conectar();
+            String sql ="INSERT INTO editorial (nom_editorial) VALUES ('" + editorial.getNomEditor()+"')";
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("editor insert succeeded");
+            }
+            else System.out.println("editor insert failed");
+            con.desconectar();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Inserting Editorial: " + e.getMessage());
+        }
     }
 
     public void eliminarEditor()
     {
 
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat =con.conectar();
+            String sql ="";
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Deleting Editorial: " + e.getMessage());
+        }
     }
     public void modificarEditorial()
     {
-
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat =con.conectar();
+            String sql ="";
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Modify Editorial: " + e.getMessage());
+        }
     }
     public ArrayList<Editorial> consultarEditorials()
     {
