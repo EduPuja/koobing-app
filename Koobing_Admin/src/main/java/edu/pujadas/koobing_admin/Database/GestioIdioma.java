@@ -4,6 +4,7 @@ import edu.pujadas.koobing_admin.Database.ConnexioMYSQL;
 import edu.pujadas.koobing_admin.Models.Idioma;
 
 import java.sql.ResultSet;
+import java.sql.RowId;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -28,9 +29,23 @@ public class GestioIdioma
         }
     }
 
-    public void eliminarIdioma()
+    public void eliminarIdioma(int idIdioma)
     {
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql = "DELETE FROM idioma WHERE id_idioma = "+idIdioma;
 
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Idioma eliminat correctament");
+            }
+            else System.out.println("Idioma not deleted");
+            con.desconectar();
+        }
+        catch (Exception e) {
+            System.out.println("Error deleting a idioma : " +e.getMessage());
+        }
     }
     public void modificarIdioma()
     {
@@ -87,25 +102,30 @@ public class GestioIdioma
         return null;
     }
 
-    public Idioma findIdiomaByName(String nomIdioma)
-    {
+  public boolean isIdiomaInBook(int idIdioma)
+  {
+      try
+      {
+          ConnexioMYSQL con = new ConnexioMYSQL();
+          Statement stat = con.conectar();
 
-        try {
-            ConnexioMYSQL con = new ConnexioMYSQL();
-            Statement stat = con.conectar();
-            ResultSet rs = stat.executeQuery("SELECT * FROM idioma WHERE nom_idioma ='" + nomIdioma+"'");
-            if (rs.next())
-            {
-                Idioma idioma =new Idioma(rs.getInt("id_idioma"),rs.getString("nom_idioma"));
-                con.desconectar();
-                return idioma;
-            }
+          String query = "SELECT COUNT(*) AS count FROM llibre WHERE id_idioma="+ idIdioma;
+          ResultSet rs = stat.executeQuery(query);
+          if(rs.next())
+          {
+              int count = rs.getInt("count");
+              if(count>0)
+              {
+                  return true;
+              }
+          }
+      }
+      catch (Exception e)
+      {
+          System.out.println("Error buscat idioma en el llibre");
+      }
 
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error find idioma name: " + e.getMessage());
-        }
-      return  null;
-    }
+      return false;
+  }
+
 }
