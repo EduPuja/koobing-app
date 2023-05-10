@@ -101,6 +101,18 @@ public class IdiomaController implements Initializable
     }
 
 
+    public void onAddIdiom(ActionEvent event){
+
+    }
+
+    public void onRemoveIdiom(ActionEvent event){
+
+    }
+
+    public void onModifyIdioma (ActionEvent event) {
+
+    }
+
 
 
 
