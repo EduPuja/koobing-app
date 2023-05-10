@@ -139,4 +139,30 @@ public class GestioEditorial
         }
         return null;
     }
+
+    /**
+     * Metode per comprovar si aquesta editorial esta en un llibre
+     * @param idEditorial integer id del editor
+     * @return true si esta en un llibre , si no et retorna false
+     */
+    public boolean isEditorInBook(int idEditorial) {
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql = "SELECT COUNT(*) AS count FROM llibre WHERE id_editor="+idEditorial;
+            ResultSet result = stat.executeQuery(sql);
+            if(result.next()) {
+                int count = result.getInt("count");
+                if(count > 0) {
+                   return true;
+                }
+            }
+            con.desconectar();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error isEditorInBook : "+e.getMessage());
+        }
+        return false;
+    }
 }
