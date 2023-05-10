@@ -28,14 +28,17 @@ import java.util.ResourceBundle;
 public class ReservaController implements Initializable
 {
     public TableView2<Reserva> taulaReserves;
-    public TableColumn<Reserva,Integer> idReserva;
-    public TableColumn<Reserva,String> nomUser;
-    public TableColumn<Reserva,String>nomWorker;
-    public TableColumn<Reserva,String> bookTitle;
-    public TableColumn<Reserva,String> nomBiblio;
+
 
 
     public ImageView avatarWorker;
+    public TableColumn nomUserColum;
+    public TableColumn idReservaColum;
+    public TableColumn nomWorkerColum;
+    public TableColumn nomBiblioColum;
+    public TableColumn bookTitleColum;
+    public TableColumn dataHoraIniciColum;
+    public TableColumn dataHoraFiciColum;
     Parent root;
     Stage stage;
     Scene scene;
