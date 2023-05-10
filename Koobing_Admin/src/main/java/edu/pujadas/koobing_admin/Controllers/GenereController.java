@@ -4,6 +4,8 @@ import edu.pujadas.koobing_admin.Database.GestioGenere;
 import edu.pujadas.koobing_admin.Models.Genere;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -41,8 +44,8 @@ public class GenereController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Genere Screen! ");
-
         loadWorkerInfo();
+        loadGenereInfo();
     }
 
 
@@ -89,6 +92,47 @@ public class GenereController implements Initializable
         GestioGenere gestioGenere = new GestioGenere();
         listGenere = gestioGenere.consultarGeneres();
 
+
+        ObservableList<Genere> observableList = FXCollections.observableArrayList(listGenere);
+
+        idGenereColum.setCellValueFactory(new PropertyValueFactory<>("idGenere"));
+        descripGenereColum.setCellValueFactory(new PropertyValueFactory<>("descrip"));
+        taulaGenere.setItems(observableList);
+
+    }
+
+
+    public void onAddGenere(ActionEvent event)
+    {
+        try {
+
+        }
+        catch (Exception e) {
+            System.out.println("Error Afegint un nou Genere : " +e.getMessage());
+        }
+    }
+
+    public void onDeleteGenere(ActionEvent event)
+    {
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error al eliminar el genere : " +e.getMessage());
+        }
+    }
+
+    public void onModifyGenere(ActionEvent event)
+    {
+        try {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error modificar el genere : " +e.getMessage());
+        }
     }
 
 
