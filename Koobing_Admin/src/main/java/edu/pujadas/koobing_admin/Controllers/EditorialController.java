@@ -134,7 +134,12 @@ public class EditorialController implements Initializable
             Optional<ButtonType> resultat = alert.showAndWait();
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                
+                Editorial editor = new Editorial();
+                editor.setNomEditor(nomEditor.getText());
+
+                //insertar
+                GestioEditorial gestioEditorial = new GestioEditorial();
+                gestioEditorial.crearEditorial(editor);
             }
         }
         catch (Exception e)
