@@ -140,6 +140,10 @@ public class EditorialController implements Initializable
                 //insertar
                 GestioEditorial gestioEditorial = new GestioEditorial();
                 gestioEditorial.crearEditorial(editor);
+
+                //referscar
+                taulaEditorials.refresh();
+                switchToEditorial(event);
             }
         }
         catch (Exception e)
