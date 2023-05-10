@@ -188,8 +188,8 @@ public class EditorialController implements Initializable
                         //alerta succes
                         Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
                         sucessAlert.setTitle("Success!");
-                        sucessAlert.setHeaderText("Has eliminat el treballador!");
-                        sucessAlert.setContentText("El treballador ha sigut eliminat correctament");
+                        sucessAlert.setHeaderText("Has eliminat la editorial!");
+                        sucessAlert.setContentText("La editorial se ha eliminat");
                         sucessAlert.show();
 
                         //delete memory
@@ -225,7 +225,7 @@ public class EditorialController implements Initializable
             Editorial editorial = taulaEditorials.getSelectionModel().getSelectedItem();
             if(editorial != null)
             {
-                TextField novaEditorial = new TextField();
+                TextField novaEditorial = new TextField(editorial.getNomEditor());
                 GridPane gridPane = new GridPane();
                 gridPane.setHgap(10);
                 gridPane.setVgap(10);
