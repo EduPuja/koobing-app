@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2023 a las 17:07:11
+-- Tiempo de generación: 10-05-2023 a las 18:44:46
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -134,10 +134,11 @@ CREATE TABLE `idioma` (
 --
 
 INSERT INTO `idioma` (`id_idioma`, `nom_idioma`) VALUES
-(1, 'Catala'),
-(2, 'Español'),
-(3, 'Ingles'),
-(4, 'Aleman');
+(1, 'Català'),
+(2, 'Espanyol'),
+(3, 'Anglès'),
+(4, 'Alemàn'),
+(9, 'Italià');
 
 -- --------------------------------------------------------
 
@@ -347,10 +348,16 @@ ALTER TABLE `biblioteca`
   MODIFY `id_biblioteca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `genere`
+--
+ALTER TABLE `genere`
+  MODIFY `id_genere` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `idioma`
 --
 ALTER TABLE `idioma`
-  MODIFY `id_idioma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_idioma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `treballador`
