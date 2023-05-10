@@ -213,10 +213,42 @@ public class IdiomaController implements Initializable
     }
 
     public void onModifyIdioma (ActionEvent event) {
-
         try
         {
+            Idioma idioma = taulaIdioma.getSelectionModel().getSelectedItem();
+            if(idioma!=null)
+            {
+                TextField changeName = new TextField();
+                GridPane gridPane = new GridPane();
+                gridPane.setVgap(10);
+                gridPane.setHgap(10);
 
+                gridPane.addRow(0,new Label("Modificar Idioma"),changeName);
+
+
+                // Mostrar los dos diálogos en la misma ventana
+                Alert alert = new Alert(Alert.AlertType.NONE);
+
+                alert.setTitle("Modificar Treballador");
+                alert.setHeaderText("Introduïu les noves dades del treballador:");
+                alert.getDialogPane().setContent(gridPane);
+                alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+                Optional<ButtonType> resultat = alert.showAndWait();
+
+                if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+                {
+                    idioma.setNomIdioma(changeName.getText());
+
+                    GestioIdioma gestioIdioma = new GestioIdioma();
+                    gestioIdioma.modificarIdioma(idioma);
+                    //actuaizar idioma
+                    taulaIdioma.refresh();
+
+                    switchToIdioma(event);
+
+                }
+            }
         }
         catch (Exception e)
         {
