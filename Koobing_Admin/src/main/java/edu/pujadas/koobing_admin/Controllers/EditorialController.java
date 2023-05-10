@@ -234,8 +234,8 @@ public class EditorialController implements Initializable
                 // Mostrar los dos diálogos en la misma ventana
                 Alert alert = new Alert(Alert.AlertType.NONE);
 
-                alert.setTitle("Modificar Treballador");
-                alert.setHeaderText("Introduïu les noves dades del treballador:");
+                alert.setTitle("Modificar Editorial");
+                alert.setHeaderText("Introduïu les noves dades de la Editorial:");
                 alert.getDialogPane().setContent(gridPane);
                 alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
