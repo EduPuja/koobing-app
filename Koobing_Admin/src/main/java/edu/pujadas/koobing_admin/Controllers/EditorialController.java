@@ -181,6 +181,10 @@ public class EditorialController implements Initializable
                         wrong.setContentText("Aquesta editorial esta a llibres");
                         wrong.show();
 
+
+                    }
+                    else
+                    {
                         //alerta succes
                         Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
                         sucessAlert.setTitle("Success!");
