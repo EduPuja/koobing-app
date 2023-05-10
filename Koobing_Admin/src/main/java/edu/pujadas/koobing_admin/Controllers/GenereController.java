@@ -12,10 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -23,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GenereController implements Initializable
@@ -105,7 +107,36 @@ public class GenereController implements Initializable
     public void onAddGenere(ActionEvent event)
     {
         try {
+            TextField nouGenere = new TextField();
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
 
+            gridPane.addRow(0,new Label("Digues el nou genere"),nouGenere);
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Afegir nou Idioma");
+            alert.setHeaderText("Introdueix el nou idioma");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+            if(resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                Genere genere = new Genere();
+                genere.setNomGenere(nouGenere.getText());
+
+                GestioGenere gestioGenere  = new GestioGenere();
+                gestioGenere.crearGenere(genere);
+
+                //actualizar la taula
+                taulaGenere.refresh();;
+
+                switchToGenere(event);
+            }
         }
         catch (Exception e) {
             System.out.println("Error Afegint un nou Genere : " +e.getMessage());
