@@ -173,6 +173,33 @@ public class EditorialController implements Initializable
                 if(editorial != null)
                 {
                     boolean isEditorInBook = gestioEditorial.isEditorInBook(editorial.getIdEditorial());
+                    if(isEditorInBook)
+                    {
+                        // no es pot elimianr :(
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("No es pot eliminar la editorial");
+                        wrong.setContentText("Aquesta editorial esta a llibres");
+                        wrong.show();
+
+                        //alerta succes
+                        Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                        sucessAlert.setTitle("Success!");
+                        sucessAlert.setHeaderText("Has eliminat el treballador!");
+                        sucessAlert.setContentText("El treballador ha sigut eliminat correctament");
+                        sucessAlert.show();
+
+                        //delete memory
+                        ObservableList<Editorial> editorialsObservable = taulaEditorials.getItems();
+                        editorialsObservable.remove(editorial);
+
+                        //delete database
+                        gestioEditorial.eliminarEditor(editorial.getIdEditorial());
+
+                        //refrescar
+                        taulaEditorials.refresh();
+                        switchToEditorial(event);
+
+                    }
                 }
             }
 

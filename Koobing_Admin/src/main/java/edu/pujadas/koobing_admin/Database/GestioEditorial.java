@@ -28,13 +28,20 @@ public class GestioEditorial
         }
     }
 
-    public void eliminarEditor()
+    public void eliminarEditor(int idEditor)
     {
 
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat =con.conectar();
-            String sql ="";
+            String sql ="DELETE FROM editorial where id_editorial = "+idEditor;
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Editorial eliminat correctament");
+            }
+            else System.out.println("Editorial not deleted");
+            con.desconectar();
+
         }
         catch (Exception e)
         {
