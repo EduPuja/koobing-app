@@ -90,6 +90,9 @@ public class GenereController implements Initializable
     }
 
 
+    /**
+     * Metode per carregar la informacio de la taula genere
+     */
     private void loadGenereInfo()
     {
         GestioGenere gestioGenere = new GestioGenere();
@@ -104,6 +107,11 @@ public class GenereController implements Initializable
 
     }
 
+
+    /**
+     * Metode que quant fas click al buto afegir , pots afegir un genere
+     * @param event ActionEvent
+     */
 
     public void onAddGenere(ActionEvent event)
     {
@@ -144,6 +152,10 @@ public class GenereController implements Initializable
         }
     }
 
+    /**
+     * Metode per eliminar un genere fent click al buto de eliminar
+     * @param event ActionEvent
+     */
     public void onDeleteGenere(ActionEvent event)
     {
         try
@@ -181,15 +193,15 @@ public class GenereController implements Initializable
                         sucessAlert.show();
 
                         //delete memory
-                        ObservableList<Idioma> idiomas = taulaIdioma.getItems();
-                        idiomas.remove(idiomas);
+                        ObservableList<Genere> generes = taulaGenere.getItems();
+                        generes.remove(genere);
 
-                        gestioIdioma.eliminarIdioma(idioma.getIdIdioma());
+                        gestioGenere.eliminarGenere(genere.getIdGenere());
 
                         //actualizar la taula
-                        taulaIdioma.refresh();
+                        taulaGenere.refresh();
 
-                        switchToIdioma(event);
+                        switchToGenere(event);
                     }
                 }
             }
