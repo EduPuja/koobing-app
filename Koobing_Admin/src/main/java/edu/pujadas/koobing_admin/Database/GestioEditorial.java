@@ -48,12 +48,19 @@ public class GestioEditorial
             System.out.println("Error Deleting Editorial: " + e.getMessage());
         }
     }
-    public void modificarEditorial()
+    public void modificarEditorial(Editorial editorial)
     {
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat =con.conectar();
-            String sql ="";
+            String sql ="UPDATE `editorial` SET nom_editorial= '"+editorial.getNomEditor()+"' WHERE id_editorial = "+ editorial.getIdEditorial();
+
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Editorial se ha modificat correctament");
+            }
+            else System.out.println("Editorial no se ha modificat");
+            con.desconectar();
         }
         catch (Exception e)
         {

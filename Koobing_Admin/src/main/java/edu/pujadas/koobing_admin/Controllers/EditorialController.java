@@ -222,7 +222,41 @@ public class EditorialController implements Initializable
     public void onModifyEditorial(ActionEvent event)
     {
         try {
+            Editorial editorial = taulaEditorials.getSelectionModel().getSelectedItem();
+            if(editorial != null)
+            {
+                TextField novaEditorial = new TextField();
+                GridPane gridPane = new GridPane();
+                gridPane.setHgap(10);
+                gridPane.setVgap(10);
 
+                gridPane.addRow(0,new Label("Nou nom Editorial: ") , novaEditorial);
+                // Mostrar los dos diálogos en la misma ventana
+                Alert alert = new Alert(Alert.AlertType.NONE);
+
+                alert.setTitle("Modificar Treballador");
+                alert.setHeaderText("Introduïu les noves dades del treballador:");
+                alert.getDialogPane().setContent(gridPane);
+                alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+
+
+                // Esperar a que el usuario presione OK o Cancel
+                Optional<ButtonType> resultat = alert.showAndWait();
+
+                if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+                {
+                    editorial.setNomEditor(novaEditorial.getText());
+
+                    //actualizar a la base de dades
+                    GestioEditorial gestioEditorial = new GestioEditorial();
+                    gestioEditorial.modificarEditorial(editorial);
+
+                    //refrescar
+                    taulaEditorials.refresh();
+                    switchToEditorial(event);
+                }
+            }
         }
         catch (Exception e)
         {
