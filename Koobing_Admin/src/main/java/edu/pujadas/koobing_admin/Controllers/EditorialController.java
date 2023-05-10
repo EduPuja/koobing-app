@@ -159,6 +159,23 @@ public class EditorialController implements Initializable
     public void onDeleteEditorial(ActionEvent event)
     {
         try {
+            GestioEditorial gestioEditorial = new GestioEditorial();
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert wrong  = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Confirmación");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Estàs segur de que vols continuar?");
+
+            Optional<ButtonType> resultado = alerta.showAndWait();
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK)
+            {
+                Editorial editorial = taulaEditorials.getSelectionModel().getSelectedItem();
+                if(editorial != null)
+                {
+                    boolean isEditorInBook = gestioEditorial.isEditorInBook(editorial.getIdEditorial());
+                }
+            }
+
 
         }
         catch (Exception e)
