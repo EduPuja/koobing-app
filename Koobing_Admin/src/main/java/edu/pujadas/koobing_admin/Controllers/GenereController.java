@@ -96,7 +96,7 @@ public class GenereController implements Initializable
         ObservableList<Genere> observableList = FXCollections.observableArrayList(listGenere);
 
         idGenereColum.setCellValueFactory(new PropertyValueFactory<>("idGenere"));
-        descripGenereColum.setCellValueFactory(new PropertyValueFactory<>("descrip"));
+        descripGenereColum.setCellValueFactory(new PropertyValueFactory<>("nomGenere"));
         taulaGenere.setItems(observableList);
 
     }
