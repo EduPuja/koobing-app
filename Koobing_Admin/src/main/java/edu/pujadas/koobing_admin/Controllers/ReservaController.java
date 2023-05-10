@@ -143,6 +143,47 @@ public class ReservaController implements Initializable
         }
     }
 
+    //todo fer els metodes de afegir , modificar , eliminar
+    //todo IMPORNTANT se ha de compovar que la dataInici sigui més PETTIT que la de final . La final no pot ser més gran
+
+    public void onAddReserva(ActionEvent event )
+    {
+        try {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error adding Reserva: " + e.getMessage());
+        }
+
+
+    }
+
+    public void onDeleteReserva(ActionEvent event )
+    {
+        try {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Delete Reserva: " + e.getMessage());
+        }
+
+
+    }
+    public void onModifyReserva(ActionEvent event )
+    {
+        try {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Modify Reserva: " + e.getMessage());
+        }
+
+
+    }
+
     // CANVIS DE PANTALLA
 
 
