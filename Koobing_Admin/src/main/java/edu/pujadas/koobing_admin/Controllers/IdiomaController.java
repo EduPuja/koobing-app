@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.ByteArrayInputStream;
+import java.io.InvalidObjectException;
 import java.net.URL;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -154,6 +155,49 @@ public class IdiomaController implements Initializable
     public void onRemoveIdiom(ActionEvent event){
 
         try {
+
+            GestioIdioma gestioIdioma = new GestioIdioma();
+
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert wrong  = new Alert(Alert.AlertType.ERROR);
+
+            alerta.setTitle("Confirmación");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Estàs segur de que vols continuar?");
+
+
+            Optional<ButtonType> resultado = alerta.showAndWait();
+
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK)
+            {
+                Idioma idioma = taulaIdioma.getSelectionModel().getSelectedItem();
+                if(idioma !=null)
+                {
+                    boolean isIdomaInBook = gestioIdioma.isIdiomaInBook(idioma.getIdIdioma());
+
+                    if(isIdomaInBook)
+                    {
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("No es pot eliminar el idioma");
+                        wrong.setContentText("Aquest idioma pertany a un llibre");
+                        wrong.show();
+                    }
+                    else {
+                        //alerta succes
+                        Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                        sucessAlert.setTitle("Success!");
+                        sucessAlert.setHeaderText("Has eliminat el idioma");
+                        sucessAlert.setContentText("El idioma ha sigut eliminat correctament");
+                        sucessAlert.show();
+
+                        //delete memory
+                        ObservableList<Idioma> idiomas = taulaIdioma.getItems();
+                        idiomas.remove(idiomas);
+
+                        gestioIdioma.eliminarIdioma(idioma.getIdIdioma());
+                    }
+                }
+            }
 
         }
         catch (Exception e)
