@@ -129,7 +129,7 @@ public class BibliotecaController implements Initializable
         try
         {
             TextField nomBilio = new TextField();
-            ComboBox<String> poblacions = new ComboBox<String>();
+            ComboBox<Poblacio> poblacions = new ComboBox<Poblacio>();
             TextField latitudBilio = new TextField();
             TextField longitudBilio = new TextField();
 
@@ -181,9 +181,10 @@ public class BibliotecaController implements Initializable
                biblioteca.setLatitud(Double.parseDouble(latitudBilio.getText()));
                biblioteca.setLongitud(Double.parseDouble(longitudBilio.getText()));
                //poblacio
-                String nomPoblacio = poblacions.getValue();
+                PoblacioStringConverter converter = new PoblacioStringConverter();
+                int idPoblacio = converter.getIdPoblacio(poblacions.getValue());
                 GestioPoblacio gestioPoblacio = new GestioPoblacio();
-                Poblacio p =gestioPoblacio.findPoblacioByName(nomPoblacio);
+                Poblacio p = gestioPoblacio.findPoblacio(idPoblacio);
                 biblioteca.setPoblacio(p);
 
                 //actualizar la taula
