@@ -22,6 +22,8 @@ import org.controlsfx.control.tableview2.TableView2;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -38,13 +40,13 @@ public class ReservaController implements Initializable
     // taula
     public TableView2<Reserva> taulaReserves;
 
-    public TableColumn nomUserColum;
-    public TableColumn idReservaColum;
-    public TableColumn nomWorkerColum;
-    public TableColumn nomBiblioColum;
-    public TableColumn bookTitleColum;
-    public TableColumn dataHoraIniciColum;
-    public TableColumn dataHoraFiciColum;
+    public TableColumn<Reserva,String> nomUserColum;
+    public TableColumn<Reserva,Integer> idReservaColum;
+    public TableColumn<Reserva,String> nomWorkerColum;
+    public TableColumn<Reserva,String> nomBiblioColum;
+    public TableColumn<Reserva,String> bookTitleColum;
+    public TableColumn<Reserva, Timestamp> dataHoraIniciColum;
+    public TableColumn<Reserva,Timestamp> dataHoraFiciColum;
 
 
 
@@ -108,27 +110,30 @@ public class ReservaController implements Initializable
             );
             //afegint el observable list en el tableview
             taulaReserves.setItems(observableListReserva);
-            idReserva.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
-            nomUser.setCellValueFactory(cellData ->{
+            idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+            nomUserColum.setCellValueFactory(cellData ->{
                 Usuari usuari = cellData.getValue().getUsuari();
                 String nom = usuari.getNom();
                 return new SimpleStringProperty(nom);
             });
-            nomWorker.setCellValueFactory(cellData->{
+            nomWorkerColum.setCellValueFactory(cellData->{
                 Treballador treballador = cellData.getValue().getTreballador();
                 String nom = treballador.getNom();
                 return new SimpleStringProperty(nom);
             });
-            nomBiblio.setCellValueFactory(cellData ->{
+            nomBiblioColum.setCellValueFactory(cellData ->{
                 Biblioteca bilbio = cellData.getValue().getBiblio();
                 String nomBiblio = bilbio.getNomBiblioteca();
                 return new SimpleStringProperty(nomBiblio);
             });
-            bookTitle.setCellValueFactory(cellData ->{
+            bookTitleColum.setCellValueFactory(cellData ->{
                 Llibre book = cellData.getValue().getLlibre();
                 String titol = book.getTitol();
               return new SimpleStringProperty(titol);
             });
+            dataHoraIniciColum.setCellValueFactory(new PropertyValueFactory<>("dataHoraReserva"));
+            dataHoraFiciColum.setCellValueFactory(new PropertyValueFactory<>("dataHoraEntrega"));
+
 
 
         }
