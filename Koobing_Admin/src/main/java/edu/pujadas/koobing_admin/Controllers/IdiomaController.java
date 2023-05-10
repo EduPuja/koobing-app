@@ -135,6 +135,11 @@ public class IdiomaController implements Initializable
                 GestioIdioma gestioIdioma = new GestioIdioma();
                 gestioIdioma.crearIdioma(idioma);
 
+                //actualizar la taula
+                taulaIdioma.refresh();
+
+                switchToIdioma(event);
+
             }
 
 
