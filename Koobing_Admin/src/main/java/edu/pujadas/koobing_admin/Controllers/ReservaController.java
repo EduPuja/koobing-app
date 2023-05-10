@@ -27,11 +27,17 @@ import java.util.ResourceBundle;
 
 public class ReservaController implements Initializable
 {
-    public TableView2<Reserva> taulaReserves;
 
+    Parent root;
+    Stage stage;
+    Scene scene;
 
 
     public ImageView avatarWorker;
+
+    // taula
+    public TableView2<Reserva> taulaReserves;
+
     public TableColumn nomUserColum;
     public TableColumn idReservaColum;
     public TableColumn nomWorkerColum;
@@ -39,9 +45,7 @@ public class ReservaController implements Initializable
     public TableColumn bookTitleColum;
     public TableColumn dataHoraIniciColum;
     public TableColumn dataHoraFiciColum;
-    Parent root;
-    Stage stage;
-    Scene scene;
+
 
 
     ArrayList<Reserva> listReserves = new ArrayList<>();
