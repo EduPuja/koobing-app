@@ -106,7 +106,51 @@ public class EditorialController implements Initializable
     }
 
 
+    /**
+     * Metode per afegir una editorial
+     * @param event ActionEvent
+     */
+    public void onAddEditorial(ActionEvent event)
+    {
+        try
+        {
 
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error afegint Editorial: " +e.getMessage());
+        }
+    }
+
+    /**
+     * Metode per eliminar una editorial
+     * @param event ActionEvent
+     */
+    public void onDeleteEditorial(ActionEvent event)
+    {
+        try {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Deleting Editor: " +e.getMessage());
+        }
+    }
+
+    /**
+     * Metode per modificar una editorial
+     * @param event ActionEvent
+     */
+    public void onModifyEditorial(ActionEvent event)
+    {
+        try {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error modify Editor: " +e.getMessage());
+        }
+    }
 
     // CANVIS DE PANTALLA
 
