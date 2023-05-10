@@ -7,20 +7,42 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//todo falta create, update, delete
 public class GestioGenere
 {
-    public void crearGenere()
+    public void crearGenere(Genere genere)
     {
-
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat =con.conectar();
+            String sql = "INSERT INTO genere vaues"
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error adding genere " +e.getMessage());
+        }
     }
     public void modificarGenere()
     {
+        try
+        {
 
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Modfiy genere " +e.getMessage());
+        }
     }
     public void eliminarGenere()
     {
+        try
+        {
 
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Deleting genere " +e.getMessage());
+        }
     }
     public ArrayList<Genere> consultarGeneres()
     {
