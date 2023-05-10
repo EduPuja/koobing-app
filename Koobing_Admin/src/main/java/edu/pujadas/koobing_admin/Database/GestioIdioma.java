@@ -7,12 +7,25 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//todo falta create delete mod
+//todo falta:  delete ,mod
 public class GestioIdioma
 {
-    public void crearIdioma()
+    public void crearIdioma(Idioma idioma)
     {
-
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat  = con.conectar();
+            String sql = "INSERT INTO idioma (nom_idioma) values ( '"+idioma.getNomIdioma()+"')";
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Idioma inserted successfully");
+            }
+            else System.out.println("Idioma not inserted");
+            con.desconectar();
+        }
+        catch (Exception e) {
+            System.out.println("Error inserting Idioma: " +e.getMessage());
+        }
     }
 
     public void eliminarIdioma()

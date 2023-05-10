@@ -12,12 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -25,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class IdiomaController implements Initializable
@@ -109,6 +109,33 @@ public class IdiomaController implements Initializable
         {
             //texfield
             TextField nomText = new TextField();
+
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+            gridPane.addRow(0,new Label("Digues el nou idioma"),nomText);
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Afegir nou Idioma");
+            alert.setHeaderText("Introdueix el nou idioma");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+
+            if(resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                Idioma idioma = new Idioma();
+                idioma.setNomIdioma(nomIdioma.getText());
+
+                GestioIdioma gestioIdioma = new GestioIdioma();
+                gestioIdioma.crearIdioma(idioma);
+
+            }
 
 
         }
