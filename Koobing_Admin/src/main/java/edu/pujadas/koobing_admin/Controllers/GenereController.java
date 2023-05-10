@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_admin.Controllers;
 
+import edu.pujadas.koobing_admin.Database.GestioGenere;
 import edu.pujadas.koobing_admin.Models.Genere;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
@@ -18,6 +19,7 @@ import org.controlsfx.control.tableview2.TableView2;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GenereController implements Initializable
@@ -34,6 +36,7 @@ public class GenereController implements Initializable
     public TableColumn<Genere,Integer> idGenereColum;
     public TableColumn<Genere,String > descripGenereColum;
 
+    private ArrayList<Genere> listGenere = new ArrayList<Genere>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,6 +83,13 @@ public class GenereController implements Initializable
         }
     }
 
+
+    private void loadGenereInfo()
+    {
+        GestioGenere gestioGenere = new GestioGenere();
+        listGenere = gestioGenere.consultarGeneres();
+
+    }
 
 
 
