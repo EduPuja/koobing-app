@@ -192,7 +192,7 @@ public class IdiomaController implements Initializable
 
                         //delete memory
                         ObservableList<Idioma> idiomas = taulaIdioma.getItems();
-                        idiomas.remove(idiomas);
+                        idiomas.remove(idioma);
 
                         gestioIdioma.eliminarIdioma(idioma.getIdIdioma());
 
