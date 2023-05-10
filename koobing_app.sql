@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2023 a las 18:44:46
+-- Tiempo de generación: 10-05-2023 a las 19:28:34
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -115,8 +115,7 @@ INSERT INTO `genere` (`id_genere`, `descrip`) VALUES
 (3, 'Comedia'),
 (4, 'Aventura'),
 (5, 'Infantil'),
-(6, 'Ciencia Ficcio'),
-(7, 'Anime');
+(6, 'Ciencia Ficcio');
 
 -- --------------------------------------------------------
 
@@ -348,10 +347,16 @@ ALTER TABLE `biblioteca`
   MODIFY `id_biblioteca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `editorial`
+--
+ALTER TABLE `editorial`
+  MODIFY `id_editorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `genere`
 --
 ALTER TABLE `genere`
-  MODIFY `id_genere` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_genere` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `idioma`
@@ -386,7 +391,7 @@ ALTER TABLE `biblioteca`
 --
 ALTER TABLE `llibre`
   ADD CONSTRAINT `autorFK` FOREIGN KEY (`id_autor`) REFERENCES `autor` (`id_autor`),
-  ADD CONSTRAINT `editorial_FK` FOREIGN KEY (`id_editor`) REFERENCES `editorial` (`id_editorial`),
+  ADD CONSTRAINT `editorial_fk` FOREIGN KEY (`id_editor`) REFERENCES `editorial` (`id_editorial`),
   ADD CONSTRAINT `genere_fk` FOREIGN KEY (`id_genere`) REFERENCES `genere` (`id_genere`),
   ADD CONSTRAINT `idioma_fk` FOREIGN KEY (`id_idioma`) REFERENCES `idioma` (`id_idioma`);
 
