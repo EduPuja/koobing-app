@@ -12,7 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +29,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import com.jfoenix.controls.*;
 
 public class ReservaController implements Initializable
 {
@@ -98,6 +102,10 @@ public class ReservaController implements Initializable
         }
     }
 
+
+    /**
+     * Metode per carregar les dades de la reserva
+     */
     public void loadInfoReserves()
     {
        // System.out.println("Loading info reserva"); // debug testing
@@ -143,12 +151,33 @@ public class ReservaController implements Initializable
         }
     }
 
-    //todo fer els metodes de afegir , modificar , eliminar
+
     //todo IMPORNTANT se ha de compovar que la dataInici sigui més PETTIT que la de final . La final no pot ser més gran
 
     public void onAddReserva(ActionEvent event )
     {
         try {
+
+            //todo fer el String converter per usuari
+            ComboBox<Usuari> usuariComboBox = new ComboBox<Usuari>();
+
+            //optinc el treballador actual el mostro
+            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+            TextField workerName = new TextField(worker.getNom());
+            workerName.setDisable(true); // el desabilito perque no es pigui modificar
+
+
+            //biblioteca
+            //Todo fer el String converter biblio
+            ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
+            // libre
+            //todo converter String llibre
+            ComboBox<Llibre > llibreComboBox  = new ComboBox<Llibre>();
+
+
+            //todo falta el formatter i que sigui mes gran la de fi
+            //JFXDateTimePicker dateTimePicker = new JFXDateTimePicker();
+
 
         }
         catch (Exception e)
