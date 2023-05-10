@@ -47,9 +47,23 @@ public class GestioIdioma
             System.out.println("Error deleting a idioma : " +e.getMessage());
         }
     }
-    public void modificarIdioma()
+    public void modificarIdioma(Idioma i)
     {
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement statement = con.conectar();
+            String sql = "UPDATE idioma SET nom_idioma = '"+i.getNomIdioma()+"' WHERE id_idioma = "+i.getIdIdioma();
 
+            if(statement.executeUpdate(sql) == 1)
+            {
+                System.out.println("Idioma actualizat correctament");
+            }
+            else System.out.println("Idioma not updated correctly");
+            con.desconectar();
+        }
+        catch (Exception e) {
+            System.out.println("Error modfy the idioma :" +e.getMessage());
+        }
     }
     public ArrayList<Idioma> consultarIdiomes()
     {
