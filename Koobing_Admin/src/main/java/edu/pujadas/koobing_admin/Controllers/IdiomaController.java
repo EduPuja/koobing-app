@@ -195,6 +195,11 @@ public class IdiomaController implements Initializable
                         idiomas.remove(idiomas);
 
                         gestioIdioma.eliminarIdioma(idioma.getIdIdioma());
+
+                        //actualizar la taula
+                        taulaIdioma.refresh();
+
+                        switchToIdioma(event);
                     }
                 }
             }
