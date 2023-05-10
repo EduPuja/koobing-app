@@ -218,7 +218,7 @@ public class IdiomaController implements Initializable
             Idioma idioma = taulaIdioma.getSelectionModel().getSelectedItem();
             if(idioma!=null)
             {
-                TextField changeName = new TextField();
+                TextField changeName = new TextField(idioma.getNomIdioma());
                 GridPane gridPane = new GridPane();
                 gridPane.setVgap(10);
                 gridPane.setHgap(10);
