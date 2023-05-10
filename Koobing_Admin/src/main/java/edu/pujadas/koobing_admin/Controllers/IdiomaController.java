@@ -105,7 +105,7 @@ public class IdiomaController implements Initializable
 
 
     public void onAddIdiom(ActionEvent event){
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+      
         try
         {
             //texfield
