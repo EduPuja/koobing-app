@@ -9,14 +9,23 @@ import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 
-//todo falta create, mod , update
+
 public class GestioReserva
 {
     public void crearReserva(Reserva reserva)
     {
         try
         {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement statement = con.conectar();
+            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_hora_reserva`, `data_hora_entrega`) VALUES " +
+                    "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataHoraReserva()+"','"+reserva.getDataHoraEntrega()+"') ";
 
+            if(statement.executeUpdate(sql) == 1)
+            {
+                System.out.println("Reserva inserted successfuly!");
+            }
+            else System.out.println("Reserva not inseted :(");
         }
         catch (Exception e)
         {
@@ -24,10 +33,20 @@ public class GestioReserva
         }
     }
 
-    public void modificarReserva(int idReserva)
+    public void modificarReserva(Reserva reserva)
     {
         try
         {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql ="UPDATE `reserves` SET `id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"'," +
+                    "`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"'," +
+                    "`data_hora_reserva`='"+reserva.getDataHoraReserva()+"',`data_hora_entrega`='"+reserva.getDataHoraEntrega()+"' WHERE id_reserva=" +reserva.getIdReserva();
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Reseva update successfully");
+            }
+            else System.out.println("Reserva not updated ;(");
 
         }
         catch (Exception e)
@@ -40,7 +59,14 @@ public class GestioReserva
     {
         try
         {
-
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql="DELETE FROM `reserves` WHERE id_reserva =" +idReserva;
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Reserva deleted succesfully");
+            }
+            else System.out.println("Reserva not deleted :(");
         }
         catch (Exception e)
         {
