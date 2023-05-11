@@ -30,9 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-
-
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 
 public class ReservaController implements Initializable
@@ -165,11 +163,9 @@ public class ReservaController implements Initializable
 
             //usuari
             ComboBox<Usuari> usuariComboBox = new ComboBox<Usuari>();
-            UsuariStringConverter userConverter = new UsuariStringConverter();
-            usuariComboBox.setConverter(userConverter);
+
 
             //treballador
-            //optinc el treballador actual el mostro
             Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
             TextField workerName = new TextField(worker.getNom());
             workerName.setDisable(true); // el desabilito perque no es pigui modificar
@@ -177,13 +173,17 @@ public class ReservaController implements Initializable
             //biblioteca
 
             ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
-            BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
-            bibliotecaComboBox.setConverter(converterBiblio);
+
+
 
             // libre
             ComboBox<Llibre > llibreComboBox  = new ComboBox<Llibre>();
-            LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-            llibreComboBox.setConverter(llibreStringConverter);
+
+
+
+
+            //IMPORTANT AFEGIR LES DADES als comboboxes
+            addDataComboxes(usuariComboBox,bibliotecaComboBox,llibreComboBox);
 
 
 
@@ -237,6 +237,7 @@ public class ReservaController implements Initializable
 
 
                 //set user
+                UsuariStringConverter userConverter = new UsuariStringConverter();
                 int idUser = userConverter.getIdUsuari(usuariComboBox.getValue());
                 GestioUsuari gestioUsuari = new GestioUsuari();
                 Usuari user = gestioUsuari.findUserID(idUser);
@@ -249,12 +250,14 @@ public class ReservaController implements Initializable
 
 
                 //biblioteca
+                BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
                 int idBiblio = converterBiblio.getIdBiblioteca(bibliotecaComboBox.getValue());
                 GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
                 Biblioteca biblioteca = gestioBiblioteca.findBiblioteca(idBiblio);
                 reserva.setBiblio(biblioteca);
 
                 //set llibre to reserva
+                LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
                 long isbnBook =llibreStringConverter.getISBNLlibre(llibreComboBox.getValue());
                 GestioLlibre gestioLlibre = new GestioLlibre();
                 Llibre book = gestioLlibre.findLLibre(isbnBook);
@@ -328,12 +331,32 @@ public class ReservaController implements Initializable
     }
 
 
-    private void changeEndDate(String dateValue)
+    private void addDataComboxes(ComboBox<Usuari> usuariComboBox, ComboBox<Biblioteca> bibliotecaComboBox, ComboBox<Llibre> llibreComboBox)
     {
-        if (dateValue.equals("1 mes")) {
 
-            LocalDate newDate = LocalDate.now().plusMonths(1);
-        }
+        //usuari
+        GestioUsuari gestioUsuari = new GestioUsuari();
+        ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
+        UsuariStringConverter userConverter = new UsuariStringConverter();
+        usuariComboBox.setConverter(userConverter);
+        usuariComboBox.getItems().addAll(listaUsuarios);
+
+        //biblioteca
+        GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+        ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
+        BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
+        bibliotecaComboBox.getItems().addAll(listaBiblio);
+        bibliotecaComboBox.setConverter(bibliotecaStringConverter);
+
+
+        //llibre
+        GestioLlibre gestioLlibre = new GestioLlibre();
+        ArrayList<Llibre> listLlibres = gestioLlibre.consultarLlibres();
+        LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+        llibreComboBox.getItems().addAll(listLlibres);
+        llibreComboBox.setConverter(llibreStringConverter);
+
+
     }
     // CANVIS DE PANTALLA
 
