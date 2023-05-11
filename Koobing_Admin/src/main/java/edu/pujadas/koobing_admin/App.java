@@ -34,21 +34,11 @@ public class App extends Application
         Parent root = loader.load();
         Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
 
-   /* public void switchTreballador() throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/pujadas/koobing_admin/screens/treballador.fxml"));
-        Parent root = loader.load();
-
-
-        //todo treballador
-        Scene scene = new Scene(root, 1000, 600);
-        stage.setScene(scene);
-        stage.show();
-    }*/
     public static void main(String[] args)
     {
         launch();
