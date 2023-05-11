@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-05-2023 a las 18:10:55
+-- Tiempo de generación: 11-05-2023 a las 23:16:47
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -197,16 +197,16 @@ CREATE TABLE `reserves` (
   `id_treballador` int(11) NOT NULL,
   `id_biblioteca` int(11) NOT NULL,
   `ISBN` bigint(13) NOT NULL,
-  `data_hora_reserva` datetime NOT NULL,
-  `data_hora_entrega` datetime NOT NULL
+  `data_inici` date NOT NULL,
+  `data_fi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reserves`
 --
 
-INSERT INTO `reserves` (`id_reserva`, `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_hora_reserva`, `data_hora_entrega`) VALUES
-(1, 12, 26, 1, 12312312312312, '2023-05-10 20:13:24', '2023-05-31 20:13:24');
+INSERT INTO `reserves` (`id_reserva`, `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`) VALUES
+(1, 12, 26, 1, 12312312312312, '2023-05-11', '2023-05-19');
 
 -- --------------------------------------------------------
 
@@ -375,7 +375,7 @@ ALTER TABLE `idioma`
 -- AUTO_INCREMENT de la tabla `reserves`
 --
 ALTER TABLE `reserves`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `treballador`

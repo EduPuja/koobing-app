@@ -148,7 +148,7 @@ public class ReservaController implements Initializable
               return new SimpleStringProperty(titol);
             });
             dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
-            dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFi"));
+            dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
 
 
 
@@ -269,16 +269,16 @@ public class ReservaController implements Initializable
                 DateTimeFormatter formatterDataInici = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 LocalDateTime dateTimeStart = LocalDateTime.parse(dataValue, formatter);
                 Timestamp timeStart = Timestamp.valueOf(dateTimeStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-                reserva.setDataHoraReserva(timeStart);
+               // reserva.setDataHoraReserva(timeStart);
 
                 //date end
                 if (dataEndComboBox.getValue().equals("1 mes")) {
                     LocalDate newDate = LocalDate.now().plusMonths(1);
                     Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                    reserva.setDataHoraEntrega(timeEnd);
+                   // reserva.setDataHoraEntrega(timeEnd);
                     //afegir la reserva
-                    GestioReserva gestioReserva =new GestioReserva();
-                    gestioReserva.crearReserva(reserva);
+                    /*  GestioReserva gestioReserva =new GestioReserva();
+                    gestioReserva.crearReserva(reserva);*/
 
 
            
@@ -287,10 +287,10 @@ public class ReservaController implements Initializable
                 else if (dataEndComboBox.getValue().equals("10 dies")) {
                     LocalDate newDate = LocalDate.now().plusDays(10);
                     Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                    reserva.setDataHoraEntrega(timeEnd);
+                  //  reserva.setDataHoraEntrega(timeEnd);
                     //afegir la reserva
-                    GestioReserva gestioReserva =new GestioReserva();
-                    gestioReserva.crearReserva(reserva);
+                   /*  GestioReserva gestioReserva =new GestioReserva();
+                    gestioReserva.crearReserva(reserva);*/
 
 
 
@@ -299,10 +299,10 @@ public class ReservaController implements Initializable
                 else if (dataEndComboBox.getValue().equals("5 dies")) {
                     LocalDate newDate = LocalDate.now().plusDays(5);
                     Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                    reserva.setDataHoraEntrega(timeEnd);
+                   // reserva.setDataHoraEntrega(timeEnd);
                     //afegir la reserva
-                    GestioReserva gestioReserva =new GestioReserva();
-                    gestioReserva.crearReserva(reserva);
+                  /*  GestioReserva gestioReserva =new GestioReserva();
+                    gestioReserva.crearReserva(reserva);*/
 
 
 
@@ -455,7 +455,7 @@ public class ReservaController implements Initializable
                     if (dataEndComboBox.getValue().equals("1 mes")) {
                         LocalDate newDate = LocalDate.now().plusMonths(1);
                         Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                        reserva.setDataHoraEntrega(timeEnd);
+                      //  reserva.setDataHoraEntrega(timeEnd);
                         //afegir la reserva
                           /*  GestioReserva gestioReserva =new GestioReserva();
                         gestioReserva.crearReserva(reserva);*/
@@ -467,7 +467,7 @@ public class ReservaController implements Initializable
                     else if (dataEndComboBox.getValue().equals("10 dies")) {
                         LocalDate newDate = LocalDate.now().plusDays(10);
                         Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                        reserva.setDataHoraEntrega(timeEnd);
+                      //  reserva.setDataHoraEntrega(timeEnd);
                         //afegir la reserva
                        /*  GestioReserva gestioReserva =new GestioReserva();
                         gestioReserva.crearReserva(reserva);*/
@@ -479,7 +479,7 @@ public class ReservaController implements Initializable
                     else if (dataEndComboBox.getValue().equals("5 dies")) {
                         LocalDate newDate = LocalDate.now().plusDays(5);
                         Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                        reserva.setDataHoraEntrega(timeEnd);
+                       // reserva.setDataHoraEntrega(timeEnd);
                         //afegir la reserva
                       /*  GestioReserva gestioReserva =new GestioReserva();
                         gestioReserva.crearReserva(reserva);*/
@@ -637,7 +637,7 @@ public class ReservaController implements Initializable
      * @throws Exception exeception
      */
     public void switchToGenere(ActionEvent event) throws Exception
-    {
+     {
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/genere.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

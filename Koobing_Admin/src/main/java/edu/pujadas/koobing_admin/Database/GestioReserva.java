@@ -18,8 +18,8 @@ public class GestioReserva
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement statement = con.conectar();
-            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_hora_reserva`, `data_hora_entrega`) VALUES " +
-                    "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataHoraReserva()+"','"+reserva.getDataHoraEntrega()+"') ";
+            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`) VALUES " +
+                    "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataInici()+"','"+reserva.getDataFI()+"') ";
 
             if(statement.executeUpdate(sql) == 1)
             {
@@ -41,7 +41,7 @@ public class GestioReserva
             Statement stat = con.conectar();
             String sql ="UPDATE `reserves` SET `id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"'," +
                     "`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"'," +
-                    "`data_hora_reserva`='"+reserva.getDataHoraReserva()+"',`data_hora_entrega`='"+reserva.getDataHoraEntrega()+"' WHERE id_reserva=" +reserva.getIdReserva();
+                    "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"' WHERE id_reserva=" +reserva.getIdReserva();
             if(stat.executeUpdate(sql) == 1)
             {
                 System.out.println("Reseva update successfully");
@@ -105,8 +105,8 @@ public class GestioReserva
                 reserva.setTreballador(new GestioTreballador().findTreballador(rs.getInt("id_treballador")));
                 reserva.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
                 reserva.setLlibre(new GestioLlibre().findLLibre(rs.getLong("ISBN")));
-                reserva.setDataHoraReserva(rs.getTimestamp("data_hora_reserva"));
-                reserva.setDataHoraEntrega(rs.getTimestamp("data_hora_entrega"));
+                reserva.setDataInici(rs.getDate("data_inici"));
+                reserva.setDataFI(rs.getDate("data_fi"));
 
                 //addin the object into the arraylist
                 listReserva.add(reserva);
