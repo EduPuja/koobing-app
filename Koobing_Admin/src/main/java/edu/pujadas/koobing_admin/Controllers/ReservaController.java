@@ -467,6 +467,10 @@ public class ReservaController implements Initializable
                             // La fecha de fin es mayor a la fecha de inicio
                             reserva.setDataInici(start);
                             reserva.setDataFI(end);
+
+
+                            GestioReserva gestioReserva = new GestioReserva();
+                            gestioReserva.modificarReserva(reserva);
                         } else {
                             // La fecha de fin es menor o igual a la fecha de inicio
 
