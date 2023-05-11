@@ -323,6 +323,42 @@ public class ReservaController implements Initializable
     {
         try {
 
+            GestioReserva gestioReserva = new GestioReserva();
+            //confirmacion
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            //error
+            Alert wrong = new Alert(Alert.AlertType.ERROR);
+
+            // mostrar el una alerta de tipus confirmacio per poder eliminar el llibre
+            alerta.setTitle("Confirmación");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Estàs segur de que vols continuar?");
+
+
+            Optional<ButtonType> resultado = alerta.showAndWait();
+
+
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                Reserva reserva =taulaReserves.getSelectionModel().getSelectedItem();
+                if(reserva!=null)
+                {
+                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    sucessAlert.setTitle("Success!");
+                    sucessAlert.setHeaderText("Has eliminat una reserva!");
+                    sucessAlert.setContentText("La reserva s'ha eliminat correctament!");
+                    sucessAlert.show();
+
+
+                    //delte to memory
+                    ObservableList<Reserva> itemsReserves = taulaReserves.getItems();
+                    itemsReserves.remove(reserva);
+                    //eliminar reseva
+                    gestioReserva.eliminarReserva(reserva.getIdReserva());
+                    taulaReserves.refresh();
+                    switchToReserva(event);
+
+                }
+            }
         }
         catch (Exception e)
         {
