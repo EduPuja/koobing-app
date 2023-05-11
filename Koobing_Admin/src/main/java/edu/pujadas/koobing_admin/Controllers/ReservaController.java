@@ -385,17 +385,13 @@ public class ReservaController implements Initializable
     {
         try {
             Reserva reserva = taulaReserves.getSelectionModel().getSelectedItem();
+            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
             if(reserva!=null){
                 ComboBox<Usuari> userComboBox= new ComboBox<>();
                 ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
                 ComboBox<Llibre> llibeComboBox= new ComboBox<>();
-
-
-                ComboBox<String> dataEndComboBox = new ComboBox<String>();
-                ObservableList<String> dies = FXCollections.observableArrayList(
-                        "1 mes" ,"10 dies ","5 dies"
-                );
-                dataEndComboBox.setItems(dies);
+                DatePicker datePickerStart = new DatePicker(LocalDate.now());
+                DatePicker datePickerEnd = new DatePicker();
 
 
                 addDataComboxes(userComboBox,bibliotecaComboBox,llibeComboBox);
@@ -411,6 +407,8 @@ public class ReservaController implements Initializable
                 gridPane.addRow(0,new Label("Usuaris ") ,userComboBox);
                 gridPane.addRow(1, new Label("Bibilioteca"), bibliotecaComboBox);
                 gridPane.addRow(2, new Label("LLibre "),llibeComboBox);
+                gridPane.addRow(3, new Label("Data de inicio"), datePickerStart);
+                gridPane.addRow(4, new Label("Data de fin"), datePickerEnd);
 
 
 
@@ -433,7 +431,7 @@ public class ReservaController implements Initializable
 
 
                     //set worker
-                   // reserva.setTreballador(worker);
+                    reserva.setTreballador(worker);
 
 
 
@@ -452,50 +450,40 @@ public class ReservaController implements Initializable
                     reserva.setLlibre(book);
 
 
-                    //data hora inci
-                    /*String dataValue = da.getText();
-                    DateTimeFormatter formatterDataInici = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                    LocalDateTime dateTimeStart = LocalDateTime.parse(dataValue, formatter);
-                    Timestamp timeStart = Timestamp.valueOf(dateTimeStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-                    reserva.setDataHoraReserva(timeStart);*/
+                    //data incii
+                    LocalDate dateStart =datePickerStart.getValue();
 
-                    //date end
-                    if (dataEndComboBox.getValue().equals("1 mes")) {
-                        LocalDate newDate = LocalDate.now().plusMonths(1);
-                        Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                      //  reserva.setDataHoraEntrega(timeEnd);
-                        //afegir la reserva
-                          /*  GestioReserva gestioReserva =new GestioReserva();
-                        gestioReserva.crearReserva(reserva);*/
+                    Alert wrong = new Alert(Alert.AlertType.ERROR);
+
+                    //data fin
+                    LocalDate dateEnd =datePickerEnd.getValue();
 
 
+                    if (dateStart != null && dateEnd != null) {
+                        Date start = Date.valueOf(dateStart);
+                        Date end = Date.valueOf(dateEnd);
 
+                        if (end.compareTo(start) > 0) {
+                            // La fecha de fin es mayor a la fecha de inicio
+                            reserva.setDataInici(start);
+                            reserva.setDataFI(end);
+                        } else {
+                            // La fecha de fin es menor o igual a la fecha de inicio
 
+                            wrong.setTitle("Error");
+                            wrong.setHeaderText("Fecha de fin incorrecta");
+                            wrong.setContentText("La fecha de fin debe ser mayor a la fecha de inicio.");
+                            wrong.showAndWait();
+                        }
+                    } else {
+                        // Alguna de las fechas es nula
+
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("Fechas no seleccionadas");
+                        wrong.setContentText("Debe seleccionar una fecha de inicio y una fecha de fin.");
+                        wrong.showAndWait();
                     }
-                    else if (dataEndComboBox.getValue().equals("10 dies")) {
-                        LocalDate newDate = LocalDate.now().plusDays(10);
-                        Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                      //  reserva.setDataHoraEntrega(timeEnd);
-                        //afegir la reserva
-                       /*  GestioReserva gestioReserva =new GestioReserva();
-                        gestioReserva.crearReserva(reserva);*/
 
-
-
-
-                    }
-                    else if (dataEndComboBox.getValue().equals("5 dies")) {
-                        LocalDate newDate = LocalDate.now().plusDays(5);
-                        Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
-                       // reserva.setDataHoraEntrega(timeEnd);
-                        //afegir la reserva
-                      /*  GestioReserva gestioReserva =new GestioReserva();
-                        gestioReserva.crearReserva(reserva);*/
-
-
-
-
-                    }
 
                     // refrescar
                     taulaReserves.refresh();
