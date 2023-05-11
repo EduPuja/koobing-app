@@ -22,6 +22,7 @@ import org.controlsfx.control.tableview2.TableView2;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,6 +40,7 @@ import javafx.scene.control.TextFormatter.Change;
 public class ReservaController implements Initializable
 {
 
+
     Parent root;
     Stage stage;
     Scene scene;
@@ -54,8 +56,9 @@ public class ReservaController implements Initializable
     public TableColumn<Reserva,String> nomWorkerColum;
     public TableColumn<Reserva,String> nomBiblioColum;
     public TableColumn<Reserva,String> bookTitleColum;
-    public TableColumn<Reserva, Timestamp> dataHoraIniciColum;
-    public TableColumn<Reserva,Timestamp> dataHoraFiciColum;
+    public TableColumn<Reserva, Date> dataInici;
+    public TableColumn<Reserva,Date> dataFi;
+
 
 
 
@@ -144,8 +147,8 @@ public class ReservaController implements Initializable
                 String titol = book.getTitol();
               return new SimpleStringProperty(titol);
             });
-            dataHoraIniciColum.setCellValueFactory(new PropertyValueFactory<>("dataHoraReserva"));
-            dataHoraFiciColum.setCellValueFactory(new PropertyValueFactory<>("dataHoraEntrega"));
+            dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
+            dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFi"));
 
 
 
