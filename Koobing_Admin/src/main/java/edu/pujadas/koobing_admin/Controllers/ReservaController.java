@@ -370,7 +370,13 @@ public class ReservaController implements Initializable
     public void onModifyReserva(ActionEvent event )
     {
         try {
-
+            Reserva reserva = taulaReserves.getSelectionModel().getSelectedItem();
+            if(reserva!=null){
+                ComboBox<Usuari> userComboBox= new ComboBox<>();
+                ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
+                ComboBox<Llibre> llibeComboBox= new ComboBox<>();
+                //todo data hora start and end
+            }
         }
         catch (Exception e)
         {
