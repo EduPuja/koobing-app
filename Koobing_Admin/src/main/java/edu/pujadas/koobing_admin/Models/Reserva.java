@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_admin.Models;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Reserva
@@ -9,22 +10,22 @@ public class Reserva
     Treballador treballador;
     Biblioteca biblio;
     Llibre llibre;
-    Timestamp dataHoraReserva;
-    Timestamp dataHoraEntrega;
+    Date dataInici;
+    Date dataFI;
 
     public Reserva()
     {
     }
 
-    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, Timestamp dataHoraReserva, Timestamp dataHoraEntrega)
+    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, Date dataInici, Date dataFi)
     {
         this.idReserva = idReserva;
         this.usuari = usuari;
         this.treballador = treballador;
         this.biblio = biblio;
         this.llibre = llibre;
-        this.dataHoraReserva = dataHoraReserva;
-        this.dataHoraEntrega = dataHoraEntrega;
+        this.dataInici = dataInici;
+        this.dataFI = dataFi;
     }
 
     public int getIdReserva()
@@ -77,23 +78,19 @@ public class Reserva
         this.llibre = llibre;
     }
 
-    public Timestamp getDataHoraReserva()
-    {
-        return dataHoraReserva;
+    public Date getDataInici() {
+        return dataInici;
     }
 
-    public void setDataHoraReserva(Timestamp dataHoraReserva)
-    {
-        this.dataHoraReserva = dataHoraReserva;
+    public void setDataInici(Date dataInici) {
+        this.dataInici = dataInici;
     }
 
-    public Timestamp getDataHoraEntrega()
-    {
-        return dataHoraEntrega;
+    public Date getDataFI() {
+        return dataFI;
     }
 
-    public void setDataHoraEntrega(Timestamp dataHoraEntrega)
-    {
-        this.dataHoraEntrega = dataHoraEntrega;
+    public void setDataFI(Date dataFI) {
+        this.dataFI = dataFI;
     }
 }

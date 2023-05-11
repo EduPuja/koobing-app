@@ -97,8 +97,8 @@
                                 <TableColumn fx:id="nomWorkerColum" prefWidth="112.0" text="Nom treballador" />
                                 <TableColumn fx:id="nomBiblioColum" prefWidth="112.0" text="Nom Biblioteca" />
                                 <TableColumn fx:id="bookTitleColum" prefWidth="112.0" text="Titol" />
-                                <TableColumn fx:id="dataHoraIniciColum" prefWidth="112.0" text="Data Hora Inici" />
-                                <TableColumn fx:id="dataHoraFiciColum" prefWidth="112.0" text="Data Hora Fi" />
+                                <TableColumn fx:id="dataInici" prefWidth="112.0" text="Data  Inici" />
+                                <TableColumn fx:id="dataFi" prefWidth="112.0" text="Data  Fi" />
                             </columns>
                         </TableView2>
                     </children>
