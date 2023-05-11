@@ -205,6 +205,7 @@ public class ReservaController implements Initializable
             gridPane.addRow(0,new Label("Digues el usuari: ") ,usuariComboBox);
             gridPane.addRow(1, new Label("Nom del treballador :"), workerName);
             gridPane.addRow(2,new Label("Data de inicio:"),dataInici);
+            gridPane.addRow(3,new Label("Digues la finalizació de la reserva"),dataEndComboBox);
 
 
 
