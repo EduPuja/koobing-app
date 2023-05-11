@@ -57,11 +57,6 @@
             <artifactId>controlsfx</artifactId>
             <version>11.1.2</version>
         </dependency>
-        <dependency>
-            <groupId>org.jfxtras</groupId>
-            <artifactId>jfxtras-controls</artifactId>
-            <version>11.8-r2</version>
-        </dependency>
 
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
