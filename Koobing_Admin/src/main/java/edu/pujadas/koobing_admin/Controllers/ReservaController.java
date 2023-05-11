@@ -173,16 +173,10 @@ public class ReservaController implements Initializable
             //biblioteca
 
             ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
-
-
-
             // libre
             ComboBox<Llibre > llibreComboBox  = new ComboBox<Llibre>();
 
-
-
-
-            //IMPORTANT AFEGIR LES DADES als comboboxes
+            //IMPORTNT AFEGIR LES DADES als comboboxes
             addDataComboxes(usuariComboBox,bibliotecaComboBox,llibreComboBox);
 
 
@@ -266,22 +260,20 @@ public class ReservaController implements Initializable
 
                 //data hora inci
                 String dataValue = dataInici.getText();
-                Timestamp timeStart = Timestamp.valueOf(dataValue);
+                DateTimeFormatter formatterDataInici = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime dateTimeStart = LocalDateTime.parse(dataValue, formatter);
+                Timestamp timeStart = Timestamp.valueOf(dateTimeStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 reserva.setDataHoraReserva(timeStart);
 
                 //date end
-                if(dataEndComboBox.getValue().equals("1 mes"))
-                {
+                if (dataEndComboBox.getValue().equals("1 mes")) {
                     LocalDate newDate = LocalDate.now().plusMonths(1);
-                    LocalDateTime dateTime = LocalDateTime.of(newDate, LocalTime.parse("00:00"));
-                    Timestamp timeEnd = Timestamp.valueOf(dateTime);
+                    Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
                     reserva.setDataHoraEntrega(timeEnd);
                 }
-                else if(dataEndComboBox.getValue().equals("10 dies"))
-                {
+                else if (dataEndComboBox.getValue().equals("10 dies")) {
                     LocalDate newDate = LocalDate.now().plusDays(10);
-                    LocalDateTime dateTime = LocalDateTime.of(newDate, LocalTime.parse("00:00"));
-                    Timestamp timeEnd = Timestamp.valueOf(dateTime);
+                    Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
                     reserva.setDataHoraEntrega(timeEnd);
                 }
                 else if (dataEndComboBox.getValue().equals("5 dies")) {
@@ -290,7 +282,14 @@ public class ReservaController implements Initializable
                     reserva.setDataHoraEntrega(timeEnd);
                 }
 
+                //afegir la reserva
+                GestioReserva gestioReserva =new GestioReserva();
+                gestioReserva.crearReserva(reserva);
 
+
+                // refrescar
+                taulaReserves.refresh();
+                switchToReserva(event);
 
 
 

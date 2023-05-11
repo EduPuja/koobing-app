@@ -8,7 +8,7 @@ public class UsuariStringConverter extends StringConverter<Usuari> {
     public String toString(Usuari usuari) {
         if(usuari !=null)
         {
-            return usuari.getNom();
+            return usuari.getDni()+" | "+usuari.getNom()+" "+usuari.getCognom();
         }
         return null;
     }
