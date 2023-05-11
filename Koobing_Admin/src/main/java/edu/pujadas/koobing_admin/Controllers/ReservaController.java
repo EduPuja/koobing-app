@@ -30,8 +30,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReferenceArray;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import javafx.scene.control.TextFormatter;
 
+import javafx.scene.control.TextFormatter.Change;
 
 public class ReservaController implements Initializable
 {
@@ -154,7 +157,7 @@ public class ReservaController implements Initializable
     }
 
 
-    //todo IMPORNTANT se ha de compovar que la dataInici sigui més PETTIT que la de final . La final no pot ser més gran
+
 
     public void onAddReserva(ActionEvent event )
     {
@@ -375,7 +378,118 @@ public class ReservaController implements Initializable
                 ComboBox<Usuari> userComboBox= new ComboBox<>();
                 ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
                 ComboBox<Llibre> llibeComboBox= new ComboBox<>();
-                //todo data hora start and end
+
+
+                ComboBox<String> dataEndComboBox = new ComboBox<String>();
+                ObservableList<String> dies = FXCollections.observableArrayList(
+                        "1 mes" ,"10 dies ","5 dies"
+                );
+                dataEndComboBox.setItems(dies);
+
+
+                addDataComboxes(userComboBox,bibliotecaComboBox,llibeComboBox);
+
+
+                //crear el gridpane per posar els 2 camps a l'hora
+                GridPane gridPane = new GridPane();
+                gridPane.setHgap(10);
+                gridPane.setVgap(10);
+
+
+
+                gridPane.addRow(0,new Label("Usuaris ") ,userComboBox);
+                gridPane.addRow(1, new Label("Bibilioteca"), bibliotecaComboBox);
+                gridPane.addRow(2, new Label("LLibre "),llibeComboBox);
+
+
+
+
+                Alert alert = new Alert(Alert.AlertType.NONE);
+
+                alert.setTitle("Modificar la reserva");
+                alert.setHeaderText("Introduïu les noves dades de la reserva");
+                alert.getDialogPane().setContent(gridPane);
+                alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+                Optional<ButtonType> resultat = alert.showAndWait();
+                if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+                {
+                    //set user
+                    UsuariStringConverter userConverter = new UsuariStringConverter();
+                    int idUser = userConverter.getIdUsuari(userComboBox.getValue());
+                    GestioUsuari gestioUsuari = new GestioUsuari();
+                    Usuari user = gestioUsuari.findUserID(idUser);
+                    reserva.setUsuari(user);
+
+
+                    //set worker
+                   // reserva.setTreballador(worker);
+
+
+
+                    //biblioteca
+                    BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
+                    int idBiblio = converterBiblio.getIdBiblioteca(bibliotecaComboBox.getValue());
+                    GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+                    Biblioteca biblioteca = gestioBiblioteca.findBiblioteca(idBiblio);
+                    reserva.setBiblio(biblioteca);
+
+                    //set llibre to reserva
+                    LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+                    long isbnBook =llibreStringConverter.getISBNLlibre(llibeComboBox.getValue());
+                    GestioLlibre gestioLlibre = new GestioLlibre();
+                    Llibre book = gestioLlibre.findLLibre(isbnBook);
+                    reserva.setLlibre(book);
+
+
+                    //data hora inci
+                    /*String dataValue = da.getText();
+                    DateTimeFormatter formatterDataInici = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                    LocalDateTime dateTimeStart = LocalDateTime.parse(dataValue, formatter);
+                    Timestamp timeStart = Timestamp.valueOf(dateTimeStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                    reserva.setDataHoraReserva(timeStart);*/
+
+                    //date end
+                    if (dataEndComboBox.getValue().equals("1 mes")) {
+                        LocalDate newDate = LocalDate.now().plusMonths(1);
+                        Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
+                        reserva.setDataHoraEntrega(timeEnd);
+                        //afegir la reserva
+                          /*  GestioReserva gestioReserva =new GestioReserva();
+                        gestioReserva.crearReserva(reserva);*/
+
+
+
+
+                    }
+                    else if (dataEndComboBox.getValue().equals("10 dies")) {
+                        LocalDate newDate = LocalDate.now().plusDays(10);
+                        Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
+                        reserva.setDataHoraEntrega(timeEnd);
+                        //afegir la reserva
+                       /*  GestioReserva gestioReserva =new GestioReserva();
+                        gestioReserva.crearReserva(reserva);*/
+
+
+
+
+                    }
+                    else if (dataEndComboBox.getValue().equals("5 dies")) {
+                        LocalDate newDate = LocalDate.now().plusDays(5);
+                        Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
+                        reserva.setDataHoraEntrega(timeEnd);
+                        //afegir la reserva
+                      /*  GestioReserva gestioReserva =new GestioReserva();
+                        gestioReserva.crearReserva(reserva);*/
+
+
+
+
+                    }
+
+                    // refrescar
+                    taulaReserves.refresh();
+                    switchToReserva(event);
+                }
             }
         }
         catch (Exception e)
