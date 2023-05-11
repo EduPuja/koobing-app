@@ -12,19 +12,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -167,6 +170,7 @@ public class ReservaController implements Initializable
             workerName.setDisable(true); // el desabilito perque no es pigui modificar
 
 
+
             //biblioteca
             //Todo fer el String converter biblio
             ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
@@ -176,8 +180,52 @@ public class ReservaController implements Initializable
 
 
             //todo falta el formatter i que sigui mes gran la de fi
-            //JFXDateTimePicker dateTimePicker = new JFXDateTimePicker();
-            //DateTimePicker dateTimePicker = new DateTimePicker();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            String formatStartDate = LocalDateTime.now().format(formatter);
+            TextField dataInici = new TextField(formatStartDate);
+            dataInici.setDisable(true);
+
+
+            //todo combobox de dies
+            ComboBox<String> dataEndComboBox = new ComboBox<String>();
+            ObservableList<String> dies = FXCollections.observableArrayList(
+                    "1 mes" ,"10 dies ","5 dies"
+            );
+            dataEndComboBox.setItems(dies);
+
+
+
+            //crear el gridpane per posar els 2 camps a l'hora
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+
+
+            gridPane.addRow(0,new Label("Digues el usuari: ") ,usuariComboBox);
+            gridPane.addRow(1, new Label("Nom del treballador :"), workerName);
+            gridPane.addRow(2,new Label("Data de inicio:"),dataInici);
+
+
+
+
+            // Mostrar los dos diálogos en la misma ventana
+            Alert alert = new Alert(Alert.AlertType.NONE);
+
+            alert.setTitle("Modificar Treballador");
+            alert.setHeaderText("Introduïu les noves dades del treballador:");
+            alert.getDialogPane().setContent(gridPane);
+            alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+
+
+            // Esperar a que el usuario presione OK o Cancel
+            Optional<ButtonType> resultat = alert.showAndWait();
+
+            if (resultat.isPresent() && resultat.get() == ButtonType.OK)
+            {
+                System.out.println("add");
+            }
 
         }
         catch (Exception e)
