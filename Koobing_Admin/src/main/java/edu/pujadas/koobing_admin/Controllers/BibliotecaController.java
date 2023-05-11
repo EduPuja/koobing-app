@@ -219,7 +219,7 @@ public class BibliotecaController implements Initializable
             TextField latitudField = new TextField(Double.toString(biblioteca.getLatitud()));
             TextField longitudField = new TextField(Double.toString(biblioteca.getLongitud()));
 
-            // Emplenar el ComboBox
+            // IMPORTNATN EMPLENAR DADES EL COBMBOX
             addPoblacioCombo(poblacio);
 
             GridPane gridPane = new GridPane();
