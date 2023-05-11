@@ -26,7 +26,7 @@ import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+//import org.jfxtras.scene.control.LocalDateTimePicker;
 
 
 
@@ -177,7 +177,7 @@ public class ReservaController implements Initializable
 
             //todo falta el formatter i que sigui mes gran la de fi
             //JFXDateTimePicker dateTimePicker = new JFXDateTimePicker();
-            DateTimePicker dateTimePicker = new DateTimePicker();
+            //DateTimePicker dateTimePicker = new DateTimePicker();
 
         }
         catch (Exception e)
