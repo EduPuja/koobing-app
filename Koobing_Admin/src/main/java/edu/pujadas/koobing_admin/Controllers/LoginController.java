@@ -36,61 +36,79 @@ public class LoginController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-
-        if(email.isEmpty() || password.isEmpty() )
+        try
         {
-            showAlert("Emplena els camp necessaris");
-            return;
+            if(!email.isEmpty() || !password.isEmpty() )
+            {
+                //validar el correu
+                boolean isEmailValid = Validation.isValidEmail(email);
+
+                if(!isEmailValid)
+                {
+                    showAlert("El correu no és vàlid");
+
+                }
+                else
+                {
+                    GestioTreballador gestioTreballador = new GestioTreballador();
+                    Treballador treballador = gestioTreballador.findWorkerByEmail(email);
+
+                    if(treballador != null)
+                    {
+                        //validar la contrassenay
+                        boolean isValidPassword = PasswordUtilites.checkPassword(password, treballador.getPassword());
+                        if(!isValidPassword)
+                        {
+                            showAlert("El contrassenya no és correcta!");
+                            return;
+                        }
+                        else
+                        {
+                            //cookie
+                            TrabajadorSingleton.getInstance().setTrabajador(treballador);
+
+                            //canvi de pantalla
+
+                            if(treballador.isAdmin() == 1)
+                            {
+                                showAlert("Bienvenido Administrador: " + treballador.getNom());
+                                switchToHome(event);
+                            }
+                            else
+                            {
+                                showAlert("Bienvenido Treballador: " + treballador.getNom());
+                                switchToHome(event);
+                            }
+                        }
+
+                    }
+
+                    else
+                    {
+                        showAlert("No exgisteix aquest treballador amb aquest correu");
+                        return;
+                    }
+
+
+                }
+
+            }
+            else
+            {
+                showAlert("Emplena els camp necessaris");
+                return;
+
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failed to login error : " + e.getMessage());
         }
 
-        boolean isEmailValid = Validation.isValidEmail(email);
-
-        if(!isEmailValid)
-        {
-            showAlert("El correu no és vàlid");
-            return;
-        }
-
-        GestioTreballador gestioTreballador = new GestioTreballador();
-        Treballador treballador = gestioTreballador.findWorkerByEmail(email);
-
-     try
-     {
-         if(treballador !=null)
-         {
-             boolean isValidPassword = PasswordUtilites.checkPassword(password, treballador.getPassword());
-             if(!isValidPassword)
-             {
-                 showAlert("La contrasenya no és vàlid");
-                 return;
-             }
 
 
-             if(treballador.isAdmin() ==1)
-             {
-                 showAlert("Bienvenido Administrador: " + treballador.getNom());
-                 TrabajadorSingleton.getInstance().setTrabajador(treballador);
-                 switchToHome(event);
-
-                 //crido a la aplicacio per canviar de pantalla
-
-
-                 return;
-             }
-             else {
-                 showAlert("Bienvenido Treballador: " + treballador.getNom());
-                 switchToHome(event);
-
-                 return;
-             }
-
-         }
-
-     }
-     catch (Exception e)
-     {
-         System.out.println("Failed to login error : " + e.getMessage());
-     }
 
 
     }
