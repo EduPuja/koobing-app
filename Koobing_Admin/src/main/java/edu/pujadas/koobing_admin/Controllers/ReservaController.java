@@ -15,20 +15,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
-
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+
+
 
 
 public class ReservaController implements Initializable
@@ -177,7 +177,7 @@ public class ReservaController implements Initializable
 
             //todo falta el formatter i que sigui mes gran la de fi
             //JFXDateTimePicker dateTimePicker = new JFXDateTimePicker();
-
+            DateTimePicker dateTimePicker = new DateTimePicker();
 
         }
         catch (Exception e)
