@@ -1,8 +1,8 @@
 package edu.pujadas.koobing_admin.Controllers;
 
-import edu.pujadas.koobing_admin.Database.GestioReserva;
+import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
-import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
+import edu.pujadas.koobing_admin.Utilities.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +25,7 @@ import java.sql.Blob;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -161,32 +162,38 @@ public class ReservaController implements Initializable
     {
         try {
 
-            //todo fer el String converter per usuari
-            ComboBox<Usuari> usuariComboBox = new ComboBox<Usuari>();
 
+            //usuari
+            ComboBox<Usuari> usuariComboBox = new ComboBox<Usuari>();
+            UsuariStringConverter userConverter = new UsuariStringConverter();
+            usuariComboBox.setConverter(userConverter);
+
+            //treballador
             //optinc el treballador actual el mostro
             Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
             TextField workerName = new TextField(worker.getNom());
             workerName.setDisable(true); // el desabilito perque no es pigui modificar
 
-
-
             //biblioteca
-            //Todo fer el String converter biblio
+
             ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
+            BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
+            bibliotecaComboBox.setConverter(converterBiblio);
+
             // libre
-            //todo converter String llibre
             ComboBox<Llibre > llibreComboBox  = new ComboBox<Llibre>();
+            LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+            llibreComboBox.setConverter(llibreStringConverter);
 
 
-            //todo falta el formatter i que sigui mes gran la de fi
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String formatStartDate = LocalDateTime.now().format(formatter);
             TextField dataInici = new TextField(formatStartDate);
             dataInici.setDisable(true);
 
 
-            //todo combobox de dies
+
             ComboBox<String> dataEndComboBox = new ComboBox<String>();
             ObservableList<String> dies = FXCollections.observableArrayList(
                     "1 mes" ,"10 dies ","5 dies"
@@ -204,10 +211,10 @@ public class ReservaController implements Initializable
 
             gridPane.addRow(0,new Label("Digues el usuari: ") ,usuariComboBox);
             gridPane.addRow(1, new Label("Nom del treballador :"), workerName);
-            gridPane.addRow(2,new Label("Data de inicio:"),dataInici);
-            gridPane.addRow(3,new Label("Digues la finalizació de la reserva"),dataEndComboBox);
-
-
+            gridPane.addRow(2, new Label("Biblioteca"),bibliotecaComboBox);
+            gridPane.addRow(3, new Label("Llibre"),llibreComboBox);
+            gridPane.addRow(4,new Label("Data de inicio:"),dataInici);
+            gridPane.addRow(5,new Label("Digues la finalizació de la reserva"),dataEndComboBox);
 
 
             // Mostrar los dos diálogos en la misma ventana
@@ -225,7 +232,65 @@ public class ReservaController implements Initializable
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                System.out.println("add");
+               Reserva reserva = new Reserva();
+
+
+
+                //set user
+                int idUser = userConverter.getIdUsuari(usuariComboBox.getValue());
+                GestioUsuari gestioUsuari = new GestioUsuari();
+                Usuari user = gestioUsuari.findUserID(idUser);
+                reserva.setUsuari(user);
+
+
+                //set worker
+                reserva.setTreballador(worker);
+
+
+
+                //biblioteca
+                int idBiblio = converterBiblio.getIdBiblioteca(bibliotecaComboBox.getValue());
+                GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+                Biblioteca biblioteca = gestioBiblioteca.findBiblioteca(idBiblio);
+                reserva.setBiblio(biblioteca);
+
+                //set llibre to reserva
+                long isbnBook =llibreStringConverter.getISBNLlibre(llibreComboBox.getValue());
+                GestioLlibre gestioLlibre = new GestioLlibre();
+                Llibre book = gestioLlibre.findLLibre(isbnBook);
+                reserva.setLlibre(book);
+
+
+                //data hora inci
+                String dataValue = dataInici.getText();
+                Timestamp timeStart = Timestamp.valueOf(dataValue);
+                reserva.setDataHoraReserva(timeStart);
+
+                //date end
+                if(dataEndComboBox.getValue().equals("1 mes"))
+                {
+                    LocalDate newDate = LocalDate.now().plusMonths(1);
+                    LocalDateTime dateTime = LocalDateTime.of(newDate, LocalTime.parse("00:00"));
+                    Timestamp timeEnd = Timestamp.valueOf(dateTime);
+                    reserva.setDataHoraEntrega(timeEnd);
+                }
+                else if(dataEndComboBox.getValue().equals("10 dies"))
+                {
+                    LocalDate newDate = LocalDate.now().plusDays(10);
+                    LocalDateTime dateTime = LocalDateTime.of(newDate, LocalTime.parse("00:00"));
+                    Timestamp timeEnd = Timestamp.valueOf(dateTime);
+                    reserva.setDataHoraEntrega(timeEnd);
+                }
+                else if (dataEndComboBox.getValue().equals("5 dies")) {
+                    LocalDate newDate = LocalDate.now().plusDays(5);
+                    Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
+                    reserva.setDataHoraEntrega(timeEnd);
+                }
+
+
+
+
+
             }
 
         }
@@ -262,6 +327,14 @@ public class ReservaController implements Initializable
 
     }
 
+
+    private void changeEndDate(String dateValue)
+    {
+        if (dateValue.equals("1 mes")) {
+
+            LocalDate newDate = LocalDate.now().plusMonths(1);
+        }
+    }
     // CANVIS DE PANTALLA
 
 
