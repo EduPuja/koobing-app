@@ -270,27 +270,42 @@ public class ReservaController implements Initializable
                     LocalDate newDate = LocalDate.now().plusMonths(1);
                     Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
                     reserva.setDataHoraEntrega(timeEnd);
+                    //afegir la reserva
+                    GestioReserva gestioReserva =new GestioReserva();
+                    gestioReserva.crearReserva(reserva);
+
+
+           
+
                 }
                 else if (dataEndComboBox.getValue().equals("10 dies")) {
                     LocalDate newDate = LocalDate.now().plusDays(10);
                     Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
                     reserva.setDataHoraEntrega(timeEnd);
+                    //afegir la reserva
+                    GestioReserva gestioReserva =new GestioReserva();
+                    gestioReserva.crearReserva(reserva);
+
+
+
+
                 }
                 else if (dataEndComboBox.getValue().equals("5 dies")) {
                     LocalDate newDate = LocalDate.now().plusDays(5);
                     Timestamp timeEnd = Timestamp.valueOf(newDate.atStartOfDay());
                     reserva.setDataHoraEntrega(timeEnd);
+                    //afegir la reserva
+                    GestioReserva gestioReserva =new GestioReserva();
+                    gestioReserva.crearReserva(reserva);
+
+
+
+
                 }
-
-                //afegir la reserva
-                GestioReserva gestioReserva =new GestioReserva();
-                gestioReserva.crearReserva(reserva);
-
 
                 // refrescar
                 taulaReserves.refresh();
                 switchToReserva(event);
-
 
 
             }
