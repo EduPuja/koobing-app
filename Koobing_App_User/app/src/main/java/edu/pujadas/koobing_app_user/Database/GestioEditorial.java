@@ -1,6 +1,6 @@
 package edu.pujadas.koobing_app_user.Database;
 
-import edu.pujadas.koobing_admin.Models.Editorial;
+import edu.pujadas.koobing_app_user.Models.Editorial;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
