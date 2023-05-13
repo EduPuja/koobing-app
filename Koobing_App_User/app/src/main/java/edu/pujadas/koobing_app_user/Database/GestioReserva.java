@@ -1,6 +1,6 @@
 package edu.pujadas.koobing_app_user.Database;
 
-import edu.pujadas.koobing_admin.Models.Reserva;
+import edu.pujadas.koobing_app_user.Models.Reserva;
 
 import java.lang.reflect.Array;
 import java.sql.ResultSet;

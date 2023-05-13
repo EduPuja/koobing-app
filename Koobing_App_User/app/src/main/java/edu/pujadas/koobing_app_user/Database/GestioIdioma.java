@@ -1,14 +1,14 @@
 package edu.pujadas.koobing_app_user.Database;
 
-import edu.pujadas.koobing_admin.Database.ConnexioMYSQL;
-import edu.pujadas.koobing_admin.Models.Idioma;
+import edu.pujadas.koobing_app_user.Database.ConnexioMYSQL;
+import edu.pujadas.koobing_app_user.Models.Idioma;
 
 import java.sql.ResultSet;
 import java.sql.RowId;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//todo falta:  delete ,mod
+
 public class GestioIdioma
 {
     public void crearIdioma(Idioma idioma)
