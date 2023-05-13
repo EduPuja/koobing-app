@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import edu.pujadas.koobing_app_user.Database.ConnexioMYSQL;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -12,5 +14,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setTitle("Koobing APP");
+
+        ConnexioMYSQL con =new ConnexioMYSQL();
+        con.conectar();
     }
 }
