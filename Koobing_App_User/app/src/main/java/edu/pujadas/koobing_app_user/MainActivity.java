@@ -15,7 +15,5 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("Koobing APP");
 
-        ConnexioMYSQL con =new ConnexioMYSQL();
-        con.conectar();
     }
 }
