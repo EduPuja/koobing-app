@@ -37,4 +37,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //mysql dependecy
     implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 }
