@@ -11,7 +11,7 @@ public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavBar ;
     HorizontalScrollView scrollView;
-    
+
     Button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
