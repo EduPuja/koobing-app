@@ -38,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
         bottomNavBar = findViewById(R.id.bottom_navigation_view);
         scrollView = findViewById(R.id.horizontalScrollView);
 

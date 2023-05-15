@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-public class ConnexioMYSQL extends AsyncTask<Void,Void,Statement>
+public class ConnexioMYSQL
 {
     private Connection conexion = null;
 
@@ -56,9 +56,5 @@ public class ConnexioMYSQL extends AsyncTask<Void,Void,Statement>
         return conexion;
     }
 
-    @Override
-    protected Statement doInBackground(Void... voids) {
-       return  conectar();
-
-    }
+  
 }
