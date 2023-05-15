@@ -136,6 +136,6 @@ public class UserLoader {
         requestQueue.add(jsonArrayRequest);
 
 
-        return null;
+        return listUsers;
     }
 }
