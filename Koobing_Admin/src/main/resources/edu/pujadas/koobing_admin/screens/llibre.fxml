@@ -94,6 +94,7 @@
                         <TableView2 fx:id="taulaLlibres">
                             <columns>
                                 <TableColumn fx:id="isbnColum" prefWidth="90.0" text="ISBN" />
+                                <TableColumn fx:id="bibliotecaColum" prefWidth="90.0" text="Biblioteca" />
                                 <TableColumn fx:id="autorColum" prefWidth="90.0" text="Autor" />
                                 <TableColumn fx:id="editorColum" prefWidth="90.0" text="Editorial" />
                                 <TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />

@@ -37,7 +37,8 @@ public class LlibreController implements Initializable
 {
 
     public ImageView avatarWorker;
-    ArrayList<Llibre> listLlibres =new ArrayList<Llibre>();
+    public TableColumn<Llibre,String> bibliotecaColum;
+    ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
     public TableView2<Llibre> taulaLlibres;
     public TableColumn<Llibre,Long> isbnColum;
     public TableColumn<Llibre,String> autorColum;

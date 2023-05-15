@@ -7,6 +7,9 @@ public class Llibre
 
     Long ISBN;
     Autor autor;
+
+
+    Biblioteca biblioteca;
     Editorial editor;
     Idioma idioma;
     Genere genere;
@@ -18,10 +21,11 @@ public class Llibre
     {
     }
 
-    public Llibre(Long ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli)
+    public Llibre(Long ISBN, Autor autor,Biblioteca biblioteca ,Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli)
     {
         this.ISBN = ISBN;
         this.autor = autor;
+        this.biblioteca = biblioteca;
         this.editor = editor;
         this.idioma = idioma;
         this.genere = genere;
@@ -29,6 +33,16 @@ public class Llibre
         this.versio = versio;
         this.dataPubli = dataPubli;
     }
+
+
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
 
     public Long getISBN()
     {
