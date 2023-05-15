@@ -31,9 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
         homeLable = findViewById(R.id.homeLabel);
 
-
         ConnexioMYSQL con = new ConnexioMYSQL();
-        con.conectar();
 
 
 

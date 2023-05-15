@@ -1,11 +1,13 @@
 package edu.pujadas.koobing_app.Database;
 
 
+import android.os.AsyncTask;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-public class ConnexioMYSQL
+public class ConnexioMYSQL extends AsyncTask<Void,Void,Statement>
 {
     private Connection conexion = null;
 
@@ -52,5 +54,11 @@ public class ConnexioMYSQL
     public Connection getConexion()
     {
         return conexion;
+    }
+
+    @Override
+    protected Statement doInBackground(Void... voids) {
+       return  conectar();
+
     }
 }
