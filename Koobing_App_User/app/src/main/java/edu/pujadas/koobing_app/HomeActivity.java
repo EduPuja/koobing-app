@@ -37,6 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavBar ;
     HorizontalScrollView scrollView;
 
+    
+
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
@@ -53,79 +55,11 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavBar = findViewById(R.id.bottom_navigation_view);
         scrollView = findViewById(R.id.horizontalScrollView);
 
+
+
     }
 
 
-    public void carregarDades(View vista) {
-        String url = "http://192.168.19.0:3000/users";
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        // procesar la respuesta como una matriz JSON
-                        homeLable.setText("Success!");
-                        Toast.makeText(HomeActivity.this, "Success!", Toast.LENGTH_SHORT).show();
-                        System.out.println("Success");
-
-
-                        List<Usuari> listUsers = new ArrayList<Usuari>();
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                int id = jsonObject.getInt("id_usuari");
-                                String dni = jsonObject.getString("dni");
-                                //todo recollir avatar
-                                String nom = jsonObject.getString("nom");
-                                String cognom = jsonObject.getString("cognom");
-                                String dataNaix = jsonObject.getString("data_naix");
-                                String email = jsonObject.getString("email");
-                                String password = jsonObject.getString("password");
-
-                                Usuari u = new Usuari();
-                                u.setDni(dni);
-                                u.setNom(nom);
-                                u.setCognom(cognom);
-                                u.setEmail(email);
-                                u.setPassword(password);
-
-                                listUsers.add(u);
-
-
-
-                            }
-                            catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        SharedPreferences sharedPreferences = getSharedPreferences("listUsers", MODE_PRIVATE);
-                        Gson gson = new Gson();
-                        String jsonListUsers = gson.toJson(listUsers);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("listUsers", jsonListUsers);
-                        editor.apply();
-
-                        //afegint del primer usuari
-                        homeLable.setText(listUsers.get(0).getNom());
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // manejar el error
-                        //homeLable.setText("Error");
-                        Toast.makeText(HomeActivity.this, "Error!", Toast.LENGTH_SHORT).show();
-                        System.out.println("Error " + error.getMessage());
-                    }
-                });
-        // Crea una nueva cola de solicitudes de red.
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        // Agrega la solicitud a la cola de solicitudes.
-        requestQueue.add(jsonArrayRequest);
-    }
 
 }
