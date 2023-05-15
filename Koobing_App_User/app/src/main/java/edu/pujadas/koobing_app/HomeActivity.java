@@ -3,8 +3,10 @@ package edu.pujadas.koobing_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,22 +43,8 @@ public class HomeActivity extends AppCompatActivity {
 
         homeLable = findViewById(R.id.homeLabel);
 
-        String url = "http://localhost:3000/connect";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println("Susscess");
-                    }
-                }, new Response.ErrorListener() {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("Error ; (");
-
-                    }
-                });
 
          //RequestQueue query = Volley.newRequestQueue(this);
 
@@ -70,5 +58,28 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavBar = findViewById(R.id.bottom_navigation_view);
         scrollView = findViewById(R.id.horizontalScrollView);
 
+    }
+
+
+    public void carregarDades(View vista)
+    {
+        String url = "http://192.168.19.0:3000/users";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        homeLable.setText("Succes!");
+                        //Toast.makeText(vista.getContext()).setText("HOla");
+                        System.out.println("Success");
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        homeLable.setText("Error");
+                        System.out.println("Error");
+                    }
+                });
     }
 }
