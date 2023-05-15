@@ -1,8 +1,8 @@
 package edu.pujadas.koobing_app.Utilities;
 
-import edu.pujadas.koobing_admin.Database.GestioLlibre;
-import edu.pujadas.koobing_admin.Database.GestioTreballador;
-import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_app.Database.GestioLlibre;
+import edu.pujadas.koobing_app.Database.GestioTreballador;
+import edu.pujadas.koobing_app.Models.Treballador;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

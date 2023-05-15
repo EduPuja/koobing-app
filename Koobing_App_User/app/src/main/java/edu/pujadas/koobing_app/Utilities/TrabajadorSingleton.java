@@ -1,6 +1,6 @@
 
 package edu.pujadas.koobing_app.Utilities;
-import edu.pujadas.koobing_admin.Models.Treballador;
+import edu.pujadas.koobing_app.Models.Treballador;
 
 public class TrabajadorSingleton {
     private static TrabajadorSingleton instance = null;
