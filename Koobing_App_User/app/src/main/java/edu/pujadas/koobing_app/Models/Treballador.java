@@ -1,6 +1,6 @@
 package edu.pujadas.koobing_app.Models;
 
-import javafx.scene.image.Image;
+
 
 import java.sql.Blob;
 import java.sql.Date;
