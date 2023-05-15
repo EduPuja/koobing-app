@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.HorizontalScrollView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.sql.Statement;
 
 import edu.pujadas.koobing_app.Database.ConnexioMYSQL;
 import edu.pujadas.koobing_app.Database.GestioLlibre;
 
 public class HomeActivity extends AppCompatActivity {
 
+
+    TextView homeLable ;
     BottomNavigationView bottomNavBar ;
     HorizontalScrollView scrollView;
 
@@ -24,8 +29,28 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.home_activity);
         setTitle("Home");
 
+        homeLable = findViewById(R.id.homeLabel);
+
+
         ConnexioMYSQL con = new ConnexioMYSQL();
         con.conectar();
+
+        try {
+
+            if(con.getConexion().isValid(100))
+            {
+                homeLable.setText("Succes!");
+            }
+        }
+        catch (Exception e) {
+
+            homeLable.setText("ERROR  :(");
+            System.out.println("Not valid");
+            e.printStackTrace();
+        }
+
+
+
 
 
 
