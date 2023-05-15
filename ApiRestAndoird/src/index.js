@@ -41,7 +41,7 @@ app.get("/users", (req, res) => {
       res.status(500).send("Error interno del servidor");
     } else {
       res.json(results);
-      console.log("Successs! ",results);
+      console.log("\nSuccesss! ",results);
     }
   });
 });
