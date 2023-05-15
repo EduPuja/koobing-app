@@ -9,10 +9,8 @@ public class ConnexioMYSQL
 {
     private Connection conexion = null;
 
-    // Servidor institut : jdbc:mysql://192.168.2.143:3306/koobing_app
-    //servidor home :
-    //localhost  "jdbc:mysql://localhost:3306/koobing_app";
-    private final String url = "jdbc:mysql://localhost:3306/koobing_app";
+    // ip insti :  192.168.19.0
+    private final String url = "jdbc:mysql:// 192.168.19.0:3306/koobing_app";
     private final String usuario = "root";
     private final String password = "";
 
