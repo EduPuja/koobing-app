@@ -1,5 +1,5 @@
 package edu.pujadas.koobing_app.Database;
-import javafx.scene.control.Alert;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +19,7 @@ public class ConnexioMYSQL
 
     public Statement conectar()
     {
-        Alert wrong = new Alert(Alert.AlertType.ERROR);
+
         try
         {
             conexion = DriverManager.getConnection(url, usuario, password);
@@ -27,10 +27,7 @@ public class ConnexioMYSQL
             return conexion.createStatement();
         }
         catch (SQLException ex) {
-            wrong.setTitle("Error al conectar amb el servidor");
-            wrong.setHeaderText("La connexio no s'h establert correctament");
-            wrong.setContentText("Prova de obrir el servidor de BASE DE DADES");
-            wrong.show();
+            ex.printStackTrace();
             return null;
         }
     }
