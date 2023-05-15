@@ -20,11 +20,11 @@ import edu.pujadas.koobing_app.Models.Usuari;
 
 public class UserLoader {
 
-    public static List<Usuari> loadUsers(Context context) {
+    public static ArrayList<Usuari> loadUsers(Context context) {
 
         String url = "http://192.168.19.0:3000/users";
 
-        final List<Usuari> listUsers = new ArrayList<Usuari>();
+        final ArrayList<Usuari> listUsers = new ArrayList<Usuari>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
