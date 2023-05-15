@@ -7,10 +7,15 @@ import android.widget.HorizontalScrollView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import edu.pujadas.koobing_app.Database.ConnexioMYSQL;
+import edu.pujadas.koobing_app.Database.GestioLlibre;
+
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavBar ;
     HorizontalScrollView scrollView;
+
+
 
 
     @Override
@@ -18,6 +23,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
         setTitle("Home");
+
+        ConnexioMYSQL con = new ConnexioMYSQL();
+        con.conectar();
+
+
 
 
         bottomNavBar = findViewById(R.id.bottom_navigation_view);

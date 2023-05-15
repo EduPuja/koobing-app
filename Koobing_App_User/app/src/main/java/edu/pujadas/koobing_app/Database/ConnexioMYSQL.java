@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 public class ConnexioMYSQL
 {
-    private Connection conexion;
+    private Connection conexion = null;
 
     // Servidor institut : jdbc:mysql://192.168.2.143:3306/koobing_app
     //servidor home :
@@ -22,14 +22,19 @@ public class ConnexioMYSQL
 
         try
         {
+
             conexion = DriverManager.getConnection(url, usuario, password);
-            //System.out.println("Conexión establecida correctamente ✓");
+            System.out.println("Conexión establecida correctamente ✓");
             return conexion.createStatement();
+
+
         }
         catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
+
         }
+
+        return null;
     }
     /**
      * Metode per poder desconectar de la base de datos
