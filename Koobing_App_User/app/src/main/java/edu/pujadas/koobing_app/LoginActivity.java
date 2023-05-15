@@ -34,10 +34,17 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
-        listUsuarios =  UserLoader.loadUsers(this);
+        listUsuarios =  UserLoader.getAllUsers(this);
+
+
     }
 
     public void onLoginSubmit(View view) {
+        String email = emailField.getText().toString();
+        String password = passwordField.getText().toString();
+
+
+        loginLabel.setText(listUsuarios.get(0).getNom());
 
     }
 }
