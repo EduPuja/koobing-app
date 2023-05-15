@@ -28,6 +28,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="@string/app_name"
+        android:onClick="carregarDades"
         android:textAlignment="center"
         app:icon="@drawable/gear"
         app:iconGravity="start"
