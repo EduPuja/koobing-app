@@ -10,7 +10,7 @@ public class ConnexioMYSQL
     private Connection conexion = null;
 
     // ip insti :  192.168.19.0
-    private final String url = "jdbc:mysql:// 192.168.19.0:3306/koobing_app";
+    private final String url = "jdbc:mysql://192.168.19.0:3306/koobing_app";
     private final String usuario = "root";
     private final String password = "";
 

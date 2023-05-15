@@ -35,21 +35,6 @@ public class HomeActivity extends AppCompatActivity {
         ConnexioMYSQL con = new ConnexioMYSQL();
         con.conectar();
 
-        try {
-
-            if(con.getConexion().isValid(100))
-            {
-                homeLable.setText("Succes!");
-            }
-        }
-        catch (Exception e) {
-
-            homeLable.setText("ERROR  :(");
-            System.out.println("Not valid");
-            e.printStackTrace();
-        }
-
-
 
 
 
