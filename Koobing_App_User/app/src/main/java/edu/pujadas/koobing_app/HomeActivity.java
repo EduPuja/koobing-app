@@ -68,7 +68,8 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // manejar el error
-                        homeLable.setText("Error");
+                        //homeLable.setText("Error");
+                        Toast.makeText(HomeActivity.this, "Error!", Toast.LENGTH_SHORT).show();
                         System.out.println("Error " + error.getMessage());
                     }
                 });
