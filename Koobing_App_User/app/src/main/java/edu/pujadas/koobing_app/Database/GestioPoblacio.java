@@ -1,6 +1,6 @@
 package edu.pujadas.koobing_app.Database;
 
-import edu.pujadas.koobing_admin.Models.Poblacio;
+import edu.pujadas.koobing_app.Models.Poblacio;
 
 import java.sql.ResultSet;
 import java.sql.Statement;

@@ -1,9 +1,7 @@
 package edu.pujadas.koobing_app.Database;
 
-import edu.pujadas.koobing_admin.Models.*;
-
+import edu.pujadas.koobing_app.Models.*;
 import java.sql.ResultSet;
-import java.sql.SQLData;
 import java.sql.Statement;
 import java.util.ArrayList;
 

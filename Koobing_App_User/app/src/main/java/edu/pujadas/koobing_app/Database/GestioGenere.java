@@ -1,7 +1,7 @@
 package edu.pujadas.koobing_app.Database;
 
-import edu.pujadas.koobing_admin.Models.Genere;
-import edu.pujadas.koobing_admin.Models.Idioma;
+import edu.pujadas.koobing_app.Models.Genere;
+import edu.pujadas.koobing_app.Models.Idioma;
 
 import java.sql.ResultSet;
 import java.sql.Statement;

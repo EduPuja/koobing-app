@@ -1,7 +1,7 @@
 package edu.pujadas.koobing_app.Database;
 
-import edu.pujadas.koobing_admin.Models.Treballador;
-import edu.pujadas.koobing_admin.Utilities.PasswordUtilites;
+import edu.pujadas.koobing_app.Models.Treballador;
+import edu.pujadas.koobing_app.Utilities.PasswordUtilites;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
