@@ -10,8 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.sql.Statement;
 
-import edu.pujadas.koobing_app.Database.ConnexioMYSQL;
-import edu.pujadas.koobing_app.Database.GestioLlibre;
+
 
 public class HomeActivity extends AppCompatActivity {
 
