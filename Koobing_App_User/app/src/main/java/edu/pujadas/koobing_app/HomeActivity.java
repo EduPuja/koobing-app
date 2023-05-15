@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,12 +92,24 @@ public class HomeActivity extends AppCompatActivity {
 
                                 listUsers.add(u);
 
+
+
                             }
                             catch (JSONException e)
                             {
                                 e.printStackTrace();
                             }
                         }
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("listUsers", MODE_PRIVATE);
+                        Gson gson = new Gson();
+                        String jsonListUsers = gson.toJson(listUsers);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("listUsers", jsonListUsers);
+                        editor.apply();
+
+                        //afegint del primer usuari
+                        homeLable.setText(listUsers.get(0).getNom());
                     }
                 }, new Response.ErrorListener() {
 
