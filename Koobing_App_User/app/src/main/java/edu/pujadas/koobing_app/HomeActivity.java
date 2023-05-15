@@ -19,9 +19,13 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import edu.pujadas.koobing_app.Models.Usuari;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -62,6 +66,36 @@ public class HomeActivity extends AppCompatActivity {
                         homeLable.setText("Success!");
                         Toast.makeText(HomeActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                         System.out.println("Success");
+
+
+                        List<Usuari> listUsers = new ArrayList<Usuari>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                int id = jsonObject.getInt("id_usuari");
+                                String dni = jsonObject.getString("dni");
+                                //todo recollir avatar
+                                String nom = jsonObject.getString("nom");
+                                String cognom = jsonObject.getString("cognom");
+                                String dataNaix = jsonObject.getString("data_naix");
+                                String email = jsonObject.getString("email");
+                                String password = jsonObject.getString("password");
+
+                                Usuari u = new Usuari();
+                                u.setDni(dni);
+                                u.setNom(nom);
+                                u.setCognom(cognom);
+                                u.setEmail(email);
+                                u.setPassword(password);
+
+                                listUsers.add(u);
+
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }, new Response.ErrorListener() {
 
