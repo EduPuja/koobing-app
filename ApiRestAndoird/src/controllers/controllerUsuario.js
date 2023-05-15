@@ -2,10 +2,10 @@ const conection = require('../database/conexio');
 
 
 function getAllUsers(req, res) {
-    const sql = "SELECT * FROM usuaris";
+    const sql = "SELECT * FROM usuari";
   
-    db.query(sql, (err, result) => {
-      if (err) {
+    conection.query(sql, (error, result) => {
+      if (error) {
         console.error("Error al obtener la lista de usuarios: ", error);
         res.status(500).send("Error interno del servidor");
       } 
