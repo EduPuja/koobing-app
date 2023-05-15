@@ -12,11 +12,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -51,11 +53,12 @@ public class HomeActivity extends AppCompatActivity {
     public void carregarDades(View vista) {
         String url = "http://192.168.19.0:3000/users";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
+                        // procesar la respuesta como una matriz JSON
                         homeLable.setText("Success!");
                         Toast.makeText(HomeActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                         System.out.println("Success");
@@ -64,18 +67,16 @@ public class HomeActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        // manejar el error
                         homeLable.setText("Error");
-                        Toast.makeText(HomeActivity.this, "Error!", Toast.LENGTH_SHORT).show();
-                        System.out.println("Error : " + error.getMessage());
-
+                        System.out.println("Error " + error.getMessage());
                     }
                 });
-
         // Crea una nueva cola de solicitudes de red.
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         // Agrega la solicitud a la cola de solicitudes.
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonArrayRequest);
     }
 
 }
