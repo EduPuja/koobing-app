@@ -166,6 +166,23 @@ public class LlibreController implements Initializable
 
 
     /**
+     * Metode per carregar dades de llibre biblioteca la nova relacio 
+     */
+    public void loadLlibreBiblioteca()
+    {
+        try
+        {
+            GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
      * Metode per afegir un llibre a la base de dades
      * @param event ActionEvent
      */
