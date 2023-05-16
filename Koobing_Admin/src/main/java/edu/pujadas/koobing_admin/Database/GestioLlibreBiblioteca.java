@@ -9,30 +9,55 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class GestioLlibreBiblioteca {
+    //gestors necessaris per trobar els objectes per els identificadors
+    GestioLlibre gestioLlibre = new GestioLlibre();
+    GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+
 
     public void crearLlibreBiblioteca(Llibre llibre)
     {
+        try
+        {
 
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error insertinga book into a library: "+e.getMessage());
+        }
     }
 
     public void modificarLlibreBiblioteca(Llibre llibre)
     {
+        try
 
+        {
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error modifiy de book biblio " + e.getMessage());
+        }
     }
 
 
     public void eliminarLlibreBiblioteca(Llibre llibre)
     {
+        try
+        {
 
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Deleting a book bilbiotec: " +e.getMessage());
+        }
     }
 
     public ArrayList<LlibreBiblio> consultarLlibreBiblioteca()
     {
         try
         {
-            //gestors
-            GestioLlibre gestioLlibre = new GestioLlibre();
-            GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+
+
           ArrayList<LlibreBiblio>  listBiblioBook=  new ArrayList<LlibreBiblio>();
 
             ConnexioMYSQL con = new ConnexioMYSQL();
