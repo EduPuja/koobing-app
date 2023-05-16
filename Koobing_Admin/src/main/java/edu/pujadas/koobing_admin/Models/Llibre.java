@@ -7,8 +7,6 @@ public class Llibre
 
     Long ISBN;
     Autor autor;
-
-
     Biblioteca biblioteca;
     Editorial editor;
     Idioma idioma;
