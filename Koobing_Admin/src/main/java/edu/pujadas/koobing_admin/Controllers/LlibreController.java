@@ -533,6 +533,9 @@ public class LlibreController implements Initializable
             gridPane.addRow(8, new Label("Digues el stock: "),stock);
 
 
+
+
+
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
 
@@ -542,13 +545,14 @@ public class LlibreController implements Initializable
             alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
 
+
             // Esperar a que el usuario presione OK o Cancel
             Optional<ButtonType> resultat = alert.showAndWait();
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK) {
 
 
-               //Actualizar les dades del llibre selecionat
+                //Actualizar les dades del llibre selecionat
 
                 //gestors
                 GestioAutor gestioAutor = new GestioAutor();
@@ -598,12 +602,10 @@ public class LlibreController implements Initializable
                 llibreBiblio.setStock(Integer.parseInt(stock.getText()));
 
 
-                //biblioteca
-
-
                 //biblitoeca
                 int idBiblitoeca = converterBiblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
                 Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
+                llibreBiblio.setBiblioteca(b);
 
                 //update memory
                 listBiblioLLibre.add(llibreBiblio);
