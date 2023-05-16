@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.Biblioteca;
+import edu.pujadas.koobing_admin.Models.Poblacio;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -137,12 +138,15 @@ public class GestioBiblioteca {
             Statement stat = con.conectar();;
             String sql = "SELECT * FROM biblioteca WHERE id_biblioteca = "+idBiblio;
             ResultSet rs = stat.executeQuery(sql);
+
+            GestioPoblacio gestioPoblacio = new GestioPoblacio();
+
             if(rs.next())
             {
                 Biblioteca biblioteca = new Biblioteca();
                 biblioteca.setIdBiblioteca(rs.getInt("id_biblioteca"));
-                //todo falta la poblacio
-
+                Poblacio p = gestioPoblacio.findPoblacio(rs.getInt("id_poblacio"));
+                biblioteca.setPoblacio(p);
                 biblioteca.setNomBiblioteca(rs.getString("nom_biblio"));
                 biblioteca.setLatitud(rs.getDouble("latitud"));
                 biblioteca.setLongitud(rs.getDouble("longitud"));
