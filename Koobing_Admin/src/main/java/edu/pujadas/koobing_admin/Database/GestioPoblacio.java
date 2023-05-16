@@ -130,7 +130,7 @@ public class GestioPoblacio {
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String query = "Select * from poblacio where id_poblacio = "+ idPoblacio+";";
+            String query = "Select * from poblacio where id_poblacio = "+ idPoblacio;
             ResultSet rs = stat.executeQuery(query);
 
             if(rs.next())
