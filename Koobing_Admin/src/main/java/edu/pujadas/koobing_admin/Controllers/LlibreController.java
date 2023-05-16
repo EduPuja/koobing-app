@@ -65,6 +65,7 @@ public class LlibreController implements Initializable
 
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Book Screen");
@@ -181,6 +182,26 @@ public class LlibreController implements Initializable
      */
     public void loadLlibreBiblioteca()
     {
+        taulaBiblioLlibre.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                LlibreBiblio llibreSeleccionado = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
+
+                if (llibreSeleccionado != null) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Información del libro");
+                    alert.setHeaderText(null);
+                    alert.setContentText("ISBN: " + llibreSeleccionado.getBook().getISBN() +
+                            "\nTítulo: " + llibreSeleccionado.getBook().getTitol() +
+                            "\nAutor: " + llibreSeleccionado.getBook().getAutor().getNomAutor() +
+                            // Agrega aquí más información del libro
+                            "\nStock: " + llibreSeleccionado.getStock());
+
+                    alert.showAndWait();
+                }
+            }
+        });
+
+
         try
         {
             GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
@@ -213,8 +234,8 @@ public class LlibreController implements Initializable
                 Llibre llibre =cellData.getValue().getBook();
                 int stock = cellData.getValue().getStock();
 
-                boolean isReserved =gestioLlibre.hayReservasActivas(llibre.getISBN());
-                if (isReserved)
+                int numReserves =gestioLlibre.getNumReservas(llibre.getISBN());
+                if (numReserves != -1)
                 {
                     int calcul = stock -1;
 
@@ -225,12 +246,15 @@ public class LlibreController implements Initializable
                     return new SimpleIntegerProperty(stock).asObject();
                 }
             });
+
+
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
     }
+
 
 
     /**

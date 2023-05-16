@@ -116,11 +116,12 @@ public class GestioLlibreBiblioteca {
                 llibreBiblio.setStock(rs.getInt("stock"));
 
                 listBiblioBook.add(llibreBiblio);
-                return  listBiblioBook;
+
 
             }
-
             con.desconectar();
+            return  listBiblioBook;
+
         }
         catch (Exception e)
         {

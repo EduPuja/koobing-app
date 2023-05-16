@@ -341,4 +341,24 @@ public class GestioLlibre
         }
         return existe;
     }
+
+    public int getNumReservas(long ISBN)
+    {
+        try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE ISBN='"+ISBN+"'";
+            ResultSet result = stat.executeQuery(sql);
+            if(result.next()) {
+                int count = result.getInt("count");
+                if(count > 0) {
+                    return count;
+                }
+            }
+            con.desconectar();
+        } catch(Exception e) {
+            System.out.println("Error al comprobar si el libro existe: " + e.getMessage());
+        }
+        return -1;
+    }
 }
