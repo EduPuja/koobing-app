@@ -91,17 +91,17 @@
                                 <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false"  prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
-                        <TableView2 fx:id="taulaLlibres">
+                        <TableView2 fx:id="taulaBiblioLlibre">
                             <columns>
-                                <TableColumn fx:id="isbnColum" prefWidth="90.0" text="ISBN" />
-                                <TableColumn fx:id="bibliotecaColum" prefWidth="90.0" text="Biblioteca" />
-                                <TableColumn fx:id="autorColum" prefWidth="90.0" text="Autor" />
-                                <TableColumn fx:id="editorColum" prefWidth="90.0" text="Editorial" />
-                                <TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
+                                <TableColumn fx:id="id" prefWidth="90.0" text="ID" />
+                                <TableColumn fx:id="isbnColum2" prefWidth="90.0" text="ISBN" />
+                                <TableColumn fx:id="idBibilitoeca" prefWidth="90.0" text="BIBLIOTECA" />
+                                <TableColumn fx:id="stock" prefWidth="90.0" text="Stock" />
+                                <!--<TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
                                 <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
                                 <TableColumn fx:id="titleColum" prefWidth="100.0" text="Títol" />
                                 <TableColumn fx:id="versionColum" prefWidth="100.0" text="Versio" />
-                                <TableColumn fx:id="dataPubliColum" prefWidth="100.0" text="DataPublicacio" />
+                                <TableColumn fx:id="dataPubliColum" prefWidth="100.0" text="DataPublicacio" />-->
                             </columns>
                         </TableView2>
                     </children>
