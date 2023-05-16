@@ -3,7 +3,6 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.*;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -232,12 +231,13 @@ public class LlibreController implements Initializable
             GestioLlibre gestioLlibre  =  new GestioLlibre();
             dsponibles.setCellValueFactory(cellData ->{
                 Llibre llibre =cellData.getValue().getBook();
+                Biblioteca bibilio = cellData.getValue().getBiblioteca();
                 int stock = cellData.getValue().getStock();
 
-                int numReserves =gestioLlibre.getNumReservas(llibre.getISBN());
+                int numReserves =gestioLlibre.getNumReservasWithBiblio(llibre.getISBN(),bibilio.getIdBiblioteca());
                 if (numReserves != -1)
                 {
-                    int calcul = stock -1;
+                    int calcul = stock -numReserves;
 
                     return new SimpleIntegerProperty(calcul).asObject();
                 }

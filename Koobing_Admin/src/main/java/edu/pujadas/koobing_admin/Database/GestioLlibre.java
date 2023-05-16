@@ -3,7 +3,6 @@ package edu.pujadas.koobing_admin.Database;
 import edu.pujadas.koobing_admin.Models.*;
 
 import java.sql.ResultSet;
-import java.sql.SQLData;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -342,12 +341,12 @@ public class GestioLlibre
         return existe;
     }
 
-    public int getNumReservas(long ISBN)
+    public int getNumReservasWithBiblio(long ISBN,int idBiblio)
     {
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE ISBN='"+ISBN+"'";
+            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE ISBN='"+ISBN+"' AND id_biblioteca ="+idBiblio;
             ResultSet result = stat.executeQuery(sql);
             if(result.next()) {
                 int count = result.getInt("count");
