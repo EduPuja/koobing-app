@@ -21,6 +21,11 @@ public class GestioLlibreBiblioteca {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
             String sql = "INSERT INTO `biblio_llibre`(`ISBN`, `id_biblioteca`, `stock`) VALUES ('"+llibreBiblio.getBook().getISBN()+"',"+llibreBiblio.getBiblioteca().getIdBiblioteca()+","+llibreBiblio.getStock()+")";
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Insert biblio llibre correctly");
+            }
+            else System.out.println("Error inserting biblio llibre"); con.desconectar();;
         }
         catch (Exception e)
         {
@@ -28,12 +33,18 @@ public class GestioLlibreBiblioteca {
         }
     }
 
-    public void modificarLlibreBiblioteca(Llibre llibre)
+
+    /**
+     * Metode per actualizar en el stock o bé la relació del llibre i la biblioteca
+     * @param llibreBiblio objecte
+     */
+    public void modificarLlibreBiblioteca(LlibreBiblio llibreBiblio)
     {
         try
 
         {
-
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            
         }
         catch (Exception e)
         {
@@ -42,11 +53,22 @@ public class GestioLlibreBiblioteca {
     }
 
 
-    public void eliminarLlibreBiblioteca(Llibre llibre)
+    /**
+     * Metode per eliminar es valors de la relacio entre llibre i bilioceca
+     * @param id identficador de tipus integer
+     */
+    public void eliminarLlibreBiblioteca(int id)
     {
         try
         {
-
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql = "DELETE FROM `biblio_llibre` WHERE  id= "+id;
+            if(stat.executeUpdate(sql) == 1)
+            {
+                System.out.println("Llibre elimiant de la relacio correctament");
+            }
+            else System.out.println("Llibre not deleted from relation :( "); con.desconectar();
         }
         catch (Exception e)
         {
@@ -54,6 +76,12 @@ public class GestioLlibreBiblioteca {
         }
     }
 
+
+    /**
+     * Metode que et retorna un llistat de tots els llibres que hi han en una bilbioteca
+     * et dona tot el llistat dels llibres amb la bilbioteca i el seu stock
+     * @return ArraList<LlibreBiblioteca>
+     */
     public ArrayList<LlibreBiblio> consultarLlibreBiblioteca()
     {
         try
@@ -78,11 +106,14 @@ public class GestioLlibreBiblioteca {
                 return  listBiblioBook;
 
             }
+
+            con.desconectar();
         }
         catch (Exception e)
         {
             System.out.println("Error consulting relation between book and library: "+ e.getMessage());
         }
+
 
         return null;
     }
