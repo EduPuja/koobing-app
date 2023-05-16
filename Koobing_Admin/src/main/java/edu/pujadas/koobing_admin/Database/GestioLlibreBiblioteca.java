@@ -14,11 +14,13 @@ public class GestioLlibreBiblioteca {
     GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
 
 
-    public void crearLlibreBiblioteca(Llibre llibre)
+    public void crearLlibreBiblioteca(LlibreBiblio llibreBiblio)
     {
         try
         {
-
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String sql = "INSERT INTO `biblio_llibre`(`ISBN`, `id_biblioteca`, `stock`) VALUES ('"+llibreBiblio.getBook().getISBN()+"',"+llibreBiblio.getBiblioteca().getIdBiblioteca()+","+llibreBiblio.getStock()+")";
         }
         catch (Exception e)
         {
