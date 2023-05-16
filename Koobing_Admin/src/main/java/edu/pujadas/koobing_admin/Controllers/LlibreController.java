@@ -4,6 +4,7 @@ import edu.pujadas.koobing_admin.Database.*;
 
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.*;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,9 +38,9 @@ public class LlibreController implements Initializable
 {
 
     public ImageView avatarWorker;
-    public TableColumn<Llibre,String> bibliotecaColum;
+    public TableColumn<Biblioteca,String> bibliotecaColum;
     ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
-    public TableView2<Llibre> taulaLlibres;
+    public TableView2<LlibreBiblio> taulaLlibres;
     public TableColumn<Llibre,Long> isbnColum;
     public TableColumn<Llibre,String> autorColum;
     public TableColumn<Llibre,String> editorColum;
@@ -59,7 +60,8 @@ public class LlibreController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Book Screen");
         loadWorkerInfo();
-        loadLlibres();
+        loadLlibreBiblioteca();
+       // loadLlibres();
     }
     /**
      * Metode que carrega la info del treballador
@@ -119,7 +121,7 @@ public class LlibreController implements Initializable
                     listLlibres
             );
 
-            taulaLlibres.setItems(observableListLlibre);
+           // taulaLlibres.setItems(observableListLlibre);
 
             isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
             /*bibliotecaColum.setCellValueFactory(cellData ->{
@@ -174,6 +176,17 @@ public class LlibreController implements Initializable
         {
             GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
 
+            ArrayList<LlibreBiblio >listBiblioLLibre = gestioLlibreBiblioteca.consultarLlibreBiblioteca();
+
+            ObservableList<LlibreBiblio> observableList = FXCollections.observableArrayList(listBiblioLLibre);
+            taulaLlibres.setItems(observableList);
+
+            isbnColum.setCellValueFactory(cellData ->{
+                Llibre llibre =cellData.getValue();
+                long isbn = llibre.getISBN();
+                return new SimpleLongProperty(isbn);
+            });
+
         }
         catch (Exception e)
         {
@@ -186,7 +199,7 @@ public class LlibreController implements Initializable
      * Metode per afegir un llibre a la base de dades
      * @param event ActionEvent
      */
-    public void onAddBook(ActionEvent event)
+    /*public void onAddBook(ActionEvent event)
     {
         try
         {
@@ -332,13 +345,13 @@ public class LlibreController implements Initializable
         }
 
 
-    }
+    }*/
 
     /**
      * Metode per eliminar un llibre
      * @param event
      */
-    public void deleteBook(ActionEvent event)
+    /*public void deleteBook(ActionEvent event)
     {
         //gestio llibre per poder comprovar si el llibre esta en la base de dades
         // and per poder eliminar desde la base de dades
@@ -377,7 +390,7 @@ public class LlibreController implements Initializable
 
 
                     //delte to memory
-                    ObservableList<Llibre> itemsLlibres = taulaLlibres.getItems();
+                    //ObservableList<Llibre> itemsLlibres = taulaLlibres.getItems();
                     itemsLlibres.remove(llibre);
 
                     // delete bd
@@ -398,16 +411,16 @@ public class LlibreController implements Initializable
 
         }
 
-    }
+    }*/
 
     /**
      * Metode per modifcar un llibre
      * @param event Action evnet
      * @throws Exception exception
      */
-    public void onModifyLLibre(ActionEvent event) throws Exception
+   /* public void onModifyLLibre(ActionEvent event) throws Exception
     {
-        Llibre book = taulaLlibres.getSelectionModel().getSelectedItem();
+        //Llibre book = taulaLlibres.getSelectionModel().getSelectedItem();
         if(book != null) {
             // Creacio dels Textes
 
@@ -516,7 +529,7 @@ public class LlibreController implements Initializable
 
             }
         }
-    }
+    }*/
 
 
     /**
@@ -526,7 +539,7 @@ public class LlibreController implements Initializable
      * @param idiomaComboBox ComboBox de Idiomas
      * @param genereComboBox Combobox de Generes
      */
-    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox,ComboBox<Genere> genereComboBox)
+    /*private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox,ComboBox<Genere> genereComboBox)
     {
         AutorStringConverter converterAutor = new AutorStringConverter();
         GestioAutor gestioAutor = new GestioAutor();
@@ -562,7 +575,7 @@ public class LlibreController implements Initializable
         genereComboBox.getItems().addAll(listGeneres);
         genereComboBox.setConverter(genereConverter);
 
-    }
+    }*/
 
 
 
