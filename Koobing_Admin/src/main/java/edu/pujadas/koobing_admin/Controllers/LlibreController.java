@@ -359,28 +359,34 @@ public class LlibreController implements Initializable
                 llibreBiblio.setBiblioteca(b);
                 llibreBiblio.setStock(Integer.parseInt(stock.getText()));
 
-
-                //update memory
-                ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
-                items.add(llibreBiblio);
-
-
-
-                // update the table
-                GestioLlibre gestioLlibre = new GestioLlibre();
-                gestioLlibre.crearLlibre(llibre);
-
-
-                //update the table biblio_llibre
-
-                GestioLlibreBiblioteca gestioLlibreBiblioteca =new GestioLlibreBiblioteca();
-                gestioLlibreBiblioteca.crearLlibreBiblioteca(llibreBiblio);
+                if(llibreBiblio != null  && llibre!=null)
+                {
+                    //update memory
+                    ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
+                    items.add(llibreBiblio);
 
 
 
+                    // update the table
+                    GestioLlibre gestioLlibre = new GestioLlibre();
+                    gestioLlibre.crearLlibre(llibre);
 
-                //actualiar la pagina
-                switchToLlibre(event);
+
+                    //update the table biblio_llibre
+
+                    GestioLlibreBiblioteca gestioLlibreBiblioteca =new GestioLlibreBiblioteca();
+                    gestioLlibreBiblioteca.crearLlibreBiblioteca(llibreBiblio);
+
+
+
+
+                    //actualiar la pagina
+                    switchToLlibre(event);
+                }
+                else {
+                    System.out.println("Vuit");
+                }
+
 
             }
 
@@ -389,6 +395,11 @@ public class LlibreController implements Initializable
         catch (Exception e)
         {
             System.out.println("Error Insert Llibre: "+ e.getMessage());
+            Alert wrong = new Alert(Alert.AlertType.ERROR);
+            wrong.setTitle("Error");
+            wrong.setHeaderText(null);
+            wrong.setContentText("Els camps estan buits ");
+            wrong.show();
         }
 
 
@@ -442,8 +453,9 @@ public class LlibreController implements Initializable
                         items.remove(llibreBiblio);
 
                         //eliminare de la base de dadecs de la taula llibre && de biblio
-                        gestioLlibre.eliminarLlibre(llibreBiblio.getBook().getISBN());
                         gestioLlibreBiblioteca.eliminarLlibreBiblioteca(llibreBiblio.getId());
+                        gestioLlibre.eliminarLlibre(llibreBiblio.getBook().getISBN());
+
 
                     }
                 }
