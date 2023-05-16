@@ -533,9 +533,9 @@ public class LlibreController implements Initializable
             gridPane.addRow(8, new Label("Canvi Idioma: "),idiomaComboBox);
             gridPane.addRow(9, new Label("Genere Actual: "),new Label(llibreBiblio.getBook().getGenere().getNomGenere()));
             gridPane.addRow(10,new Label("Canvi Genere: "),genereComboBox);
-            gridPane.addRow(6, new Label("Versio: "),version);
-            gridPane.addRow(7, new Label("Data Publi "),dataPublicacio);
-            gridPane.addRow(8, new Label("Digues el stock: "),stock);
+            gridPane.addRow(11, new Label("Versio: "),version);
+            gridPane.addRow(12, new Label("Data Publi "),dataPublicacio);
+            gridPane.addRow(13, new Label("Digues el stock: "),stock);
 
 
 
