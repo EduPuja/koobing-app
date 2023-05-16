@@ -102,10 +102,18 @@ public class GestioLlibreBiblioteca {
             while (rs.next())
             {
                 LlibreBiblio llibreBiblio = new LlibreBiblio();
+                //id
+                llibreBiblio.setId(rs.getInt("id"));
+                //llibre
                 Llibre book = gestioLlibre.findLLibre(rs.getLong("ISBN"));
+                //biblitoteca
                 Biblioteca b = gestioBiblioteca.findBiblioteca(rs.getInt("id_biblioteca"));
+                //add llibre
                 llibreBiblio.setBook(book);
+                //add bibilio
                 llibreBiblio.setBiblioteca(b);
+                //stock
+                llibreBiblio.setStock(rs.getInt("stock"));
 
                 listBiblioBook.add(llibreBiblio);
                 return  listBiblioBook;
