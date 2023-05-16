@@ -523,11 +523,16 @@ public class LlibreController implements Initializable
             gridPane.setVgap(15);
 
             gridPane.addRow(0, new Label("Titol: "),titol);
-            gridPane.addRow(1,new Label("Digues el autor") ,autorComboBox);
-            gridPane.addRow(2, new Label("Entra la Editorial: "), editorialComboBox);
-            gridPane.addRow(3, new Label("Biblioteca :"),bibliotecaComboBox);
-            gridPane.addRow(4, new Label("Idioma: "),idiomaComboBox);
-            gridPane.addRow(5, new Label("Genere: "),genereComboBox);
+            gridPane.addRow(1,new Label("Autor actual: "),new Label(llibreBiblio.getBook().getAutor().getNomAutor()) );
+            gridPane.addRow(2,new Label("Canvia el autor :"),autorComboBox);
+            gridPane.addRow(3, new Label("Editorial Actual: "),new Label(llibreBiblio.getBook().getEditor().getNomEditor()));
+            gridPane.addRow(4, new Label("Canvia l'editorial: "),editorialComboBox);
+            gridPane.addRow(5, new Label("Biblioteca Actual :"), new Label(llibreBiblio.getBiblioteca().getNomBiblioteca()));
+            gridPane.addRow(6, new Label("Canvi Biblioteca :"),bibliotecaComboBox);
+            gridPane.addRow(7, new Label("Idioma Actual : "),new Label(llibreBiblio.getBook().getIdioma().getNomIdioma()));
+            gridPane.addRow(8, new Label("Canvi Idioma: "),idiomaComboBox);
+            gridPane.addRow(9, new Label("Genere Actual: "),new Label(llibreBiblio.getBook().getGenere().getNomGenere()));
+            gridPane.addRow(10,new Label("Canvi Genere: "),genereComboBox);
             gridPane.addRow(6, new Label("Versio: "),version);
             gridPane.addRow(7, new Label("Data Publi "),dataPublicacio);
             gridPane.addRow(8, new Label("Digues el stock: "),stock);
@@ -600,7 +605,6 @@ public class LlibreController implements Initializable
 
                 //stock
                 llibreBiblio.setStock(Integer.parseInt(stock.getText()));
-
 
                 //biblitoeca
                 int idBiblitoeca = converterBiblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
