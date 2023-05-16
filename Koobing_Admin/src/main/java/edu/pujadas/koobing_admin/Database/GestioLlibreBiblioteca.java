@@ -44,7 +44,12 @@ public class GestioLlibreBiblioteca {
 
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
-            
+            Statement stmt = con.conectar();
+            String sql = "UPDATE `biblio_llibre` SET `ISBN`='"+llibreBiblio.getBook().getISBN()+"',`id_biblioteca`='"+llibreBiblio.getBiblioteca().getIdBiblioteca()+"',`stock`='"+llibreBiblio.getStock()+"' WHERE id="+llibreBiblio.getId();
+            if(stmt.executeUpdate(sql) == 1 ){
+                System.out.println("La relacio s'ha actualizat perfectament");
+            }
+            else System.out.println("No se ha actualizat correctament");
         }
         catch (Exception e)
         {
