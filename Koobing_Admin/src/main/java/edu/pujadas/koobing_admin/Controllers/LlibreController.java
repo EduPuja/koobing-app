@@ -4,6 +4,7 @@ import edu.pujadas.koobing_admin.Database.*;
 
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.*;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -38,12 +39,24 @@ public class LlibreController implements Initializable
 {
 
     public ImageView avatarWorker;
-    public TableColumn<Biblioteca,String> bibliotecaColum;
+
+    // taula biblioteca llibre
+    public TableView2<LlibreBiblio> taulaBiblioLlibre;
+    public TableColumn<LlibreBiblio,Integer> id;
+    public TableColumn<LlibreBiblio,Long> isbnColum2;
+    public TableColumn<LlibreBiblio,Integer> idBibilitoeca;
+    public TableColumn<LlibreBiblio,Integer> stock;
+
+
+    // llibre
+
     ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
-    public TableView2<LlibreBiblio> taulaLlibres;
+    public TableView2<Llibre> taulaLlibres;
     public TableColumn<Llibre,Long> isbnColum;
     public TableColumn<Llibre,String> autorColum;
     public TableColumn<Llibre,String> editorColum;
+
+    public TableColumn<Biblioteca,String> bibliotecaColum;
 
     public TableColumn <Llibre,String> idiomaColum;
     public TableColumn<Llibre,String> genereColum;
@@ -178,14 +191,27 @@ public class LlibreController implements Initializable
 
             ArrayList<LlibreBiblio >listBiblioLLibre = gestioLlibreBiblioteca.consultarLlibreBiblioteca();
 
-            ObservableList<LlibreBiblio> observableList = FXCollections.observableArrayList(listBiblioLLibre);
-            taulaLlibres.setItems(observableList);
+            ObservableList<LlibreBiblio > observableList= FXCollections.observableArrayList(listBiblioLLibre);
 
-            isbnColum.setCellValueFactory(cellData ->{
-                Llibre llibre =cellData.getValue();
-                long isbn = llibre.getISBN();
-                return new SimpleLongProperty(isbn);
+            taulaBiblioLlibre.setItems(observableList);
+
+            id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            isbnColum2.setCellValueFactory(cellData ->{
+                Llibre boom = cellData.getValue().getBook();
+                long isbn =boom.getISBN();
+                return new SimpleLongProperty(isbn).asObject();
             });
+
+            idBibilitoeca.setCellValueFactory(cellData ->{
+                Biblioteca biblioteca = cellData.getValue().getBiblioteca();
+                int id = biblioteca.getIdBiblioteca();
+                //String nombiblio = biblioteca.getNomBiblioteca();
+                //return new SimpleStringProperty(nombiblio);
+                return new SimpleIntegerProperty(id).asObject();
+            });
+
+            stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
 
         }
         catch (Exception e)
