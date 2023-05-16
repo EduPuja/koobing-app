@@ -38,6 +38,8 @@ public class LlibreController implements Initializable
     public ImageView avatarWorker;
 
     // taula biblioteca llibre
+
+    ArrayList<LlibreBiblio> listBiblioLLibre = new ArrayList<LlibreBiblio>();
     public TableView2<LlibreBiblio> taulaBiblioLlibre;
     public TableColumn<LlibreBiblio,Integer> id;
     public TableColumn<LlibreBiblio,String> nomLlibre;
@@ -105,69 +107,6 @@ public class LlibreController implements Initializable
     }
 
 
-    /**
-     * Metode per carregar les dades del llibre desde la base de dades MYSQL
-     */
-    /*public void loadLlibres()
-    {
-        try
-        {
-            // classe per agafar la info de la base de dades
-            GestioLlibre gestioLlibre = new GestioLlibre();
-            listLlibres = gestioLlibre.conusltar10Llibres();
-
-
-
-            //observablelist llibres
-            ObservableList<Llibre> observableListLlibre = FXCollections.observableArrayList(
-                    listLlibres
-            );
-
-           // taulaLlibres.setItems(observableListLlibre);
-
-            isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-            /*bibliotecaColum.setCellValueFactory(cellData ->{
-                Biblioteca biblioteca = cellData.getValue().getBiblioteca();
-                String nomBiblioteca = biblioteca.getNomBiblioteca();
-                return new SimpleStringProperty(nomBiblioteca);
-            });
-            autorColum.setCellValueFactory(cellData -> {
-
-                Autor actor = cellData.getValue().getAutor();
-                String nombreAutor = actor.getNomAutor();
-                return new SimpleStringProperty(nombreAutor);
-
-            });
-            editorColum.setCellValueFactory(cellData -> {
-                Editorial editor = cellData.getValue().getEditor();
-                String nomEditor = editor.getNomEditor();
-                return new SimpleStringProperty(nomEditor);
-            });
-            idiomaColum.setCellValueFactory(cellData ->{
-                Idioma idioma = cellData.getValue().getIdioma();
-                String nomIdioma = idioma.getNomIdioma();
-                return new SimpleStringProperty(nomIdioma);
-            });
-            genereColum.setCellValueFactory(cellData ->{
-                Genere genere = cellData.getValue().getGenere();
-                String nomGenere = genere.getNomGenere();
-                return new SimpleStringProperty(nomGenere);
-            });
-            titleColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
-            versionColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
-            dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
-
-
-
-
-
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error loading data LLibres : " + e.getMessage());
-        }
-    }*/
-
 
     /**
      * Metode per carregar dades de llibre biblioteca la nova relacio
@@ -180,16 +119,16 @@ public class LlibreController implements Initializable
 
                 if (llibreSeleccionado != null) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Información del libro");
+                    alert.setTitle("Informació del libro");
                     alert.setHeaderText(null);
                     alert.setContentText("ISBN: " + llibreSeleccionado.getBook().getISBN() +
-                            "\nTítulo: " + llibreSeleccionado.getBook().getTitol() +
+                            "\nTítul: " + llibreSeleccionado.getBook().getTitol() +
                             "\nAutor: " + llibreSeleccionado.getBook().getAutor().getNomAutor() +
-                            // Agrega aquí más información del libro
+
                             "\nStock: " + llibreSeleccionado.getStock()
                     +"\nEditorial: " + llibreSeleccionado.getBook().getEditor().getNomEditor()
-                            +"\nGenere: " + llibreSeleccionado.getBook().getGenere().getNomGenere()
-                    +"\nFecha Publicacion: " + llibreSeleccionado.getBook().getDataPubli());
+                            +"\nGenére: " + llibreSeleccionado.getBook().getGenere().getNomGenere()
+                    +"\nData de Publicació: " + llibreSeleccionado.getBook().getDataPubli());
 
                     alert.showAndWait();
                 }
@@ -201,7 +140,7 @@ public class LlibreController implements Initializable
         {
             GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
 
-            ArrayList<LlibreBiblio >listBiblioLLibre = gestioLlibreBiblioteca.consultarLlibreBiblioteca();
+            listBiblioLLibre = gestioLlibreBiblioteca.consultarLlibreBiblioteca();
 
             ObservableList<LlibreBiblio > observableList= FXCollections.observableArrayList(listBiblioLLibre);
 
@@ -290,12 +229,18 @@ public class LlibreController implements Initializable
             versionInput.setTextFormatter(versionFormat);
 
             //comboboxes
+            double tamany= 200;
 
             ComboBox<Autor> autorComboBox = new ComboBox<Autor>();
+            autorComboBox.setMaxWidth(tamany);
             ComboBox<Editorial> editorialComboBox = new ComboBox<Editorial>();
+            editorialComboBox.setMaxWidth(tamany);
             ComboBox<Idioma>idiomaComboBox = new ComboBox<Idioma>();
+            idiomaComboBox.setMaxWidth(tamany);
             ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
+            genereComboBox.setMaxWidth(tamany);
             ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
+            bibliotecaComboBox.setMaxWidth(tamany);
 
             //afegint la info dels autors
             addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox,bibliotecaComboBox);
@@ -304,23 +249,38 @@ public class LlibreController implements Initializable
 
             //  Creacio dels Textes
             TextField titolInput = new TextField();
+
+            TextField stock = new TextField();
+            TextFormatter<Integer> stockFormater = new TextFormatter<>(change -> {
+                if (change.getControlNewText().matches("\\d*")) {
+                    return change;
+                } else {
+                    return null;
+                }
+            });
+            stock.setTextFormatter(stockFormater);
+
+
             //data
             DatePicker dataPubliInput = new DatePicker();
+            dataPubliInput.setMaxHeight(tamany);
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
-            gridPane.setHgap(10);
-            gridPane.setVgap(10);
+            gridPane.setHgap(15);
+            gridPane.setVgap(15);
+
 
             gridPane.addRow(0, new Label("Titol: "),titolInput);
             gridPane.addRow(1, new Label("ISBN del llibre: "),isbnInput);
             gridPane.addRow(2,new Label("Digues el autor") ,autorComboBox);
             gridPane.addRow(3, new Label("Entra la Editorial: "), editorialComboBox);
-            gridPane.addRow(4, new Label("Biblioteca :",bibliotecaComboBox));
+            gridPane.addRow(4, new Label("Biblioteca :"),bibliotecaComboBox);
             gridPane.addRow(5, new Label("Idioma: "),idiomaComboBox);
             gridPane.addRow(6, new Label("Genere: "),genereComboBox);
             gridPane.addRow(7, new Label("Versio: "),versionInput);
             gridPane.addRow(8, new Label("Data Publi "),dataPubliInput);
+            gridPane.addRow(9, new Label("Digues el stock: "),stock);
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
@@ -397,9 +357,24 @@ public class LlibreController implements Initializable
                 LlibreBiblio llibreBiblio =new LlibreBiblio();
                 llibreBiblio.setBook(llibre);
                 llibreBiblio.setBiblioteca(b);
+                llibreBiblio.setStock(Integer.parseInt(stock.getText()));
 
 
-                //update the table
+                //update memory
+                ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
+                items.add(llibreBiblio);
+
+
+
+                // update the table
+                GestioLlibre gestioLlibre = new GestioLlibre();
+                gestioLlibre.crearLlibre(llibre);
+
+
+                //update the table biblio_llibre
+
+                GestioLlibreBiblioteca gestioLlibreBiblioteca =new GestioLlibreBiblioteca();
+                gestioLlibreBiblioteca.crearLlibreBiblioteca(llibreBiblio);
 
 
 
@@ -423,67 +398,64 @@ public class LlibreController implements Initializable
      * Metode per eliminar un llibre
      * @param event
      */
-    /*public void deleteBook(ActionEvent event)
+    public void onDeleteBook(ActionEvent event)
     {
-        //gestio llibre per poder comprovar si el llibre esta en la base de dades
-        // and per poder eliminar desde la base de dades
-        GestioLlibre gestioLlibre = new GestioLlibre();
-        //confirmacion
-        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-        //error
-        Alert wrong = new Alert(Alert.AlertType.ERROR);
+        try
+        {
 
-        // mostrar el una alerta de tipus confirmacio per poder eliminar el llibre
-        alerta.setTitle("Confirmación");
-        alerta.setHeaderText(null);
-        alerta.setContentText("Estàs segur de que vols continuar?");
+            GestioLlibre gestioLlibre = new GestioLlibre();
+            GestioLlibreBiblioteca gestioLlibreBiblioteca =new GestioLlibreBiblioteca();
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+
+            Alert wrong = new Alert(Alert.AlertType.ERROR);
 
 
-        Optional<ButtonType> resultado = alerta.showAndWait();
+            alerta.setTitle("Confirmación");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Estàs segur de que vols continuar?");
 
 
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            Llibre llibre = taulaLlibres.getSelectionModel().getSelectedItem();
-            if (llibre != null) {
-                boolean isReserved = gestioLlibre.hayReservasActivas(llibre.getISBN());
+            Optional<ButtonType> resultado = alerta.showAndWait();
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
 
-                if (isReserved) {
-                    wrong.setTitle("Error");
-                    wrong.setHeaderText(null);
-                    wrong.setContentText("Aquest llibre no es pot eliminar, esta en una reserva activa");
-                    wrong.show();
-                }
-                else {
-                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
-                    sucessAlert.setTitle("Success!");
-                    sucessAlert.setHeaderText("Has eliminat llibre!");
-                    sucessAlert.setContentText("Llibre s'ha eliminat correctament");
-                    sucessAlert.show();
+                LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
 
 
-                    //delte to memory
-                    //ObservableList<Llibre> itemsLlibres = taulaLlibres.getItems();
-                    itemsLlibres.remove(llibre);
+                if (llibreBiblio != null) {
+                    boolean isReserved = gestioLlibre.hayReservasActivas(llibreBiblio.getBook().getISBN());
 
-                    // delete bd
-                    try
-                    {
-                        //eliminar llibre de la base de dades and refrescar la taula
-                        gestioLlibre.eliminarLlibre(llibre.getISBN());
-                        taulaLlibres.refresh();
+                    if (isReserved) {
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText(null);
+                        wrong.setContentText("Aquest llibre no es pot eliminar, esta en una reserva activa");
+                        wrong.show();
+                    } else {
+                        Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                        sucessAlert.setTitle("Success!");
+                        sucessAlert.setHeaderText("Has eliminat llibre!");
+                        sucessAlert.setContentText("Llibre s'ha eliminat correctament");
+                        sucessAlert.show();
+
+
+                        //delte to memory
+                        ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
+                        items.remove(llibreBiblio);
+
+                        //eliminare de la base de dadecs de la taula llibre && de biblio
+                        gestioLlibre.eliminarLlibre(llibreBiblio.getBook().getISBN());
+                        gestioLlibreBiblioteca.eliminarLlibreBiblioteca(llibreBiblio.getId());
 
                     }
-                    catch (Exception e)
-                    {
-                        System.out.println("Error deleting llibre : " + e.getMessage());
-                    }
-
                 }
             }
-
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Delete Book: "+ e.getMessage());
         }
 
-    }*/
+
+    }
 
     /**
      * Metode per modifcar un llibre
