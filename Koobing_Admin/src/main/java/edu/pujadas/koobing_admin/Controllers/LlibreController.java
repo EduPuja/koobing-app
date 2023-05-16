@@ -3,6 +3,7 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.*;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -40,6 +41,7 @@ public class LlibreController implements Initializable
     public TableColumn<LlibreBiblio,String> nomLlibre;
     public TableColumn<LlibreBiblio,String > nomBiblioteca;
     public TableColumn<LlibreBiblio,Integer> stock;
+    public TableColumn<LlibreBiblio,Integer> dsponibles;
 
 
     // llibre
@@ -206,7 +208,23 @@ public class LlibreController implements Initializable
 
             stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
+            GestioLlibre gestioLlibre  =  new GestioLlibre();
+            dsponibles.setCellValueFactory(cellData ->{
+                Llibre llibre =cellData.getValue().getBook();
+                int stock = cellData.getValue().getStock();
 
+                boolean isReserved =gestioLlibre.hayReservasActivas(llibre.getISBN());
+                if (isReserved)
+                {
+                    int calcul = stock -1;
+
+                    return new SimpleIntegerProperty(calcul).asObject();
+                }
+                else
+                {
+                    return new SimpleIntegerProperty(stock).asObject();
+                }
+            });
         }
         catch (Exception e)
         {
