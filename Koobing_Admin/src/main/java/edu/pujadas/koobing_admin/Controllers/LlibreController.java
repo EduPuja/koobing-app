@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -25,8 +26,10 @@ import java.io.ByteArrayInputStream;
 import java.net.URL;
 
 import java.sql.Blob;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LlibreController implements Initializable
@@ -264,7 +267,7 @@ public class LlibreController implements Initializable
      * Metode per afegir un llibre a la base de dades
      * @param event ActionEvent
      */
-    /*public void onAddBook(ActionEvent event)
+    public void onAddBook(ActionEvent event)
     {
         try
         {
@@ -410,7 +413,7 @@ public class LlibreController implements Initializable
         }
 
 
-    }*/
+    }
 
     /**
      * Metode per eliminar un llibre
@@ -604,7 +607,7 @@ public class LlibreController implements Initializable
      * @param idiomaComboBox ComboBox de Idiomas
      * @param genereComboBox Combobox de Generes
      */
-    /*private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox,ComboBox<Genere> genereComboBox)
+    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox,ComboBox<Genere> genereComboBox)
     {
         AutorStringConverter converterAutor = new AutorStringConverter();
         GestioAutor gestioAutor = new GestioAutor();
@@ -640,7 +643,7 @@ public class LlibreController implements Initializable
         genereComboBox.getItems().addAll(listGeneres);
         genereComboBox.setConverter(genereConverter);
 
-    }*/
+    }
 
 
 
