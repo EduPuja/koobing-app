@@ -622,12 +622,12 @@ public class LlibreController implements Initializable
                 taulaBiblioLlibre.refresh();
 
                 //modificar la relacio
-                GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
-                gestioLlibreBiblioteca.modificarLlibreBiblioteca(llibreBiblio);
+              /*  GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
+                gestioLlibreBiblioteca.modificarLlibreBiblioteca(llibreBiblio);*/
 
                 //modificar el llibre
-                GestioLlibre gestioLlibre = new GestioLlibre();
-                gestioLlibre.modificarLlibre(llibreBiblio.getBook());
+                /*GestioLlibre gestioLlibre = new GestioLlibre();
+                gestioLlibre.modificarLlibre(llibreBiblio.getBook());*/
 
 
             }
