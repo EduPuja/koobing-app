@@ -193,7 +193,10 @@ public class LlibreController implements Initializable
                             "\nTítulo: " + llibreSeleccionado.getBook().getTitol() +
                             "\nAutor: " + llibreSeleccionado.getBook().getAutor().getNomAutor() +
                             // Agrega aquí más información del libro
-                            "\nStock: " + llibreSeleccionado.getStock());
+                            "\nStock: " + llibreSeleccionado.getStock()
+                    +"\nEditorial: " + llibreSeleccionado.getBook().getEditor().getNomEditor()
+                            +"\nGenere: " + llibreSeleccionado.getBook().getGenere().getNomGenere()
+                    +"\nFecha Publicacion: " + llibreSeleccionado.getBook().getDataPubli());
 
                     alert.showAndWait();
                 }
