@@ -49,18 +49,8 @@ public class LlibreController implements Initializable
     // llibre
 
     ArrayList<Llibre> listLlibres = new ArrayList<Llibre>();
-    public TableView2<Llibre> taulaLlibres;
-    public TableColumn<Llibre,Long> isbnColum;
-    public TableColumn<Llibre,String> autorColum;
-    public TableColumn<Llibre,String> editorColum;
 
-    public TableColumn<Biblioteca,String> bibliotecaColum;
 
-    public TableColumn <Llibre,String> idiomaColum;
-    public TableColumn<Llibre,String> genereColum;
-    public TableColumn<Llibre,String> titleColum;
-    public TableColumn<Llibre,String> versionColum;
-    public TableColumn<Llibre, Date> dataPubliColum;
     Parent root;
     Stage stage;
     Scene scene;
@@ -118,7 +108,7 @@ public class LlibreController implements Initializable
     /**
      * Metode per carregar les dades del llibre desde la base de dades MYSQL
      */
-    public void loadLlibres()
+    /*public void loadLlibres()
     {
         try
         {
@@ -140,7 +130,7 @@ public class LlibreController implements Initializable
                 Biblioteca biblioteca = cellData.getValue().getBiblioteca();
                 String nomBiblioteca = biblioteca.getNomBiblioteca();
                 return new SimpleStringProperty(nomBiblioteca);
-            });*/
+            });
             autorColum.setCellValueFactory(cellData -> {
 
                 Autor actor = cellData.getValue().getAutor();
@@ -176,7 +166,7 @@ public class LlibreController implements Initializable
         {
             System.out.println("Error loading data LLibres : " + e.getMessage());
         }
-    }
+    }*/
 
 
     /**
@@ -390,7 +380,11 @@ public class LlibreController implements Initializable
                 Idioma i = gestioIdioma.findIdioma(idIdioma);
                 llibre.setIdioma(i);
 
+
+                //biblitoeca
                 int idBiblitoeca = converterBibblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
+                Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
+
 
                 //versio
                 llibre.setVersio(Integer.parseInt(versionInput.getText()));
@@ -399,12 +393,15 @@ public class LlibreController implements Initializable
                 Date d = Date.valueOf(data);
                 llibre.setDataPubli(d);
 
-                //refresh
-                taulaLlibres.refresh();
+                //creating the bibliteca llibre
+                LlibreBiblio llibreBiblio =new LlibreBiblio();
+                llibreBiblio.setBook(llibre);
+                llibreBiblio.setBiblioteca(b);
 
-                //update database
-                GestioLlibre gest = new GestioLlibre();
-                gest.crearLlibre(llibre);
+
+                //update the table
+
+
 
 
                 //actualiar la pagina
