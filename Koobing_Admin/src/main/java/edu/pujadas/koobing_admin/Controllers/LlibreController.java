@@ -166,7 +166,7 @@ public class LlibreController implements Initializable
 
 
     /**
-     * Metode per carregar dades de llibre biblioteca la nova relacio 
+     * Metode per carregar dades de llibre biblioteca la nova relacio
      */
     public void loadLlibreBiblioteca()
     {
