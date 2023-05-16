@@ -474,7 +474,7 @@ public class LlibreController implements Initializable
      * @param event Action evnet
      * @throws Exception exception
      */
-   public void onModifyLLibre(ActionEvent event) throws Exception
+   public void onModifyBook(ActionEvent event) throws Exception
     {
         LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
         if(llibreBiblio != null) {

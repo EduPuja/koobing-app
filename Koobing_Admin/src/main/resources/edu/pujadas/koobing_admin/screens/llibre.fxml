@@ -87,7 +87,7 @@
                                     </image>
                                 </ImageView>
                                 <Button fx:id="addBtn" onAction="#onAddBook" alignment="CENTER" mnemonicParsing="false"  prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <Button fx:id="modifyBtn" onAction="#onModifyBook" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Button fx:id="deleteBtn" onAction="#onDeleteBook" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
