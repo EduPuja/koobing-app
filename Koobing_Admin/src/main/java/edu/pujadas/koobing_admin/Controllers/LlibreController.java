@@ -1,11 +1,9 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.*;
-
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.*;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,19 +18,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.net.URL;
 
 import java.sql.Blob;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LlibreController implements Initializable
@@ -43,8 +37,8 @@ public class LlibreController implements Initializable
     // taula biblioteca llibre
     public TableView2<LlibreBiblio> taulaBiblioLlibre;
     public TableColumn<LlibreBiblio,Integer> id;
-    public TableColumn<LlibreBiblio,Long> isbnColum2;
-    public TableColumn<LlibreBiblio,Integer> idBibilitoeca;
+    public TableColumn<LlibreBiblio,String> nomLlibre;
+    public TableColumn<LlibreBiblio,String > nomBiblioteca;
     public TableColumn<LlibreBiblio,Integer> stock;
 
 
@@ -196,18 +190,18 @@ public class LlibreController implements Initializable
             taulaBiblioLlibre.setItems(observableList);
 
             id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            isbnColum2.setCellValueFactory(cellData ->{
-                Llibre boom = cellData.getValue().getBook();
-                long isbn =boom.getISBN();
-                return new SimpleLongProperty(isbn).asObject();
+            nomLlibre.setCellValueFactory(cellData ->{
+                Llibre book = cellData.getValue().getBook();
+                String nomLLibre =book.getTitol();
+                return new SimpleStringProperty(nomLLibre);
             });
 
-            idBibilitoeca.setCellValueFactory(cellData ->{
+            nomBiblioteca.setCellValueFactory(cellData ->{
                 Biblioteca biblioteca = cellData.getValue().getBiblioteca();
-                int id = biblioteca.getIdBiblioteca();
-                //String nombiblio = biblioteca.getNomBiblioteca();
-                //return new SimpleStringProperty(nombiblio);
-                return new SimpleIntegerProperty(id).asObject();
+                //int id = biblioteca.getIdBiblioteca();
+                String nombiblio = biblioteca.getNomBiblioteca();
+                return new SimpleStringProperty(nombiblio);
+                //return new SimpleIntegerProperty(id).asObject();
             });
 
             stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
