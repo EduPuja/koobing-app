@@ -122,7 +122,11 @@ public class LlibreController implements Initializable
             taulaLlibres.setItems(observableListLlibre);
 
             isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-
+            bibliotecaColum.setCellValueFactory(cellData ->{
+                Biblioteca biblioteca = cellData.getValue().getBiblioteca();
+                String nomBiblioteca = biblioteca.getNomBiblioteca();
+                return new SimpleStringProperty(nomBiblioteca);
+            });
             autorColum.setCellValueFactory(cellData -> {
 
                 Autor actor = cellData.getValue().getAutor();
