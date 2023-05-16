@@ -305,14 +305,15 @@ public class LlibreController implements Initializable
             ComboBox<Editorial> editorialComboBox = new ComboBox<Editorial>();
             ComboBox<Idioma>idiomaComboBox = new ComboBox<Idioma>();
             ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
+            ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
 
             //afegint la info dels autors
-            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
+            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox,bibliotecaComboBox);
 
 
 
             //  Creacio dels Textes
-            TextInputDialog titolInput = new TextInputDialog();
+            TextField titolInput = new TextField();
             //data
             DatePicker dataPubliInput = new DatePicker();
 
@@ -321,14 +322,15 @@ public class LlibreController implements Initializable
             gridPane.setHgap(10);
             gridPane.setVgap(10);
 
-            gridPane.addRow(0, new Label("Digues el ISBN del llibre: "),isbnInput);
-            gridPane.addRow(1,new Label("Digues el autor") ,autorComboBox);
-            gridPane.addRow(2, new Label("Entra la Editorial: "), editorialComboBox);
-            gridPane.addRow(3, new Label("Idioma: "),idiomaComboBox);
-            gridPane.addRow(4, new Label("Genere: "),genereComboBox);
-            gridPane.addRow(5, new Label("Titol: "),titolInput.getEditor());
-            gridPane.addRow(6, new Label("Versio: "),versionInput);
-            gridPane.addRow(7, new Label("Data Publi "),dataPubliInput);
+            gridPane.addRow(0, new Label("Titol: "),titolInput);
+            gridPane.addRow(1, new Label("ISBN del llibre: "),isbnInput);
+            gridPane.addRow(2,new Label("Digues el autor") ,autorComboBox);
+            gridPane.addRow(3, new Label("Entra la Editorial: "), editorialComboBox);
+            gridPane.addRow(4, new Label("Biblioteca :",bibliotecaComboBox));
+            gridPane.addRow(5, new Label("Idioma: "),idiomaComboBox);
+            gridPane.addRow(6, new Label("Genere: "),genereComboBox);
+            gridPane.addRow(7, new Label("Versio: "),versionInput);
+            gridPane.addRow(8, new Label("Data Publi "),dataPubliInput);
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
@@ -354,6 +356,7 @@ public class LlibreController implements Initializable
                 GestioEditorial gestioEditorial = new GestioEditorial();
                 GestioIdioma  gestioIdioma = new GestioIdioma();
                 GestioGenere gestioGenere = new GestioGenere();
+                GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
 
 
                 //converters
@@ -361,9 +364,11 @@ public class LlibreController implements Initializable
                 EditorialStringConverter converterEditorial = new EditorialStringConverter();
                 GenereStringConverter converterGenere = new GenereStringConverter();
                 IdiomaStringConverter converterIdioma = new IdiomaStringConverter();
+                BibliotecaStringConverter converterBibblioteca = new BibliotecaStringConverter();
+
 
                 //titol
-                llibre.setTitol(titolInput.getEditor().getText());
+                llibre.setTitol(titolInput.getText());
 
                 //autor
                 int idAutor = converterAutor.getIdAutor(autorComboBox.getValue());
@@ -384,6 +389,8 @@ public class LlibreController implements Initializable
                 int idIdioma = converterIdioma.getIdIdioma(idiomaComboBox.getValue());
                 Idioma i = gestioIdioma.findIdioma(idIdioma);
                 llibre.setIdioma(i);
+
+                int idBiblitoeca = converterBibblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
 
                 //versio
                 llibre.setVersio(Integer.parseInt(versionInput.getText()));
@@ -602,12 +609,14 @@ public class LlibreController implements Initializable
 
     /**
      * Metode per poder emplanar les dades dels comboboxes de forma més rapida
-     * @param autorComboBox Combobox de Autors
-     * @param editorialComboBox Combobox de Editorials
-     * @param idiomaComboBox ComboBox de Idiomas
-     * @param genereComboBox Combobox de Generes
+     *
+     * @param autorComboBox      Combobox de Autors
+     * @param editorialComboBox  Combobox de Editorials
+     * @param idiomaComboBox     ComboBox de Idiomas
+     * @param genereComboBox     Combobox de Generes
+     * @param bibliotecaComboBox
      */
-    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox,ComboBox<Genere> genereComboBox)
+    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox, ComboBox<Genere> genereComboBox, ComboBox<Biblioteca> bibliotecaComboBox)
     {
         AutorStringConverter converterAutor = new AutorStringConverter();
         GestioAutor gestioAutor = new GestioAutor();
@@ -642,6 +651,14 @@ public class LlibreController implements Initializable
         ArrayList<Genere> listGeneres = gestioGenre.consultarGeneres();
         genereComboBox.getItems().addAll(listGeneres);
         genereComboBox.setConverter(genereConverter);
+
+        //bibioteca
+
+        BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
+        GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+        ArrayList<Biblioteca> listBiblios = gestioBiblioteca.consultarBiblioteques();
+        bibliotecaComboBox.getItems().addAll(listBiblios);
+        bibliotecaComboBox.setConverter(bibliotecaStringConverter);
 
     }
 
