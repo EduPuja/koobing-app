@@ -39,9 +39,10 @@ public class GestioPrestec
             /*String sql ="UPDATE `reserves` SET `id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"'," +
                     "`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"'," +
                     "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"' WHERE id_reserva=" +reserva.getIdReserva();*/
+            String sql = "UPDATE `reserves` SET `id_usuari`='" + reserva.getUsuari().getId() + "', `id_treballador`='" + reserva.getTreballador().getId() + "', `id_biblioteca`='" + reserva.getBiblio().getIdBiblioteca() + "', `ISBN`='" + reserva.getLlibre().getISBN() + "', " +
+                    "`data_inici`='" + reserva.getDataInici() + "', `data_fi`='" + reserva.getDataFI() + "', `estat` ='" + reserva.isEstat() + "' WHERE id_reserva =" + reserva.getIdReserva();
 
-            String sql = "UPDATE `reserves` SET id_usuari`='',`id_treballador`='[value-3]',`id_biblioteca`='[value-4]',`ISBN`='[value-5]'," +
-                    "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"',`estat`='"+reserva.isEstat()+"' WHERE id_reserva ="+reserva.getIdReserva();
+
             if(stat.executeUpdate(sql) == 1)
             {
                 System.out.println("Reseva update successfully");
