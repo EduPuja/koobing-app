@@ -57,7 +57,7 @@
                                 <Button fx:id="idiomaBtn" mnemonicParsing="false" onAction="#switchToIdioma" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="6" />
                                 <Button fx:id="genereBtn" mnemonicParsing="false" onAction="#switchToGenere" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="7" />
                                 <Button fx:id="editioralBtn" mnemonicParsing="false" onAction="#switchToEditorial" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="8" />
-                                <Button fx:id="reservaBtn" mnemonicParsing="false" onAction="#switchToReserva" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Reserva" textFill="WHITE" GridPane.rowIndex="9" />
+                                <Button fx:id="reservaBtn" mnemonicParsing="false" onAction="#switchToReserva" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Prestec" textFill="WHITE" GridPane.rowIndex="9" />
                             </children>
                         </GridPane>
                     </children>
@@ -75,7 +75,7 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" text="Reserva" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                <Label alignment="CENTER" contentDisplay="CENTER" text="Prestec" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                     <font>
                                         <Font size="30.0" />
                                     </font>
