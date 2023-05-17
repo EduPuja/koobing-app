@@ -346,7 +346,7 @@ public class GestioLlibre
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE ISBN='"+ISBN+"' AND id_biblioteca ="+idBiblio;
+            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE ISBN = '" + ISBN + "' AND id_biblioteca = " + idBiblio + " AND estat = 0";
             ResultSet result = stat.executeQuery(sql);
             if(result.next()) {
                 int count = result.getInt("count");
