@@ -34,6 +34,10 @@ public class IdiomaController implements Initializable
     public TableColumn<Idioma,Integer> idIdioma;
     public TableColumn<Idioma,String > nomIdioma;
     public ImageView avatarWorker;
+    public Button trebaladorBtn;
+    public Button bibliotecaBtn;
+    public Button editioralBtn;
+    public Button genereBtn;
 
     private ArrayList<Idioma> listIdioma = new ArrayList<Idioma>();
     Parent root;
@@ -73,6 +77,10 @@ public class IdiomaController implements Initializable
                 else
                 {
                     System.out.println("worker");
+                    trebaladorBtn.setVisible(false);
+                    bibliotecaBtn.setVisible(false);
+                    editioralBtn.setVisible(false);
+                    genereBtn.setVisible(false);
                 }
 
 
