@@ -614,7 +614,7 @@ public class LlibreController implements Initializable
                     Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
                     llibreBiblio.setBiblioteca(b);
 
-                 
+
                     //refresh
                     taulaBiblioLlibre.refresh();
 
