@@ -545,6 +545,7 @@ public class PrestecController implements Initializable
                 success.setTitle("Se ha tornat el llibre");
                 success.setContentText(null);
                 success.setHeaderText("El llibre se ha tornat correctament!");
+                success.show();
                 switchToReserva(event);
             }
             else {
