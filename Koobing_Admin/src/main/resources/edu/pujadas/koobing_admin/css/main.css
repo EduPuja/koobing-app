@@ -16,3 +16,8 @@
     -fx-border-radius: 2px;
     -fx-text-fill: #E3B71C;
 }
+
+#homeBtn{
+
+    -fx-background-color: red;
+}

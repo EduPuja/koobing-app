@@ -52,7 +52,7 @@
                             </image>
                         </ImageView>
 
-                        <GridPane prefHeight="460.0" prefWidth="230.0">
+                        <GridPane fx:id="navBar" prefHeight="460.0" prefWidth="230.0">
                             <columnConstraints>
                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                             </columnConstraints>
