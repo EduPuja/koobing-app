@@ -79,11 +79,7 @@ public class GestioPrestec
     {
         ArrayList<Reserva> listReserva = new ArrayList<>();
 
-        //gestiors
-
-        GestioUsuari gestioUsuari = new GestioUsuari();
-        GestioTreballador gestioTreballador = new GestioTreballador();
-
+        
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
