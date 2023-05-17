@@ -164,34 +164,19 @@ public class PrestecController implements Initializable
 
     public void onAddReserva(ActionEvent event )
     {
-        try {
-
-
-            //usuari
-            ComboBox<Usuari> usuariComboBox = new ComboBox<Usuari>();
-
-
+        try
+        {
             //treballador
             Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
-            TextField workerName = new TextField(worker.getNom());
-            workerName.setDisable(true); // el desabilito perque no es pigui modificar
 
-            //biblioteca
-
-            ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
-            // libre
-            ComboBox<Llibre > llibreComboBox  = new ComboBox<Llibre>();
-
-            //IMPORTNT AFEGIR LES DADES als comboboxes
-            addDataComboxes(usuariComboBox,bibliotecaComboBox,llibreComboBox);
-
+            //comboboxes
+            ComboBox<Usuari> usuariComboBox= new ComboBox<>();
+            ComboBox<Biblioteca> bibliotecaComboBox= new ComboBox<>();
+            ComboBox<Llibre> llibreComboBox = new ComboBox<>();
 
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String formatStartDate = LocalDate.now().format(formatter);
-            TextField dataInici = new TextField(formatStartDate);
-            dataInici.setDisable(true);
-
 
 
             ComboBox<String> dataEndComboBox = new ComboBox<String>();
@@ -199,7 +184,6 @@ public class PrestecController implements Initializable
                     "1 mes" ,"10 dies ","5 dies"
             );
             dataEndComboBox.setItems(dies);
-
 
 
             //crear el gridpane per posar els 2 camps a l'hora
@@ -210,11 +194,11 @@ public class PrestecController implements Initializable
 
 
             gridPane.addRow(0,new Label("Digues el usuari: ") ,usuariComboBox);
-            gridPane.addRow(1, new Label("Nom del treballador :"), workerName);
-            gridPane.addRow(2, new Label("Biblioteca"),bibliotecaComboBox);
-            gridPane.addRow(3, new Label("Llibre"),llibreComboBox);
-            gridPane.addRow(4,new Label("Data de inicio:"),dataInici);
-            gridPane.addRow(5,new Label("Digues la finalizació de la reserva"),dataEndComboBox);
+            gridPane.addRow(1, new Label("Nom del treballador :"), new Label(worker.getNom()));
+            gridPane.addRow(2, new Label("Seleciona la biblioteca: "),bibliotecaComboBox);
+            gridPane.addRow(3, new Label("Seleciona el llibre: "),llibreComboBox);
+            gridPane.addRow(4,new Label("Data d'inici: "),new Label(formatStartDate));
+            gridPane.addRow(5,new Label("Data de finalizació: "),dataEndComboBox);
 
 
             // Mostrar los dos diálogos en la misma ventana
@@ -232,105 +216,10 @@ public class PrestecController implements Initializable
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-               Reserva reserva = new Reserva();
-
-
-
-                //set user
-                UsuariStringConverter userConverter = new UsuariStringConverter();
-                int idUser = userConverter.getIdUsuari(usuariComboBox.getValue());
-                GestioUsuari gestioUsuari = new GestioUsuari();
-                Usuari user = gestioUsuari.findUserID(idUser);
-                reserva.setUsuari(user);
-
-
-                //set worker
-                reserva.setTreballador(worker);
-
-
-                //biblio llibre
-
-                //biblioteca
-                BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
-                int idBiblio = converterBiblio.getIdBiblioteca(bibliotecaComboBox.getValue());
-                LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-                long isbnBook =llibreStringConverter.getISBNLlibre(llibreComboBox.getValue());
-                GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-                Biblioteca biblioteca = gestioBiblioteca.findBiblioteca(idBiblio);
-                reserva.setBiblio(biblioteca);
-
-                GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
-                ArrayList<Llibre>  books = gestioLlibreBiblioteca.getLlibreBibliotecaByBilio(biblioteca.getIdBiblioteca());
-
-
-                llibreComboBox.getItems().addAll(books);
-                //set llibre to reserva
-                /*LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-                long isbnBook =llibreStringConverter.getISBNLlibre(llibreComboBox.getValue());
-                GestioLlibre gestioLlibre = new GestioLlibre();
-                Llibre book = gestioLlibre.findLLibre(isbnBook);
-                reserva.setLlibre(book);*/
-
-
-                //data hora inci
-                String dataValue = dataInici.getText();
-
-                LocalDate dateTimeStart = LocalDate.parse(dataValue, formatter);
-                Date dateStart = Date.valueOf(dateTimeStart);
-                reserva.setDataInici(dateStart);
-
-
-
-
-               // reserva.setDataHoraReserva(timeStart);
-
-                //date end
-                if (dataEndComboBox.getValue().equals("1 mes")) {
-                    LocalDate newDate = LocalDate.now().plusMonths(1);
-                    Date entDate = Date.valueOf(newDate);
-                    reserva.setDataFI(entDate);
-
-                    //afegir la reserva
-                     GestioPrestec gestioPrestec =new GestioPrestec();
-                    gestioPrestec.crearReserva(reserva);
-
-
-           
-
-                }
-                else if (dataEndComboBox.getValue().equals("10 dies")) {
-                    LocalDate newDate = LocalDate.now().plusDays(10);
-                    Date entDate = Date.valueOf(newDate);
-                    reserva.setDataFI(entDate);
-
-                    //afegir la reserva
-                    GestioPrestec gestioPrestec =new GestioPrestec();
-                    gestioPrestec.crearReserva(reserva);
-
-
-
-
-                }
-                else if (dataEndComboBox.getValue().equals("5 dies")) {
-                    LocalDate newDate = LocalDate.now().plusDays(5);
-                    Date entDate = Date.valueOf(newDate);
-                    reserva.setDataFI(entDate);
-
-                    //afegir la reserva
-                   GestioPrestec gestioPrestec =new GestioPrestec();
-                    gestioPrestec.crearReserva(reserva);
-
-
-
-
-                }
-
-                // refrescar
-                taulaReserves.refresh();
-                switchToReserva(event);
-
-
+                System.out.println("aaa");
             }
+
+
 
         }
         catch (Exception e)
@@ -400,7 +289,7 @@ public class PrestecController implements Initializable
                 DatePicker datePickerEnd = new DatePicker();
                 CheckBox isRetornart = new CheckBox();
 
-                addDataComboxes(userComboBox,bibliotecaComboBox,llibeComboBox);
+               // addDataComboxes(userComboBox,bibliotecaComboBox,llibeComboBox);
 
 
                 //crear el gridpane per posar els 2 camps a l'hora
@@ -510,6 +399,7 @@ public class PrestecController implements Initializable
     }
 
 
+    /*
     private void addDataComboxes(ComboBox<Usuari> usuariComboBox, ComboBox<Biblioteca> bibliotecaComboBox, ComboBox<Llibre> llibreComboBox)
     {
 
@@ -538,7 +428,7 @@ public class PrestecController implements Initializable
         llibreComboBox.setConverter(llibreStringConverter);
 
 
-    }
+    }*/
 
 
     public void onTornarLlibre(ActionEvent event)
