@@ -139,7 +139,8 @@ public class LoginController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         //css
-        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
+        String css = "/edu/pujadas/koobing_admin/css/main.css";
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
