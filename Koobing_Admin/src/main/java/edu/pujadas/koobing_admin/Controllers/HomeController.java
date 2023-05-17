@@ -50,7 +50,7 @@ public class HomeController implements Initializable
     // --- buttons navbar--//
     public Button homeBtn;
     public Button usuariBtn;
-    public Button treballadorBtn;
+    public Button trebaladorBtn;
     public Button llibreBtn;
     public Button autorBtn;
     public Button bibliotecaBtn;
@@ -149,6 +149,11 @@ public class HomeController implements Initializable
                     else
                     {
                         System.out.println("worker");
+                        trebaladorBtn.setVisible(false);
+                        bibliotecaBtn.setVisible(false);
+                        editioralBtn.setVisible(false);
+                        genereBtn.setVisible(false);
+
                     }
 
 

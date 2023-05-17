@@ -105,10 +105,10 @@ public class LlibreController implements Initializable
                 else
                 {
                     System.out.println("worker");
-                    trebaladorBtn.setDisable(true);
-                    bibliotecaBtn.setDisable(true);
-                    editioralBtn.setDisable(true);
-                    genereBtn.setDisable(true);
+                    trebaladorBtn.setVisible(false);
+                    bibliotecaBtn.setVisible(false);
+                    editioralBtn.setVisible(false);
+                    genereBtn.setVisible(false);
                 }
 
 

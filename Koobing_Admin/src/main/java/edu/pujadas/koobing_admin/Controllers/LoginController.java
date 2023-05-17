@@ -138,7 +138,7 @@ public class LoginController {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-       
+
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
