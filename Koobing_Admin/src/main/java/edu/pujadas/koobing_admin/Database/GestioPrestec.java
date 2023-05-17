@@ -15,8 +15,8 @@ public class GestioPrestec
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement statement = con.conectar();
-            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`) VALUES " +
-                    "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataInici()+"','"+reserva.getDataFI()+"') ";
+            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`,`estat`) VALUES " +
+                    "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataInici()+"','"+reserva.getDataFI()+"',"+reserva.isEstat()+") ";
 
             if(statement.executeUpdate(sql) == 1)
             {
@@ -40,7 +40,8 @@ public class GestioPrestec
                     "`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"'," +
                     "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"' WHERE id_reserva=" +reserva.getIdReserva();*/
 
-            String sql = "UPDATE `reserves` SET  id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"',`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"',`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"',`estat`='"+reserva.isEstat()+"' WHERE id_reserva ="+reserva.getIdReserva();
+            String sql = "UPDATE `reserves` SET id_usuari`='',`id_treballador`='[value-3]',`id_biblioteca`='[value-4]',`ISBN`='[value-5]'," +
+                    "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"',`estat`='"+reserva.isEstat()+"' WHERE id_reserva ="+reserva.getIdReserva();
             if(stat.executeUpdate(sql) == 1)
             {
                 System.out.println("Reseva update successfully");
@@ -86,11 +87,7 @@ public class GestioPrestec
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            /*String query="SELECT r.id_reserva,u.nom as nom_usuari,t.nom as nom_treballador,l.titol,b.nom_biblio" +
-                    "FROM `reserves` r INNER JOIN usuari u on u.id_usuari=r.id_reserva" +
-                    "INNER JOIN treballador t on t.id_treballador=r.id_treballador" +
-                    "INNER JOIN llibre l on l.ISBN= r.ISBN" +
-                    "INNER JOIN biblioteca b on b.id_biblioteca=r.id_biblioteca";*/
+
 
             String query = "SELECT * FROM reserves WHERE estat = 0";
 
