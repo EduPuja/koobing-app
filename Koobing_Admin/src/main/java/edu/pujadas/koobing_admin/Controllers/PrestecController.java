@@ -248,20 +248,28 @@ public class PrestecController implements Initializable
                 reserva.setTreballador(worker);
 
 
+                //biblio llibre
 
                 //biblioteca
                 BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
                 int idBiblio = converterBiblio.getIdBiblioteca(bibliotecaComboBox.getValue());
+                LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+                long isbnBook =llibreStringConverter.getISBNLlibre(llibreComboBox.getValue());
                 GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
                 Biblioteca biblioteca = gestioBiblioteca.findBiblioteca(idBiblio);
                 reserva.setBiblio(biblioteca);
 
+                GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
+                ArrayList<Llibre>  books = gestioLlibreBiblioteca.getLlibreBibliotecaByBilio(biblioteca.getIdBiblioteca());
+
+
+                llibreComboBox.getItems().addAll(books);
                 //set llibre to reserva
-                LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+                /*LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
                 long isbnBook =llibreStringConverter.getISBNLlibre(llibreComboBox.getValue());
                 GestioLlibre gestioLlibre = new GestioLlibre();
                 Llibre book = gestioLlibre.findLLibre(isbnBook);
-                reserva.setLlibre(book);
+                reserva.setLlibre(book);*/
 
 
                 //data hora inci
@@ -511,6 +519,8 @@ public class PrestecController implements Initializable
         UsuariStringConverter userConverter = new UsuariStringConverter();
         usuariComboBox.setConverter(userConverter);
         usuariComboBox.getItems().addAll(listaUsuarios);
+
+
 
         //biblioteca
         GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();

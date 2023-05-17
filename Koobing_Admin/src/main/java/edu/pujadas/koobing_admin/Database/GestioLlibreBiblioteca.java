@@ -3,10 +3,13 @@ package edu.pujadas.koobing_admin.Database;
 import edu.pujadas.koobing_admin.Models.Biblioteca;
 import edu.pujadas.koobing_admin.Models.Llibre;
 import edu.pujadas.koobing_admin.Models.LlibreBiblio;
+import edu.pujadas.koobing_admin.Models.Reserva;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.function.BinaryOperator;
 
 public class GestioLlibreBiblioteca {
     //gestors necessaris per trobar els objectes per els identificadors
@@ -130,5 +133,33 @@ public class GestioLlibreBiblioteca {
 
 
         return null;
+    }
+
+    public ArrayList<Llibre> getLlibreBibliotecaByBilio(int id_biblioteca)
+    {
+        ArrayList<Llibre> books = new ArrayList<>();
+
+        GestioLlibre gestioLlibre = new GestioLlibre();
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stmt = con.conectar();
+            String query = "SELECT * FROM `biblio_llibre` WHERE id_biblioteca= "+id_biblioteca;
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next())
+            {
+                Llibre llibre = gestioLlibre.findLLibre(rs.getInt("ISBN"));
+
+                books.add(llibre);
+            }
+
+            con.desconectar();
+            return books;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return  null;
     }
 }
