@@ -374,10 +374,8 @@ public class ReservaController implements Initializable
                     //delte to memory
                     ObservableList<Reserva> itemsReserves = taulaReserves.getItems();
                     itemsReserves.remove(reserva);
-                    //eliminar reseva
-                    gestioReserva.eliminarReserva(reserva.getIdReserva());
-                    taulaReserves.refresh();
-                    switchToReserva(event);
+         
+
 
                 }
             }
