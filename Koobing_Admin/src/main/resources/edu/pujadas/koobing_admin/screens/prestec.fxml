@@ -88,6 +88,7 @@
                                 <Button fx:id="addBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onAddReserva" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onModifyReserva" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onDeleteReserva" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="addBtn1" alignment="CENTER" mnemonicParsing="false" onAction="#onAddReserva" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Tornar Llibre" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                         <TableView2 fx:id="taulaReserves">

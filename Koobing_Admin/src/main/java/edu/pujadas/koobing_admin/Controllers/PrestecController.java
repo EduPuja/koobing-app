@@ -529,6 +529,35 @@ public class PrestecController implements Initializable
 
 
     }
+
+
+    public void onTornarLlibre(ActionEvent envet)
+    {
+        try
+        {
+            Alert wrong = new Alert(Alert.AlertType.ERROR);
+            Alert success = new Alert(Alert.AlertType.INFORMATION);
+            Reserva res  = taulaReserves.getSelectionModel().getSelectedItem();
+            if(res != null)
+            {
+                GestioPrestec gestioPrestec = new GestioPrestec();
+                gestioPrestec.canviarEstat(res.getIdReserva());
+                success.setTitle("Se ha tornat el llibre");
+                success.setContentText(null);
+                success.setHeaderText("El llibre se ha tornat correctament!");
+            }
+            else {
+                wrong.setTitle("Selecciona una reserva");
+                wrong.setHeaderText("Has de selecionar una reserva");
+                wrong.show();
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Tornar Llibre Error :" +e.getMessage());
+        }
+    }
     // CANVIS DE PANTALLA
 
 
