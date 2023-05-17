@@ -159,7 +159,7 @@ public class GestioPrestec
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String query = "UPDATE `reserves` SET `estat`='[value-8]' WHERE id_reserva= "+idPrestec;
+            String query = "UPDATE `reserves` SET `estat`='1' WHERE id_reserva= "+idPrestec;
             if(stat.executeUpdate(query) == 1)
             {
                 System.out.println("Se ha actualizat el estat");

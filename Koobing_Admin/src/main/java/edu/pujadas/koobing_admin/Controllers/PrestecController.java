@@ -531,7 +531,7 @@ public class PrestecController implements Initializable
     }
 
 
-    public void onTornarLlibre(ActionEvent envet)
+    public void onTornarLlibre(ActionEvent event)
     {
         try
         {
@@ -545,6 +545,7 @@ public class PrestecController implements Initializable
                 success.setTitle("Se ha tornat el llibre");
                 success.setContentText(null);
                 success.setHeaderText("El llibre se ha tornat correctament!");
+                switchToReserva(event);
             }
             else {
                 wrong.setTitle("Selecciona una reserva");
