@@ -1,8 +1,5 @@
-.root
-{
 
-}
 #loginBtn
 {
-    -fx-background-color: black;
+    -fx-background-color: red;
 }
