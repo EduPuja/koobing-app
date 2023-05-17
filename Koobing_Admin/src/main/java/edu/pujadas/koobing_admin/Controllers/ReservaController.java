@@ -41,6 +41,10 @@ public class ReservaController implements Initializable
 {
 
 
+    public Button trebaladorBtn;
+    public Button bibliotecaBtn;
+    public Button genereBtn;
+    public Button editioralBtn;
     Parent root;
     Stage stage;
     Scene scene;
@@ -98,6 +102,10 @@ public class ReservaController implements Initializable
                 else
                 {
                     System.out.println("worker");
+                    trebaladorBtn.setVisible(false);
+                    bibliotecaBtn.setVisible(false);
+                    editioralBtn.setVisible(false);
+                    genereBtn.setVisible(false);
                 }
 
 
