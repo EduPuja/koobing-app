@@ -293,7 +293,7 @@ public class LlibreController implements Initializable
             gridPane.addRow(4, new Label("Biblioteca :"),bibliotecaComboBox);
             gridPane.addRow(5, new Label("Idioma: "),idiomaComboBox);
             gridPane.addRow(6, new Label("Genere: "),genereComboBox);
-            gridPane.addRow(7, new Label("Versio: "),versionInput);
+            gridPane.addRow(7, new Label("Edició: "),versionInput);
             gridPane.addRow(8, new Label("Data Publi "),dataPubliInput);
             gridPane.addRow(9, new Label("Digues el stock: "),stock);
 
