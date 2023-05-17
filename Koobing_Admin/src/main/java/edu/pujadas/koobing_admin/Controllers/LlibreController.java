@@ -36,6 +36,16 @@ public class LlibreController implements Initializable
 {
 
     public ImageView avatarWorker;
+    public Button homeBtn;
+    public Button usuariBtn;
+    public Button trebaladorBtn;
+    public Button llibreBtn;
+    public Button autorBtn;
+    public Button bibliotecaBtn;
+    public Button idiomaBtn;
+    public Button genereBtn;
+    public Button editioralBtn;
+    public Button reservaBtn;
 
     // taula biblioteca llibre
 
@@ -94,6 +104,7 @@ public class LlibreController implements Initializable
                 else
                 {
                     System.out.println("worker");
+                    trebaladorBtn.setDisable(true);
                 }
 
 
