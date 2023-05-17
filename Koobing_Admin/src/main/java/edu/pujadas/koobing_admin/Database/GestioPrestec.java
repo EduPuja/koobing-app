@@ -36,9 +36,11 @@ public class GestioPrestec
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql ="UPDATE `reserves` SET `id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"'," +
+            /*String sql ="UPDATE `reserves` SET `id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"'," +
                     "`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"'," +
-                    "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"' WHERE id_reserva=" +reserva.getIdReserva();
+                    "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"' WHERE id_reserva=" +reserva.getIdReserva();*/
+
+            String sql = "UPDATE `reserves` SET  id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"',`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"',`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"',`estat`='"+reserva.isEstat()+"' WHERE id_reserva ="+reserva.getIdReserva();
             if(stat.executeUpdate(sql) == 1)
             {
                 System.out.println("Reseva update successfully");
