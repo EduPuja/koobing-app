@@ -1,9 +1,7 @@
 package edu.pujadas.koobing_admin.Controllers;
 
 import edu.pujadas.koobing_admin.Database.GestioAutor;
-import edu.pujadas.koobing_admin.Database.GestioLlibre;
 import edu.pujadas.koobing_admin.Models.Autor;
-import edu.pujadas.koobing_admin.Models.Llibre;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
 import javafx.collections.FXCollections;
@@ -21,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
-import org.w3c.dom.Text;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -416,7 +413,7 @@ public class AutorController implements Initializable
      */
     public void switchToReserva(ActionEvent event) throws Exception
     {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/reserva.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/prestec.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

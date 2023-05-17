@@ -23,21 +23,13 @@ import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import javafx.scene.control.TextFormatter;
 
-import javafx.scene.control.TextFormatter.Change;
-
-public class ReservaController implements Initializable
+public class PrestecController implements Initializable
 {
 
 
@@ -127,8 +119,8 @@ public class ReservaController implements Initializable
        // System.out.println("Loading info reserva"); // debug testing
         try
         {
-            GestioReserva gestioReserva= new GestioReserva();
-            listReserves = gestioReserva.consultarReserves();
+            GestioPrestec gestioPrestec = new GestioPrestec();
+            listReserves = gestioPrestec.consultarReserves();
             ObservableList<Reserva> observableListReserva = FXCollections.observableArrayList(
                     listReserves
             );
@@ -291,8 +283,8 @@ public class ReservaController implements Initializable
                     reserva.setDataFI(entDate);
 
                     //afegir la reserva
-                     GestioReserva gestioReserva =new GestioReserva();
-                    gestioReserva.crearReserva(reserva);
+                     GestioPrestec gestioPrestec =new GestioPrestec();
+                    gestioPrestec.crearReserva(reserva);
 
 
            
@@ -304,8 +296,8 @@ public class ReservaController implements Initializable
                     reserva.setDataFI(entDate);
 
                     //afegir la reserva
-                    GestioReserva gestioReserva =new GestioReserva();
-                    gestioReserva.crearReserva(reserva);
+                    GestioPrestec gestioPrestec =new GestioPrestec();
+                    gestioPrestec.crearReserva(reserva);
 
 
 
@@ -317,8 +309,8 @@ public class ReservaController implements Initializable
                     reserva.setDataFI(entDate);
 
                     //afegir la reserva
-                   GestioReserva gestioReserva =new GestioReserva();
-                    gestioReserva.crearReserva(reserva);
+                   GestioPrestec gestioPrestec =new GestioPrestec();
+                    gestioPrestec.crearReserva(reserva);
 
 
 
@@ -345,7 +337,7 @@ public class ReservaController implements Initializable
     {
         try {
 
-            GestioReserva gestioReserva = new GestioReserva();
+            GestioPrestec gestioPrestec = new GestioPrestec();
             //confirmacion
             Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
             //error
@@ -374,7 +366,7 @@ public class ReservaController implements Initializable
                     //delte to memory
                     ObservableList<Reserva> itemsReserves = taulaReserves.getItems();
                     itemsReserves.remove(reserva);
-         
+
 
 
                 }
@@ -475,8 +467,8 @@ public class ReservaController implements Initializable
                             reserva.setDataFI(end);
 
 
-                            GestioReserva gestioReserva = new GestioReserva();
-                            gestioReserva.modificarReserva(reserva);
+                            GestioPrestec gestioPrestec = new GestioPrestec();
+                            gestioPrestec.modificarReserva(reserva);
                         } else {
                             // La fecha de fin es menor o igual a la fecha de inicio
 
@@ -672,7 +664,7 @@ public class ReservaController implements Initializable
      */
     public void switchToReserva(ActionEvent event) throws Exception
     {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/reserva.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/prestec.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

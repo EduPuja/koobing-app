@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.ByteArrayInputStream;
-import java.io.InvalidObjectException;
 import java.net.URL;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -402,7 +401,7 @@ public class IdiomaController implements Initializable
      */
     public void switchToReserva(ActionEvent event) throws Exception
     {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/reserva.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/prestec.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

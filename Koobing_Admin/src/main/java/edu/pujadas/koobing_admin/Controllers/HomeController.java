@@ -1,13 +1,8 @@
 package edu.pujadas.koobing_admin.Controllers;
 
-import edu.pujadas.koobing_admin.App;
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
-import edu.pujadas.koobing_admin.Utilities.Validation;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleMapProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,8 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -29,11 +22,9 @@ import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -459,7 +450,7 @@ public class HomeController implements Initializable
      */
     public void switchToReserva(ActionEvent event) throws Exception
     {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/reserva.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/prestec.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

@@ -1,6 +1,5 @@
 package edu.pujadas.koobing_admin.Controllers;
 
-import edu.pujadas.koobing_admin.Database.GestioTreballador;
 import edu.pujadas.koobing_admin.Database.GestioUsuari;
 import edu.pujadas.koobing_admin.Models.Treballador;
 import edu.pujadas.koobing_admin.Models.Usuari;
@@ -526,7 +525,7 @@ public class UsuariController implements Initializable
      */
     public void switchToReserva(ActionEvent event) throws Exception
     {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/reserva.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/prestec.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

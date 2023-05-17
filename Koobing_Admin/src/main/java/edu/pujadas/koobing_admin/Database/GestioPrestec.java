@@ -2,15 +2,12 @@ package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.Reserva;
 
-import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.concurrent.locks.ReentrantLock;
 
 
-
-public class GestioReserva
+public class GestioPrestec
 {
     public void crearReserva(Reserva reserva)
     {
