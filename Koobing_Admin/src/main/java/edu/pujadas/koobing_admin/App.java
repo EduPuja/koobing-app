@@ -39,6 +39,8 @@ public class App extends Application
        //css
 
        //String cssFile = getClass().getResource("/edu/pujadas/koobing_admin/css/main.css").toExternalForm();
+
+
        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
        stage.setScene(scene);
         stage.setResizable(false);

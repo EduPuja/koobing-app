@@ -300,8 +300,7 @@ public class HomeController implements Initializable
 
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
-        stage.setScene(scene);
+
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -316,8 +315,7 @@ public class HomeController implements Initializable
     {
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/usuari.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
-        stage.setScene(scene);
+
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -332,8 +330,7 @@ public class HomeController implements Initializable
     {
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/treballador.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
-        stage.setScene(scene);
+
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -347,8 +344,7 @@ public class HomeController implements Initializable
     {
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/llibre.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
-        stage.setScene(scene);
+
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
