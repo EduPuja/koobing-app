@@ -40,6 +40,10 @@ public class AutorController implements Initializable
     public TableColumn<Autor,String> nomAutor;
     public TableColumn<Autor, Date> dataNaix;
     public ImageView avatarWorker;
+    public Button trebaladorBtn;
+    public Button bibliotecaBtn;
+    public Button editioralBtn;
+    public Button genereBtn;
 
     ArrayList<Autor> listAutores = new ArrayList<>();
     Parent root;
@@ -79,6 +83,10 @@ public class AutorController implements Initializable
                 else
                 {
                     System.out.println("worker");
+                    trebaladorBtn.setVisible(false);
+                    bibliotecaBtn.setVisible(false);
+                    editioralBtn.setVisible(false);
+                    genereBtn.setVisible(false);
                 }
 
 

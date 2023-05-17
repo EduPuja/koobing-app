@@ -110,6 +110,10 @@ public class UsuariController implements Initializable
                 else
                 {
                     System.out.println("worker");
+                    trebaladorBtn.setVisible(false);
+                    bibliotecaBtn.setVisible(false);
+                    editioralBtn.setVisible(false);
+                    genereBtn.setVisible(false);
                 }
 
 
