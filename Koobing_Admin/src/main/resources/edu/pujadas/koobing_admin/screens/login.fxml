@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@../css/main.css" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.LoginController">
+<AnchorPane  prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.LoginController">
    <children>
       <GridPane layoutX="307.0" prefHeight="593.0" prefWidth="386.0">
         <columnConstraints>
@@ -41,7 +41,7 @@
                   <Insets top="50.0" />
                </GridPane.margin>
             </PasswordField>
-            <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="135.0"  text="Login" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button   fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="135.0"  text="Login" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>

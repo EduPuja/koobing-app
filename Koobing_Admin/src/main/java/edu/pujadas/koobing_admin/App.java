@@ -38,8 +38,8 @@ public class App extends Application
         Scene scene = new Scene(root, 1000, 600);
        //css
 
-       String cssFile = getClass().getResource("/edu/pujadas/koobing_admin/css/main.css").toExternalForm();
-       scene.getStylesheets().add(cssFile);
+       //String cssFile = getClass().getResource("/edu/pujadas/koobing_admin/css/main.css").toExternalForm();
+       scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
        stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
