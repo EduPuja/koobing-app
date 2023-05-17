@@ -614,100 +614,26 @@ public class LlibreController implements Initializable
                     Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
                     llibreBiblio.setBiblioteca(b);
 
-                    //update memory
-                    listBiblioLLibre.add(llibreBiblio);
-
-                    ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
-                    items.add(llibreBiblio);
-
-
+                 
                     //refresh
                     taulaBiblioLlibre.refresh();
 
                     //modificar la relacio
-                  /*  GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
-                    gestioLlibreBiblioteca.modificarLlibreBiblioteca(llibreBiblio);*/
+                   GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
+                    gestioLlibreBiblioteca.modificarLlibreBiblioteca(llibreBiblio);
 
                         //modificar el llibre
-                    /*GestioLlibre gestioLlibre = new GestioLlibre();
-                    gestioLlibre.modificarLlibre(llibreBiblio.getBook());*/
+                    GestioLlibre gestioLlibre = new GestioLlibre();
+                    gestioLlibre.modificarLlibre(llibreBiblio.getBook());
                 }
 
                 else
                 {
                     System.out.println("Camps vuits");
-
-
-
-
-                    //Actualizar les dades del llibre selecionat
-
-                    //gestors
-                    GestioAutor gestioAutor = new GestioAutor();
-                    GestioEditorial gestioEditorial = new GestioEditorial();
-                    GestioIdioma  gestioIdioma = new GestioIdioma();
-                    GestioGenere gestioGenere = new GestioGenere();
-                    GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-
-                    //converters
-                    AutorStringConverter converterAutor = new AutorStringConverter();
-                    EditorialStringConverter converterEditorial = new EditorialStringConverter();
-                    GenereStringConverter converterGenere = new GenereStringConverter();
-                    IdiomaStringConverter converterIdioma = new IdiomaStringConverter();
-                    BibliotecaStringConverter converterBiblioteca = new BibliotecaStringConverter();
-
-                    //titol
-                    llibreBiblio.getBook().setTitol(titol.getText());
-
-                    //autor
-                    int idAutor = converterAutor.getIdAutor(autorComboBox.getValue());
-                    Autor a = gestioAutor.findAutor(idAutor);
-                    llibreBiblio.getBook().setAutor(a);
-
-                    //editorial
-                    /*int idEditorial = converterEditorial.getIdEditor(editorialComboBox.getValue());
-                    Editorial e = gestioEditorial.findEditorial(idEditorial);
-                    llibreBiblio.getBook().setEditor(e);
-
-                    //genere
-                    int idGenere = converterGenere.getIdGenere(genereComboBox.getValue());
-                    Genere g = gestioGenere.findGenere(idGenere);
-                    llibreBiblio.getBook().setGenere(g);
-
-                    //idioma
-                    int idIdioma = converterIdioma.getIdIdioma(idiomaComboBox.getValue());
-                    Idioma i = gestioIdioma.findIdioma(idIdioma);
-                    llibreBiblio.getBook().setIdioma(i);
-
-
-                    //biblitoeca
-                    int idBiblitoeca = converterBiblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
-                    Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
-                    llibreBiblio.setBiblioteca(b);
-
-                    */
-
-                    //versio
-                    llibreBiblio.getBook().setVersio(Integer.parseInt(version.getText()));
-                    //data
-                    LocalDate data = dataPublicacio.getValue();
-                    Date d = Date.valueOf(data);
-                    llibreBiblio.getBook().setDataPubli(d);
-
-                    //stock
-                    llibreBiblio.setStock(Integer.parseInt(stock.getText()));
-
-
-
-                    //update memory
-                    listBiblioLLibre.add(llibreBiblio);
-
-                    ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
-                    items.add(llibreBiblio);
-
-
-                    //refresh
-                    taulaBiblioLlibre.refresh();
+                    Alert badAlert = new Alert(Alert.AlertType.ERROR);
+                    badAlert.setTitle("Camps vuits");
+                    badAlert.setContentText("Emplena els camps");
+                    badAlert.show();
                 }
 
 
