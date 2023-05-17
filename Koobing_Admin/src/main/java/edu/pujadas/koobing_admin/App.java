@@ -37,9 +37,9 @@ public class App extends Application
         Parent root = loader.load();
         Scene scene = new Scene(root, 1000, 600);
        //css
-       String css ="/edu/pujadas/koobing_admin/css/main.css";
-       scene.getStylesheets().add(css); // Reemplaza "ruta-del-archivo" con la ubicación real del archivo CSS
 
+       String cssFile = getClass().getResource("css/main.css").toExternalForm();
+       scene.getStylesheets().add(cssFile);
        stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

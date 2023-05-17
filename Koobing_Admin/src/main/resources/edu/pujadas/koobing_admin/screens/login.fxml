@@ -41,7 +41,7 @@
                   <Insets top="50.0" />
                </GridPane.margin>
             </PasswordField>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: black;" text="Login" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button id="loginBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: black;" text="Login" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>
