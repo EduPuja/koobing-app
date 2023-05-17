@@ -90,7 +90,7 @@ public class GestioPrestec
                     "INNER JOIN llibre l on l.ISBN= r.ISBN" +
                     "INNER JOIN biblioteca b on b.id_biblioteca=r.id_biblioteca";*/
 
-            String query = "SELECT * FROM reserves";
+            String query = "SELECT * FROM reserves WHERE estat = 0";
 
             ResultSet rs = stat.executeQuery(query);
 
@@ -104,7 +104,7 @@ public class GestioPrestec
                 reserva.setLlibre(new GestioLlibre().findLLibre(rs.getLong("ISBN")));
                 reserva.setDataInici(rs.getDate("data_inici"));
                 reserva.setDataFI(rs.getDate("data_fi"));
-
+                reserva.setEstat(rs.getBoolean("estat"));
                 //addin the object into the arraylist
                 listReserva.add(reserva);
             }
@@ -122,8 +122,31 @@ public class GestioPrestec
 
     public Reserva findReserva(int idReserva)
     {
+        // RETORNA LA RESERVA INDEPENDENT DEL STAT
         try {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String query = "SELECT * FROM reserves where id_reserva = "+idReserva ;
+            ResultSet rs = stat.executeQuery(query);
 
+            if (rs.next())
+            {
+                Reserva reserva = new Reserva();
+                reserva.setIdReserva(rs.getInt("id_reserva"));
+                reserva.setUsuari(new GestioUsuari().findUserID(rs.getInt("id_usuari")));
+                reserva.setTreballador(new GestioTreballador().findTreballador(rs.getInt("id_treballador")));
+                reserva.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
+                reserva.setLlibre(new GestioLlibre().findLLibre(rs.getLong("ISBN")));
+                reserva.setDataInici(rs.getDate("data_inici"));
+                reserva.setDataFI(rs.getDate("data_fi"));
+                reserva.setEstat(rs.getBoolean("estat"));
+
+                con.desconectar();
+
+                return reserva;
+
+            }
+       ;
         }
         catch (Exception e)
         {

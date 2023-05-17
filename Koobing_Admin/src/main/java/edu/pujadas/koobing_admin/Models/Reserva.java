@@ -13,6 +13,8 @@ public class Reserva
     Date dataInici;
     Date dataFI;
 
+    boolean estat;
+
     public Reserva()
     {
     }
@@ -92,5 +94,19 @@ public class Reserva
 
     public void setDataFI(Date dataFI) {
         this.dataFI = dataFI;
+    }
+
+    public int isEstat() {
+        if(estat)
+        {
+            return 1;
+        }
+        else  return 0;
+
+
+    }
+
+    public void setEstat(boolean estat) {
+        this.estat = estat;
     }
 }
