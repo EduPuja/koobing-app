@@ -130,9 +130,11 @@ public class HomeController implements Initializable
 
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
-        stage.setScene(scene);
+
+        String css = "/edu/pujadas/koobing_admin/css/main.css";
         scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+
         stage.setScene(scene);
         stage.show();
 
@@ -322,8 +324,9 @@ public class HomeController implements Initializable
 
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/home.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
+        String css = "/edu/pujadas/koobing_admin/css/main.css";
         scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -338,9 +341,16 @@ public class HomeController implements Initializable
         root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/usuari.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+        String css = "/edu/pujadas/koobing_admin/css/main.css";
         scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
         stage.setScene(scene);
+
         stage.show();
+
+
+
+
     }
 
     /**
