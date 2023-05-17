@@ -1,5 +1,18 @@
-
 #loginBtn
 {
-    -fx-background-color: red;
+    -fx-background-color: black;
+}
+#loginBtn:hover
+{
+    -fx-border-color: #E3B71C;
+    -fx-border-width: 2px;
+    -fx-border-radius: 2px;
+    -fx-text-fill: #E3B71C;
+}
+#loginBtn:pressed
+{
+    -fx-border-color: #E3B71C;
+    -fx-border-width: 2px;
+    -fx-border-radius: 2px;
+    -fx-text-fill: #E3B71C;
 }
