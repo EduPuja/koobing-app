@@ -379,7 +379,7 @@ public class PrestecController implements Initializable
 
 
     }
-    public void onModifyReserva(ActionEvent event )
+    public void onModifyReserva(ActionEvent event)
     {
         try {
             Reserva reserva = taulaReserves.getSelectionModel().getSelectedItem();
@@ -390,7 +390,7 @@ public class PrestecController implements Initializable
                 ComboBox<Llibre> llibeComboBox= new ComboBox<>();
                 DatePicker datePickerStart = new DatePicker(LocalDate.now());
                 DatePicker datePickerEnd = new DatePicker();
-
+                CheckBox isRetornart = new CheckBox();
 
                 addDataComboxes(userComboBox,bibliotecaComboBox,llibeComboBox);
 
@@ -407,7 +407,7 @@ public class PrestecController implements Initializable
                 gridPane.addRow(2, new Label("LLibre "),llibeComboBox);
                 gridPane.addRow(3, new Label("Data de inicio"), datePickerStart);
                 gridPane.addRow(4, new Label("Data de fin"), datePickerEnd);
-
+                gridPane.addRow(5, new Label("Estat :"),isRetornart);
 
 
 
@@ -427,11 +427,8 @@ public class PrestecController implements Initializable
                     Usuari user = gestioUsuari.findUserID(idUser);
                     reserva.setUsuari(user);
 
-
                     //set worker
                     reserva.setTreballador(worker);
-
-
 
                     //biblioteca
                     BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
@@ -447,6 +444,9 @@ public class PrestecController implements Initializable
                     Llibre book = gestioLlibre.findLLibre(isbnBook);
                     reserva.setLlibre(book);
 
+
+                    //retornat
+                    reserva.setEstat(isRetornart.isSelected());
 
                     //data incii
                     LocalDate dateStart =datePickerStart.getValue();
