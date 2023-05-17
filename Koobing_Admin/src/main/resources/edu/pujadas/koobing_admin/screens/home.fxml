@@ -107,6 +107,7 @@
                                         <Image url="@../img/libro.png" />
                                     </image>
                                 </ImageView>
+                        <Button onAction="#onLogout" fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: black;" text="Tencar Sessió" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                         <!--Tabpane-->

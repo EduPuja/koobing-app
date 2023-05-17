@@ -40,6 +40,7 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable
 {
 
+    public Button logoutBtn;
     // Stage and parent stuff//
     private Stage stage ;
     private Scene scene;
@@ -121,6 +122,22 @@ public class HomeController implements Initializable
 
     }
 
+
+    public void onLogout(ActionEvent event) throws Exception
+    {
+        Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
+        worker = null;
+
+        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/login.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
+        stage.setScene(scene);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
 
     /**
      * Metode que carrega la info del treballador
