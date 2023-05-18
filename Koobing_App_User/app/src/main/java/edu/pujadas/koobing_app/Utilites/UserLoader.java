@@ -52,73 +52,46 @@ public class UserLoader {
 
     public ArrayList<Usuari> loadUsers()
     {
-        try
-        {
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+            new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response)
                 {
-
                     System.out.println("Successfully loaded response");
                     try
                     {
                         listUsers = new ArrayList<Usuari>();
-
                         for (int i = 0; i < response.length(); i++)
                         {
                             JSONObject jsonObject = response.getJSONObject(i);
-
                             int idUsuari = jsonObject.getInt("id_usuari");
                             String nom =jsonObject.getString("nom");
-
                             Usuari usuari = new Usuari();
                             usuari.setId(idUsuari);
                             usuari.setNom(nom);
-
+                            System.out.println(usuari.getNom());
                             listUsers.add(usuari);
-
-
-
                         }
-
-
-
                     }
                     catch (Exception e)
                     {
                         System.out.println("on response error: " + e.getMessage());
                     }
-
-
                 }
-
-
-
             },
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("Volley Error: " + error.getMessage());
                 }
-            });
+            }); // fi jsonArrayRequest
 
-            // Crea una nueva cola de solicitudes de red.
-            RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-            // Agrega la solicitud a la cola de solicitudes.
-            requestQueue.add(jsonArrayRequest);
-
-            return listUsers;
-
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
+        // Crea una nueva cola de solicitudes de red.
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        // Agrega la solicitud a la cola de solicitudes.
+        requestQueue.add(jsonArrayRequest);
+        requestQueue.stop();
+       return  listUsers;
     }
 
 

@@ -38,10 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         userLoader = new UserLoader(this);
 
-       listUsuarios=  userLoader.loadUsers();
-
-
-        System.out.println("Nom Usuari desde arraylist :" + listUsuarios.get(0).getNom());
+        userLoader.loadUsers();
 
 
     }
