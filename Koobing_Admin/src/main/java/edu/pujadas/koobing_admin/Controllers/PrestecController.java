@@ -210,20 +210,6 @@ public class PrestecController implements Initializable
             bibliotecaComboBox.setConverter(bibliotecaStringConverter);
 
 
-           /* GestioLlibre gestioLlibre = new GestioLlibre();
-            ArrayList<Llibre> listLlibres = gestioLlibre.consultarLlibres();
-            LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-            llibreComboBox.getItems().addAll(listLlibres);
-            llibreComboBox.setConverter(llibreStringConverter);*/
-
-
-
-
-
-
-
-
-
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String formatStartDate = LocalDate.now().format(formatter);
