@@ -1,6 +1,7 @@
 package edu.pujadas.koobing_app.Utilites;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -8,10 +9,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import edu.pujadas.koobing_app.Models.Usuari;
@@ -53,7 +60,7 @@ public class UserLoader {
     }
 
 
-    public ArrayList<Usuari> loadUsers()
+    public void loadUsers()
     {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
             new Response.Listener<JSONArray>() {
@@ -72,8 +79,10 @@ public class UserLoader {
                             Usuari usuari = new Usuari();
                             usuari.setId(idUsuari);
                             usuari.setNom(nom);
-                            System.out.println(usuari.getNom());
+
                             listUsers.add(usuari);
+
+                            saveArrayList(listUsers);
                         }
                     }
                     catch (Exception e)
@@ -94,7 +103,26 @@ public class UserLoader {
         // Agrega la solicitud a la cola de solicitudes.
         requestQueue.add(jsonArrayRequest);
         requestQueue.stop();
-       return  listUsers;
+
+    }
+
+    private void saveArrayList(ArrayList<Usuari> listUsers) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(listUsers);
+        editor.putString("userList", json);
+        editor.apply();
+    }
+
+    private ArrayList<Usuari> loadArrayList() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String json = sharedPreferences.getString("userList", null);
+
+        Type type = new TypeToken<ArrayList<Usuari>>() {}.getType();
+        Gson gson = new Gson();
+        return gson.fromJson(json, type);
     }
 
 
