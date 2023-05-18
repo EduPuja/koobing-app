@@ -145,7 +145,9 @@ public class GestioLlibreBiblioteca {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next())
             {
-                Llibre llibre = gestioLlibre.findLLibre(rs.getInt("ISBN"));
+               Llibre llibre = new Llibre();
+               llibre = gestioLlibre.findLLibre(rs.getLong("ISBN"));
+
 
                 books.add(llibre);
             }
@@ -155,7 +157,7 @@ public class GestioLlibreBiblioteca {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Error Retuning list of books from libryary :"+e.getMessage());
         }
         return  null;
     }
