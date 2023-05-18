@@ -263,56 +263,74 @@ public class PrestecController implements Initializable
                 Date dateInici = Date.valueOf(LocalDate.now());
                 prestec.setDataInici(dateInici);
 
-                if(dataEndComboBox.getValue().equals("1 mes"))
+                if(dataEndComboBox.getValue() != null)
                 {
-                    Date endDate = Date.valueOf(LocalDate.now().plusMonths(1));
-                    prestec.setDataFI(endDate);
+                    if(dataEndComboBox.getValue().equals("1 mes"))
+                    {
+                        Date endDate = Date.valueOf(LocalDate.now().plusMonths(1));
+                        prestec.setDataFI(endDate);
 
-                    //afegir a memoria
-                    listReserves.add(prestec);
-                    ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
-                    taulaReserves.setItems(reservaObservableList);
+                        //afegir a memoria
+                        listReserves.add(prestec);
+                        ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
+                        taulaReserves.setItems(reservaObservableList);
 
-                    //base de dades
+                        //base de dades
                     /*GestioPrestec gestioPrestec = new GestioPrestec();
                     gestioPrestec.crearReserva(prestec);*/
-                }
-                else if(dataEndComboBox.getValue().equals("10 dies"))
-                {
-                    Date endDate = Date.valueOf(LocalDate.now().plusDays(10));
-                    prestec.setDataFI(endDate);
+                    }
+                    else if(dataEndComboBox.getValue().equals("10 dies"))
+                    {
+                        Date endDate = Date.valueOf(LocalDate.now().plusDays(10));
+                        prestec.setDataFI(endDate);
 
-                    //afegir a memoria
-                    listReserves.add(prestec);
-                    ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
-                    taulaReserves.setItems(reservaObservableList);
+                        //afegir a memoria
+                        listReserves.add(prestec);
+                        ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
+                        taulaReserves.setItems(reservaObservableList);
 
-                    //base de dades
+                        //base de dades
                     /*GestioPrestec gestioPrestec = new GestioPrestec();
                     gestioPrestec.crearReserva(prestec);*/
-                }
-                else if(dataEndComboBox.getValue().equals("5 dies"))
-                {
-                    Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
-                    prestec.setDataFI(endDate);
+                    }
+                    else if(dataEndComboBox.getValue().equals("5 dies"))
+                    {
+                        Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
+                        prestec.setDataFI(endDate);
 
-                    //afegir a memoria
-                    listReserves.add(prestec);
-                    ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
-                    taulaReserves.setItems(reservaObservableList);
+                        //afegir a memoria
+                        listReserves.add(prestec);
+                        ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
+                        taulaReserves.setItems(reservaObservableList);
 
 
-                    //base de dades
+                        //base de dades
                     /*GestioPrestec gestioPrestec = new GestioPrestec();
                     gestioPrestec.crearReserva(prestec);*/
+                    }
+
+
+                    GestioPrestec  gestioPrestec = new GestioPrestec();
+                    gestioPrestec.crearReserva(prestec);
+
+                    switchToReserva(event);
+
+                }
+                else
+                {
+                    Alert wromg = new Alert(Alert.AlertType.ERROR);
+
+                    wromg.setTitle("Emplena els camps");
+                    wromg.setHeaderText("Els camps estan vuits");
+                    wromg.setContentText("Torna a emplenar els camps");
+                    wromg.show();
                 }
 
 
 
 
 
-                GestioPrestec  gestioPrestec = new GestioPrestec();
-                gestioPrestec.crearReserva(prestec);
+
 
             }
 
