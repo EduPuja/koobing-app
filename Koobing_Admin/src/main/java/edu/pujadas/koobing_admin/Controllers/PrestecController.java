@@ -473,24 +473,39 @@ public class PrestecController implements Initializable
                 Optional<ButtonType> resultat = alert.showAndWait();
                 if (resultat.isPresent() && resultat.get() == ButtonType.OK)
                 {
-                    System.out.println("Actualizat");
 
-                    reserva.setBiblio(bibliotecaComboBox.getValue());
-                    reserva.setTreballador(worker);
-                    reserva.setEstat(false);
-                    reserva.setUsuari(userComboBox.getValue());
-                    reserva.setLlibre(llibreComboBox.getValue());
 
-                    Date dateInici = Date.valueOf(datePickerStart.getValue());
-                    reserva.setDataInici(dateInici);
+                    if(bibliotecaComboBox.getSelectionModel().getSelectedItem() != null && userComboBox.getSelectionModel().getSelectedItem() != null && llibreComboBox.getSelectionModel().getSelectedItem() != null)
+                    {
+                        System.out.println("Actualizat");
+                        reserva.setBiblio(bibliotecaComboBox.getValue());
+                        reserva.setTreballador(worker);
+                        reserva.setEstat(false);
+                        reserva.setUsuari(userComboBox.getValue());
+                        reserva.setLlibre(llibreComboBox.getValue());
 
-                    Date dataFi = Date.valueOf(datePickerEnd.getValue());
-                    reserva.setDataFI(dataFi);
+                        Date dateInici = Date.valueOf(datePickerStart.getValue());
+                        reserva.setDataInici(dateInici);
+
+                        Date dataFi = Date.valueOf(datePickerEnd.getValue());
+                        reserva.setDataFI(dataFi);
+                    }
+
+                    else
+                    {
+
+                        Alert wrong = new Alert(Alert.AlertType.ERROR);
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("Els camps son buits");
+                        wrong.setContentText("Torna a provar de modifcar el prestec");
+                        wrong.show();
+                    }
+
 
 
 
                     //actualizar memoria
-                    
+
 
                     //actualizar base de dades
 
@@ -498,15 +513,6 @@ public class PrestecController implements Initializable
                 }
             }
 
-
-            else
-            {
-
-                Alert wrong = new Alert(Alert.AlertType.ERROR);
-                wrong.setTitle("Error");
-                wrong.setHeaderText("Els camps son buits");
-                wrong.show();
-            }
         }
         catch (Exception e)
         {
