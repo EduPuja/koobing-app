@@ -13,6 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,8 +108,11 @@ public class UserLoader {
                                 String email = jsonObject.getString("email");
                                 String password = jsonObject.getString("password");
 
+                                System.out.println("Data Naix: " + dataNaix);
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                                java.util.Date parsedDate = format.parse(dataNaix);
+                                Date sqlDate = new Date(parsedDate.getTime());
 
-                                System.out.println("Data Naix: "+dataNaix);
                                 Usuari u = new Usuari();
                                 u.setId(id);
                                 u.setDni(dni);
@@ -115,10 +120,10 @@ public class UserLoader {
                                 u.setCognom(cognom);
                                 u.setEmail(email);
                                 u.setPassword(password);
-
+                                u.setDataNaix(sqlDate);
                                 listUsers.add(u);
 
-                            } catch (JSONException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
