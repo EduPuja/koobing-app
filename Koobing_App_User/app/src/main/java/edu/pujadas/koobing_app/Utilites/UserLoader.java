@@ -1,70 +1,82 @@
+package edu.pujadas.koobing_app.Utilites;
+
 import android.content.Context;
+
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import edu.pujadas.koobing_app.Models.Usuari;
 
 public class UserLoader {
+
+
     private Context context;
-    private RequestQueue requestQueue;
-    private String url;
+    private ArrayList<Usuari> listUsers;
 
-    public UserLoader(Context context, String url) {
+    private String url = "http://192.168.19.0:3000/users";
+
+    public UserLoader(Context context, ArrayList<Usuari> listUsers) {
         this.context = context;
-        this.url = url;
-        requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        this.listUsers = listUsers;
     }
 
-    public void loadUsers(final UserLoadListener listener) {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        ArrayList<Usuari> users = new ArrayList<>();
 
-                        try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject userJson = response.getJSONObject(i);
-                                int userId = userJson.getInt("id_usuari");
-                                String dni = userJson.getString("dni");
-                                String nom = userJson.getString("nom");
-                                // Obtén otros campos del usuario según tu estructura de datos
-
-                                Usuari user = new Usuari();
-                                user.setId(userId);
-                                user.setDni(dni);
-                                user.setNom(nom);
-
-                                //afegir al arraylist
-                                users.add(user);
-                            }
-
-                            listener.onUsersLoaded(users);
-                        } catch (JSONException e) {
-                            listener.onLoadError("Error al procesar la respuesta del servidor");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        listener.onLoadError("Error de red: " + error.getMessage());
-                    }
-                });
-
-        requestQueue.add(jsonArrayRequest);
+    public UserLoader() {
     }
 
-    public interface UserLoadListener {
-        void onUsersLoaded(ArrayList<Usuari> users);
-        void onLoadError(String error);
+    public Context getContext() {
+        return context;
     }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public ArrayList<Usuari> getListUsers() {
+        return listUsers;
+    }
+
+    public void setListUsers(ArrayList<Usuari> listUsers) {
+        this.listUsers = listUsers;
+    }
+
+
+    public ArrayList<Usuari> loadUsers()
+    {
+        try
+        {
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
+                @Override
+                public void onResponse(JSONArray response) 
+                {
+
+                }
+
+
+
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("Volley Error: " + error.getMessage());
+                }
+            });
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 }
