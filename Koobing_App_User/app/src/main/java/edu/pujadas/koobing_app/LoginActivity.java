@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         userLoader = new UserLoader(this);
 
-        userLoader.loadUsers();
+        userLoader.getListUsers();
 
 
     }
