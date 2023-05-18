@@ -162,7 +162,7 @@ public class PrestecController implements Initializable
 
 
 
-    public void onAddReserva(ActionEvent event )
+    public void onAddReserva(ActionEvent event)
     {
         try
         {
@@ -267,15 +267,15 @@ public class PrestecController implements Initializable
                 {
                     Date endDate = Date.valueOf(LocalDate.now().plusMonths(1));
                     prestec.setDataFI(endDate);
-                    
+
                     //afegir a memoria
                     listReserves.add(prestec);
                     ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
                     taulaReserves.setItems(reservaObservableList);
 
                     //base de dades
-                    GestioPrestec gestioPrestec = new GestioPrestec();
-                    gestioPrestec.crearReserva(prestec);
+                    /*GestioPrestec gestioPrestec = new GestioPrestec();
+                    gestioPrestec.crearReserva(prestec);*/
                 }
                 else if(dataEndComboBox.getValue().equals("10 dies"))
                 {
@@ -288,8 +288,8 @@ public class PrestecController implements Initializable
                     taulaReserves.setItems(reservaObservableList);
 
                     //base de dades
-                    GestioPrestec gestioPrestec = new GestioPrestec();
-                    gestioPrestec.crearReserva(prestec);
+                    /*GestioPrestec gestioPrestec = new GestioPrestec();
+                    gestioPrestec.crearReserva(prestec);*/
                 }
                 else if(dataEndComboBox.getValue().equals("5 dies"))
                 {
@@ -303,8 +303,8 @@ public class PrestecController implements Initializable
 
 
                     //base de dades
-                    GestioPrestec gestioPrestec = new GestioPrestec();
-                    gestioPrestec.crearReserva(prestec);
+                    /*GestioPrestec gestioPrestec = new GestioPrestec();
+                    gestioPrestec.crearReserva(prestec);*/
                 }
 
 
