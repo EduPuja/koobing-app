@@ -6,8 +6,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -54,9 +57,29 @@ public class UserLoader {
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
                 @Override
-                public void onResponse(JSONArray response) 
+                public void onResponse(JSONArray response)
                 {
+                    try
+                    {
+                        listUsers = new ArrayList<Usuari>();
 
+                        for (int i = 0; i < response.length(); i++)
+                        {
+                            JSONObject jsonObject = response.getJSONObject(i);
+
+                            int idUsuari = jsonObject.getInt("id_usuari");
+                            String nom =jsonObject.getString("nom");
+
+                            Usuari usuari = new Usuari();
+                            usuari.setId(idUsuari);
+                            usuari.setNom(nom);
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("on response error: " + e.getMessage());
+                    }
                 }
 
 
