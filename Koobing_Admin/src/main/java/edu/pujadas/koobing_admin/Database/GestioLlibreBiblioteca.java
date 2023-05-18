@@ -3,13 +3,10 @@ package edu.pujadas.koobing_admin.Database;
 import edu.pujadas.koobing_admin.Models.Biblioteca;
 import edu.pujadas.koobing_admin.Models.Llibre;
 import edu.pujadas.koobing_admin.Models.LlibreBiblio;
-import edu.pujadas.koobing_admin.Models.Reserva;
 
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.function.BinaryOperator;
 
 public class GestioLlibreBiblioteca {
     //gestors necessaris per trobar els objectes per els identificadors
@@ -90,7 +87,7 @@ public class GestioLlibreBiblioteca {
      * et dona tot el llistat dels llibres amb la bilbioteca i el seu stock
      * @return ArraList<LlibreBiblioteca>
      */
-    public ArrayList<LlibreBiblio> consultarLlibreBiblioteca()
+    public ArrayList<LlibreBiblio> consultarLlibresBiblioteca()
     {
         try
         {

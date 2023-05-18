@@ -155,7 +155,7 @@ public class LlibreController implements Initializable
         {
             GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
 
-            listBiblioLLibre = gestioLlibreBiblioteca.consultarLlibreBiblioteca();
+            listBiblioLLibre = gestioLlibreBiblioteca.consultarLlibresBiblioteca();
 
             ObservableList<LlibreBiblio > observableList= FXCollections.observableArrayList(listBiblioLLibre);
 
