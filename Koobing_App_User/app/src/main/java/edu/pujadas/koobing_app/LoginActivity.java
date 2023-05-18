@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             if(email.equals(listUsers.get(i).getEmail()))
             {
                 System.out.println("Email correcte");
-                if(password.)
+             
             }
         }
 
