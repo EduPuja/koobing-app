@@ -3,11 +3,11 @@ package edu.pujadas.koobing_app.Utilites;
 import android.content.Context;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.JsonObject;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,9 +24,9 @@ public class UserLoader {
 
     private String url = "http://192.168.19.0:3000/users";
 
-    public UserLoader(Context context, ArrayList<Usuari> listUsers) {
+    public UserLoader(Context context) {
         this.context = context;
-        this.listUsers = listUsers;
+
     }
 
 
@@ -59,6 +59,8 @@ public class UserLoader {
                 @Override
                 public void onResponse(JSONArray response)
                 {
+
+                    System.out.println("Successfully loaded response");
                     try
                     {
                         listUsers = new ArrayList<Usuari>();
@@ -74,12 +76,21 @@ public class UserLoader {
                             usuari.setId(idUsuari);
                             usuari.setNom(nom);
 
+                            listUsers.add(usuari);
+
+
+
                         }
+
+
+
                     }
                     catch (Exception e)
                     {
                         System.out.println("on response error: " + e.getMessage());
                     }
+
+
                 }
 
 
@@ -91,6 +102,15 @@ public class UserLoader {
                     System.out.println("Volley Error: " + error.getMessage());
                 }
             });
+
+            // Crea una nueva cola de solicitudes de red.
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+            // Agrega la solicitud a la cola de solicitudes.
+            requestQueue.add(jsonArrayRequest);
+
+            return listUsers;
+
 
         }
         catch (Exception e)

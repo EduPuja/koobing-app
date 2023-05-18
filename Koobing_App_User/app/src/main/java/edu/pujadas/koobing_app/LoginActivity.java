@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordField;
     Button loginSubmit;
 
+    UserLoader userLoader;
+
 
     private  ArrayList<Usuari> listUsuarios = new ArrayList<Usuari>();
     @Override
@@ -33,6 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
+
+        userLoader = new UserLoader(this);
+
+        userLoader.loadUsers();
 
 
     }
