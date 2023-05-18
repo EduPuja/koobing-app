@@ -1,165 +1,70 @@
-package edu.pujadas.koobing_app.Utilites;
-
 import android.content.Context;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.microsoft.sqlserver.jdbc.SQLServerBlob;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.ByteArrayInputStream;
-import java.sql.Blob;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Usuari;
 
 public class UserLoader {
+    private Context context;
+    private RequestQueue requestQueue;
+    private String url;
 
-    private static ArrayList<Usuari> listUsers = new ArrayList<Usuari>();
+    public UserLoader(Context context, String url) {
+        this.context = context;
+        this.url = url;
+        requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+    }
 
-
-
-   /* public static ArrayList<Usuari> loadUsers(Context context) {
-
-        String url = "http://192.168.19.0:3000/users";
-
-        final ArrayList<Usuari> listUsers = new ArrayList<Usuari>();
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
+    public void loadUsers(final UserLoadListener listener) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        // procesar la respuesta como una matriz JSON
-                        System.out.println("Success");
+                        ArrayList<Usuari> users = new ArrayList<>();
 
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                int id = jsonObject.getInt("id_usuari");
-                                String dni = jsonObject.getString("dni");
-                                //todo recollir avatar
-                                String nom = jsonObject.getString("nom");
-                                String cognom = jsonObject.getString("cognom");
-                                String dataNaix = jsonObject.getString("data_naix");
-                                String email = jsonObject.getString("email");
-                                String password = jsonObject.getString("password");
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject userJson = response.getJSONObject(i);
+                                int userId = userJson.getInt("id_usuari");
+                                String dni = userJson.getString("dni");
+                                String nom = userJson.getString("nom");
+                                // Obtén otros campos del usuario según tu estructura de datos
 
-                                Usuari u = new Usuari();
-                                u.setDni(dni);
-                                u.setNom(nom);
-                                u.setCognom(cognom);
-                                u.setEmail(email);
-                                u.setPassword(password);
+                                Usuari user = new Usuari();
+                                user.setId(userId);
+                                user.setDni(dni);
+                                user.setNom(nom);
 
-                                listUsers.add(u);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                //afegir al arraylist
+                                users.add(user);
                             }
+
+                            listener.onUsersLoaded(users);
+                        } catch (JSONException e) {
+                            listener.onLoadError("Error al procesar la respuesta del servidor");
                         }
                     }
-                }, new Response.ErrorListener() {
-
+                },
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // manejar el error
-                        System.out.println("Error " + error.getMessage());
+                        listener.onLoadError("Error de red: " + error.getMessage());
                     }
                 });
 
-        // Crea una nueva cola de solicitudes de red.
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-        // Agrega la solicitud a la cola de solicitudes.
         requestQueue.add(jsonArrayRequest);
+    }
 
-        return listUsers;
-    }*/
-
-
-    public static ArrayList<Usuari> getAllUsers(Context context)
-    {
-        String url = "http://192.168.19.0:3000/users";
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        // procesar la respuesta como una matriz JSON
-                        System.out.println("Success");
-
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                int id = jsonObject.getInt("id_usuari");
-                                String dni = jsonObject.getString("dni");
-                                String avatarStringJson = jsonObject.getString("avatar");
-
-                                JSONObject avatarJson = new JSONObject(avatarStringJson);
-
-                                byte[] byteArray = new byte[avatarJson.getJSONArray("data").length()];
-                                for (int a = 0; a < byteArray.length; a++) {
-                                    byteArray[a] = (byte) avatarJson.getJSONArray("data").getInt(i);
-                                }
-
-                              
-
-                                String nom = jsonObject.getString("nom");
-                                String cognom = jsonObject.getString("cognom");
-                                String dataNaix = jsonObject.getString("data_naix");
-                                String email = jsonObject.getString("email");
-                                String password = jsonObject.getString("password");
-
-                                System.out.println("Data Naix: " + dataNaix);
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                                java.util.Date parsedDate = format.parse(dataNaix);
-                                Date sqlDate = new Date(parsedDate.getTime());
-
-                                Usuari u = new Usuari();
-                                u.setId(id);
-                                u.setDni(dni);
-                                u.setNom(nom);
-                                u.setCognom(cognom);
-                                u.setEmail(email);
-                                u.setPassword(password);
-                                u.setDataNaix(sqlDate);
-                                listUsers.add(u);
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // manejar el error
-                        System.out.println("Error " + error.getMessage());
-                    }
-                });
-
-        // Crea una nueva cola de solicitudes de red.
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-        // Agrega la solicitud a la cola de solicitudes.
-        requestQueue.add(jsonArrayRequest);
-
-
-        return listUsers;
+    public interface UserLoadListener {
+        void onUsersLoaded(ArrayList<Usuari> users);
+        void onLoadError(String error);
     }
 }
