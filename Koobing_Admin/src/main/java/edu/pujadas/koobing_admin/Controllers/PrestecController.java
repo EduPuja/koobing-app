@@ -171,8 +171,58 @@ public class PrestecController implements Initializable
 
             //comboboxes
             ComboBox<Usuari> usuariComboBox= new ComboBox<>();
-            ComboBox<Biblioteca> bibliotecaComboBox= new ComboBox<>();
+            //usuari
+            GestioUsuari gestioUsuari = new GestioUsuari();
+            ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
+            UsuariStringConverter userConverter = new UsuariStringConverter();
+            usuariComboBox.setConverter(userConverter);
+            usuariComboBox.getItems().addAll(listaUsuarios);
+
+
+
+
             ComboBox<Llibre> llibreComboBox = new ComboBox<>();
+            llibreComboBox.setDisable(true);
+            ComboBox<Biblioteca> bibliotecaComboBox= new ComboBox<>();
+            bibliotecaComboBox.setOnAction(actionEvent ->
+            {
+                if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
+                {
+                    llibreComboBox.setDisable(false);
+                    Biblioteca bibliotecaSelected = bibliotecaComboBox.getSelectionModel().getSelectedItem();
+
+                    System.out.println("INFO BIBLIOTECA: "+ bibliotecaSelected.getIdBiblioteca());
+                    //afegir dades llibre
+                    GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
+                    LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+
+                    ArrayList<Llibre> llistatLlibresByBiblio = gestioLlibreBiblioteca.getLlibreBibliotecaByBilio(bibliotecaSelected.getIdBiblioteca());
+                    llibreComboBox.getItems().addAll(llistatLlibresByBiblio);
+                    llibreComboBox.setConverter(llibreStringConverter);
+                }
+            });
+
+            //add dades a biblioteca
+            GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+            ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
+            BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
+            bibliotecaComboBox.getItems().addAll(listaBiblio);
+            bibliotecaComboBox.setConverter(bibliotecaStringConverter);
+
+
+           /* GestioLlibre gestioLlibre = new GestioLlibre();
+            ArrayList<Llibre> listLlibres = gestioLlibre.consultarLlibres();
+            LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+            llibreComboBox.getItems().addAll(listLlibres);
+            llibreComboBox.setConverter(llibreStringConverter);*/
+
+
+
+
+
+
+
+
 
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
