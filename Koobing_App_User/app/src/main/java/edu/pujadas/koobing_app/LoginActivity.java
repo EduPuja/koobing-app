@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(List<Usuari> data) {
 
                 System.out.println("Succes!");
-             /*if(data != null && !data.isEmpty()) {
+             if(data != null && !data.isEmpty()) {
                  Usuari primerUsuario = data.get(0);
 
 
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
                  // Cambiar el texto de un TextView o Label
                  loginLabel.setText(nombreUsuario);
-             }*/
+             }
             }
 
             @Override
