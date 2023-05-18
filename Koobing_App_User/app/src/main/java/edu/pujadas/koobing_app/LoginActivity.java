@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
 
     UserLoader userLoader;
 
+    public ArrayList<Usuari> listUsers = new ArrayList<Usuari>();
+
 
 
     @Override
@@ -45,15 +47,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 System.out.println("Succes!");
              if(data != null && !data.isEmpty()) {
-                 Usuari primerUsuario = data.get(0);
 
+                 listUsers = (ArrayList<Usuari>) data;
 
-                 // Crear el objeto Usuario a partir de los datos recibidos
-                 String nombreUsuario = primerUsuario.getNom();
-
-
-                 // Cambiar el texto de un TextView o Label
-                 loginLabel.setText(nombreUsuario);
              }
             }
 
@@ -83,6 +79,14 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
 
+
+        for(int i = 0; i <listUsers.size() ; i++) {
+            if(email.equals(listUsers.get(i).getEmail()))
+            {
+                System.out.println("Email correcte");
+                if(password.)
+            }
+        }
 
 
 
