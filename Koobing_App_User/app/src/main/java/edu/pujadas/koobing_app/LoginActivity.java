@@ -42,7 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         userLoader.obtenerUsuarios(new ApiCallback<List<Usuari>>() {
             @Override
             public void onSuccess(List<Usuari> data) {
-             if(data != null && !data.isEmpty()) {
+
+                System.out.println("Succes!");
+             /*if(data != null && !data.isEmpty()) {
                  Usuari primerUsuario = data.get(0);
 
 
@@ -52,18 +54,22 @@ public class LoginActivity extends AppCompatActivity {
 
                  // Cambiar el texto de un TextView o Label
                  loginLabel.setText(nombreUsuario);
-             }
+             }*/
             }
 
             @Override
             public void onError(int statusCode) {
-                Toast.makeText(LoginActivity.this, "Error en la respuesta: " + statusCode, Toast.LENGTH_SHORT).show();
+
+                System.out.println("Error");
+                //Toast.makeText(LoginActivity.this, "Error en la respuesta: " + statusCode, Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onFailure(Throwable throwable) {
-                Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+
+                System.out.println("Failure: " + throwable.getMessage());
+                ///Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

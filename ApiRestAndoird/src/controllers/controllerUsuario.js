@@ -1,22 +1,22 @@
-const conection = require("../database/conexio");
+const connection = require("../database/conexio");
 
 function getAllUsers(req, res) {
-  console.log("\Obtenint tots els usuaris");
+  console.log("Obtenint tots els usuaris");
   const sql = "SELECT * FROM usuari";
 
-  conection.query(sql, (error, result) => {
+  connection.query(sql, (error, result) => {
     if (error) {
       console.error("Error al obtener la lista de usuarios: ", error);
       res.status(500).send("Error interno del servidor");
     } else {
-      /*const users = result.map((user) => {
+      const users = result.map((user) => {
         return {
           ...user,
           avatar: user.avatar.toString("base64"),
         };
       });
-        */
-      res.json(result);
+        
+      res.json(users);
     }
   });
 }
@@ -24,3 +24,4 @@ function getAllUsers(req, res) {
 module.exports = {
   getAllUsers,
 };
+
