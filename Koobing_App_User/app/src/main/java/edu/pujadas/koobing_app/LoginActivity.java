@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import edu.pujadas.koobing_app.Utilites.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,35 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
+        userLoader = new UserLoader();
+        userLoader.obtenerUsuarios(new ApiCallback<List<Usuari>>() {
+            @Override
+            public void onSuccess(List<Usuari> data) {
+             if(data != null && !data.isEmpty()) {
+                 Usuari primerUsuario = data.get(0);
 
+
+                 // Crear el objeto Usuario a partir de los datos recibidos
+                 String nombreUsuario = primerUsuario.getNom();
+
+
+                 // Cambiar el texto de un TextView o Label
+                 loginLabel.setText(nombreUsuario);
+             }
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                Toast.makeText(LoginActivity.this, "Error en la respuesta: " + statusCode, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 
@@ -47,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
 
-       
+
 
 
     }
