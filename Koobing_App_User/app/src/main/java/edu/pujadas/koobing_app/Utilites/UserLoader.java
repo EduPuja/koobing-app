@@ -39,28 +39,6 @@ public class UserLoader {
             public void onResponse(Call<List<Usuari>> call, Response<List<Usuari>> response) {
                 if (response.isSuccessful()) {
 
-                    /*// Crear el GsonBuilder
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-
-                    // Registrar un InstanceCreator personalizado para Blob
-                    gsonBuilder.registerTypeAdapter(Blob.class, new InstanceCreator<Blob>() {
-                        @Override
-                        public Blob createInstance(Type type) {
-                            try {
-                                return new SerialBlob(new byte[0]);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                                return null;
-                            }
-                        }
-                    });
-
-                    // Crear el Gson con el GsonBuilder configurado
-                    Gson gson = gsonBuilder.create();
-
-                    */
-
-
 
                     List<Usuari> usuarios = response.body();
                     callback.onSuccess(usuarios);
