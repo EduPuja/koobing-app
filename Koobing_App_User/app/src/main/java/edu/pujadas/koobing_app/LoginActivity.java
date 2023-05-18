@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
         userLoader = new UserLoader(this);
 
-        userLoader.getListUsers();
 
 
     }
@@ -48,8 +47,19 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
 
-
+        listUsuarios =userLoader.loadArrayList();
         loginLabel.setText(listUsuarios.get(0).getNom());
+
+
+
+        if(listUsuarios != null)
+        {
+            System.out.println("tinc algo");
+        }
+        else{
+            System.out.println("Estic buit");
+        }
+
 
     }
 }

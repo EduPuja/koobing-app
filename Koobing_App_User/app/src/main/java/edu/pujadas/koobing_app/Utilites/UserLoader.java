@@ -110,7 +110,7 @@ public class UserLoader {
 
     }
 
-    private void saveArrayList(ArrayList<Usuari> listUsers) {
+    public void saveArrayList(ArrayList<Usuari> listUsers) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -120,8 +120,8 @@ public class UserLoader {
         editor.apply();
     }
 
-    private ArrayList<Usuari> loadArrayList() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+    public ArrayList<Usuari> loadArrayList() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("userList", Context.MODE_PRIVATE);
         String json = sharedPreferences.getString("userList", null);
 
         Type type = new TypeToken<ArrayList<Usuari>>() {}.getType();
