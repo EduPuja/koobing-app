@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         loginSubmit = findViewById(R.id.loginSubmit);
 
         listUsuarios =  UserLoader.getAllUsers(this);
-        loginLabel.setText(listUsuarios.get(0).getNom());
+        //loginLabel.setText(listUsuarios.get(0).getNom());
 
     }
 

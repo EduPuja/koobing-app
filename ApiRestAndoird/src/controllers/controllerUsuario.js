@@ -2,6 +2,8 @@ const conection = require('../database/conexio');
 
 
 function getAllUsers(req, res) {
+
+  console.log("\nOpinguent tots els usuaris")
     const sql = "SELECT * FROM usuari";
   
     conection.query(sql, (error, result) => {

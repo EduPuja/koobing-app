@@ -106,7 +106,10 @@ public class UserLoader {
                                 String email = jsonObject.getString("email");
                                 String password = jsonObject.getString("password");
 
+
+                                System.out.println("Data Naix: "+dataNaix);
                                 Usuari u = new Usuari();
+                                u.setId(id);
                                 u.setDni(dni);
                                 u.setNom(nom);
                                 u.setCognom(cognom);
