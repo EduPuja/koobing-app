@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 
 public interface ApiService {
 
-    String ruta = "http://192.168.0.33:3000/users";
+    String ruta = "http://192.168.0.33:3000/users/";
     @GET(ruta)
     Call<List<Usuari>>getUsuaris();
 

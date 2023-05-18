@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     UserLoader userLoader;
 
 
-    private  ArrayList<Usuari> listUsuarios = new ArrayList<Usuari>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
