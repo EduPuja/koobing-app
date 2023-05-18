@@ -456,14 +456,15 @@ public class PrestecController implements Initializable
 
 
                 gridPane.addRow(0,new Label("Usuari Actual: "),new Label(reserva.getUsuari().getNom() +" " +reserva.getUsuari().getCognom()));
-                gridPane.addRow(1,new Label("Digues el nou usuari ") ,userComboBox);
-                gridPane.addRow(2,new Label("Biblioteca Actual :") ,new Label(reserva.getBiblio().getNomBiblioteca()));
-                gridPane.addRow(3, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
-                gridPane.addRow(4,new Label("Titol del llibre actual: ") ,new Label(reserva.getLlibre().getTitol()));
-                gridPane.addRow(5, new Label("Digues el llibre:  "),llibreComboBox);
-                gridPane.addRow(6, new Label("Data de inicio"), datePickerStart);
-                gridPane.addRow(7, new Label("Data de fin"), datePickerEnd);
-                gridPane.addRow(8, new Label("Estat :"),isRetornart);
+                gridPane.addRow(1,new Label("Treballdor Actual: "),new Label(worker.getNom() +" "+ worker.getCognom()));
+                gridPane.addRow(2,new Label("Digues el nou usuari ") ,userComboBox);
+                gridPane.addRow(3,new Label("Biblioteca Actual :") ,new Label(reserva.getBiblio().getNomBiblioteca()));
+                gridPane.addRow(4, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
+                gridPane.addRow(5,new Label("Titol del llibre actual: ") ,new Label(reserva.getLlibre().getTitol()));
+                gridPane.addRow(6, new Label("Digues el llibre:  "),llibreComboBox);
+                gridPane.addRow(7, new Label("Data de inicio"), datePickerStart);
+                gridPane.addRow(8, new Label("Data de fin"), datePickerEnd);
+                gridPane.addRow(9, new Label("Estat :"),isRetornart);
 
 
 
