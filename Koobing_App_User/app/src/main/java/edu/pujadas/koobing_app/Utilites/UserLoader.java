@@ -39,7 +39,7 @@ public class UserLoader {
             public void onResponse(Call<List<Usuari>> call, Response<List<Usuari>> response) {
                 if (response.isSuccessful()) {
 
-                    // Crear el GsonBuilder
+                    /*// Crear el GsonBuilder
                     GsonBuilder gsonBuilder = new GsonBuilder();
 
                     // Registrar un InstanceCreator personalizado para Blob
@@ -58,7 +58,7 @@ public class UserLoader {
                     // Crear el Gson con el GsonBuilder configurado
                     Gson gson = gsonBuilder.create();
 
-
+                    */
 
 
 

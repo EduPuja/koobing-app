@@ -7,7 +7,7 @@ public class Persona {
 
     private int id;
     private String dni;
-    private Blob avatar;
+
     private String nom;
     private String cognom;
     private Date dataNaix;
@@ -19,10 +19,10 @@ public class Persona {
     }
 
 
-    public Persona(int id, String dni, Blob avatar, String nom, String cognom, Date dataNaix, String email, String password) {
+    public Persona(int id, String dni,  String nom, String cognom, Date dataNaix, String email, String password) {
         this.id = id;
         this.dni = dni;
-        this.avatar = avatar;
+
         this.nom = nom;
         this.cognom = cognom;
         this.dataNaix = dataNaix;
@@ -47,13 +47,7 @@ public class Persona {
         this.dni = dni;
     }
 
-    public Blob getAvatar() {
-        return avatar;
-    }
 
-    public void setAvatar(Blob avatar) {
-        this.avatar = avatar;
-    }
 
     public String getNom() {
         return nom;
