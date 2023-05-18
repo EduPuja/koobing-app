@@ -400,12 +400,50 @@ public class PrestecController implements Initializable
             if(reserva!=null){
                 ComboBox<Usuari> userComboBox= new ComboBox<>();
                 ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
-                ComboBox<Llibre> llibeComboBox= new ComboBox<>();
-                DatePicker datePickerStart = new DatePicker(LocalDate.now());
-                DatePicker datePickerEnd = new DatePicker();
+                ComboBox<Llibre> llibreComboBox= new ComboBox<>();
+                llibreComboBox.setDisable(true);
+                bibliotecaComboBox.setOnAction(actionEvent ->
+                {
+                    if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
+                    {
+                        llibreComboBox.getItems().clear();
+                        llibreComboBox.setDisable(false);
+                        Biblioteca bibliotecaSelected = bibliotecaComboBox.getSelectionModel().getSelectedItem();
+
+                        System.out.println("INFO BIBLIOTECA: "+ bibliotecaSelected.getIdBiblioteca());
+                        //afegir dades llibre
+                        GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
+                        LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
+
+                        ArrayList<Llibre> llistatLlibresByBiblio = gestioLlibreBiblioteca.getLlibreBibliotecaByBilio(bibliotecaSelected.getIdBiblioteca());
+                        llibreComboBox.getItems().addAll(llistatLlibresByBiblio);
+                        llibreComboBox.setConverter(llibreStringConverter);
+                    }
+                });
+
+                //add dades a biblioteca
+                GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+                ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
+                BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
+                bibliotecaComboBox.getItems().addAll(listaBiblio);
+                bibliotecaComboBox.setConverter(bibliotecaStringConverter);
+
+
+
+                DatePicker datePickerStart = new DatePicker(reserva.getDataInici().toLocalDate());
+                DatePicker datePickerEnd = new DatePicker(reserva.getDataFI().toLocalDate());
                 CheckBox isRetornart = new CheckBox();
 
-               // addDataComboxes(userComboBox,bibliotecaComboBox,llibeComboBox);
+                //afegir dades usuari
+                GestioUsuari gestioUsuari = new GestioUsuari();
+                ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
+                UsuariStringConverter userConverter = new UsuariStringConverter();
+                userComboBox.setConverter(userConverter);
+                userComboBox.getItems().addAll(listaUsuarios);
+
+              //afegit dades biblioteca
+
+
 
 
                 //crear el gridpane per posar els 2 camps a l'hora
@@ -414,13 +452,15 @@ public class PrestecController implements Initializable
                 gridPane.setVgap(10);
 
 
-
-                gridPane.addRow(0,new Label("Usuaris ") ,userComboBox);
-                gridPane.addRow(1, new Label("Bibilioteca"), bibliotecaComboBox);
-                gridPane.addRow(2, new Label("LLibre "),llibeComboBox);
-                gridPane.addRow(3, new Label("Data de inicio"), datePickerStart);
-                gridPane.addRow(4, new Label("Data de fin"), datePickerEnd);
-                gridPane.addRow(5, new Label("Estat :"),isRetornart);
+                gridPane.addRow(0,new Label("Usuari Actual: "),new Label(reserva.getUsuari().getNom() +" " +reserva.getUsuari().getCognom()));
+                gridPane.addRow(1,new Label("Digues el nou usuari ") ,userComboBox);
+                gridPane.addRow(2,new Label("Biblioteca Actual :") ,new Label(reserva.getBiblio().getNomBiblioteca()));
+                gridPane.addRow(3, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
+                gridPane.addRow(4,new Label("Titol del llibre actual: ") ,new Label(reserva.getLlibre().getTitol()));
+                gridPane.addRow(5, new Label("Digues el llibre:  "),llibreComboBox);
+                gridPane.addRow(6, new Label("Data de inicio"), datePickerStart);
+                gridPane.addRow(7, new Label("Data de fin"), datePickerEnd);
+                gridPane.addRow(8, new Label("Estat :"),isRetornart);
 
 
 
@@ -433,77 +473,39 @@ public class PrestecController implements Initializable
                 Optional<ButtonType> resultat = alert.showAndWait();
                 if (resultat.isPresent() && resultat.get() == ButtonType.OK)
                 {
-                    //set user
-                    UsuariStringConverter userConverter = new UsuariStringConverter();
-                    int idUser = userConverter.getIdUsuari(userComboBox.getValue());
-                    GestioUsuari gestioUsuari = new GestioUsuari();
-                    Usuari user = gestioUsuari.findUserID(idUser);
-                    reserva.setUsuari(user);
+                    System.out.println("Actualizat");
 
-                    //set worker
+                    reserva.setBiblio(bibliotecaComboBox.getValue());
                     reserva.setTreballador(worker);
+                    reserva.setEstat(false);
+                    reserva.setUsuari(userComboBox.getValue());
+                    reserva.setLlibre(llibreComboBox.getValue());
 
-                    //biblioteca
-                    BibliotecaStringConverter converterBiblio = new BibliotecaStringConverter();
-                    int idBiblio = converterBiblio.getIdBiblioteca(bibliotecaComboBox.getValue());
-                    GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-                    Biblioteca biblioteca = gestioBiblioteca.findBiblioteca(idBiblio);
-                    reserva.setBiblio(biblioteca);
+                    Date dateInici = Date.valueOf(datePickerStart.getValue());
+                    reserva.setDataInici(dateInici);
 
-                    //set llibre to reserva
-                    LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-                    long isbnBook =llibreStringConverter.getISBNLlibre(llibeComboBox.getValue());
-                    GestioLlibre gestioLlibre = new GestioLlibre();
-                    Llibre book = gestioLlibre.findLLibre(isbnBook);
-                    reserva.setLlibre(book);
+                    Date dataFi = Date.valueOf(datePickerEnd.getValue());
+                    reserva.setDataFI(dataFi);
 
 
-                    //retornat
-                    reserva.setEstat(isRetornart.isSelected());
 
-                    //data incii
-                    LocalDate dateStart =datePickerStart.getValue();
+                    //actualizar memoria
+                    
 
-                    Alert wrong = new Alert(Alert.AlertType.ERROR);
-
-                    //data fin
-                    LocalDate dateEnd =datePickerEnd.getValue();
+                    //actualizar base de dades
 
 
-                    if (dateStart != null && dateEnd != null) {
-                        Date start = Date.valueOf(dateStart);
-                        Date end = Date.valueOf(dateEnd);
-
-                        if (end.compareTo(start) > 0) {
-                            // La fecha de fin es mayor a la fecha de inicio
-                            reserva.setDataInici(start);
-                            reserva.setDataFI(end);
-
-
-                            GestioPrestec gestioPrestec = new GestioPrestec();
-                            gestioPrestec.modificarReserva(reserva);
-                        } else {
-                            // La fecha de fin es menor o igual a la fecha de inicio
-
-                            wrong.setTitle("Error");
-                            wrong.setHeaderText("Fecha de fin incorrecta");
-                            wrong.setContentText("La fecha de fin debe ser mayor a la fecha de inicio.");
-                            wrong.showAndWait();
-                        }
-                    } else {
-                        // Alguna de las fechas es nula
-
-                        wrong.setTitle("Error");
-                        wrong.setHeaderText("Fechas no seleccionadas");
-                        wrong.setContentText("Debe seleccionar una fecha de inicio y una fecha de fin.");
-                        wrong.showAndWait();
-                    }
-
-
-                    // refrescar
-                    taulaReserves.refresh();
-                    switchToReserva(event);
                 }
+            }
+
+
+            else
+            {
+
+                Alert wrong = new Alert(Alert.AlertType.ERROR);
+                wrong.setTitle("Error");
+                wrong.setHeaderText("Els camps son buits");
+                wrong.show();
             }
         }
         catch (Exception e)
