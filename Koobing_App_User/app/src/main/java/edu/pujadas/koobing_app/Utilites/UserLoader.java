@@ -37,10 +37,14 @@ public class UserLoader {
     public UserLoader(Context context) {
         this.context = context;
 
+        loadUsers();
+
     }
 
 
     public UserLoader() {
+
+        loadUsers();
     }
 
     public Context getContext() {
@@ -102,7 +106,7 @@ public class UserLoader {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         // Agrega la solicitud a la cola de solicitudes.
         requestQueue.add(jsonArrayRequest);
-        requestQueue.stop();
+
 
     }
 
