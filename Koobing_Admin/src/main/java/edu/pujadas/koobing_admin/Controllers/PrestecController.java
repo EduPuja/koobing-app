@@ -188,6 +188,7 @@ public class PrestecController implements Initializable
             {
                 if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
                 {
+                    llibreComboBox.getItems().clear();
                     llibreComboBox.setDisable(false);
                     Biblioteca bibliotecaSelected = bibliotecaComboBox.getSelectionModel().getSelectedItem();
 
@@ -252,7 +253,33 @@ public class PrestecController implements Initializable
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                System.out.println("aaa");
+                Reserva prestec = new Reserva();
+                prestec.setBiblio(bibliotecaComboBox.getValue());
+                prestec.setTreballador(worker);
+                prestec.setEstat(false);
+                prestec.setUsuari(usuariComboBox.getValue());
+                prestec.setLlibre(llibreComboBox.getValue());
+
+                Date dateInici = Date.valueOf(formatStartDate);
+                prestec.setDataInici(dateInici);
+
+                if(dataEndComboBox.getValue().equals("1 mes"))
+                {
+                    Date endDate = Date.valueOf(LocalDate.now().plusMonths(1));
+                    prestec.setDataFI(endDate);
+                }
+                else if(dataEndComboBox.getValue().equals("10 dies"))
+                {
+                    Date endDate = Date.valueOf(LocalDate.now().plusDays(10));
+                    prestec.setDataFI(endDate);
+                }
+                else if(dataEndComboBox.getValue().equals("5 dies"))
+                {
+                    Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
+                    prestec.setDataFI(endDate);
+                }
+
+
             }
 
 
