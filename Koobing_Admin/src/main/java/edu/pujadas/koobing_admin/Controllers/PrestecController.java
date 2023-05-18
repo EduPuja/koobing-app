@@ -402,6 +402,16 @@ public class PrestecController implements Initializable
                 ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
                 ComboBox<Llibre> llibreComboBox= new ComboBox<>();
                 llibreComboBox.setDisable(true);
+
+                //afegir dades usuari
+                GestioUsuari gestioUsuari = new GestioUsuari();
+                ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
+                UsuariStringConverter userConverter = new UsuariStringConverter();
+                userComboBox.setConverter(userConverter);
+                userComboBox.getItems().addAll(listaUsuarios);
+
+
+                //afegit dades biblioteca
                 bibliotecaComboBox.setOnAction(actionEvent ->
                 {
                     if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
@@ -434,14 +444,7 @@ public class PrestecController implements Initializable
                 DatePicker datePickerEnd = new DatePicker(reserva.getDataFI().toLocalDate());
                 CheckBox isRetornart = new CheckBox();
 
-                //afegir dades usuari
-                GestioUsuari gestioUsuari = new GestioUsuari();
-                ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
-                UsuariStringConverter userConverter = new UsuariStringConverter();
-                userComboBox.setConverter(userConverter);
-                userComboBox.getItems().addAll(listaUsuarios);
 
-              //afegit dades biblioteca
 
 
 
