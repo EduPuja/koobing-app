@@ -455,8 +455,9 @@ public class PrestecController implements Initializable
                 gridPane.setVgap(10);
 
 
-                gridPane.addRow(0,new Label("Usuari Actual: "),new Label(reserva.getUsuari().getNom() +" " +reserva.getUsuari().getCognom()));
-                gridPane.addRow(1,new Label("Treballdor Actual: "),new Label(worker.getNom() +" "+ worker.getCognom()));
+
+                gridPane.addRow(0,new Label("Treballdor Actual: "),new Label(worker.getNom() +" "+ worker.getCognom()));
+                gridPane.addRow(1,new Label("Usuari Actual: "),new Label(reserva.getUsuari().getNom() +" " +reserva.getUsuari().getCognom()));
                 gridPane.addRow(2,new Label("Digues el nou usuari ") ,userComboBox);
                 gridPane.addRow(3,new Label("Biblioteca Actual :") ,new Label(reserva.getBiblio().getNomBiblioteca()));
                 gridPane.addRow(4, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
