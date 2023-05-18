@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import edu.pujadas.koobing_app.Utilites.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
-       if(listUsuarios == null)
-       {
-           System.out.println("Error ARRAYLIST");
-       }
-       else
-       {
-           System.out.println("Nishe");
-       }
 
     }
 
