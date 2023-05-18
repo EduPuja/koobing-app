@@ -84,7 +84,21 @@ public class LoginActivity extends AppCompatActivity {
             if(email.equals(listUsers.get(i).getEmail()))
             {
                 System.out.println("Email correcte");
-             
+
+                if(Validator.checkPassword(password,listUsers.get(i).getPassword()))
+                {
+                    System.out.println("Login correcte");
+                }
+
+                else
+                {
+                    System.out.println("Password not correct");
+                }
+
+            }
+            else
+            {
+                System.out.println("Email not correcte");
             }
         }
 
