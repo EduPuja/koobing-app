@@ -492,6 +492,16 @@ public class PrestecController implements Initializable
 
                         Date dataFi = Date.valueOf(datePickerEnd.getValue());
                         reserva.setDataFI(dataFi);
+
+
+                        //actualizar memoria
+                        taulaReserves.refresh();
+
+
+                        //actualizar base de dades
+
+                        GestioPrestec gestioPrestec = new GestioPrestec();
+                        gestioPrestec.modificarReserva(reserva);
                     }
 
                     else
@@ -507,10 +517,12 @@ public class PrestecController implements Initializable
 
 
 
-                    //actualizar memoria
 
 
-                    //actualizar base de dades
+
+
+
+
 
 
                 }
