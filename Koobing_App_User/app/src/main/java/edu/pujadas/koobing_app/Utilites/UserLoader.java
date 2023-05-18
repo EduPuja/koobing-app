@@ -22,7 +22,10 @@ public class UserLoader {
     private Context context;
     private ArrayList<Usuari> listUsers;
 
-    private String url = "http://192.168.19.0:3000/users";
+
+    // ip insti 192.168.19.0
+    // ip home : 192.168.0.33
+    private String url = "http://192.168.0.33:3000/users";
 
     public UserLoader(Context context) {
         this.context = context;
