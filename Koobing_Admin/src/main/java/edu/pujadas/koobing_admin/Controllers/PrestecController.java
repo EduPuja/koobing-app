@@ -311,7 +311,8 @@ public class PrestecController implements Initializable
 
 
 
-
+                GestioPrestec  gestioPrestec = new GestioPrestec();
+                gestioPrestec.crearReserva(prestec);
 
             }
 
