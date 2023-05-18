@@ -7,12 +7,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.microsoft.sqlserver.jdbc.SQLServerBlob;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.sql.Blob;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,7 +107,17 @@ public class UserLoader {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 int id = jsonObject.getInt("id_usuari");
                                 String dni = jsonObject.getString("dni");
-                                //todo recollir avatar
+                                String avatarStringJson = jsonObject.getString("avatar");
+
+                                JSONObject avatarJson = new JSONObject(avatarStringJson);
+
+                                byte[] byteArray = new byte[avatarJson.getJSONArray("data").length()];
+                                for (int a = 0; a < byteArray.length; a++) {
+                                    byteArray[a] = (byte) avatarJson.getJSONArray("data").getInt(i);
+                                }
+
+                              
+
                                 String nom = jsonObject.getString("nom");
                                 String cognom = jsonObject.getString("cognom");
                                 String dataNaix = jsonObject.getString("data_naix");
