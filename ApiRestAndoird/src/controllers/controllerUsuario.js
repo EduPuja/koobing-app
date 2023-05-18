@@ -1,7 +1,7 @@
 const conection = require("../database/conexio");
 
 function getAllUsers(req, res) {
-  console.log("\nOpinguent tots els usuaris");
+  console.log("\Obtenint tots els usuaris");
   const sql = "SELECT * FROM usuari";
 
   conection.query(sql, (error, result) => {
