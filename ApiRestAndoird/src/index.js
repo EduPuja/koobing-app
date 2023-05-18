@@ -3,6 +3,8 @@ const app = express();
 //const connection = require("./database/conexio");
 const controllerUsuario= require("./controllers/controllerUsuario");
 
+//utilzar jsons
+app.use(express.json());
 app.get("/users",controllerUsuario.getAllUsers);
 
 app.listen(3000, () => {
