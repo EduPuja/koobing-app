@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Usuari;
-import edu.pujadas.koobing_app.Utilites.UserLoader;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginSubmit;
 
 
-    private static ArrayList<Usuari> listUsuarios = new ArrayList<Usuari>();
+    private  ArrayList<Usuari> listUsuarios = new ArrayList<Usuari>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +34,14 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
-        listUsuarios =  UserLoader.getAllUsers(this);
-        //loginLabel.setText(listUsuarios.get(0).getNom());
+       if(listUsuarios == null)
+       {
+           System.out.println("Error ARRAYLIST");
+       }
+       else
+       {
+           System.out.println("Nishe");
+       }
 
     }
 
