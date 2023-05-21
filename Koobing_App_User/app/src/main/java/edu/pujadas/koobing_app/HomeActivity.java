@@ -68,14 +68,17 @@ public class HomeActivity extends AppCompatActivity {
                 if (itemId == R.id.navigation_home) {
                     // Navegar a la actividad HomeActivity
                     startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                    finish();
                     return true;
                 } else if (itemId == R.id.search_bar) {
                     // Navegar a la actividad SearchActivity
                     startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                    finish();
                     return true;
-                } else if (itemId == R.id.map) {
+                } else if (itemId == R.id.navigation_map) {
                     // Navegar a la actividad MapActivity
-                    startActivity(new Intent(HomeActivity.this, MapsActivity.class));
+                    Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
+                    //startActivity(new Intent(HomeActivity.this, MapsActivity.class));
                     return true;
                 }
                 return false;
