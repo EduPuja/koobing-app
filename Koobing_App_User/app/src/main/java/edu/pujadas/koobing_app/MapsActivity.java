@@ -59,7 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // carrgant el retorofit
-        Retrofit retrofit = new Retrofit.Builder()
+        /*Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.33:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -76,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             LatLng ubicacions = new LatLng(listBiblioteques.get(i).getLatitud(), listBiblioteques.get(i).getLatitud());
             mMap.addMarker(new MarkerOptions().position(ubicacions).title(listBiblioteques.get(i).getNomBiblioteca()));
-        }
+        }*/
 
        // mMap.moveCamera(CameraUpdateFactory.newLatLng());
     }
