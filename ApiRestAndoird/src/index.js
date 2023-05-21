@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 //const connection = require("./database/conexio");
 const controllerUsuario= require("./controllers/controllerUsuario");
+const controllerBiblio = require("./controllers/controllerBiblioteca");
 
 
 // Configura el middleware body-parser para analizar los datos enviados en las solicitudes
@@ -15,6 +16,8 @@ app.use(bodyParser.json());
 app.get("/users",controllerUsuario.getAllUsers);
 
 app.get("/user/:email",controllerUsuario.getUserByEmail)
+
+app.get("/biblioteques",controllerBiblio.getAllBiblioteques)
 
 app.listen(3000, () => {
   console.log("La aplicación está corriendo en el puerto 3000.");
