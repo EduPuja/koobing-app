@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Biblioteca;
-import edu.pujadas.koobing_app.Utilites.ApiCallback;
+import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Loaders.BibilotecaLoader;
 import edu.pujadas.koobing_app.databinding.MapsActivityBinding;
 

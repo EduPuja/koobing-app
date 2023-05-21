@@ -3,9 +3,8 @@ package edu.pujadas.koobing_app.Loaders;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Biblioteca;
-import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.BibliotecaService;
-import edu.pujadas.koobing_app.Utilites.ApiCallback;
+import edu.pujadas.koobing_app.Services.ApiCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
