@@ -36,6 +36,7 @@ import java.util.List;
 import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
 import edu.pujadas.koobing_app.Loaders.LlibreBibliotecaLoader;
 import edu.pujadas.koobing_app.Models.Biblioteca;
+import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
@@ -122,14 +123,14 @@ public class HomeActivity extends AppCompatActivity {
     {
         bookBiblioLoader = new LlibreBibliotecaLoader();
 
-        bookBiblioLoader.obtenerLibrosfinal(new ApiCallback<List<LlibreBiblioteca>>() {
+        bookBiblioLoader.obtenerLibrosfinal(new ApiCallback<List<Llibre>>() {
             @Override
-            public void onSuccess(List<LlibreBiblioteca> data) {
+            public void onSuccess(List<Llibre> data) {
                 if(data!=null && !data.isEmpty())
                 {
                     System.out.println("Success Book info");
 
-                    String titol = data.get(0).getBook().getTitol();
+                    String titol = data.get(0).getTitol();
                     System.out.println("Titols: " + titol);
                     // Crea una instancia del adaptador personalizado
                     //carouselAdapter = new CarouselAdapter(data, getLayoutInflater());

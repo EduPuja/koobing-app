@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app.Loaders;
 
 import java.util.List;
 
+import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
@@ -34,16 +35,16 @@ public class LlibreBibliotecaLoader {
      * Metode per obtenir tots els llibres de la API
      * @param callback callback de tipus llibreBiblioteca on hi h totala inforamcio del llibre i la biblioteca
      */
-    public void obtenerLibrosfinal  (final ApiCallback<List<LlibreBiblioteca>> callback)
+    public void obtenerLibrosfinal  (final ApiCallback<List<Llibre>> callback)
     {
-        Call <List<LlibreBiblioteca>> call = llibreService.getAllBooks();
-        call.enqueue(new Callback<List<LlibreBiblioteca>>() {
+        Call <List<Llibre>> call = llibreService.getAllBooks();
+        call.enqueue(new Callback<List<Llibre>>() {
 
             @Override
-            public void onResponse(Call<List<LlibreBiblioteca>> call, Response<List<LlibreBiblioteca>> response) {
+            public void onResponse(Call<List<Llibre>> call, Response<List<Llibre>> response) {
                 if (response.isSuccessful()) {
-                    List<LlibreBiblioteca> librosBiblioteca = response.body();
-                    
+                    List<Llibre> librosBiblioteca = response.body();
+
                     callback.onSuccess(librosBiblioteca);
                 }
                 else {
@@ -52,7 +53,7 @@ public class LlibreBibliotecaLoader {
             }
 
             @Override
-            public void onFailure(Call<List<LlibreBiblioteca>> call, Throwable t) {
+            public void onFailure(Call<List<Llibre>> call, Throwable t) {
                 callback.onFailure(t);
             }
         });
