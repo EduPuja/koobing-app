@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -112,6 +113,11 @@ public class LoginActivity extends AppCompatActivity {
                             if(Validator.checkPassword(password, user.getPassword()))
                             {
                                 Toast.makeText(getApplicationContext(),"SUCCES EL USUARI SE HA TROBAT!",Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                //pasasar a la pantalla de home
+                                startActivity(intent);
+                                finish();
                             }
 
                             else
