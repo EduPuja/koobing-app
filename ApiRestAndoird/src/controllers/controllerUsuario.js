@@ -23,7 +23,7 @@ function getAllUsers(req, res) {
 
 
 function getUserByEmail(req, res) {
-  const email = req.body.email; // Obtén el valor del email enviado desde Android Studio
+  const email = req.params.email;
 
 
 
@@ -34,15 +34,16 @@ function getUserByEmail(req, res) {
   connection.query(sql, [email], (error, result) => {
     if (error) {
       console.error("Error al obtener el usuario por correo electrónico: ", error);
-      res.status(500).send("Error interno del servidor");
+      return callback(error, null);   //retornar un callback d'error
     } else {
       if (result.length > 0) {
         const user = {
           ...result[0],
           avatar: result[0].avatar.toString("base64"),
-        };
+        }
         res.json(user);
       } else {
+        //return callback(null,null)
         res.status(404).send("Usuario no encontrado");
       }
     }
