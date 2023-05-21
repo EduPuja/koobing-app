@@ -7,11 +7,10 @@
 
     <ImageView
         android:id="@+id/bookImg"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="110dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="150dp"
         app:srcCompat="@drawable/libro" />
 
     <TextView
@@ -21,7 +20,7 @@
         android:layout_marginTop="25dp"
         android:text="Book Title"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <Button
