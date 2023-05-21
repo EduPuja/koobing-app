@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
 import edu.pujadas.koobing_app.Loaders.LlibreBibliotecaLoader;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Usuari;
@@ -40,11 +42,15 @@ import edu.pujadas.koobing_app.Models.Usuari;
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottom_navigation;
-    ScrollView scrollView;
+    ViewPager viewPager;
+    CarouselAdapter carouselAdapter;
+
     TextView homeLabel;
 
+    //loader per carrgear tota la info en un list
     LlibreBibliotecaLoader bookBiblioLoader;
-    public ArrayList<LlibreBiblioteca> listBiblios = new ArrayList<LlibreBiblioteca>();
+    ArrayList<LlibreBiblioteca> listBiblios = new ArrayList<LlibreBiblioteca>();
+
 
 
 
@@ -59,13 +65,14 @@ public class HomeActivity extends AppCompatActivity {
         //find by id
         homeLabel = findViewById(R.id.homeLabel);
         bottom_navigation = findViewById(R.id.bottom_navigation);
-        scrollView = findViewById(R.id.scrollView);
-
+        viewPager = findViewById(R.id.viewPager);
 
 
         // Posar el home como activat
         bottom_navigation.setSelectedItemId(R.id.navigation_home);
 
+
+        // menu inferior
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
