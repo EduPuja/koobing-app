@@ -1,9 +1,12 @@
 package edu.pujadas.koobing_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
@@ -19,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -57,7 +61,26 @@ public class HomeActivity extends AppCompatActivity {
         // Posar el home como activat
         bottom_navigation.setSelectedItemId(R.id.navigation_home);
 
-
+        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        // Navegar a la actividad HomeActivity
+                        startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                        return true;
+                    case R.id.search_bar:
+                        // Navegar a la actividad SearchActivity
+                        startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                        return true;
+                    case R.id.mapa:
+                        // Navegar a la actividad ProfileActivity
+                        startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+                        return true;
+                }
+                return false;
+            }
+        });
 
 
 
