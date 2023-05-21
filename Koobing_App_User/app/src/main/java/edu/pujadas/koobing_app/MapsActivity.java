@@ -16,12 +16,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
 
 import edu.pujadas.koobing_app.Models.Biblioteca;
-import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Utilites.ApiCallback;
-import edu.pujadas.koobing_app.Utilites.BibilotecaLoader;
+import edu.pujadas.koobing_app.Loaders.BibilotecaLoader;
 import edu.pujadas.koobing_app.databinding.MapsActivityBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
