@@ -32,7 +32,7 @@ public class BibilotecaLoader {
     /**
      * Metoodo para obtener una respuesta del servidor que te devuelva el listado de bilibtoecas
      * para poder poner en el mapa
-     * @param callback ApiCallBack interficie 
+     * @param callback ApiCallBack interficie
      */
     public void obtenerBiblioteques(final ApiCallback<List<Biblioteca>> callback)
     {
