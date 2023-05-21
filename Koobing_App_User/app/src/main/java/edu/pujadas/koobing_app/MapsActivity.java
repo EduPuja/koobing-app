@@ -4,10 +4,13 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -74,13 +77,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 {
                     System.out.println("Success! On Biblioteca");
 
-                    double latitud =data.get(0).getLatitud();
-                    double longitud =data.get(0).getLongitud();
+                    // Cordenades de Catalunya
+                    LatLngBounds catalunyaBounds = new LatLngBounds(
+                            new LatLng(40.2, 0.8),
+                            new LatLng(42.9, 4.8)
+                    );
 
-                    System.out.println("Lat :  " + latitud + " Long: " + longitud);
+
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(catalunyaBounds, 0);
+
+                    // moure la camara fins a la ubicacio
+                    mMap.moveCamera(cameraUpdate);
+                    mMap.animateCamera(cameraUpdate);
 
 
-                    LatLng ubicacions = new LatLng(latitud,longitud);
+                    for (int i = 0; i < data.size(); i++)
+                    {
+                        double latitud =data.get(i).getLatitud();
+                        double longitud =data.get(i).getLongitud();
+
+                        //System.out.println("Lat :  " + latitud + " Long: " + longitud);
+
+
+                        LatLng ubicacions = new LatLng(latitud,longitud);
+
+                        //afegint cada ubicacio en les opcions
+                        mMap.addMarker(new MarkerOptions().position(ubicacions));
+                    }
 
 
                 }
