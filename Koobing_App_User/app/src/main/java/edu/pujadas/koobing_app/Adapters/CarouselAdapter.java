@@ -17,7 +17,7 @@ import edu.pujadas.koobing_app.R;
 
 public class CarouselAdapter extends PagerAdapter {
 
-    private List<LlibreBiblioteca> books;
+    private List<Llibre> books;
 
     private LayoutInflater layoutInflater;
 
@@ -25,7 +25,7 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-    public CarouselAdapter(List<LlibreBiblioteca> books, LayoutInflater layoutInflater) {
+    public CarouselAdapter(List<Llibre> books, LayoutInflater layoutInflater) {
         this.books = books;
         this.layoutInflater = layoutInflater;
     }
@@ -41,7 +41,7 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-        Llibre book = books.get(position).getBook();
+        Llibre book = books.get(position);
 
         if(book !=null)
         {
