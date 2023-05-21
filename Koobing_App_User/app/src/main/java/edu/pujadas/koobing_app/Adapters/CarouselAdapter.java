@@ -3,6 +3,7 @@ package edu.pujadas.koobing_app.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,14 +39,13 @@ public class CarouselAdapter extends PagerAdapter {
         TextView bookTitleTextView = view.findViewById(R.id.bookTitleTextView);
         Button readButton = view.findViewById(R.id.readButton);
 
-        // Obtener el libro actual
-        Book book = books.get(position);
+        Llibre book = books.get(position).getBook();
 
-        // Configurar los textos y el comportamiento del botón
-        bookTitleTextView.setText(book.getTitle());
+
+        bookTitleTextView.setText(book.getTitol());
         readButton.setOnClickListener(v -> {
-            // Acción al hacer clic en el botón
-            // ...
+            // todo quan li dongui click anar a la pantalla de reserva
+
         });
 
         container.addView(view);
