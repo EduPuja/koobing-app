@@ -25,7 +25,7 @@ function getAllUsers(req, res) {
 function getUserByEmail(req, res) {
   const email = req.body.email; // Obtén el valor del email enviado desde Android Studio
 
-  if(email!=undefined && email!==null)
+
 
   console.log("Obtenint usuari pel correu electrònic: ", email);
 
