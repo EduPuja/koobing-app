@@ -3,6 +3,7 @@ package edu.pujadas.koobing_app.Utilites;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Usuari;
+import edu.pujadas.koobing_app.Services.UserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
