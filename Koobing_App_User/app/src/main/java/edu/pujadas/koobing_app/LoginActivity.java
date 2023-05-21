@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                             {
                                 Toast.makeText(getApplicationContext(),"Benvingut: "+user.getNom()+" "+user.getCognom(),Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                 //pasasar a la pantalla de home
                                 startActivity(intent);
                                 finish();
