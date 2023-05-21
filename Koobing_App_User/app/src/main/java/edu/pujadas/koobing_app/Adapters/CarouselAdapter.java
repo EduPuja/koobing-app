@@ -39,14 +39,24 @@ public class CarouselAdapter extends PagerAdapter {
         TextView bookTitleTextView = view.findViewById(R.id.bookTitleTextView);
         Button readButton = view.findViewById(R.id.readButton);
 
+
+
         Llibre book = books.get(position).getBook();
 
+        if(book !=null)
+        {
 
-        bookTitleTextView.setText(book.getTitol());
-        readButton.setOnClickListener(v -> {
-            // todo quan li dongui click anar a la pantalla de reserva
+            bookTitleTextView.setText(book.getTitol());
+            readButton.setOnClickListener(v -> {
+                // todo quan li dongui click anar a la pantalla de reserva
 
-        });
+            });
+        }
+        else
+        {
+            System.out.println("Llibre Buit");
+        }
+
 
         container.addView(view);
         return view;
