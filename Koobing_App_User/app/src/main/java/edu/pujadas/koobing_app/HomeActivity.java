@@ -64,21 +64,22 @@ public class HomeActivity extends AppCompatActivity {
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        // canvi de pantalla a mapa home
-                        startActivity(new Intent(HomeActivity.this, HomeActivity.class));
-                        return true;
-                    case R.id.search_bar:
-                        // canvi de pantalla a buscador
-                        startActivity(new Intent(HomeActivity.this, SearchActivity.class));
-                        return true;
-                    case R.id.mapa:
-                        //canvi de pantalla a mapa
-                        startActivity(new Intent(HomeActivity.this, MapsActivity.class));
-                        return true;
+                int itemId = item.getItemId();
+                if (itemId == R.id.navigation_home) {
+                    // Navegar a la actividad HomeActivity
+                    startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                    return true;
+                } else if (itemId == R.id.search_bar) {
+                    // Navegar a la actividad SearchActivity
+                    startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                    return true;
+                } else if (itemId == R.id.map) {
+                    // Navegar a la actividad MapActivity
+                    startActivity(new Intent(HomeActivity.this, MapsActivity.class));
+                    return true;
                 }
                 return false;
+
             }
         });
 
