@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Usuari;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -79,28 +82,16 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.0.33:3000/") // Reemplaza con la dirección IP de tu servidor
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        for(int i = 0; i <listUsers.size() ; i++) {
-            if(email.equals(listUsers.get(i).getEmail()))
-            {
-                System.out.println("Email correcte");
+        UserService userService = retrofit.create(UserService.class);
 
-                if(Validator.checkPassword(password,listUsers.get(i).getPassword()))
-                {
-                    System.out.println("Login correcte");
-                }
+        Call<Usuari> call = userService.getUserByEmail(email);
 
-                else
-                {
-                    System.out.println("Password not correct");
-                }
 
-            }
-            else
-            {
-                System.out.println("Email not correcte");
-            }
-        }
 
 
 
