@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
 
 import edu.pujadas.koobing_app.Models.Biblioteca;
 import edu.pujadas.koobing_app.Models.Usuari;
@@ -45,23 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // instacio el loader de bilioteca
         bibilotecaLoader = new BibilotecaLoader();
 
-        // carregnat les dades de en el maps
-        bibilotecaLoader.obtenerBiblioteques(new ApiCallback<List<Biblioteca>>() {
-            @Override
-            public void onSuccess(List<Biblioteca> data) {
-                System.out.println("Success! On Biblioteca");
 
-
-            }
-            @Override
-            public void onError(int statusCode) {
-                System.out.println("Error on mapa bilioteca : " + statusCode);
-            }
-            @Override
-            public void onFailure(Throwable throwable) {
-                System.out.println("Failure Biblioteca: " + throwable.getMessage());
-            }
-        });
 
 
 
@@ -81,6 +66,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        // carregnat les dades de en el maps
+        bibilotecaLoader.obtenerBiblioteques(new ApiCallback<List<Biblioteca>>() {
+            @Override
+            public void onSuccess(List<Biblioteca> data) {
+                if(!data.isEmpty() && data != null)
+                {
+                    System.out.println("Success! On Biblioteca");
+
+                    double latitud =data.get(0).getLatitud();
+                    double longitud =data.get(0).getLongitud();
+
+                    System.out.println("Lat :  " + latitud + " Long: " + longitud);
+
+
+                    LatLng ubicacions = new LatLng(latitud,longitud);
+
+
+                }
+
+
+            }
+            @Override
+            public void onError(int statusCode) {
+                System.out.println("Error on mapa bilioteca : " + statusCode);
+            }
+            @Override
+            public void onFailure(Throwable throwable) {
+                System.out.println("Failure Biblioteca: " + throwable.getMessage());
+            }
+        });
 
 
 
