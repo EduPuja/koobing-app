@@ -82,6 +82,8 @@
                 android:layout_marginRight="110dp"
                 android:text="Nom Llibre"
                 android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 tools:ignore="InvalidId">
 
             </TextView>
