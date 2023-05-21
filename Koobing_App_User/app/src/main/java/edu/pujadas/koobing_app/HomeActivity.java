@@ -66,16 +66,16 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        // Navegar a la actividad HomeActivity
+                        // canvi de pantalla a mapa home
                         startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                         return true;
                     case R.id.search_bar:
-                        // Navegar a la actividad SearchActivity
+                        // canvi de pantalla a buscador
                         startActivity(new Intent(HomeActivity.this, SearchActivity.class));
                         return true;
                     case R.id.mapa:
-                        // Navegar a la actividad ProfileActivity
-                        startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+                        //canvi de pantalla a mapa
+                        startActivity(new Intent(HomeActivity.this, MapsActivity.class));
                         return true;
                 }
                 return false;
