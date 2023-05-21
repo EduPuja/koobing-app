@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         else
         {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.33:3000/") // Reemplaza con la dirección IP de tu servidor
+                    .baseUrl("http://192.168.0.33:3000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
