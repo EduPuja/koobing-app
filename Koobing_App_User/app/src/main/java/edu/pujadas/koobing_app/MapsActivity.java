@@ -26,6 +26,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private BibilotecaLoader bibilotecaLoader;
 
+    public ArrayList<Biblioteca> listBiblioteques = new ArrayList<Biblioteca>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // instacio el loader de bilioteca
         bibilotecaLoader = new BibilotecaLoader();
+
+        // carregnat les dades de en el maps
+        bibilotecaLoader.obtenerBiblioteques(new ApiCallback<List<Biblioteca>>() {
+            @Override
+            public void onSuccess(List<Biblioteca> data) {
+                System.out.println("Success! On Biblioteca");
+
+
+            }
+            @Override
+            public void onError(int statusCode) {
+                System.out.println("Error on mapa bilioteca : " + statusCode);
+            }
+            @Override
+            public void onFailure(Throwable throwable) {
+                System.out.println("Failure Biblioteca: " + throwable.getMessage());
+            }
+        });
 
 
 
@@ -62,61 +82,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        // carregnat les dades de en el maps
-
-        bibilotecaLoader.obtenerBiblioteques(new ApiCallback<List<Biblioteca>>() {
-            @Override
-            public void onSuccess(List<Biblioteca> data) {
-                System.out.println("Success! On Biblioteca");
-                if(data != null && !data.isEmpty()) {
-
-                   // listBilioteca = (ArrayList<Biblioteca>) data;
-
-                    for(int i = 0; i < data.size(); i++) {
-                        LatLng ubicacions = new LatLng(data.get(i).getLatitud(), data.get(i).getLatitud());
-
-                        String nom = data.get(i).getNomBiblioteca();
-                        mMap.addMarker(new MarkerOptions().position(ubicacions).title(nom));
 
 
-                    }
-
-                }
-                mMap.getUiSettings().setZoomControlsEnabled(true);
-
-            }
-
-            @Override
-            public void onError(int statusCode) {
-                System.out.println("Error on mapa bilioteca : " + statusCode);
-
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                System.out.println("Failure Biblioteca: " + throwable.getMessage());
-            }
-        });
-        // carrgant el retorofit
-        /*Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.33:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        //creant la instacion per poder recollir totes les biblioteces
-        bibliotecaService = retrofit.create(BibliotecaService.class);
 
 
-        List<Biblioteca> listBiblioteques = (List<Biblioteca>) bibliotecaService.getBiblioteques();
-
-        // Afegint les ubuicacions gracies
-
-        for(int i = 0; i < listBiblioteques.size(); i++)
-        {
-            LatLng ubicacions = new LatLng(listBiblioteques.get(i).getLatitud(), listBiblioteques.get(i).getLatitud());
-            mMap.addMarker(new MarkerOptions().position(ubicacions).title(listBiblioteques.get(i).getNomBiblioteca()));
-        }*/
-
-       // mMap.moveCamera(CameraUpdateFactory.newLatLng());
     }
 }
