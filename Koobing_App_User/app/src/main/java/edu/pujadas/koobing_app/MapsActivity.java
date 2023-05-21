@@ -11,13 +11,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.pujadas.koobing_app.Models.Biblioteca;
+import edu.pujadas.koobing_app.Models.Usuari;
+import edu.pujadas.koobing_app.Services.BibliotecaService;
 import edu.pujadas.koobing_app.databinding.MapsActivityBinding;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private MapsActivityBinding binding;
 
+    private BibliotecaService bibliotecaService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +39,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+
+
     }
 
     /**
@@ -44,9 +58,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // carrgant el retorofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.0.33:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        //creant la instacion per poder recollir totes les biblioteces
+        bibliotecaService = retrofit.create(BibliotecaService.class);
+
+
+        List<Biblioteca> listBiblioteques = (List<Biblioteca>) bibliotecaService.getBiblioteques();
+
+        // Afegint les ubuicacions gracies
+
+        for(int i = 0; i < listBiblioteques.size(); i++)
+        {
+            LatLng ubicacions = new LatLng(listBiblioteques.get(i).getLatitud(), listBiblioteques.get(i).getLatitud());
+            mMap.addMarker(new MarkerOptions().position(ubicacions).title(listBiblioteques.get(i).getNomBiblioteca()));
+        }
+
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng());
     }
 }
