@@ -1,12 +1,5 @@
 package edu.pujadas.koobing_app.Utilites;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.InstanceCreator;
-
-import java.lang.reflect.Type;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Usuari;
@@ -18,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserLoader {
 
-    private ApiService apiService;
+    private UserService userService;
 
     private String url = "http://192.168.0.33:3000/users/";
     public UserLoader()
@@ -29,11 +22,11 @@ public class UserLoader {
                 .build();
 
 
-        apiService = retrofit.create(ApiService.class);
+        userService = retrofit.create(UserService.class);
     }
 
     public void obtenerUsuarios(final ApiCallback<List<Usuari>> callback) {
-        Call<List<Usuari>> call = apiService.getUsuaris();
+        Call<List<Usuari>> call = userService.getUsuaris();
         call.enqueue(new Callback<List<Usuari>>() {
             @Override
             public void onResponse(Call<List<Usuari>> call, Response<List<Usuari>> response) {

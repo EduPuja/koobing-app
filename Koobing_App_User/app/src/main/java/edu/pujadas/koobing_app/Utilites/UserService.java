@@ -6,7 +6,7 @@ import edu.pujadas.koobing_app.Models.Usuari;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface ApiService {
+public interface UserService {
 
     String ruta = "http://192.168.0.33:3000/users/";
     @GET(ruta)
