@@ -84,55 +84,62 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.33:3000/") // Reemplaza con la dirección IP de tu servidor
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        UserService userService = retrofit.create(UserService.class);
+        if(email.isEmpty() && password.isEmpty())
+        {
+            emailField.setError("Emplena aquest camp");
+            passwordField.setError("Emplena aquest camp ");
+        }
+        else
+        {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://192.168.0.33:3000/") // Reemplaza con la dirección IP de tu servidor
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
 
-        Call<Usuari> call = userService.getUserByEmail(email);
+            UserService userService = retrofit.create(UserService.class);
 
-        call.enqueue(new Callback<Usuari>() {
+            Call<Usuari> call = userService.getUserByEmail(email);
 
-            @Override
-            public void onResponse(Call<Usuari> call, Response<Usuari> response) {
-                if (response.isSuccessful()) {
-                    Usuari user = response.body();
-                    if (user != null) {
-                        // comprovar si la password entrada es correcta
-                        if(Validator.checkPassword(password, user.getPassword()))
-                        {
-                            Toast.makeText(getApplicationContext(),"SUCCES EL USUARI SE HA TROBAT!",Toast.LENGTH_SHORT).show();
+            call.enqueue(new Callback<Usuari>() {
+
+                @Override
+                public void onResponse(Call<Usuari> call, Response<Usuari> response) {
+                    if (response.isSuccessful()) {
+                        Usuari user = response.body();
+                        if (user != null) {
+                            // comprovar si la password entrada es correcta
+                            if(Validator.checkPassword(password, user.getPassword()))
+                            {
+                                Toast.makeText(getApplicationContext(),"SUCCES EL USUARI SE HA TROBAT!",Toast.LENGTH_SHORT).show();
+                            }
+
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(),"La contrassenya no és correcte \uD83D\uDE14!",Toast.LENGTH_SHORT).show();
+                            }
+
                         }
-
-                        else
-                        {
-                            Toast.makeText(getApplicationContext(),"La contrassenya no és correcte \uD83D\uDE14!",Toast.LENGTH_SHORT).show();
+                        else {
+                            // Toast el usuari no exgisteix
+                            Toast.makeText(getApplicationContext(),"El usuari no s'ha trobat",Toast.LENGTH_SHORT).show();
                         }
-
                     }
                     else {
-                        // Toast el usuari no exgisteix
+                        // Error en la respuesta del servidor
                         Toast.makeText(getApplicationContext(),"El usuari no s'ha trobat",Toast.LENGTH_SHORT).show();
                     }
                 }
-                else {
-                    // Error en la respuesta del servidor
-                    Toast.makeText(getApplicationContext(),"El usuari no s'ha trobat",Toast.LENGTH_SHORT).show();
+
+                @Override
+                public void onFailure(Call<Usuari> call, Throwable t) {
+                    System.out.println("Failure: " + t.getMessage());
                 }
-            }
-
-            @Override
-            public void onFailure(Call<Usuari> call, Throwable t) {
-                System.out.println("Failure: " + t.getMessage());
-            }
 
 
-        }); //end callback enque
+            }); //end callback enque
 
-
-
+        }
 
 
     }
