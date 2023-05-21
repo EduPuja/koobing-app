@@ -20,11 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="410dp"
@@ -44,59 +39,14 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="400dp"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
         android:layout_height="450dp"
-        android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="1dp"
         android:layout_marginBottom="10dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeLabel">
-
-        <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="450dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/llibreIcon"
-                android:layout_width="167dp"
-                android:layout_height="185dp"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="110dp"
-                app:srcCompat="@drawable/libro" />
-
-            <TextView
-
-                android:id="@+id/titolBook"
-                android:layout_width="168dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="110dp"
-                android:text="Nom Llibre"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:ignore="InvalidId">
-
-            </TextView>
-
-            <Button
-                android:id="@+id/reservarBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
-                android:text="Button" />
-
-        </LinearLayout>
-
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/homeLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
