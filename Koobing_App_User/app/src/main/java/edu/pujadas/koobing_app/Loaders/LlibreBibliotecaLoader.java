@@ -43,6 +43,7 @@ public class LlibreBibliotecaLoader {
             public void onResponse(Call<List<LlibreBiblioteca>> call, Response<List<LlibreBiblioteca>> response) {
                 if (response.isSuccessful()) {
                     List<LlibreBiblioteca> librosBiblioteca = response.body();
+                    
                     callback.onSuccess(librosBiblioteca);
                 }
                 else {

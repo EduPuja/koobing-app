@@ -128,11 +128,14 @@ public class HomeActivity extends AppCompatActivity {
                 if(data!=null && !data.isEmpty())
                 {
                     System.out.println("Success Book info");
+
+                    String titol = data.get(0).getBook().getTitol();
+                    System.out.println("Titols: " + titol);
                     // Crea una instancia del adaptador personalizado
-                    carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
+                    //carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
 
                     // Asigna el adaptador al ViewPager
-                    viewPager.setAdapter(carouselAdapter);
+                    //viewPager.setAdapter(carouselAdapter);
                 }
             }
 
