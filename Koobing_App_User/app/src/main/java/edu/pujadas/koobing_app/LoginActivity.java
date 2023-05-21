@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                             // comprovar si la password entrada es correcta
                             if(Validator.checkPassword(password, user.getPassword()))
                             {
-                                Toast.makeText(getApplicationContext(),"SUCCES EL USUARI SE HA TROBAT!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Benvingut: "+user.getNom()+" "+user.getCognom(),Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                 //pasasar a la pantalla de home
