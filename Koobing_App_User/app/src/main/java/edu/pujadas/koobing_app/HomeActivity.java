@@ -33,9 +33,7 @@ import edu.pujadas.koobing_app.Models.Usuari;
 public class HomeActivity extends AppCompatActivity {
 
 
-    TextView homeLable ;
-    BottomNavigationView bottomNavBar ;
-    HorizontalScrollView scrollView;
+
 
     
 
@@ -51,9 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.home_activity);
         setTitle("Home");
 
-        homeLable = findViewById(R.id.homeLabel);
-        bottomNavBar = findViewById(R.id.bottom_navigation_view);
-        scrollView = findViewById(R.id.horizontalScrollView);
+
 
 
 
