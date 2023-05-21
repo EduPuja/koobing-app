@@ -74,10 +74,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     for(int i = 0; i < data.size(); i++) {
                         LatLng ubicacions = new LatLng(data.get(i).getLatitud(), data.get(i).getLatitud());
-                        mMap.addMarker(new MarkerOptions().position(ubicacions).title(data.get(i).getNomBiblioteca()));
+
+                        String nom = data.get(i).getNomBiblioteca();
+                        mMap.addMarker(new MarkerOptions().position(ubicacions).title(nom));
+
+
                     }
 
                 }
+                mMap.getUiSettings().setZoomControlsEnabled(true);
+
             }
 
             @Override
