@@ -32,6 +32,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.pujadas.koobing_app.Loaders.LlibreBibliotecaLoader;
+import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Usuari;
 
 
@@ -40,7 +42,10 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottom_navigation;
     ScrollView scrollView;
     TextView homeLabel;
-    
+
+    LlibreBibliotecaLoader bookBiblioLoader;
+    public ArrayList<LlibreBiblioteca> listBiblios = new ArrayList<LlibreBiblioteca>();
+
 
 
 
@@ -89,6 +94,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
 
