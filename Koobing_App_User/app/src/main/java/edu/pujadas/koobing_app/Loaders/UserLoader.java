@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
-import edu.pujadas.koobing_app.Utilites.ApiCallback;
+import edu.pujadas.koobing_app.Services.ApiCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
