@@ -96,7 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     {
                         double latitud =data.get(i).getLatitud();
                         double longitud =data.get(i).getLongitud();
-
+                        String noms = data.get(i).getNomBiblioteca();
                         //System.out.println("Lat :  " + latitud + " Long: " + longitud);
 
 
@@ -104,7 +104,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         //afegint cada ubicacio en les opcions i el titul i el icona
                         mMap.addMarker(new MarkerOptions().position(ubicacions).
-                                title(data.get(i).getNomBiblioteca())
+                                title(noms)
+                                .snippet(noms)
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.libro_tiny_icon)));
                     }
 
