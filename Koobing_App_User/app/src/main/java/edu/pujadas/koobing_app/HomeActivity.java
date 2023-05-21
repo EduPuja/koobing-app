@@ -77,8 +77,8 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.navigation_map) {
                     // Navegar a la actividad MapActivity
-                    Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(HomeActivity.this, MapsActivity.class));
+                    //Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(HomeActivity.this, MapsActivity.class));
                     return true;
                 }
                 return false;
