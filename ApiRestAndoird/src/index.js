@@ -7,6 +7,8 @@ const controllerUsuario= require("./controllers/controllerUsuario");
 app.use(express.json());
 app.get("/users",controllerUsuario.getAllUsers);
 
+app.get("/user",controllerUsuario.getUserByEmail)
+
 app.listen(3000, () => {
   console.log("La aplicación está corriendo en el puerto 3000.");
 });
