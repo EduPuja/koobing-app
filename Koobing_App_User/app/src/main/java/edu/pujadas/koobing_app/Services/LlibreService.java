@@ -6,7 +6,7 @@ import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface LLibreService {
+public interface LlibreService {
 
     @GET("/books")
     Call<List<LlibreBiblioteca>> getAllBooks();
