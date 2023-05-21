@@ -1,7 +1,7 @@
 const connection = require("../database/conexio");
 
 function getAllUsers(req, res) {
-  console.log("Obtenint tots els usuaris");
+  console.log("\nObtenint tots els usuaris");
   const sql = "SELECT * FROM usuari";
 
   connection.query(sql, (error, result) => {
@@ -27,7 +27,7 @@ function getUserByEmail(req, res) {
 
 
 
-  console.log("Obtenint usuari pel correu electrònic: ", email);
+  console.log("\nObtenint usuari pel correu electrònic: ", email);
 
   const sql = "SELECT * FROM usuari WHERE email = ?";
 
