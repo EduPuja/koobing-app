@@ -106,6 +106,11 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"SUCCES EL USUARI SE HA TROBAT!",Toast.LENGTH_SHORT).show();
                         }
 
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"La contrassenya no és correcte \uD83D\uDE14!",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     else {
                         // Toast el usuari no exgisteix
@@ -114,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     // Error en la respuesta del servidor
-                    Toast.makeText(getApplicationContext(),"Error a la resposta del servidor",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"El usuari no s'ha trobat",Toast.LENGTH_SHORT).show();
                 }
             }
 
