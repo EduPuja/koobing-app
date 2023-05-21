@@ -4,7 +4,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -16,18 +15,18 @@ import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Biblioteca;
 import edu.pujadas.koobing_app.Models.Usuari;
-import edu.pujadas.koobing_app.Services.BibliotecaService;
+import edu.pujadas.koobing_app.Utilites.ApiCallback;
+import edu.pujadas.koobing_app.Utilites.BibilotecaLoader;
 import edu.pujadas.koobing_app.databinding.MapsActivityBinding;
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private MapsActivityBinding binding;
 
-    private BibliotecaService bibliotecaService;
+    private BibilotecaLoader bibilotecaLoader;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +38,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        // instacio el loader de bilioteca
+        bibilotecaLoader = new BibilotecaLoader();
 
 
 
@@ -58,6 +61,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
+        // carregnat les dades de en el maps
+
+        bibilotecaLoader.obtenerBiblioteques(new ApiCallback<List<Biblioteca>>() {
+            @Override
+            public void onSuccess(List<Biblioteca> data) {
+                System.out.println("Success! On Biblioteca");
+                if(data != null && !data.isEmpty()) {
+
+                   // listBilioteca = (ArrayList<Biblioteca>) data;
+
+                    for(int i = 0; i < data.size(); i++) {
+                        LatLng ubicacions = new LatLng(data.get(i).getLatitud(), data.get(i).getLatitud());
+                        mMap.addMarker(new MarkerOptions().position(ubicacions).title(data.get(i).getNomBiblioteca()));
+                    }
+
+                }
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                System.out.println("Error on mapa bilioteca : " + statusCode);
+
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                System.out.println("Failure Biblioteca: " + throwable.getMessage());
+            }
+        });
         // carrgant el retorofit
         /*Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.33:3000/")
