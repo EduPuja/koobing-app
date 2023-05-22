@@ -64,9 +64,9 @@ public class CarouselAdapter extends PagerAdapter {
 
                 Reserva reserva = new Reserva();
 
-                reserva.setLlibre(book);
+                reserva.setISBN(book.getISBN());
                 Usuari currentUser = UsuarioSingleton.getInstance().getUsuario();
-                reserva.setUsuari(currentUser);
+                reserva.setIdUsuari(currentUser.getId());
                 //reserva.setBiblio();
                 Treballador administrador = new Treballador();
                 administrador.setId(1);
@@ -74,7 +74,7 @@ public class CarouselAdapter extends PagerAdapter {
                 administrador.setEmail("administrador@mail.com");
                 administrador.setAdmin(true);
 
-                reserva.setTreballador(administrador);
+                reserva.setIdTreballador(administrador.getId());
                 Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
                 Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
                 reserva.setDataInici(dataInici);
