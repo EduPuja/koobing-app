@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     ViewPager viewPager;
     CarouselAdapter carouselAdapter;
 
-    Button reservarBtn;
+
     TextView homeLabel;
 
     //loader per carrgear tota la info en un list
@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         homeLabel = findViewById(R.id.homeLabel);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.viewPager);
-        reservarBtn = findViewById(R.id.reservarBtn);
+
 
         // Posar el home como activat
         bottom_navigation.setSelectedItemId(R.id.navigation_home);
