@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
-       userLoader = new UserLoader();
+       /*userLoader = new UserLoader();
         userLoader.obtenerUsuarios(new ApiCallback<List<Usuari>>() {
             @Override
             public void onSuccess(List<Usuari> data) {
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
 
 
 
@@ -97,11 +97,34 @@ public class LoginActivity extends AppCompatActivity {
         else
         {
 
+            String url = "http://192.168.16.254:3000/users/";
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
 
+            UserService userService = retrofit.create(UserService.class);
+            Call<Usuari> call = userService.getUserByEmail(email);
+            call.enqueue(new Callback<Usuari>() {
+                @Override
+                public void onResponse(Call<Usuari> call, Response<Usuari> response) {
+                    if(response.isSuccessful())
+                    {
+                        System.out.println("SUCCES FULLY RESPON");
+                        Toast.makeText(getApplicationContext(),"Sucesffuly Resoon",Toast.LENGTH_SHORT).show();
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<Usuari> call, Throwable t) {
+
+                    System.out.println("ON FAILURE : " +t.getMessage());
+                    Toast.makeText(getApplicationContext(),"Failure ",Toast.LENGTH_SHORT).show();
+                }
+            });
 
             //ip institut
-            String url = "http://192.168.16.254:3000/users/";
+            /*String url = "http://192.168.16.254:3000/users/";
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -127,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
-            }); //end callback enque
+            }); //end callback enque*/
 
         }
 
