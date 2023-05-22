@@ -75,10 +75,15 @@ public class CarouselAdapter extends PagerAdapter {
                 Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
                 reserva.setDataInici(dataInici);
 
-                String url = "http://192.168.16.254:3000/reservarLlibre/";
+
+                //ip institut
+                //String url = "http://192.168.16.254:3000/reservarLlibre/";
+
+                //ip home
+                String url = "http://192.168.0.33:3000/reservarLlibre/";
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("") // URL base de tu API
+                        .baseUrl(url)
                         .client(httpClient.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
@@ -105,7 +110,8 @@ public class CarouselAdapter extends PagerAdapter {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(container.getContext(), "Error en la solicitud", Toast.LENGTH_SHORT).show();
+                        System.out.println("onFailure :" + t.getMessage());
+                        Toast.makeText(container.getContext(), "Error en la solicitud ", Toast.LENGTH_SHORT).show();
                     }
                 }); //end call
             });
