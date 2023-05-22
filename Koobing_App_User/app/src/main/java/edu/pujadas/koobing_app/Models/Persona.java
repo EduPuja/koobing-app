@@ -1,13 +1,12 @@
 package edu.pujadas.koobing_app.Models;
 
-import java.sql.Blob;
+
 import java.sql.Date;
 
 public class Persona {
 
     private int id;
     private String dni;
-
     private String nom;
     private String cognom;
     private Date dataNaix;
