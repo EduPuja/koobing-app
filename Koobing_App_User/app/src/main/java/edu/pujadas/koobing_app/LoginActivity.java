@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
-        userLoader = new UserLoader();
+       /* userLoader = new UserLoader();
         userLoader.obtenerUsuarios(new ApiCallback<List<Usuari>>() {
             @Override
             public void onSuccess(List<Usuari> data) {
@@ -65,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(int statusCode) {
 
-                System.out.println("Error");
-                //Toast.makeText(LoginActivity.this, "Error en la respuesta: " + statusCode, Toast.LENGTH_SHORT).show();
+                System.out.println("Error : " + statusCode);
+                Toast.makeText(LoginActivity.this, "Error en la respuesta: " + statusCode, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -74,10 +74,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Throwable throwable) {
 
                 System.out.println("Failure: " + throwable.getMessage());
-                ///Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
 
 
 
@@ -96,8 +96,10 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
         {
+            //ip institut
+            String url = "http://192.168.16.254:3000/users/";
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.33:3000/")
+                    .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
