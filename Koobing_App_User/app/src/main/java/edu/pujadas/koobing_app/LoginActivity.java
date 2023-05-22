@@ -2,13 +2,17 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import edu.pujadas.koobing_app.Loaders.UserLoader;
 import edu.pujadas.koobing_app.Services.ApiCallback;
@@ -83,8 +87,17 @@ public class LoginActivity extends AppCompatActivity {
                     if(Validator.checkPassword(password,usuari.getPassword()))
                     {
                         Toast.makeText(getApplicationContext(),"Benvingut: "+ usuari.getNom() +" "+usuari.getCognom(),Toast.LENGTH_SHORT).show();
-                        UsuarioSingleton usuarioSingleton = UsuarioSingleton.getInstance();
-                        usuarioSingleton.setUsuario(usuari);
+                        //guardar la sessio del usuari en el shared preferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        Gson gson = new Gson();
+                        // Convierte el objeto usuario a JSON
+                        String usuarioJson = gson.toJson(usuari);
+
+                        editor.putString("usuario", usuarioJson);
+
+                        editor.apply();
+
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);
                     }
