@@ -1,5 +1,7 @@
 package edu.pujadas.koobing_app.Adapters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.google.gson.Gson;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -66,61 +70,79 @@ public class CarouselAdapter extends PagerAdapter {
 
                 reserva.setISBN(book.getISBN());
 
+                SharedPreferences sharedPreferences = container.getContext().getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE);
+
+                String usuarioJson = sharedPreferences.getString("usuario", null); // Obtiene el JSON del usuario de SharedPreferences
+                if (usuarioJson != null) {
+                    Gson gson = new Gson();
+                    Usuari usuario = gson.fromJson(usuarioJson, Usuari.class); // Convierte el JSON a objeto usuario
+                    Treballador administrador = new Treballador();
+                    administrador.setId(1);
+                    administrador.setNom("Admin");
+                    administrador.setEmail("administrador@mail.com");
+                    administrador.setAdmin(true);
+
+                    reserva.setIdTreballador(administrador.getId());
+                    Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
+                    Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
+                    reserva.setDataInici(dataInici);
+
+
+                    //ip institut
+                    //String url = "http://192.168.16.254:3000/reservarLlibre/";
+
+                    //ip home
+                    String url = "http://192.168.0.33:3000/reservarLlibre/";
+                    OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(url)
+                            .client(httpClient.build())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+
+                    ReservaService reservaService = retrofit.create(ReservaService.class);
+                    Call<Void> call = reservaService.hacerReserva(reserva);
 
 
 
 
-                //reserva.setBiblio();
-                Treballador administrador = new Treballador();
-                administrador.setId(1);
-                administrador.setNom("Admin");
-                administrador.setEmail("administrador@mail.com");
-                administrador.setAdmin(true);
+                    //reserva.setBiblio();
 
-                reserva.setIdTreballador(administrador.getId());
-                Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
-                Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
-                reserva.setDataInici(dataInici);
+                    call.enqueue(new Callback<Void>() {
 
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if(response.isSuccessful())
+                            {
+                                System.out.println("Reserva creada ");
+                                Toast.makeText(container.getContext(), "El llibre s'ha reservat correctamet", Toast.LENGTH_SHORT).show();
 
-                //ip institut
-                //String url = "http://192.168.16.254:3000/reservarLlibre/";
+                            }
+                            else
+                            {
+                                Toast.makeText(container.getContext(), "Error al realizar la reserva", Toast.LENGTH_SHORT).show();
 
-                //ip home
-                String url = "http://192.168.0.33:3000/reservarLlibre/";
-                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(url)
-                        .client(httpClient.build())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-
-                ReservaService reservaService = retrofit.create(ReservaService.class);
-                Call<Void> call = reservaService.hacerReserva(reserva);
-                call.enqueue(new Callback<Void>() {
-
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(response.isSuccessful())
-                        {
-                            System.out.println("Reserva creada ");
-                            Toast.makeText(container.getContext(), "El llibre s'ha reservat correctamet", Toast.LENGTH_SHORT).show();
-
+                            }
                         }
-                        else
-                        {
-                            Toast.makeText(container.getContext(), "Error al realizar la reserva", Toast.LENGTH_SHORT).show();
 
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            System.out.println("onFailure :" + t.getMessage());
+                            Toast.makeText(container.getContext(), "Error en la solicitud ", Toast.LENGTH_SHORT).show();
                         }
-                    }
+                    }); //end call
+                }
+                else
+                {
+                    System.out.println("Usuario vacio");
+                    //el usuari esta vuit hauria d'anar a registrar-se
+                }
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        System.out.println("onFailure :" + t.getMessage());
-                        Toast.makeText(container.getContext(), "Error en la solicitud ", Toast.LENGTH_SHORT).show();
-                    }
-                }); //end call
+
+
+
+
             });
         }
         else
@@ -132,6 +154,7 @@ public class CarouselAdapter extends PagerAdapter {
         container.addView(view);
         return view;
     }
+
 
 
     @Override
