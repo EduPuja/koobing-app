@@ -9,7 +9,11 @@ import retrofit2.http.Path;
 
 public interface UserService {
 
-    String ruta = "http://192.168.0.33:3000/users/";
+
+    //ruta insti 192.168.137.1
+
+    //String ruta = "http://192.168.0.33:3000/users/";
+    String ruta = "http://192.168.137.1:3000/users/";
     @GET(ruta)
     Call<List<Usuari>>getUsuaris();
 
