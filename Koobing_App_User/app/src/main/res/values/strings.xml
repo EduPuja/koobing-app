@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Koobing_App</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="todo">TODO</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="labelRegister">No estas registrat? Click aquí</string>
 </resources>
