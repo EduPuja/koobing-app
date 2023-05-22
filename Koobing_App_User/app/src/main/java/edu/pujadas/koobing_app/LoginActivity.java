@@ -96,6 +96,10 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
         {
+
+
+
+
             //ip institut
             String url = "http://192.168.16.254:3000/users/";
             Retrofit retrofit = new Retrofit.Builder()
@@ -112,34 +116,9 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Usuari> call, Response<Usuari> response) {
                     if (response.isSuccessful()) {
-                        Usuari user = response.body();
-                        if (user != null) {
-                            // comprovar si la password entrada es correcta
-                            if(Validator.checkPassword(password, user.getPassword()))
-                            {
-                                Toast.makeText(getApplicationContext(),"Benvingut: "+user.getNom()+" "+user.getCognom(),Toast.LENGTH_SHORT).show();
-
-                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                                //pasasar a la pantalla de home
-                                startActivity(intent);
-                                finish();
-                            }
-
-                            else
-                            {
-                                Toast.makeText(getApplicationContext(),"La contrassenya no és correcte \uD83D\uDE14!",Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                        else {
-                            // Toast el usuari no exgisteix
-                            Toast.makeText(getApplicationContext(),"El usuari no s'ha trobat",Toast.LENGTH_SHORT).show();
-                        }
+                        System.out.println("NASHE");
                     }
-                    else {
-                        // Error en la respuesta del servidor
-                        Toast.makeText(getApplicationContext(),"El usuari no s'ha trobat",Toast.LENGTH_SHORT).show();
-                    }
+
                 }
 
                 @Override
