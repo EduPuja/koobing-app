@@ -49,36 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
+        //user loader classe per carregar les dades necesaries de la base de dade i la api
         userLoader = new UserLoader();
-       /*userLoader = new UserLoader();
-        userLoader.obtenerUsuarios(new ApiCallback<List<Usuari>>() {
-            @Override
-            public void onSuccess(List<Usuari> data) {
 
-                System.out.println("Succes!");
-             if(data != null && !data.isEmpty()) {
-
-                 listUsers = (ArrayList<Usuari>) data;
-
-             }
-            }
-
-            @Override
-            public void onError(int statusCode) {
-
-                System.out.println("Error : " + statusCode);
-                Toast.makeText(LoginActivity.this, "Error en la respuesta: " + statusCode, Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-
-                System.out.println("Failure: " + throwable.getMessage());
-                Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
 
 
 
@@ -101,8 +74,19 @@ public class LoginActivity extends AppCompatActivity {
             userLoader.obtenerUsuarioPorCorreo(email, new ApiCallback<Usuari>() {
                 @Override
                 public void onSuccess(Usuari data) {
-                    System.out.println("Has obtingut el usuari correctament");
-                    Toast.makeText(getApplicationContext(),"Has obtingut el usuari correctament",Toast.LENGTH_SHORT).show();
+                    //System.out.println("Has obtingut el usuari correctament");
+
+                    if(Validator.checkPassword(password,data.getPassword()))
+                    {
+                        Toast.makeText(getApplicationContext(),"Benvingut: "+ data.getNom() +" "+data.getCognom(),Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Contrassenya incorrecte \uD83D\uDE14",Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
                 @Override
