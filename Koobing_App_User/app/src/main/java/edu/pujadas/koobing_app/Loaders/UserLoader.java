@@ -1,10 +1,17 @@
 package edu.pujadas.koobing_app.Loaders;
 
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Services.ApiCallback;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,23 +82,48 @@ public class UserLoader {
         userService = retrofit.create(UserService.class);
 
 
-        Call<Usuari> call = userService.getUserByEmail(correo);
+        Call<ResponseBody> call = userService.getUserByEmail(correo);
 
-        call.enqueue(new Callback<Usuari>() {
+        call.enqueue(new Callback<ResponseBody>() {
 
             @Override
-            public void onResponse(Call<Usuari> call, Response<Usuari> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
+            {
                 if(response.isSuccessful())
                 {
-                    String hola = response.body().toString();
-                    Usuari user = response.body();
-
-                    if(user != null)
-                    {
-                        // en cas de que sigui success envio el usuari
-                        callback.onSuccess(user);
+                    String jsonResponse = null;
+                    try {
+                        jsonResponse = response.body().string();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
                     }
 
+                    if(jsonResponse != null)
+                    {
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(jsonResponse);
+
+                            Usuari usuari = new Usuari();
+                            usuari.setId(jsonObject.getInt("id_usuari"));
+                            usuari.setDni(jsonObject.getString("dni"));
+                            usuari.setNom(jsonObject.getString("nom"));
+
+
+                            usuari.setCognom(jsonObject.getString("cognom"));
+                        }
+
+
+                        catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        //Gson gson = new Gson();
+                        //Usuari usuariConvertit = gson.fromJson(jsonResponse, Usuari.class);
+
+                        //System.out.println("info user? :"+  usuariConvertit.getId());
+                    }
 
                 }
                 else
@@ -99,15 +131,17 @@ public class UserLoader {
                     //en cas d'error envio el codi d'error
                     callback.onError(response.code());
                 }
+
+
             }
+
+
 
             @Override
-            public void onFailure(Call<Usuari> call, Throwable t) {
-
-                // en cas d'error envio l'error
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 callback.onFailure(t);
             }
-        });
+        });//end callback
 
 
         return null;
