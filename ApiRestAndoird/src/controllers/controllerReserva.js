@@ -3,6 +3,7 @@ const connection = require("../database/conexio");
 
 function setReserva(req,res)
 {
+    console.log("\nCreant una reserva")
     const reserva = req.body;
 
     const query = "INSERT INTO reserves (id_reserva, id_usuari, id_treballador, id_biblioteca, ISBN, data_inici, data_fi) VALUES (?, ?, ?, ?, ?, ?, ?)";
