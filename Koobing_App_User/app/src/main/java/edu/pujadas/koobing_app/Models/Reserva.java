@@ -6,10 +6,13 @@ import java.sql.Timestamp;
 public class Reserva
 {
     int idReserva;
-    Usuari usuari;
-    Treballador treballador;
-    Biblioteca biblio;
-    Llibre llibre;
+
+    int idUsuari;
+    int idTreballador;
+    int idBiblioteca;
+
+    long ISBN;
+
     Date dataInici;
     Date dataFI;
 
@@ -17,65 +20,54 @@ public class Reserva
     {
     }
 
-    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, Date dataInici, Date dataFi)
-    {
+    public Reserva(int idReserva, int idUsuari, int idTreballador, int idBiblioteca, long ISBN, Date dataInici, Date dataFI) {
         this.idReserva = idReserva;
-        this.usuari = usuari;
-        this.treballador = treballador;
-        this.biblio = biblio;
-        this.llibre = llibre;
+        this.idUsuari = idUsuari;
+        this.idTreballador = idTreballador;
+        this.idBiblioteca = idBiblioteca;
+        this.ISBN = ISBN;
         this.dataInici = dataInici;
-        this.dataFI = dataFi;
+        this.dataFI = dataFI;
     }
 
-    public int getIdReserva()
-    {
+    public int getIdReserva() {
         return idReserva;
     }
 
-    public void setIdReserva(int idReserva)
-    {
+    public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
     }
 
-    public Usuari getUsuari()
-    {
-        return usuari;
+    public int getIdUsuari() {
+        return idUsuari;
     }
 
-    public void setUsuari(Usuari usuari)
-    {
-        this.usuari = usuari;
+    public void setIdUsuari(int idUsuari) {
+        this.idUsuari = idUsuari;
     }
 
-    public Treballador getTreballador()
-    {
-        return treballador;
+    public int getIdTreballador() {
+        return idTreballador;
     }
 
-    public void setTreballador(Treballador treballador)
-    {
-        this.treballador = treballador;
+    public void setIdTreballador(int idTreballador) {
+        this.idTreballador = idTreballador;
     }
 
-    public Biblioteca getBiblio()
-    {
-        return biblio;
+    public int getIdBiblioteca() {
+        return idBiblioteca;
     }
 
-    public void setBiblio(Biblioteca biblio)
-    {
-        this.biblio = biblio;
+    public void setIdBiblioteca(int idBiblioteca) {
+        this.idBiblioteca = idBiblioteca;
     }
 
-    public Llibre getLlibre()
-    {
-        return llibre;
+    public long getISBN() {
+        return ISBN;
     }
 
-    public void setLlibre(Llibre llibre)
-    {
-        this.llibre = llibre;
+    public void setISBN(long ISBN) {
+        this.ISBN = ISBN;
     }
 
     public Date getDataInici() {
