@@ -77,13 +77,14 @@ public class LoginActivity extends AppCompatActivity {
 
             userLoader.obtenerUsuarioPorCorreo(email, new ApiCallback<Usuari>() {
                 @Override
-                public void onSuccess(Usuari data) {
+                public void onSuccess(Usuari usuari) {
                     //System.out.println("Has obtingut el usuari correctament");
 
-                    if(Validator.checkPassword(password,data.getPassword()))
+                    if(Validator.checkPassword(password,usuari.getPassword()))
                     {
-                        Toast.makeText(getApplicationContext(),"Benvingut: "+ data.getNom() +" "+data.getCognom(),Toast.LENGTH_SHORT).show();
-                        UsuarioSingleton.getInstance().setUsuario(data);
+                        Toast.makeText(getApplicationContext(),"Benvingut: "+ usuari.getNom() +" "+usuari.getCognom(),Toast.LENGTH_SHORT).show();
+                        UsuarioSingleton usuarioSingleton = UsuarioSingleton.getInstance();
+                        usuarioSingleton.setUsuario(usuari);
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);
                     }
