@@ -59,7 +59,7 @@ public class UserLoader {
 
     public Usuari obtenerUsuarioPorCorreo(String correo, final ApiCallback<Usuari> callback) {
 
-        String url = "http://192.168.16.254:3000/users/" + correo;
+        String url = "http://192.168.16.254:3000/users/" + correo+"/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)

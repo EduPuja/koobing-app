@@ -11,10 +11,10 @@ public interface UserService {
 
 
 
-    @GET("users/")
+    @GET("/users/")
     Call<List<Usuari>>getUsuaris();
 
-    @GET("user/{email}")
+    @GET("/user/{email}")
     Call<Usuari> getUserByEmail(@Path("email") String email);
 
 }

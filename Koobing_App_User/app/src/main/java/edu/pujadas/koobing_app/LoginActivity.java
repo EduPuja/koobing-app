@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
+        userLoader = new UserLoader();
        /*userLoader = new UserLoader();
         userLoader.obtenerUsuarios(new ApiCallback<List<Usuari>>() {
             @Override
@@ -97,29 +98,23 @@ public class LoginActivity extends AppCompatActivity {
         else
         {
 
-            String url = "http://192.168.16.254:3000/users/";
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            UserService userService = retrofit.create(UserService.class);
-            Call<Usuari> call = userService.getUserByEmail(email);
-            call.enqueue(new Callback<Usuari>() {
+            userLoader.obtenerUsuarioPorCorreo(email, new ApiCallback<Usuari>() {
                 @Override
-                public void onResponse(Call<Usuari> call, Response<Usuari> response) {
-                    if(response.isSuccessful())
-                    {
-                        System.out.println("SUCCES FULLY RESPON");
-                        Toast.makeText(getApplicationContext(),"Sucesffuly Resoon",Toast.LENGTH_SHORT).show();
-                    }
+                public void onSuccess(Usuari data) {
+                    System.out.println("Has obtingut el usuari correctament");
+                    Toast.makeText(getApplicationContext(),"Has obtingut el usuari correctament",Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onFailure(Call<Usuari> call, Throwable t) {
+                public void onError(int statusCode) {
+                    System.out.println("Error");
+                    Toast.makeText(getApplicationContext(),"Error: " +statusCode,Toast.LENGTH_SHORT).show();
+                }
 
-                    System.out.println("ON FAILURE : " +t.getMessage());
-                    Toast.makeText(getApplicationContext(),"Failure ",Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(Throwable throwable) {
+                    System.out.println("Failure");
+                    Toast.makeText(getApplicationContext(),"Error al servidor" ,Toast.LENGTH_SHORT).show();
                 }
             });
 
