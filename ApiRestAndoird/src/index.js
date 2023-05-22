@@ -2,9 +2,15 @@ const os = require('os');
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
+
+//controllers
 const controllerUsuario = require("./controllers/controllerUsuario");
 const controllerBiblio = require("./controllers/controllerBiblioteca");
 const controllerLlibre = require("./controllers/controllerLLibre");
+const reservaController = require("./controllers/controllerReserva");
+
+
+
 
 // Configuración de la API
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +21,9 @@ app.get("/users", controllerUsuario.getAllUsers);
 app.get("/user/:email", controllerUsuario.getUserByEmail);
 app.get("/biblioteques", controllerBiblio.getAllBiblioteques);
 app.get("/books", controllerLlibre.getAllLlibres);
+app.post("/reservarLlibre",reservaController.setReserva);
+
+
 
 const port = 3000;
 const server = app.listen(port, () => {
