@@ -65,7 +65,10 @@ public class CarouselAdapter extends PagerAdapter {
                 Reserva reserva = new Reserva();
 
                 reserva.setISBN(book.getISBN());
-                Usuari currentUser = UsuarioSingleton.getInstance().getUsuario();
+                UsuarioSingleton usuarioSingleton = UsuarioSingleton.getInstance();
+
+                Usuari currentUser = usuarioSingleton.getUsuario();
+
                 reserva.setIdUsuari(currentUser.getId());
                 //reserva.setBiblio();
                 Treballador administrador = new Treballador();
