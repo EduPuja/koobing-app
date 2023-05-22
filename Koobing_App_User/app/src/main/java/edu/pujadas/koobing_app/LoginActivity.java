@@ -110,8 +110,17 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(int statusCode) {
-                    System.out.println("Error");
-                    Toast.makeText(getApplicationContext(),"Error: " +statusCode,Toast.LENGTH_SHORT).show();
+                    System.out.println("Error ");
+
+                    if(statusCode == 404)
+                    {
+                        Toast.makeText(getApplicationContext(),"No hem trobat el usauri amb correu: " +email,Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Error: " +statusCode,Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
                 @Override

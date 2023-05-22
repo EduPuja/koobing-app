@@ -70,9 +70,9 @@ public class CarouselAdapter extends PagerAdapter {
 
                 reserva.setISBN(book.getISBN());
 
-                SharedPreferences sharedPreferences = container.getContext().getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = container.getContext().getSharedPreferences("userSession", Context.MODE_PRIVATE);
 
-                String usuarioJson = sharedPreferences.getString("usuario", null); // Obtiene el JSON del usuario de SharedPreferences
+                String usuarioJson = sharedPreferences.getString("usuario", ""); // Obtiene el JSON del usuario de SharedPreferences
                 if (usuarioJson != null) {
                     Gson gson = new Gson();
                     Usuari usuario = gson.fromJson(usuarioJson, Usuari.class); // Convierte el JSON a objeto usuario
