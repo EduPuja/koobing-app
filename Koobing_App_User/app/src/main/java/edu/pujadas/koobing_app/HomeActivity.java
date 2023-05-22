@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     ViewPager viewPager;
     CarouselAdapter carouselAdapter;
 
+    Button reservarBtn;
     TextView homeLabel;
 
     //loader per carrgear tota la info en un list
@@ -69,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         homeLabel = findViewById(R.id.homeLabel);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.viewPager);
-
+        reservarBtn = findViewById(R.id.reservarBtn);
 
         // Posar el home como activat
         bottom_navigation.setSelectedItemId(R.id.navigation_home);
@@ -133,6 +135,8 @@ public class HomeActivity extends AppCompatActivity {
 
                     // Asigna el adaptador al ViewPager
                     viewPager.setAdapter(carouselAdapter);
+
+
                 }
             }
 
