@@ -57,6 +57,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metode que el que fa es comprovar el si usuari esta donat d'alta en la api web
+     * @param view vista
+     */
     public void onLoginSubmit(View view)
     {
         String email = emailField.getText().toString();
@@ -106,5 +110,18 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
+
+
+
+    }
+
+    /**
+     * Metode per anar al register al fer click en el text de registre
+     * @param vista vista
+     */
+    public void onClickRegister(View vista)
+    {
+        Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(intent);
     }
 }
