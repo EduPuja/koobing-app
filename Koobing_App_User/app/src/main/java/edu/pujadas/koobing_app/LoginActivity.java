@@ -102,35 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
 
-            //ip institut
-            /*String url = "http://192.168.16.254:3000/users/";
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            UserService userService = retrofit.create(UserService.class);
-
-            Call<Usuari> call = userService.getUserByEmail(email);
-
-            call.enqueue(new Callback<Usuari>() {
-
-                @Override
-                public void onResponse(Call<Usuari> call, Response<Usuari> response) {
-                    if (response.isSuccessful()) {
-                        System.out.println("NASHE");
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<Usuari> call, Throwable t) {
-                    System.out.println("Failure: " + t.getMessage());
-                }
-
-
-            }); //end callback enque*/
-
+          
         }
 
 
