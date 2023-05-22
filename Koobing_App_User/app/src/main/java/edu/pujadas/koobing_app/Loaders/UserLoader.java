@@ -83,6 +83,7 @@ public class UserLoader {
             public void onResponse(Call<Usuari> call, Response<Usuari> response) {
                 if(response.isSuccessful())
                 {
+                    String hola = response.body().toString();
                     Usuari user = response.body();
 
                     if(user != null)

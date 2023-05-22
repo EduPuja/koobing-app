@@ -73,74 +73,67 @@ public class CarouselAdapter extends PagerAdapter {
                 SharedPreferences sharedPreferences = container.getContext().getSharedPreferences("userSession", Context.MODE_PRIVATE);
 
                 String usuarioJson = sharedPreferences.getString("usuario", ""); // Obtiene el JSON del usuario de SharedPreferences
-                if (usuarioJson != null) {
-                    Gson gson = new Gson();
-                    Usuari usuario = gson.fromJson(usuarioJson, Usuari.class); // Convierte el JSON a objeto usuario
+                Gson gson = new Gson();
+                Usuari usuario = gson.fromJson(usuarioJson, Usuari.class); // Convierte el JSON a objeto usuario
 
-                    reserva.setIdUsuari(usuario.getId());
+                reserva.setIdUsuari(usuario.getId());
 
-                    Treballador administrador = new Treballador();
-                    administrador.setId(1);
-                    administrador.setNom("Admin");
-                    administrador.setEmail("administrador@mail.com");
-                    administrador.setAdmin(true);
+                Treballador administrador = new Treballador();
+                administrador.setId(1);
+                administrador.setNom("Admin");
+                administrador.setEmail("administrador@mail.com");
+                administrador.setAdmin(true);
 
-                    reserva.setIdTreballador(administrador.getId());
-                    Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
-                    Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
-                    reserva.setDataInici(dataInici);
-                    reserva.setDataFI(dataFi);
+                reserva.setIdTreballador(administrador.getId());
+                Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
+                Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
+                reserva.setDataInici(dataInici);
+                reserva.setDataFI(dataFi);
 
-                    //ip institut
-                    //String url = "http://192.168.16.254:3000/reservarLlibre/";
+                //ip institut
+                //String url = "http://192.168.16.254:3000/reservarLlibre/";
 
-                    //ip home
-                    String url = "http://192.168.0.33:3000/reservarLlibre/";
-                    OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(url)
-                            .client(httpClient.build())
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+                //ip home
+                String url = "http://192.168.0.33:3000/reservarLlibre/";
+                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(url)
+                        .client(httpClient.build())
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
 
-                    ReservaService reservaService = retrofit.create(ReservaService.class);
-                    Call<Void> call = reservaService.hacerReserva(reserva);
-
+                ReservaService reservaService = retrofit.create(ReservaService.class);
+                Call<Void> call = reservaService.hacerReserva(reserva);
 
 
 
-                    //reserva.setBiblio();
 
-                    call.enqueue(new Callback<Void>() {
+                //reserva.setBiblio();
 
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            if(response.isSuccessful())
-                            {
-                                System.out.println("Reserva creada ");
-                                Toast.makeText(container.getContext(), "El llibre s'ha reservat correctamet", Toast.LENGTH_SHORT).show();
+                call.enqueue(new Callback<Void>() {
 
-                            }
-                            else
-                            {
-                                Toast.makeText(container.getContext(), "Error al realizar la reserva", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful())
+                        {
+                            System.out.println("Reserva creada ");
+                            Toast.makeText(container.getContext(), "El llibre s'ha reservat correctamet", Toast.LENGTH_SHORT).show();
 
-                            }
                         }
+                        else
+                        {
+                            Toast.makeText(container.getContext(), "Error al realizar la reserva", Toast.LENGTH_SHORT).show();
 
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            System.out.println("onFailure :" + t.getMessage());
-                            Toast.makeText(container.getContext(), "Error en la solicitud ", Toast.LENGTH_SHORT).show();
                         }
-                    }); //end call
-                }
-                else
-                {
-                    System.out.println("Usuario vacio");
-                    //el usuari esta vuit hauria d'anar a registrar-se
-                }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        System.out.println("onFailure :" + t.getMessage());
+                        Toast.makeText(container.getContext(), "Error en la solicitud ", Toast.LENGTH_SHORT).show();
+                    }
+                }); //end call
 
 
 
