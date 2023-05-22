@@ -27,7 +27,9 @@ public class UserLoader {
     public void obtenerUsuarios(final ApiCallback<List<Usuari>> callback) {
 
 
-        String url ="http://192.168.16.254:3000/users/";
+        //String url ="http://192.168.16.254:3000/users/";
+
+        String url ="http://192.168.0.33:3000/users/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
