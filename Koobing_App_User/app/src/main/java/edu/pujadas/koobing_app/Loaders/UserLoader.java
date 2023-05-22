@@ -18,7 +18,7 @@ public class UserLoader {
     //private String url = "http://192.168.0.33:3000/users/";
 
     //private String url = "http://192.168.16.254:3000/users/";
-    private String url ="http://192.168.16.254:3000/users/";
+
     public UserLoader()
     {
 
@@ -27,6 +27,7 @@ public class UserLoader {
     public void obtenerUsuarios(final ApiCallback<List<Usuari>> callback) {
 
 
+        String url ="http://192.168.16.254:3000/users/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -59,7 +60,9 @@ public class UserLoader {
 
     public Usuari obtenerUsuarioPorCorreo(String correo, final ApiCallback<Usuari> callback) {
 
-        String url = "http://192.168.16.254:3000/users/" + correo+"/";
+
+        String url = "http://192.168.0.33:3000/users/" + correo+"/";
+        //String url = "http://192.168.16.254:3000/users/" + correo+"/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
