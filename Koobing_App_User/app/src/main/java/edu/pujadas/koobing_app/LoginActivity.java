@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(Validator.checkPassword(password,data.getPassword()))
                     {
                         Toast.makeText(getApplicationContext(),"Benvingut: "+ data.getNom() +" "+data.getCognom(),Toast.LENGTH_SHORT).show();
+                        UsuarioSingleton.getInstance().setUsuario(data);
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);
                     }

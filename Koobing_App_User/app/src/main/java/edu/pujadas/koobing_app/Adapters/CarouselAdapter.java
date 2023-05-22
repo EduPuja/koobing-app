@@ -17,8 +17,10 @@ import java.util.List;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.Reserva;
 import edu.pujadas.koobing_app.Models.Treballador;
+import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.R;
 import edu.pujadas.koobing_app.Services.ReservaService;
+import edu.pujadas.koobing_app.Utilites.UsuarioSingleton;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +65,8 @@ public class CarouselAdapter extends PagerAdapter {
                 Reserva reserva = new Reserva();
 
                 reserva.setLlibre(book);
+                Usuari currentUser = UsuarioSingleton.getInstance().getUsuario();
+                reserva.setUsuari(currentUser);
                 //reserva.setBiblio();
                 Treballador administrador = new Treballador();
                 administrador.setId(1);
