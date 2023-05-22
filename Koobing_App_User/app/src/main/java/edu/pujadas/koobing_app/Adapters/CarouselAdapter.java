@@ -76,6 +76,9 @@ public class CarouselAdapter extends PagerAdapter {
                 if (usuarioJson != null) {
                     Gson gson = new Gson();
                     Usuari usuario = gson.fromJson(usuarioJson, Usuari.class); // Convierte el JSON a objeto usuario
+
+                    reserva.setIdUsuari(usuario.getId());
+
                     Treballador administrador = new Treballador();
                     administrador.setId(1);
                     administrador.setNom("Admin");
@@ -86,7 +89,7 @@ public class CarouselAdapter extends PagerAdapter {
                     Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
                     Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
                     reserva.setDataInici(dataInici);
-
+                    reserva.setDataFI(dataFi);
 
                     //ip institut
                     //String url = "http://192.168.16.254:3000/reservarLlibre/";
