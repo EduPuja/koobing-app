@@ -21,6 +21,6 @@ public class RegisterActivity extends AppCompatActivity {
      */
     public void onRegisterClick(View v)
     {
-        
+
     }
 }
