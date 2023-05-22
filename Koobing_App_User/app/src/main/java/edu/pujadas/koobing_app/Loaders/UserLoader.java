@@ -109,9 +109,11 @@ public class UserLoader {
                             usuari.setId(jsonObject.getInt("id_usuari"));
                             usuari.setDni(jsonObject.getString("dni"));
                             usuari.setNom(jsonObject.getString("nom"));
-
-
                             usuari.setCognom(jsonObject.getString("cognom"));
+
+
+                            System.out.println("ID _USUARI; " +usuari.getId());
+                            //String dataNaixString = jsonObject.getString("data_naix");
                         }
 
 
