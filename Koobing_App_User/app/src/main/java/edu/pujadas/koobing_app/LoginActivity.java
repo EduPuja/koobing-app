@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginSubmit = findViewById(R.id.loginSubmit);
 
-       /* userLoader = new UserLoader();
+       userLoader = new UserLoader();
         userLoader.obtenerUsuarios(new ApiCallback<List<Usuari>>() {
             @Override
             public void onSuccess(List<Usuari> data) {
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "No se pudo realizar la solicitud: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
-        });*/
+        });
 
 
 
