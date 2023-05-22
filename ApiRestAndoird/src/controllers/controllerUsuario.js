@@ -37,11 +37,8 @@ function getUserByEmail(req, res) {
       return callback(error, null);   //retornar un callback d'error
     } else {
       if (result.length > 0) {
-        const user = {
-          ...result[0],
-          avatar: result[0].avatar.toString("base64"),
-        }
-        res.json(user);
+        const usuario = result[0];
+        res.json(usuario); // Devuelve el usuario como respuesta return res.json(result);
       } else {
         //return callback(null,null)
         res.status(404).send("Usuario no encontrado");
