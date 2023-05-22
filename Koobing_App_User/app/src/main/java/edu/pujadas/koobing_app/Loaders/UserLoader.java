@@ -21,16 +21,21 @@ public class UserLoader {
     private String url ="http://192.168.16.254:3000/users/";
     public UserLoader()
     {
+
+    }
+
+    public void obtenerUsuarios(final ApiCallback<List<Usuari>> callback) {
+
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url) // Reemplaza con la URL base de tu API
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
 
         userService = retrofit.create(UserService.class);
-    }
 
-    public void obtenerUsuarios(final ApiCallback<List<Usuari>> callback) {
+
         Call<List<Usuari>> call = userService.getUsuaris();
         call.enqueue(new Callback<List<Usuari>>() {
             @Override
@@ -52,5 +57,55 @@ public class UserLoader {
         });
     }
 
+    public Usuari obtenerUsuarioPorCorreo(String correo, final ApiCallback<Usuari> callback) {
+
+        String url = "http://192.168.16.254:3000/users/" + correo;
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        userService = retrofit.create(UserService.class);
+
+
+        Call<Usuari> call = userService.getUserByEmail(correo);
+
+        call.enqueue(new Callback<Usuari>() {
+
+            @Override
+            public void onResponse(Call<Usuari> call, Response<Usuari> response) {
+                if(response.isSuccessful())
+                {
+                    Usuari user = response.body();
+
+                    if(user != null)
+                    {
+                        // en cas de que sigui success envio el usuari
+                        callback.onSuccess(user);
+                    }
+
+
+                }
+                else
+                {
+                    //en cas d'error envio el codi d'error
+                    callback.onError(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Usuari> call, Throwable t) {
+
+                // en cas d'error envio l'error
+                callback.onFailure(t);
+            }
+        });
+
+
+        return null;
+
+    }
 
 }
