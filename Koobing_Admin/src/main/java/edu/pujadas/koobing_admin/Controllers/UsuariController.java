@@ -48,7 +48,6 @@ public class UsuariController implements Initializable
     public Button trebaladorBtn;
     public Button llibreBtn;
     public Button autorBtn;
-    public Button bibliotecaBtn;
     public Button idiomaBtn;
     public Button genereBtn;
     public Button editioralBtn;
@@ -110,7 +109,7 @@ public class UsuariController implements Initializable
                 {
                     System.out.println("worker");
                     trebaladorBtn.setVisible(false);
-                    bibliotecaBtn.setVisible(false);
+
                     editioralBtn.setVisible(false);
                     genereBtn.setVisible(false);
                 }

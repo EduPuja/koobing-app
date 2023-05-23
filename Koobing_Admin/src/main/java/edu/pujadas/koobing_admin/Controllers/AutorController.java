@@ -36,9 +36,10 @@ public class AutorController implements Initializable
     public TableColumn<Autor,Integer> idAutor;
     public TableColumn<Autor,String> nomAutor;
     public TableColumn<Autor, Date> dataNaix;
+
+
     public ImageView avatarWorker;
     public Button trebaladorBtn;
-    public Button bibliotecaBtn;
     public Button editioralBtn;
     public Button genereBtn;
 
@@ -81,7 +82,7 @@ public class AutorController implements Initializable
                 {
                     System.out.println("worker");
                     trebaladorBtn.setVisible(false);
-                    bibliotecaBtn.setVisible(false);
+
                     editioralBtn.setVisible(false);
                     genereBtn.setVisible(false);
                 }

@@ -112,7 +112,7 @@ public class LlibreController implements Initializable
                 {
                     System.out.println("worker");
                     trebaladorBtn.setVisible(false);
-                    bibliotecaBtn.setVisible(false);
+
                     editioralBtn.setVisible(false);
                     genereBtn.setVisible(false);
                 }
