@@ -93,15 +93,15 @@
                         </GridPane>
                         <TableView2 fx:id="taulaLlibres">
                             <columns>
-                                <TableColumn fx:id="isbnColum" text="ISBN"/>
-                                <TableColumn fx:id="titolColum" text="Titol"/>
-                                <TableColumn fx:id="autorColum" text="Autor"/>
-                                <TableColumn fx:id="editorColum" text="Editorial"/>
-                                <TableColumn fx:id="idiomaColum" text="Idioma"/>
-                                <TableColumn fx:id="genereColum" text="Genere"/>
-                                <TableColumn fx:id="edicioColum" text="Edicio"/>
-                                <TableColumn fx:id="dataPubliColum" text="DataPublicacio"/>
-                                <TableColumn fx:id="stockColum" text="Stock"/>
+                                <TableColumn fx:id="isbnColum" prefWidth="125.0" text="ISBN"/>
+                                <TableColumn fx:id="titolColum"  prefWidth="125.0" text="Titol"/>
+                                <TableColumn fx:id="autorColum" prefWidth="125.0" text="Autor"/>
+                                <TableColumn fx:id="editorColum" prefWidth="125.0"  text="Editorial"/>
+                                <TableColumn fx:id="idiomaColum" prefWidth="125.0" text="Idioma"/>
+                                <TableColumn fx:id="genereColum" prefWidth="125.0" text="Genere"/>
+                                <TableColumn fx:id="edicioColum" prefWidth="125.0" text="Edicio"/>
+                                <TableColumn fx:id="dataPubliColum" prefWidth="125.0" text="DataPublicacio"/>
+                                <TableColumn fx:id="stockColum" prefWidth="125.0"  text="Stock"/>
                             </columns>
                         </TableView2>
                     </children>
