@@ -164,7 +164,9 @@ public class LlibreController implements Initializable
                 String genere = cellData.getValue().getGenere().getNomGenere();
                 return new SimpleStringProperty(genere);
             });
-
+            edicioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
+            dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
+            stockColum.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
 
 
