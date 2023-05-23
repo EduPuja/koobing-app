@@ -135,6 +135,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="30dp"
+        android:onClick="onRegisterClick"
         android:text="@string/registre"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
