@@ -9,4 +9,11 @@
     <string name="book_title">Book Title</string>
     <string name="nom_biblioteca">Nom Biblioteca</string>
     <string name="reservar">Reservar</string>
+    <string name="registre">Registre</string>
+    <string name="dni">DNI</string>
+    <string name="nom">Nom</string>
+    <string name="cognom">Cognom</string>
+    <string name="data_naixament">Data Naixament</string>
+    <string name="correu">Correu</string>
+    <string name="contrassenya">Contrassenya</string>
 </resources>

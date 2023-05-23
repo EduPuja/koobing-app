@@ -13,7 +13,7 @@
         android:layout_marginStart="179dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="174dp"
-        android:text="Registre"
+        android:text="@string/registre"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -29,13 +29,14 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="DNI"
+        android:hint="@string/dni"
         android:inputType="text"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/registerLabel"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/nomField"
@@ -45,13 +46,14 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="Nom"
+        android:hint="@string/nom"
         android:inputType="text"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dniField" />
+        app:layout_constraintTop_toBottomOf="@+id/dniField"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/cognomField"
@@ -61,14 +63,15 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="Cognom"
+        android:hint="@string/cognom"
         android:inputType="text"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomField"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/dataNaixField"
@@ -78,13 +81,15 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="Data Naixament"
+        android:hint="@string/data_naixament"
         android:inputType="date"
         android:minHeight="48dp"
         android:textAlignment="center"
+        android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cognomField" />
+        app:layout_constraintTop_toBottomOf="@+id/cognomField"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/correuField"
@@ -94,13 +99,14 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="Correu "
+        android:hint="@string/correu"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataNaixField" />
+        app:layout_constraintTop_toBottomOf="@+id/dataNaixField"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/contrassenyaField"
@@ -110,14 +116,16 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="Contrassenya"
+        android:hint="@string/contrassenya"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textAlignment="center"
+        android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correuField"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/registerBtn"
@@ -127,11 +135,11 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="30dp"
-        android:text="Registre"
+        android:text="@string/registre"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contrassenyaField"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,DuplicateSpeakableTextCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
