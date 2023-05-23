@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import edu.pujadas.koobing_app.Models.Biblioteca;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Reserva;
@@ -52,15 +53,18 @@ public class CarouselAdapter extends PagerAdapter {
 
         TextView bookTitleTextView = view.findViewById(R.id.bookTitleTextView);
         Button readButton = view.findViewById(R.id.reservarBtn);
+        TextView libraryTitle = view.findViewById(R.id.libraryName);
 
 
 
         Llibre book = listBiblioLlibre.get(position).getBook();
+        Biblioteca biblio = listBiblioLlibre.get(position).getBiblioteca();
 
-        if(book !=null)
+        if(book !=null && biblio!=null)
         {
 
             bookTitleTextView.setText(book.getTitol());
+            libraryTitle.setText(biblio.getNomBiblioteca());
             readButton.setOnClickListener(v -> {
 
                 Reserva reserva = new Reserva();
@@ -70,7 +74,10 @@ public class CarouselAdapter extends PagerAdapter {
                 Usuari user = UsuarioSingleton.getInstance().getUsuario();
 
                 reserva.setUsuari(user);
-                reserva.setBiblioteca(listBiblioLlibre.get(position).getBiblioteca());
+
+
+
+                reserva.setBiblioteca(biblio);
                 Treballador administrador = new Treballador();
                 administrador.setId(1);
                 administrador.setNom("Admin");
