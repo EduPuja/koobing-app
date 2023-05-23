@@ -8,7 +8,7 @@ function setReserva(req, res) {
 
   console.log("Info reserva: ",reserva);
 
-  /*
+  
   const libroISBN = reserva.llibre.ISBN;
 
 
@@ -44,7 +44,7 @@ function setReserva(req, res) {
       res.status(200).json({ message: "Reserva insertada correctamente" });
     }
   });
-*/
+
 
 }
 
