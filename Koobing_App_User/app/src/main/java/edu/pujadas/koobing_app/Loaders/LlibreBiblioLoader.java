@@ -5,12 +5,16 @@ import androidx.annotation.NonNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
+import edu.pujadas.koobing_app.Models.Biblioteca;
+import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
@@ -36,6 +40,8 @@ public class LlibreBiblioLoader {
 
     public void obtenirLlibresBiblio(final ApiCallback<List<LlibreBiblioteca>> callback)
     {
+
+        ArrayList<LlibreBiblioteca> listLLibresBiblio = new ArrayList<LlibreBiblioteca>();
         String url = "http://192.168.0.33:3000/booksBiblio/";
         //String url = "http://192.168.16.254:3000/users/" + correo+"/";
 
@@ -75,31 +81,29 @@ public class LlibreBiblioLoader {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 LlibreBiblioteca llibreBiblioteca = new LlibreBiblioteca();
-
                                 llibreBiblioteca.setId(jsonObject.getInt("id"));
+
+                                //llibre objecte
+                                Llibre book = new Llibre();
+                                book.setISBN(jsonObject.getLong("ISBN"));
+                                book.setTitol(jsonObject.getString("titol"));
+
+                                //bilbioteca objecte
+                                Biblioteca biblioteca = new Biblioteca();
+                                biblioteca.setIdBiblioteca(jsonObject.getInt("id_biblioteca"));
+                                biblioteca.setNomBiblioteca(jsonObject.getString("nom_biblio"));
+
+                                llibreBiblioteca.setStock(jsonObject.getInt("stock"));
+                                llibreBiblioteca.setBiblioteca(biblioteca); // afegint la biblioteca
+                                llibreBiblioteca.setBook(book); //afegint el llibre
+
+
+                                listLLibresBiblio.add(llibreBiblioteca);
 
 
 
                             }
-                            /*Usuari usuari = new Usuari();
-                            usuari.setId(jsonObject.getInt("id_usuari"));
-                            usuari.setDni(jsonObject.getString("dni"));
-                            usuari.setNom(jsonObject.getString("nom"));
-                            usuari.setCognom(jsonObject.getString("cognom"));
-
-                            //datanaix
-                            String fecha = jsonObject.getString("data_naix");
-                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                            formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
-                            java.util.Date utilDate = formatoFecha.parse(fecha);
-                            Date sqlDate = new java.sql.Date(utilDate.getTime());
-                            usuari.setDataNaix(sqlDate);
-
-                            usuari.setEmail(jsonObject.getString("email"));
-                            usuari.setPassword(jsonObject.getString("password"));
-
-
-                            callback.onSuccess(usuari);*/
+                            callback.onSuccess(listLLibresBiblio);
 
 
                         }
