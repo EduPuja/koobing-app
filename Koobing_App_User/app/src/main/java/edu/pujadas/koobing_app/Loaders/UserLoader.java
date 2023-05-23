@@ -119,6 +119,9 @@ public class UserLoader {
                             Date sqlDate = new java.sql.Date(utilDate.getTime());
                             usuari.setDataNaix(sqlDate);
 
+                            usuari.setEmail(jsonObject.getString("email"));
+                            usuari.setPassword(jsonObject.getString("password"));
+
 
                         }
 
@@ -127,10 +130,7 @@ public class UserLoader {
                           e.printStackTrace();
                         }
 
-                        //Gson gson = new Gson();
-                        //Usuari usuariConvertit = gson.fromJson(jsonResponse, Usuari.class);
-
-                        //System.out.println("info user? :"+  usuariConvertit.getId());
+                     
                     }
 
                 }
