@@ -88,10 +88,12 @@ public class CarouselAdapter extends PagerAdapter {
                 reserva.setDataFI(dataFi);
 
                 //ip institut
-                //String url = "http://192.168.16.254:3000/reservarLlibre/";
+                String url = "http://192.168.16.254:3000/reservarLlibre/";
 
                 //ip home
-                String url = "http://192.168.0.33:3000/reservarLlibre/";
+                //String url = "http://192.168.0.33:3000/reservarLlibre/";
+
+
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(url)
