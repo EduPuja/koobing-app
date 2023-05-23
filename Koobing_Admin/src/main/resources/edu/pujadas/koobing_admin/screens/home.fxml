@@ -143,6 +143,7 @@
                                                 <TableColumn fx:id="titolColum" prefWidth="90.0" text="Titol" />
                                                 <TableColumn fx:id="versioColum" prefWidth="90.0" text="Versio" />
                                                 <TableColumn fx:id="dataPubliColum" prefWidth="95.0" text="Data Publi" />
+                                                <TableColumn fx:id="stockColum" prefWidth="90.0" text="Stock"/>
                                             </columns>
                                         </TableView2>
                                     </content>
