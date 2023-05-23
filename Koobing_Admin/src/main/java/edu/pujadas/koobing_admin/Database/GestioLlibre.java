@@ -49,9 +49,9 @@ public class GestioLlibre
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql = "UPDATE `llibre` SET `ISBN`='"+llibre.getISBN()+"',`id_autor`='"+llibre.getAutor().getIdAutor()+"'," +
-                    "`id_editor`='"+llibre.getEditor().getIdEditorial()+"',`id_idioma`='"+llibre.getIdioma().getIdIdioma()+"'," +
-                    "`id_genere`='"+llibre.getGenere().getIdGenere()+"',`titol`='"+llibre.getTitol()+"',`versio`='"+llibre.getVersio()+"',`data_publi`='"+llibre.getDataPubli()+"' WHERE ISBN='"+llibre.getISBN()+"'";
+           String sql = "UPDATE `llibre` `id_autor`='"+llibre.getAutor().getIdAutor()+"',`id_editor`='"+llibre.getEditor().getIdEditorial()+"'," +
+                   "`id_idioma`='"+llibre.getIdioma().getIdIdioma()+"',`id_genere`='"+llibre.getGenere().getIdGenere()+"',`titol`='"+llibre.getTitol()+"'," +
+                   "`versio`='"+llibre.getVersio()+"',`data_publi`='"+llibre.getDataPubli()+"',`stock`='"+llibre.getStock()+"' WHERE ="+llibre.getISBN();
 
             if(stat.executeUpdate(sql) ==1)
             {
