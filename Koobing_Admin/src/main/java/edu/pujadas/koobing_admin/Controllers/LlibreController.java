@@ -143,6 +143,27 @@ public class LlibreController implements Initializable
 
             isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
             titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
+            autorColum.setCellValueFactory(cellData->
+            {
+                String nomAutor =cellData.getValue().getAutor().getNomAutor();
+                return new SimpleStringProperty(nomAutor);
+            });
+            editorColum.setCellValueFactory(cellData->
+            {
+                String nomEditor = cellData.getValue().getEditor().getNomEditor();
+                return  new SimpleStringProperty(nomEditor);
+            });
+
+            idiomaColum.setCellValueFactory(cellData->
+            {
+                String idioma = cellData.getValue().getIdioma().getNomIdioma();
+                return new SimpleStringProperty(idioma);
+            });
+            genereColum.setCellValueFactory(cellData->
+            {
+                String genere = cellData.getValue().getGenere().getNomGenere();
+                return new SimpleStringProperty(genere);
+            });
 
 
 
