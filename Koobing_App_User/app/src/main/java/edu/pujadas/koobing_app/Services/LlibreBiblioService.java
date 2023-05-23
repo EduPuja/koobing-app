@@ -4,11 +4,12 @@ import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface LlibreBiblioService {
 
     @GET("/booksBiblio")
-    Call<List<LlibreBiblioteca>> getAllBooksBiblioteca();
+    Call<ResponseBody> getAllBooksBiblioteca();
 }
