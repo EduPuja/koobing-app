@@ -5,41 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
-import edu.pujadas.koobing_app.Loaders.LlibreBibliotecaLoader;
-import edu.pujadas.koobing_app.Models.Biblioteca;
+import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
-import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 
 
@@ -53,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView homeLabel;
 
     //loader per carrgear tota la info en un list
-    LlibreBibliotecaLoader bookBiblioLoader;
+    LlibreLoader bookBiblioLoader;
     ArrayList<LlibreBiblioteca> listBiblios = new ArrayList<LlibreBiblioteca>();
 
 
@@ -77,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         bottom_navigation.setSelectedItemId(R.id.navigation_home);
         setBottom_navigation();
 
-        loadBookInfoToViewPage();
+        //loadBookInfoToViewPage();
 
 
 
@@ -122,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void loadBookInfoToViewPage()
     {
-        bookBiblioLoader = new LlibreBibliotecaLoader();
+        bookBiblioLoader = new LlibreLoader();
 
         bookBiblioLoader.obtenerLibrosfinal(new ApiCallback<List<Llibre>>() {
             @Override
@@ -150,6 +129,12 @@ public class HomeActivity extends AppCompatActivity {
                 System.out.println("Failure Book " + throwable.getMessage());
             }
         });
+    }
+
+
+    public void loadInfoBook()
+    {
+
     }
 
 

@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Reserva;
 import edu.pujadas.koobing_app.Models.Treballador;
 import edu.pujadas.koobing_app.Models.Usuari;
@@ -34,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CarouselAdapter extends PagerAdapter {
 
-    private List<Llibre> books;
+    private List<LlibreBiblioteca> books;
 
     private LayoutInflater layoutInflater;
 
@@ -42,7 +43,7 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-    public CarouselAdapter(List<Llibre> books, LayoutInflater layoutInflater) {
+    public CarouselAdapter(List<LlibreBiblioteca> books, LayoutInflater layoutInflater) {
         this.books = books;
         this.layoutInflater = layoutInflater;
     }
@@ -58,7 +59,7 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-        Llibre book = books.get(position);
+        Llibre book = books.get(position).getBook();
 
         if(book !=null)
         {
