@@ -81,8 +81,8 @@ public class LlibreController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Book Screen");
         loadWorkerInfo();
-       // loadLlibreBiblioteca();
-       // loadLlibres();
+        onLoadInfoLlibre();
+
     }
     /**
      * Metode que carrega la info del treballador
@@ -127,6 +127,10 @@ public class LlibreController implements Initializable
         }
     }
 
+
+    /**
+     * Metode carregar la info del llibre
+     */
     public void onLoadInfoLlibre()
     {
         try
@@ -148,87 +152,6 @@ public class LlibreController implements Initializable
     }
 
 
-    /**
-     * Metode per carregar dades de llibre biblioteca la nova relacio
-     */
-   /* public void loadLlibreBiblioteca()
-    {
-        taulaBiblioLlibre.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                LlibreBiblio llibreSeleccionado = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
-
-                if (llibreSeleccionado != null) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informació del libro");
-                    alert.setHeaderText(null);
-                    alert.setContentText("ISBN: " + llibreSeleccionado.getBook().getISBN() +
-                            "\nTítul: " + llibreSeleccionado.getBook().getTitol() +
-                            "\nAutor: " + llibreSeleccionado.getBook().getAutor().getNomAutor() +
-
-                            "\nStock: " + llibreSeleccionado.getStock()
-                    +"\nEditorial: " + llibreSeleccionado.getBook().getEditor().getNomEditor()
-                            +"\nGenére: " + llibreSeleccionado.getBook().getGenere().getNomGenere()
-                    +"\nData de Publicació: " + llibreSeleccionado.getBook().getDataPubli());
-
-                    alert.showAndWait();
-                }
-            }
-        });
-
-
-        try
-        {
-            GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
-
-            listBiblioLLibre = gestioLlibreBiblioteca.consultarLlibresBiblioteca();
-
-            ObservableList<LlibreBiblio > observableList= FXCollections.observableArrayList(listBiblioLLibre);
-
-            taulaBiblioLlibre.setItems(observableList);
-
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            nomLlibre.setCellValueFactory(cellData ->{
-                Llibre book = cellData.getValue().getBook();
-                String nomLLibre =book.getTitol();
-                return new SimpleStringProperty(nomLLibre);
-            });
-
-            nomBiblioteca.setCellValueFactory(cellData ->{
-                Biblioteca biblioteca = cellData.getValue().getBiblioteca();
-                //int id = biblioteca.getIdBiblioteca();
-                String nombiblio = biblioteca.getNomBiblioteca();
-                return new SimpleStringProperty(nombiblio);
-                //return new SimpleIntegerProperty(id).asObject();
-            });
-
-            stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
-
-            GestioLlibre gestioLlibre  =  new GestioLlibre();
-            dsponibles.setCellValueFactory(cellData ->{
-                Llibre llibre =cellData.getValue().getBook();
-                Biblioteca bibilio = cellData.getValue().getBiblioteca();
-                int stock = cellData.getValue().getStock();
-
-                int numReserves =gestioLlibre.getNumReservasWithBiblio(llibre.getISBN(),bibilio.getIdBiblioteca());
-                if (numReserves != -1)
-                {
-                    int calcul = stock -numReserves;
-
-                    return new SimpleIntegerProperty(calcul).asObject();
-                }
-                else
-                {
-                    return new SimpleIntegerProperty(stock).asObject();
-                }
-            });
-
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }*/
 
 
 
@@ -279,11 +202,11 @@ public class LlibreController implements Initializable
             idiomaComboBox.setMaxWidth(tamany);
             ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
             genereComboBox.setMaxWidth(tamany);
-            ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
-            bibliotecaComboBox.setMaxWidth(tamany);
+            //ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
+          //  bibliotecaComboBox.setMaxWidth(tamany);
 
             //afegint la info dels autors
-            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox,bibliotecaComboBox);
+           // addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox,bibliotecaComboBox);
 
 
 
@@ -315,7 +238,7 @@ public class LlibreController implements Initializable
             gridPane.addRow(1, new Label("ISBN del llibre: "),isbnInput);
             gridPane.addRow(2,new Label("Digues el autor") ,autorComboBox);
             gridPane.addRow(3, new Label("Entra la Editorial: "), editorialComboBox);
-            gridPane.addRow(4, new Label("Biblioteca :"),bibliotecaComboBox);
+          //  gridPane.addRow(4, new Label("Biblioteca :"),bibliotecaComboBox);
             gridPane.addRow(5, new Label("Idioma: "),idiomaComboBox);
             gridPane.addRow(6, new Label("Genere: "),genereComboBox);
             gridPane.addRow(7, new Label("Edició: "),versionInput);
@@ -346,7 +269,7 @@ public class LlibreController implements Initializable
                 GestioEditorial gestioEditorial = new GestioEditorial();
                 GestioIdioma  gestioIdioma = new GestioIdioma();
                 GestioGenere gestioGenere = new GestioGenere();
-                GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+               // GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
 
 
                 //converters
@@ -382,8 +305,8 @@ public class LlibreController implements Initializable
 
 
                 //biblitoeca
-                int idBiblitoeca = converterBibblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
-                Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
+                //int idBiblitoeca = converterBibblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
+               // Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
 
 
                 //versio
@@ -394,7 +317,7 @@ public class LlibreController implements Initializable
                 llibre.setDataPubli(d);
 
                 //creating the bibliteca llibre
-                LlibreBiblio llibreBiblio =new LlibreBiblio();
+                /*LlibreBiblio llibreBiblio =new LlibreBiblio();
                 llibreBiblio.setBook(llibre);
                 llibreBiblio.setBiblioteca(b);
                 llibreBiblio.setStock(Integer.parseInt(stock.getText()));
@@ -425,7 +348,7 @@ public class LlibreController implements Initializable
                 }
                 else {
                     System.out.println("Vuit");
-                }
+                }*/
 
 
             }
@@ -455,7 +378,7 @@ public class LlibreController implements Initializable
         {
 
             GestioLlibre gestioLlibre = new GestioLlibre();
-            GestioLlibreBiblioteca gestioLlibreBiblioteca =new GestioLlibreBiblioteca();
+           // GestioLlibreBiblioteca gestioLlibreBiblioteca =new GestioLlibreBiblioteca();
             Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
 
             Alert wrong = new Alert(Alert.AlertType.ERROR);
@@ -469,10 +392,10 @@ public class LlibreController implements Initializable
             Optional<ButtonType> resultado = alerta.showAndWait();
             if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
 
-                LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
+                //LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
 
 
-                if (llibreBiblio != null) {
+                /* if (llibreBiblio != null) {
                     boolean isReserved = gestioLlibre.hayReservasActivas(llibreBiblio.getBook().getISBN());
 
                     if (isReserved) {
@@ -498,7 +421,7 @@ public class LlibreController implements Initializable
 
 
                     }
-                }
+                }*/
             }
         }
         catch (Exception e)
@@ -516,7 +439,7 @@ public class LlibreController implements Initializable
      */
    public void onModifyBook(ActionEvent event) throws Exception
     {
-        LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
+        /*LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
         if(llibreBiblio != null) {
             // Creacio dels Textes
 
@@ -679,7 +602,7 @@ public class LlibreController implements Initializable
 
 
             }
-        }
+        }*/
     }
 
 
@@ -690,9 +613,8 @@ public class LlibreController implements Initializable
      * @param editorialComboBox  Combobox de Editorials
      * @param idiomaComboBox     ComboBox de Idiomas
      * @param genereComboBox     Combobox de Generes
-     * @param bibliotecaComboBox
      */
-    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox, ComboBox<Genere> genereComboBox, ComboBox<Biblioteca> bibliotecaComboBox)
+    private void addDataAllComboBox(ComboBox<Autor> autorComboBox, ComboBox<Editorial> editorialComboBox, ComboBox<Idioma> idiomaComboBox, ComboBox<Genere> genereComboBox)
     {
         AutorStringConverter converterAutor = new AutorStringConverter();
         GestioAutor gestioAutor = new GestioAutor();
@@ -730,11 +652,11 @@ public class LlibreController implements Initializable
 
         //bibioteca
 
-        BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
+        /*BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
         GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
         ArrayList<Biblioteca> listBiblios = gestioBiblioteca.consultarBiblioteques();
         bibliotecaComboBox.getItems().addAll(listBiblios);
-        bibliotecaComboBox.setConverter(bibliotecaStringConverter);
+        bibliotecaComboBox.setConverter(bibliotecaStringConverter);*/
 
     }
 
