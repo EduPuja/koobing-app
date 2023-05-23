@@ -6,10 +6,10 @@ function setReserva(req, res) {
   console.log("\nCreando una reserva");
   const reserva = req.body;
 
-  //console.log("Datos de la reserva:", reserva);
+  console.log("Datos de la reserva:", reserva);
 
   // Acceder a los valores individuales del libro
-  const libroISBN = reserva.llibre.ISBN;
+  /*const libroISBN = reserva.llibre.ISBN;
   const libroTitulo = reserva.llibre.titol;
   const libroVersion = reserva.llibre.versio;
 
@@ -41,7 +41,7 @@ function setReserva(req, res) {
       console.log("Reserva insertada correctamente");
       res.status(200).json({ message: "Reserva insertada correctamente" });
     }
-  });
+  });*/
 
 
 }
