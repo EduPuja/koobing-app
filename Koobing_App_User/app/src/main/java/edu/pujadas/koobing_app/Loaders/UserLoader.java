@@ -6,7 +6,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
@@ -111,14 +115,18 @@ public class UserLoader {
                             usuari.setNom(jsonObject.getString("nom"));
                             usuari.setCognom(jsonObject.getString("cognom"));
 
+                            String fecha = jsonObject.getString("data_naix");
+                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                            formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
+                            Date dataNaix = formatoFecha.parse(fecha);
 
                             System.out.println("ID _USUARI; " +usuari.getId());
                             //String dataNaixString = jsonObject.getString("data_naix");
                         }
 
 
-                        catch (JSONException e) {
-                            throw new RuntimeException(e);
+                        catch (Exception e) {
+                          e.printStackTrace();
                         }
 
                         //Gson gson = new Gson();
