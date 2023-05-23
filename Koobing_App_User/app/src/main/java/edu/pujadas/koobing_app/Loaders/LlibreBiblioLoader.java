@@ -76,7 +76,7 @@ public class LlibreBiblioLoader {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 LlibreBiblioteca llibreBiblioteca = new LlibreBiblioteca();
 
-                                llibreBiblioteca.setId();
+                                llibreBiblioteca.setId(jsonObject.getInt("id"));
 
 
 
