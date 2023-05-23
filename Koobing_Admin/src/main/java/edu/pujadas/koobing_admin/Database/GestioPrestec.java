@@ -18,7 +18,7 @@ public class GestioPrestec
            /* String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`,`estat`) VALUES " +
                     "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataInici()+"','"+reserva.getDataFI()+"',"+reserva.isEstat()+") ";*/
 
-            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`, `estat`) VALUES ('"+ prestec.getUsuari().getId()+"','"+ prestec.getTreballador().getId()+"','"+ prestec.getBiblio().getIdBiblioteca()+"','"+ prestec.getLlibre().getISBN()+"','"+ prestec.getDataInici()+"','"+ prestec.getDataFI()+"','"+ prestec.isEstat()+"')";
+            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`, `estat`) VALUES ('"+ prestec.getUsuari().getId()+"','"+ prestec.getTreballador().getId()+"','"+ prestec.getBiblio()+"','"+ prestec.getLlibre().getISBN()+"','"+ prestec.getDataInici()+"','"+ prestec.getDataFI()+"','"+ prestec.isEstat()+"')";
 
             if(statement.executeUpdate(sql) == 1)
             {
@@ -38,11 +38,7 @@ public class GestioPrestec
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            /*String sql ="UPDATE `reserves` SET `id_usuari`='"+reserva.getUsuari().getId()+"',`id_treballador`='"+reserva.getTreballador().getId()+"'," +
-                    "`id_biblioteca`='"+reserva.getBiblio().getIdBiblioteca()+"',`ISBN`='"+reserva.getLlibre().getISBN()+"'," +
-                    "`data_inici`='"+reserva.getDataInici()+"',`data_fi`='"+reserva.getDataFI()+"' WHERE id_reserva=" +reserva.getIdReserva();*/
-            String sql = "UPDATE `reserves` SET `id_usuari`='" + prestec.getUsuari().getId() + "', `id_treballador`='" + prestec.getTreballador().getId() + "', `id_biblioteca`='" + prestec.getBiblio().getIdBiblioteca() + "', `ISBN`='" + prestec.getLlibre().getISBN() + "', " +
-                    "`data_inici`='" + prestec.getDataInici() + "', `data_fi`='" + prestec.getDataFI() + "', `estat` ='" + prestec.isEstat() + "' WHERE id_reserva =" + prestec.getIdReserva();
+            String sql ="";
 
 
             if(stat.executeUpdate(sql) == 1)
@@ -98,7 +94,7 @@ public class GestioPrestec
                 prestec.setIdReserva(rs.getInt("id_reserva"));
                 prestec.setUsuari(new GestioUsuari().findUserID(rs.getInt("id_usuari")));
                 prestec.setTreballador(new GestioTreballador().findTreballador(rs.getInt("id_treballador")));
-                prestec.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
+                //prestec.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
                 prestec.setLlibre(new GestioLlibre().findLLibre(rs.getLong("ISBN")));
                 prestec.setDataInici(rs.getDate("data_inici"));
                 prestec.setDataFI(rs.getDate("data_fi"));
@@ -133,7 +129,7 @@ public class GestioPrestec
                 prestec.setIdReserva(rs.getInt("id_reserva"));
                 prestec.setUsuari(new GestioUsuari().findUserID(rs.getInt("id_usuari")));
                 prestec.setTreballador(new GestioTreballador().findTreballador(rs.getInt("id_treballador")));
-                prestec.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
+                //prestec.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
                 prestec.setLlibre(new GestioLlibre().findLLibre(rs.getLong("ISBN")));
                 prestec.setDataInici(rs.getDate("data_inici"));
                 prestec.setDataFI(rs.getDate("data_fi"));
