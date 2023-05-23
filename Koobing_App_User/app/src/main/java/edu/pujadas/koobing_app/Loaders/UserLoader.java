@@ -1,14 +1,10 @@
 package edu.pujadas.koobing_app.Loaders;
 
-import com.google.gson.Gson;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -115,13 +111,15 @@ public class UserLoader {
                             usuari.setNom(jsonObject.getString("nom"));
                             usuari.setCognom(jsonObject.getString("cognom"));
 
+                            //datanaix
                             String fecha = jsonObject.getString("data_naix");
                             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                             formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
-                            Date dataNaix = formatoFecha.parse(fecha);
+                            java.util.Date utilDate = formatoFecha.parse(fecha);
+                            Date sqlDate = new java.sql.Date(utilDate.getTime());
+                            usuari.setDataNaix(sqlDate);
 
-                            System.out.println("ID _USUARI; " +usuari.getId());
-                            //String dataNaixString = jsonObject.getString("data_naix");
+
                         }
 
 
