@@ -277,7 +277,7 @@ public class LlibreController implements Initializable
                 EditorialStringConverter converterEditorial = new EditorialStringConverter();
                 GenereStringConverter converterGenere = new GenereStringConverter();
                 IdiomaStringConverter converterIdioma = new IdiomaStringConverter();
-                BibliotecaStringConverter converterBibblioteca = new BibliotecaStringConverter();
+                //BibliotecaStringConverter converterBibblioteca = new BibliotecaStringConverter();
 
 
                 //titol

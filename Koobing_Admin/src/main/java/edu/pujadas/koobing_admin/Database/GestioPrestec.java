@@ -18,8 +18,9 @@ public class GestioPrestec
            /* String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`,`estat`) VALUES " +
                     "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataInici()+"','"+reserva.getDataFI()+"',"+reserva.isEstat()+") ";*/
 
-            String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`, `estat`) VALUES ('"+ prestec.getUsuari().getId()+"','"+ prestec.getTreballador().getId()+"','"+ prestec.getBiblio()+"','"+ prestec.getLlibre().getISBN()+"','"+ prestec.getDataInici()+"','"+ prestec.getDataFI()+"','"+ prestec.isEstat()+"')";
+            //String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`, `estat`) VALUES ('"+ prestec.getUsuari().getId()+"','"+ prestec.getTreballador().getId()+"','"+ prestec.getBiblio()+"','"+ prestec.getLlibre().getISBN()+"','"+ prestec.getDataInici()+"','"+ prestec.getDataFI()+"','"+ prestec.isEstat()+"')";
 
+            String sql = "";
             if(statement.executeUpdate(sql) == 1)
             {
                 System.out.println("Reserva inserted successfuly!");
