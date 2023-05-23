@@ -91,18 +91,17 @@
                                 <Button fx:id="deleteBtn" onAction="#onDeleteBook" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
-                        <TableView2 fx:id="taulaBiblioLlibre">
+                        <TableView2 fx:id="taulaLlibres">
                             <columns>
-                                <TableColumn fx:id="id" prefWidth="90.0" text="ID" />
-                                <TableColumn fx:id="nomLlibre" prefWidth="200.0" text="ISBN" />
-                                <TableColumn fx:id="nomBiblioteca" prefWidth="200.0" text="BIBLIOTECA" />
-                                <TableColumn fx:id="stock" prefWidth="90.0" text="Stock" />
-                                <TableColumn fx:id="dsponibles" prefWidth="90.0" text="Disponibles"/>
-                                <!--<TableColumn fx:id="idiomaColum" prefWidth="90.0" text="Idioma" />
-                                <TableColumn fx:id="genereColum" prefWidth="90.0" text="Genere" />
-                                <TableColumn fx:id="titleColum" prefWidth="100.0" text="Títol" />
-                                <TableColumn fx:id="versionColum" prefWidth="100.0" text="Versio" />
-                                <TableColumn fx:id="dataPubliColum" prefWidth="100.0" text="DataPublicacio" />-->
+                                <TableColumn fx:id="isbnColum" text="ISBN"/>
+                                <TableColumn fx:id="titolColum" text="Titol"/>
+                                <TableColumn fx:id="autorColum" text="Autor"/>
+                                <TableColumn fx:id="editorColum" text="Editorial"/>
+                                <TableColumn fx:id="idiomaColum" text="Idioma"/>
+                                <TableColumn fx:id="genereColum" text="Genere"/>
+                                <TableColumn fx:id="edicioColum" text="Edicio"/>
+                                <TableColumn fx:id="dataPubliColum" text="DataPublicacio"/>
+                                <TableColumn fx:id="stockColum" text="Stock"/>
                             </columns>
                         </TableView2>
                     </children>
