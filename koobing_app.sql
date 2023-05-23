@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2023 a las 15:32:46
+-- Tiempo de generación: 23-05-2023 a las 15:57:03
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -71,7 +71,9 @@ CREATE TABLE `biblioteca` (
 
 INSERT INTO `biblioteca` (`id_biblioteca`, `id_poblacio`, `nom_biblio`, `latitud`, `longitud`) VALUES
 (1, 1, 'Biblioteca Municipal De Pals', 41.9851059, 3.1679355),
-(2, 3, 'Biblioteca Municipal Lluïsa Duran', 41.9621717, 3.0384543);
+(2, 3, 'Biblioteca Municipal Lluïsa Duran', 41.9621717, 3.0384543),
+(3, 6, 'Biblioteca Pública de Palafrugell', 41.8474072, 3.1277952),
+(4, 7, 'Biblioteca Lluís Barceló i Bou', 41.8484, 3.1291);
 
 -- --------------------------------------------------------
 
@@ -92,7 +94,9 @@ CREATE TABLE `biblio_llibre` (
 
 INSERT INTO `biblio_llibre` (`id`, `ISBN`, `id_biblioteca`, `stock`) VALUES
 (1, 12312312312312, 2, 50),
-(3, 12312312312312, 1, 15);
+(3, 12312312312312, 1, 15),
+(4, 9780807286005, 3, 15),
+(5, 9789510445365, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -182,7 +186,9 @@ CREATE TABLE `llibre` (
 --
 
 INSERT INTO `llibre` (`ISBN`, `id_autor`, `id_editor`, `id_idioma`, `id_genere`, `titol`, `versio`, `data_publi`) VALUES
-(765434231123, 8, 3, 1, 5, 'Hola', 1, '2023-05-02'),
+(765434231123, 8, 3, 1, 5, '1984', 1, '2023-05-02'),
+(9780807286005, 4, 4, 3, 6, 'Harry Potter y la piedra filosofal', 3, '2023-05-24'),
+(9789510445365, 2, 3, 4, 2, 'Cien años de soledad', 1, '2023-05-16'),
 (12312312312312, 2, 1, 2, 2, 'Les Tres Bassones', 1, '2023-05-10');
 
 -- --------------------------------------------------------
@@ -205,7 +211,9 @@ INSERT INTO `poblacio` (`id_poblacio`, `nom_poble`) VALUES
 (2, 'Begur'),
 (3, 'Calonge'),
 (4, 'Platja D\'Aro'),
-(5, 'Girona');
+(5, 'Girona'),
+(6, 'Palafrugell'),
+(7, 'Palamós');
 
 -- --------------------------------------------------------
 
@@ -380,7 +388,7 @@ ALTER TABLE `autor`
 -- AUTO_INCREMENT de la tabla `biblioteca`
 --
 ALTER TABLE `biblioteca`
-  MODIFY `id_biblioteca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_biblioteca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `biblio_llibre`
