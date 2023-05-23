@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
+import edu.pujadas.koobing_app.Loaders.LlibreBiblioLoader;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
@@ -33,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
 
     //loader per carrgear tota la info en un list
     LlibreLoader bookBiblioLoader;
+    LlibreBiblioLoader biblioLoader;
     ArrayList<LlibreBiblioteca> listBiblios = new ArrayList<LlibreBiblioteca>();
 
 
@@ -110,10 +112,10 @@ public class HomeActivity extends AppCompatActivity {
                 {
 
                     // Crea una instancia del adaptador personalizado
-                    carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
+                    //carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
 
                     // Asigna el adaptador al ViewPager
-                    viewPager.setAdapter(carouselAdapter);
+                    //viewPager.setAdapter(carouselAdapter);
 
 
                 }
@@ -134,7 +136,27 @@ public class HomeActivity extends AppCompatActivity {
 
     public void loadInfoBook()
     {
+        biblioLoader = new LlibreBiblioLoader();
+        biblioLoader.obtenirLlibresBiblio(new ApiCallback<List<LlibreBiblioteca>>() {
+            @Override
+            public void onSuccess(List<LlibreBiblioteca> data) {
+                if(data!= null && !data.isEmpty())
+                {
+                    carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
+                    viewPager.setAdapter(carouselAdapter);
+                }
+            }
 
+            @Override
+            public void onError(int statusCode) {
+                System.out.println("Error: "+ statusCode);
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                System.out.println("ON FAILURE LOADING BOOKG: " +throwable.getMessage());
+            }
+        });
     }
 
 
