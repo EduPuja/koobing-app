@@ -75,7 +75,7 @@ function setReserva(req, res) {
     reserva.idReserva,
     reserva.usuari.id,
     reserva.treballador.id,
-    /* Agrega aquí el valor correspondiente a id_biblioteca */,
+    reserva.id_biblioteca,
     libroISBN,
     reserva.dataInici,
     reserva.dataFI
