@@ -88,15 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         Toast.makeText(getApplicationContext(),"Benvingut: "+ usuari.getNom() +" "+usuari.getCognom(),Toast.LENGTH_SHORT).show();
                         //guardar la sessio del usuari en el shared preferences
-                        SharedPreferences sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        Gson gson = new Gson();
-                        // Convierte el objeto usuario a JSON
-                        String usuarioJson = gson.toJson(usuari);
 
-                        editor.putString("usuario", usuarioJson);
-
-                        editor.apply();
 
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);

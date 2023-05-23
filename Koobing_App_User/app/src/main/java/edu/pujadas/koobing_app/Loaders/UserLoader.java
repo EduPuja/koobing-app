@@ -123,6 +123,9 @@ public class UserLoader {
                             usuari.setPassword(jsonObject.getString("password"));
 
 
+                            callback.onSuccess(usuari);
+
+
                         }
 
 
@@ -130,7 +133,7 @@ public class UserLoader {
                           e.printStackTrace();
                         }
 
-                     
+
                     }
 
                 }
