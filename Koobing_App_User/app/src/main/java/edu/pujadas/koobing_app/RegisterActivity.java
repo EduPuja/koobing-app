@@ -47,6 +47,28 @@ public class RegisterActivity extends AppCompatActivity {
      */
     public void onRegisterClick(View v)
     {
+        //recollint tot el que ha entrat el usuari per text
+        String dni = dniField.getText().toString();
+        String nom = nomField.getText().toString();
+        String cognom = cognomField.getText().toString();
+        String dataText = dataNaixField.getText().toString();
+        String email = correuField.getText().toString();
+        String password = passwordField.getText().toString();
+
+
+        if(dni.isEmpty() || nom.isEmpty() || cognom.isEmpty()  || dataText.isEmpty() || email.isEmpty()|| password.isEmpty())
+        {
+            // posar els editext en error
+            String erroMsg = "Emplena aquest camps";
+
+            dniField.setError(erroMsg);
+            nomField.setError(erroMsg);
+            cognomField.setError(erroMsg);
+            dataNaixField.setError(erroMsg);
+            correuField.setError(erroMsg);
+            passwordField.setError(erroMsg);
+        }
+
 
 
 
