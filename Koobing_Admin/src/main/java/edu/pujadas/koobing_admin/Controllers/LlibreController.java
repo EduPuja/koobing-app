@@ -141,6 +141,9 @@ public class LlibreController implements Initializable
             ObservableList<Llibre> observableList = FXCollections.observableArrayList(listLlibres);
             taulaLlibres.setItems(observableList);
 
+            isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+            titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
+
 
 
 
