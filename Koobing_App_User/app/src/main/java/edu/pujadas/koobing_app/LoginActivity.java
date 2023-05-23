@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    System.out.println("Failure");
+                    System.out.println("Failure LOGIN:" +throwable.getMessage());
                     Toast.makeText(getApplicationContext(),"Error al servidor" ,Toast.LENGTH_SHORT).show();
                 }
             });
