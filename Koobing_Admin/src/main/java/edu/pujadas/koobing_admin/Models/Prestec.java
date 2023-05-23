@@ -7,7 +7,7 @@ public class Prestec
     int idReserva;
     Usuari usuari;
     Treballador treballador;
-    Biblioteca biblio;
+
     Llibre llibre;
     Date dataInici;
     Date dataFI;
@@ -18,12 +18,12 @@ public class Prestec
     {
     }
 
-    public Prestec(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, Date dataInici, Date dataFi)
+    public Prestec(int idReserva, Usuari usuari, Treballador treballador, Llibre llibre, Date dataInici, Date dataFi)
     {
         this.idReserva = idReserva;
         this.usuari = usuari;
         this.treballador = treballador;
-        this.biblio = biblio;
+
         this.llibre = llibre;
         this.dataInici = dataInici;
         this.dataFI = dataFi;
@@ -59,15 +59,9 @@ public class Prestec
         this.treballador = treballador;
     }
 
-    public Biblioteca getBiblio()
-    {
-        return biblio;
-    }
 
-    public void setBiblio(Biblioteca biblio)
-    {
-        this.biblio = biblio;
-    }
+
+
 
     public Llibre getLlibre()
     {
