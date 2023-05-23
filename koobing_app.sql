@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2023 a las 15:46:25
+-- Tiempo de generación: 23-05-2023 a las 15:32:46
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -220,8 +220,16 @@ CREATE TABLE `reserves` (
   `id_biblioteca` int(11) NOT NULL,
   `ISBN` bigint(13) NOT NULL,
   `data_inici` date NOT NULL,
-  `data_fi` date NOT NULL
+  `data_fi` date NOT NULL,
+  `estat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reserves`
+--
+
+INSERT INTO `reserves` (`id_reserva`, `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`, `estat`) VALUES
+(12, 12, 1, 1, 12312312312312, '2023-05-23', '2023-06-23', 0);
 
 -- --------------------------------------------------------
 
@@ -402,7 +410,7 @@ ALTER TABLE `idioma`
 -- AUTO_INCREMENT de la tabla `reserves`
 --
 ALTER TABLE `reserves`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `treballador`
