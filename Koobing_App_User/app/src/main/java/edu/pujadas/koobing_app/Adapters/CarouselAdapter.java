@@ -1,7 +1,5 @@
 package edu.pujadas.koobing_app.Adapters;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
-
-import com.google.gson.Gson;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -35,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CarouselAdapter extends PagerAdapter {
 
-    private List<LlibreBiblioteca> books;
+    private List<LlibreBiblioteca> listBiblioLlibre;
 
     private LayoutInflater layoutInflater;
 
@@ -43,8 +39,8 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-    public CarouselAdapter(List<LlibreBiblioteca> books, LayoutInflater layoutInflater) {
-        this.books = books;
+    public CarouselAdapter(List<LlibreBiblioteca> listBiblioLlibre, LayoutInflater layoutInflater) {
+        this.listBiblioLlibre = listBiblioLlibre;
         this.layoutInflater = layoutInflater;
     }
 
@@ -59,7 +55,7 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-        Llibre book = books.get(position).getBook();
+        Llibre book = listBiblioLlibre.get(position).getBook();
 
         if(book !=null)
         {
@@ -74,7 +70,7 @@ public class CarouselAdapter extends PagerAdapter {
                 Usuari user = UsuarioSingleton.getInstance().getUsuario();
 
                 reserva.setUsuari(user);
-
+                reserva.setBiblioteca(listBiblioLlibre.get(position).getBiblioteca());
                 Treballador administrador = new Treballador();
                 administrador.setId(1);
                 administrador.setNom("Admin");
@@ -160,7 +156,7 @@ public class CarouselAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return books.size();
+        return listBiblioLlibre.size();
     }
 
     @Override
