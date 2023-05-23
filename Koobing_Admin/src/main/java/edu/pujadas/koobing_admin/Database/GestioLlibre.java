@@ -361,7 +361,7 @@ public class GestioLlibre
                 }
                 else
                 {
-                    
+
                 }
             }
             con.desconectar();
