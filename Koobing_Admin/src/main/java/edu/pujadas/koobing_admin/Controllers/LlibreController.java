@@ -37,6 +37,7 @@ public class LlibreController implements Initializable
 
     public ImageView avatarWorker;
 
+    //navbar
     public Button homeBtn;
     public Button usuariBtn;
     public Button trebaladorBtn;
@@ -48,15 +49,20 @@ public class LlibreController implements Initializable
     public Button editioralBtn;
     public Button reservaBtn;
 
-    // taula biblioteca llibre
+    // taula llibre
 
-    ArrayList<LlibreBiblio> listBiblioLLibre = new ArrayList<LlibreBiblio>();
-    public TableView2<LlibreBiblio> taulaBiblioLlibre;
-    public TableColumn<LlibreBiblio,Integer> id;
-    public TableColumn<LlibreBiblio,String> nomLlibre;
-    public TableColumn<LlibreBiblio,String > nomBiblioteca;
-    public TableColumn<LlibreBiblio,Integer> stock;
-    public TableColumn<LlibreBiblio,Integer> dsponibles;
+
+    public TableView2<Llibre> taulaLlibres;
+    public TableColumn<Llibre,Integer> isbnColum;
+    public TableColumn<Llibre,String> titolColum;
+    public TableColumn<Llibre,String> autorColum;
+    public TableColumn <Llibre,String>editorColum;
+    public TableColumn<Llibre,String> idiomaColum;
+    public TableColumn<Llibre,String> genereColum;
+    public TableColumn<Llibre,Integer> edicioColum;
+    public TableColumn<Llibre,Date> dataPubliColum;
+    public TableColumn <Llibre,Integer>stockColum;
+
 
 
     // llibre
@@ -75,7 +81,7 @@ public class LlibreController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Book Screen");
         loadWorkerInfo();
-        loadLlibreBiblioteca();
+       // loadLlibreBiblioteca();
        // loadLlibres();
     }
     /**
@@ -121,12 +127,31 @@ public class LlibreController implements Initializable
         }
     }
 
+    public void onLoadInfoLlibre()
+    {
+        try
+        {
+            GestioLlibre gestioLlibre = new GestioLlibre();
+            listLlibres = gestioLlibre.consultarLlibres();
+
+            ObservableList<Llibre> observableList = FXCollections.observableArrayList(listLlibres);
+            taulaLlibres.setItems(observableList);
+
+
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error loading book info : "+ e.getMessage());
+        }
+    }
 
 
     /**
      * Metode per carregar dades de llibre biblioteca la nova relacio
      */
-    public void loadLlibreBiblioteca()
+   /* public void loadLlibreBiblioteca()
     {
         taulaBiblioLlibre.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
@@ -203,7 +228,7 @@ public class LlibreController implements Initializable
         {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 
