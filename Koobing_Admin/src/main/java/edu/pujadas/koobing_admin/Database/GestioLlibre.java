@@ -154,6 +154,8 @@ public class GestioLlibre
                 llibre.setVersio(rs.getInt("versio"));
                 llibre.setDataPubli(rs.getDate("data_publi"));
 
+                llibre.setStock(rs.getInt("stock"));
+
                 //afegint tots els llibres al arraylist
                 llibresList.add(llibre);
             }
