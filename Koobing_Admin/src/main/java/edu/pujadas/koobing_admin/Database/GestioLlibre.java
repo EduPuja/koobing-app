@@ -13,17 +13,17 @@ public class GestioLlibre
 
     /**
      * Metode per crear un llibre
-     * @param l Objecte llibre
+     * @param llibre Objecte llibre
      */
-    public void crearLlibre(Llibre l)
+    public void crearLlibre(Llibre llibre)
     {
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
 
-            String sql = "INSERT INTO `llibre`(`ISBN`, `id_autor`, `id_editor`, `id_idioma`, `id_genere`, `titol`, `versio`, `data_publi`) " +
-                    "VALUES ('"+l.getISBN()+"','"+l.getAutor().getIdAutor()+"','"+l.getEditor().getIdEditorial()+"','"+l.getIdioma().getIdIdioma()+"','"+l.getGenere().getIdGenere()+"','"+l.getTitol()+"','"+l.getVersio()+"','"+l.getDataPubli()+"')";
+            String sql = "INSERT INTO `llibre`(`ISBN`, `id_autor`, `id_editor`, `id_idioma`, `id_genere`, `titol`, `versio`, `data_publi`, `stock`) " +
+                    "VALUES ('"+llibre.getISBN()+"','"+llibre.getAutor().getIdAutor()+"','"+llibre.getEditor().getIdEditorial()+"','"+llibre.getIdioma().getIdIdioma()+"','"+llibre.getGenere().getIdGenere()+"','"+llibre.getTitol()+"','"+llibre.getVersio()+"','"+llibre.getDataPubli()+"','"+llibre.getStock()+"')";
 
             if(stat.executeUpdate(sql) ==1)
             {

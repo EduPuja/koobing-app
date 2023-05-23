@@ -228,12 +228,9 @@ public class LlibreController implements Initializable
             idiomaComboBox.setMaxWidth(tamany);
             ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
             genereComboBox.setMaxWidth(tamany);
-            //ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
-          //  bibliotecaComboBox.setMaxWidth(tamany);
 
-            //afegint la info dels autors
-           // addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox,bibliotecaComboBox);
 
+            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
 
 
             //  Creacio dels Textes
@@ -252,6 +249,7 @@ public class LlibreController implements Initializable
 
             //data
             DatePicker dataPubliInput = new DatePicker();
+
             dataPubliInput.setMaxHeight(tamany);
 
             //crear el gridpane per posar els 2 camps a l'hora
@@ -264,12 +262,11 @@ public class LlibreController implements Initializable
             gridPane.addRow(1, new Label("ISBN del llibre: "),isbnInput);
             gridPane.addRow(2,new Label("Digues el autor") ,autorComboBox);
             gridPane.addRow(3, new Label("Entra la Editorial: "), editorialComboBox);
-          //  gridPane.addRow(4, new Label("Biblioteca :"),bibliotecaComboBox);
-            gridPane.addRow(5, new Label("Idioma: "),idiomaComboBox);
-            gridPane.addRow(6, new Label("Genere: "),genereComboBox);
-            gridPane.addRow(7, new Label("Edició: "),versionInput);
-            gridPane.addRow(8, new Label("Data Publi "),dataPubliInput);
-            gridPane.addRow(9, new Label("Digues el stock: "),stock);
+            gridPane.addRow(4, new Label("Idioma: "),idiomaComboBox);
+            gridPane.addRow(5, new Label("Genere: "),genereComboBox);
+            gridPane.addRow(6, new Label("Edició: "),versionInput);
+            gridPane.addRow(7, new Label("Data Publi "),dataPubliInput);
+            gridPane.addRow(8, new Label("Digues el stock: "),stock);
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
@@ -295,7 +292,7 @@ public class LlibreController implements Initializable
                 GestioEditorial gestioEditorial = new GestioEditorial();
                 GestioIdioma  gestioIdioma = new GestioIdioma();
                 GestioGenere gestioGenere = new GestioGenere();
-               // GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+
 
 
                 //converters
@@ -303,7 +300,7 @@ public class LlibreController implements Initializable
                 EditorialStringConverter converterEditorial = new EditorialStringConverter();
                 GenereStringConverter converterGenere = new GenereStringConverter();
                 IdiomaStringConverter converterIdioma = new IdiomaStringConverter();
-                //BibliotecaStringConverter converterBibblioteca = new BibliotecaStringConverter();
+
 
 
                 //titol
@@ -330,11 +327,6 @@ public class LlibreController implements Initializable
                 llibre.setIdioma(i);
 
 
-                //biblitoeca
-                //int idBiblitoeca = converterBibblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
-               // Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
-
-
                 //versio
                 llibre.setVersio(Integer.parseInt(versionInput.getText()));
                 //data
@@ -342,39 +334,10 @@ public class LlibreController implements Initializable
                 Date d = Date.valueOf(data);
                 llibre.setDataPubli(d);
 
-                //creating the bibliteca llibre
-                /*LlibreBiblio llibreBiblio =new LlibreBiblio();
-                llibreBiblio.setBook(llibre);
-                llibreBiblio.setBiblioteca(b);
-                llibreBiblio.setStock(Integer.parseInt(stock.getText()));
 
-                if(llibreBiblio != null  && llibre!=null)
-                {
-                    //update memory
-                    ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
-                    items.add(llibreBiblio);
+                GestioLlibre gestioLlibre = new GestioLlibre();
 
-
-
-                    // update the table
-                    GestioLlibre gestioLlibre = new GestioLlibre();
-                    gestioLlibre.crearLlibre(llibre);
-
-
-                    //update the table biblio_llibre
-
-                    GestioLlibreBiblioteca gestioLlibreBiblioteca =new GestioLlibreBiblioteca();
-                    gestioLlibreBiblioteca.crearLlibreBiblioteca(llibreBiblio);
-
-
-
-
-                    //actualiar la pagina
-                    switchToLlibre(event);
-                }
-                else {
-                    System.out.println("Vuit");
-                }*/
+                gestioLlibre.crearLlibre(llibre);
 
 
             }
