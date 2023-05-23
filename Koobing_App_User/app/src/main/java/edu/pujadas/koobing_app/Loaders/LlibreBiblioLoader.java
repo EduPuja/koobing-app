@@ -42,8 +42,8 @@ public class LlibreBiblioLoader {
     {
 
         ArrayList<LlibreBiblioteca> listLLibresBiblio = new ArrayList<LlibreBiblioteca>();
-        String url = "http://192.168.0.33:3000/booksBiblio/";
-        //String url = "http://192.168.16.254:3000/users/" + correo+"/";
+        //String url = "http://192.168.0.33:3000/booksBiblio/";
+        String url = "http://192.168.16.254:3000/booksBiblio/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)

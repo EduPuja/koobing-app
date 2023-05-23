@@ -15,8 +15,8 @@ public class BibilotecaLoader {
 
     private BibliotecaService serviBiblioteca;
 
-    private String url = "http://192.168.0.33:3000/biblioteques/";
- //  private String url = "http://192.168.16.254:3000/biblioteques/";
+   // private String url = "http://192.168.0.33:3000/biblioteques/";
+  private String url = "http://192.168.16.254:3000/biblioteques/";
 
     public BibilotecaLoader() {
         Retrofit retrofit = new Retrofit.Builder()
