@@ -1,9 +1,8 @@
 package edu.pujadas.koobing_admin.Models;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
-public class Reserva
+public class Prestec
 {
     int idReserva;
     Usuari usuari;
@@ -15,11 +14,11 @@ public class Reserva
 
     boolean estat;
 
-    public Reserva()
+    public Prestec()
     {
     }
 
-    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, Date dataInici, Date dataFi)
+    public Prestec(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblio, Llibre llibre, Date dataInici, Date dataFi)
     {
         this.idReserva = idReserva;
         this.usuari = usuari;

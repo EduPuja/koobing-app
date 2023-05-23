@@ -45,20 +45,20 @@ public class PrestecController implements Initializable
     public ImageView avatarWorker;
 
     // taula
-    public TableView2<Reserva> taulaReserves;
+    public TableView2<Prestec> taulaReserves;
 
-    public TableColumn<Reserva,String> nomUserColum;
-    public TableColumn<Reserva,Integer> idReservaColum;
-    public TableColumn<Reserva,String> nomWorkerColum;
-    public TableColumn<Reserva,String> nomBiblioColum;
-    public TableColumn<Reserva,String> bookTitleColum;
-    public TableColumn<Reserva, Date> dataInici;
-    public TableColumn<Reserva,Date> dataFi;
-
-
+    public TableColumn<Prestec,String> nomUserColum;
+    public TableColumn<Prestec,Integer> idReservaColum;
+    public TableColumn<Prestec,String> nomWorkerColum;
+    public TableColumn<Prestec,String> nomBiblioColum;
+    public TableColumn<Prestec,String> bookTitleColum;
+    public TableColumn<Prestec, Date> dataInici;
+    public TableColumn<Prestec,Date> dataFi;
 
 
-    ArrayList<Reserva> listReserves = new ArrayList<>();
+
+
+    ArrayList<Prestec> listReserves = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -121,11 +121,11 @@ public class PrestecController implements Initializable
         {
             GestioPrestec gestioPrestec = new GestioPrestec();
             listReserves = gestioPrestec.consultarReserves();
-            ObservableList<Reserva> observableListReserva = FXCollections.observableArrayList(
+            ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
                     listReserves
             );
             //afegint el observable list en el tableview
-            taulaReserves.setItems(observableListReserva);
+            taulaReserves.setItems(observableListPrestec);
             idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
             nomUserColum.setCellValueFactory(cellData ->{
                 Usuari usuari = cellData.getValue().getUsuari();
@@ -253,7 +253,7 @@ public class PrestecController implements Initializable
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                Reserva prestec = new Reserva();
+                Prestec prestec = new Prestec();
                 prestec.setBiblio(bibliotecaComboBox.getValue());
                 prestec.setTreballador(worker);
                 prestec.setEstat(false);
@@ -272,8 +272,8 @@ public class PrestecController implements Initializable
 
                         //afegir a memoria
                         listReserves.add(prestec);
-                        ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
-                        taulaReserves.setItems(reservaObservableList);
+                        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+                        taulaReserves.setItems(prestecObservableList);
 
                         //base de dades
                     /*GestioPrestec gestioPrestec = new GestioPrestec();
@@ -286,8 +286,8 @@ public class PrestecController implements Initializable
 
                         //afegir a memoria
                         listReserves.add(prestec);
-                        ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
-                        taulaReserves.setItems(reservaObservableList);
+                        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+                        taulaReserves.setItems(prestecObservableList);
 
                         //base de dades
                     /*GestioPrestec gestioPrestec = new GestioPrestec();
@@ -300,8 +300,8 @@ public class PrestecController implements Initializable
 
                         //afegir a memoria
                         listReserves.add(prestec);
-                        ObservableList<Reserva> reservaObservableList= FXCollections.observableArrayList(listReserves);
-                        taulaReserves.setItems(reservaObservableList);
+                        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+                        taulaReserves.setItems(prestecObservableList);
 
 
                         //base de dades
@@ -366,8 +366,8 @@ public class PrestecController implements Initializable
 
 
             if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-                Reserva reserva =taulaReserves.getSelectionModel().getSelectedItem();
-                if(reserva!=null)
+                Prestec prestec =taulaReserves.getSelectionModel().getSelectedItem();
+                if(prestec !=null)
                 {
                     Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
                     sucessAlert.setTitle("Success!");
@@ -377,8 +377,8 @@ public class PrestecController implements Initializable
 
 
                     //delte to memory
-                    ObservableList<Reserva> itemsReserves = taulaReserves.getItems();
-                    itemsReserves.remove(reserva);
+                    ObservableList<Prestec> itemsReserves = taulaReserves.getItems();
+                    itemsReserves.remove(prestec);
 
 
 
@@ -395,9 +395,9 @@ public class PrestecController implements Initializable
     public void onModifyReserva(ActionEvent event)
     {
         try {
-            Reserva reserva = taulaReserves.getSelectionModel().getSelectedItem();
+            Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
             Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
-            if(reserva!=null){
+            if(prestec !=null){
                 ComboBox<Usuari> userComboBox= new ComboBox<>();
                 ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
                 ComboBox<Llibre> llibreComboBox= new ComboBox<>();
@@ -440,8 +440,8 @@ public class PrestecController implements Initializable
 
 
 
-                DatePicker datePickerStart = new DatePicker(reserva.getDataInici().toLocalDate());
-                DatePicker datePickerEnd = new DatePicker(reserva.getDataFI().toLocalDate());
+                DatePicker datePickerStart = new DatePicker(prestec.getDataInici().toLocalDate());
+                DatePicker datePickerEnd = new DatePicker(prestec.getDataFI().toLocalDate());
                 CheckBox isRetornart = new CheckBox();
 
 
@@ -457,11 +457,11 @@ public class PrestecController implements Initializable
 
 
                 gridPane.addRow(0,new Label("Treballdor Actual: "),new Label(worker.getNom() +" "+ worker.getCognom()));
-                gridPane.addRow(1,new Label("Usuari Actual: "),new Label(reserva.getUsuari().getNom() +" " +reserva.getUsuari().getCognom()));
+                gridPane.addRow(1,new Label("Usuari Actual: "),new Label(prestec.getUsuari().getNom() +" " + prestec.getUsuari().getCognom()));
                 gridPane.addRow(2,new Label("Digues el nou usuari ") ,userComboBox);
-                gridPane.addRow(3,new Label("Biblioteca Actual :") ,new Label(reserva.getBiblio().getNomBiblioteca()));
+                gridPane.addRow(3,new Label("Biblioteca Actual :") ,new Label(prestec.getBiblio().getNomBiblioteca()));
                 gridPane.addRow(4, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
-                gridPane.addRow(5,new Label("Titol del llibre actual: ") ,new Label(reserva.getLlibre().getTitol()));
+                gridPane.addRow(5,new Label("Titol del llibre actual: ") ,new Label(prestec.getLlibre().getTitol()));
                 gridPane.addRow(6, new Label("Digues el llibre:  "),llibreComboBox);
                 gridPane.addRow(7, new Label("Data de inicio"), datePickerStart);
                 gridPane.addRow(8, new Label("Data de fin"), datePickerEnd);
@@ -483,17 +483,17 @@ public class PrestecController implements Initializable
                     if(bibliotecaComboBox.getSelectionModel().getSelectedItem() != null && userComboBox.getSelectionModel().getSelectedItem() != null && llibreComboBox.getSelectionModel().getSelectedItem() != null)
                     {
                         System.out.println("Actualizat");
-                        reserva.setBiblio(bibliotecaComboBox.getValue());
-                        reserva.setTreballador(worker);
-                        reserva.setEstat(false);
-                        reserva.setUsuari(userComboBox.getValue());
-                        reserva.setLlibre(llibreComboBox.getValue());
+                        prestec.setBiblio(bibliotecaComboBox.getValue());
+                        prestec.setTreballador(worker);
+                        prestec.setEstat(false);
+                        prestec.setUsuari(userComboBox.getValue());
+                        prestec.setLlibre(llibreComboBox.getValue());
 
                         Date dateInici = Date.valueOf(datePickerStart.getValue());
-                        reserva.setDataInici(dateInici);
+                        prestec.setDataInici(dateInici);
 
                         Date dataFi = Date.valueOf(datePickerEnd.getValue());
-                        reserva.setDataFI(dataFi);
+                        prestec.setDataFI(dataFi);
 
 
                         //actualizar memoria
@@ -503,7 +503,7 @@ public class PrestecController implements Initializable
                         //actualizar base de dades
 
                         GestioPrestec gestioPrestec = new GestioPrestec();
-                        gestioPrestec.modificarReserva(reserva);
+                        gestioPrestec.modificarReserva(prestec);
                     }
 
                     else
@@ -578,7 +578,7 @@ public class PrestecController implements Initializable
         {
             Alert wrong = new Alert(Alert.AlertType.ERROR);
             Alert success = new Alert(Alert.AlertType.INFORMATION);
-            Reserva res  = taulaReserves.getSelectionModel().getSelectedItem();
+            Prestec res  = taulaReserves.getSelectionModel().getSelectedItem();
             if(res != null)
             {
                 GestioPrestec gestioPrestec = new GestioPrestec();

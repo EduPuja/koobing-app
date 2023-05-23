@@ -1,7 +1,5 @@
 package edu.pujadas.koobing_admin.Controllers;
 
-import edu.pujadas.koobing_admin.Database.GestioBiblioteca;
-import edu.pujadas.koobing_admin.Database.GestioPoblacio;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.PoblacioStringConverter;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;

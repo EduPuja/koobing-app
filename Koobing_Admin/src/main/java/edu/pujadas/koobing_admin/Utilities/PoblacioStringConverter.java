@@ -1,6 +1,5 @@
 package edu.pujadas.koobing_admin.Utilities;
 
-import edu.pujadas.koobing_admin.Models.Poblacio;
 import javafx.util.StringConverter;
 
 public class PoblacioStringConverter extends StringConverter<Poblacio> {
