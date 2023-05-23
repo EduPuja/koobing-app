@@ -45,12 +45,12 @@ public class HomeController implements Initializable
     public Button trebaladorBtn;
     public Button llibreBtn;
     public Button autorBtn;
-    public Button bibliotecaBtn;
+
     public Button idiomaBtn;
     public Button genereBtn;
     public Button editioralBtn;
     public Button reservaBtn;
-    public VBox container = new VBox();
+
 
     public ImageView logo;
 
@@ -98,6 +98,7 @@ public class HomeController implements Initializable
     public TableColumn <Llibre,String>titolColum;
     public TableColumn <Llibre,Integer>versioColum;
     public TableColumn <Llibre, Date>dataPubliColum;
+    public TableColumn <Llibre,Integer> stockColum;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -160,7 +161,6 @@ public class HomeController implements Initializable
                     {
                         System.out.println("worker");
                         trebaladorBtn.setVisible(false);
-                        bibliotecaBtn.setVisible(false);
                         editioralBtn.setVisible(false);
                         genereBtn.setVisible(false);
 
@@ -288,6 +288,8 @@ public class HomeController implements Initializable
             titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
             versioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
             dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
+            stockColum.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
 
 
 
