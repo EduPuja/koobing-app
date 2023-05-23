@@ -319,47 +319,58 @@ public class GestioLlibre
 
 
     /**
-     * Metode per comprobar si hi ha alguna reserva activa
-     * @param ISBN
-     * @return
+     * Metode per comprovar el estat de la reserva del llibre
+     * @param ISBN numero de llibre
+     * @return retrna -1 en cas d'error , 1 en cas de que "no tornat" , 2
      */
-    public boolean hayReservasActivas(long ISBN) {
+    public int getEstadoLlibre(long ISBN) {
         boolean existe = false;
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE ISBN='"+ISBN+"'";
+            String sql = "SELECT id_estat from reserva where  ISBN = " + ISBN;
             ResultSet result = stat.executeQuery(sql);
-            if(result.next()) {
-                int count = result.getInt("count");
-                if(count > 0) {
-                    existe = true;
-                }
-            }
-            con.desconectar();
-        } catch(Exception e) {
-            System.out.println("Error al comprobar si el libro existe: " + e.getMessage());
-        }
-        return existe;
-    }
+            if(result.next()  ) {
+                int valorEstat = result.getInt("id_estat");
 
-    public int getNumReservasWithBiblio(long ISBN,int idBiblio)
-    {
-        try {
-            ConnexioMYSQL con = new ConnexioMYSQL();
-            Statement stat = con.conectar();
-            String sql = "SELECT COUNT(*) AS count FROM reserves WHERE ISBN = '" + ISBN + "' AND id_biblioteca = " + idBiblio + " AND estat = 0";
-            ResultSet result = stat.executeQuery(sql);
-            if(result.next()) {
-                int count = result.getInt("count");
-                if(count > 0) {
-                    return count;
+                if(valorEstat == 1)
+                {
+                    // esta reservat :
+                    // Este estado indicaría que el libro ha sido reservado por el usuario, pero aún no se ha prestado.
+                    System.out.println("Estat Llibre : RESERVAT");
+                    return 1;
+                }
+                else if(valorEstat == 2)
+                {
+                    // CANCELAT . EL usuario o admin ha cancelat la reserva del llibre
+                    System.out.println("Estat llibre: Cancelat ");
+                    return 2;
+                }
+                else if( valorEstat == 3)
+                {
+                    // EN PRESTEC . Resulta que l'usuari  té el llibre
+                    System.out.println("Estat llibre: En prestec ");
+                    return 3;
+                }
+                else if(valorEstat ==4)
+                {
+                    // retornats
+
+                    System.out.println("Estat llibre: RETORNAT");
+                    return 4;
+                }
+                else
+                {
+                    
                 }
             }
             con.desconectar();
         } catch(Exception e) {
             System.out.println("Error al comprobar si el libro existe: " + e.getMessage());
+
         }
         return -1;
     }
+
+
 }
