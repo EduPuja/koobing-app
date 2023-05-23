@@ -137,11 +137,7 @@ public class PrestecController implements Initializable
                 String nom = treballador.getNom();
                 return new SimpleStringProperty(nom);
             });
-            nomBiblioColum.setCellValueFactory(cellData ->{
-                Biblioteca bilbio = cellData.getValue().getBiblio();
-                String nomBiblio = bilbio.getNomBiblioteca();
-                return new SimpleStringProperty(nomBiblio);
-            });
+
             bookTitleColum.setCellValueFactory(cellData ->{
                 Llibre book = cellData.getValue().getLlibre();
                 String titol = book.getTitol();
@@ -183,7 +179,7 @@ public class PrestecController implements Initializable
 
             ComboBox<Llibre> llibreComboBox = new ComboBox<>();
             llibreComboBox.setDisable(true);
-            ComboBox<Biblioteca> bibliotecaComboBox= new ComboBox<>();
+            /*ComboBox<Biblioteca> bibliotecaComboBox= new ComboBox<>();
             bibliotecaComboBox.setOnAction(actionEvent ->
             {
                 if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
@@ -201,14 +197,14 @@ public class PrestecController implements Initializable
                     llibreComboBox.getItems().addAll(llistatLlibresByBiblio);
                     llibreComboBox.setConverter(llibreStringConverter);
                 }
-            });
+            });*/
 
             //add dades a biblioteca
-            GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+            /*GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
             ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
             BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
             bibliotecaComboBox.getItems().addAll(listaBiblio);
-            bibliotecaComboBox.setConverter(bibliotecaStringConverter);
+            bibliotecaComboBox.setConverter(bibliotecaStringConverter);*/
 
 
 
@@ -232,7 +228,7 @@ public class PrestecController implements Initializable
 
             gridPane.addRow(0,new Label("Digues el usuari: ") ,usuariComboBox);
             gridPane.addRow(1, new Label("Nom del treballador :"), new Label(worker.getNom()));
-            gridPane.addRow(2, new Label("Seleciona la biblioteca: "),bibliotecaComboBox);
+            //gridPane.addRow(2, new Label("Seleciona la biblioteca: "),bibliotecaComboBox);
             gridPane.addRow(3, new Label("Seleciona el llibre: "),llibreComboBox);
             gridPane.addRow(4,new Label("Data d'inici: "),new Label(formatStartDate));
             gridPane.addRow(5,new Label("Data de finalizació: "),dataEndComboBox);
@@ -254,7 +250,7 @@ public class PrestecController implements Initializable
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
                 Prestec prestec = new Prestec();
-                prestec.setBiblio(bibliotecaComboBox.getValue());
+                //prestec.setBiblio(bibliotecaComboBox.getValue());
                 prestec.setTreballador(worker);
                 prestec.setEstat(false);
                 prestec.setUsuari(usuariComboBox.getValue());
@@ -399,7 +395,7 @@ public class PrestecController implements Initializable
             Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
             if(prestec !=null){
                 ComboBox<Usuari> userComboBox= new ComboBox<>();
-                ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
+                //ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
                 ComboBox<Llibre> llibreComboBox= new ComboBox<>();
                 llibreComboBox.setDisable(true);
 
@@ -412,7 +408,7 @@ public class PrestecController implements Initializable
 
 
                 //afegit dades biblioteca
-                bibliotecaComboBox.setOnAction(actionEvent ->
+                /*bibliotecaComboBox.setOnAction(actionEvent ->
                 {
                     if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
                     {
@@ -429,14 +425,14 @@ public class PrestecController implements Initializable
                         llibreComboBox.getItems().addAll(llistatLlibresByBiblio);
                         llibreComboBox.setConverter(llibreStringConverter);
                     }
-                });
+                });*/
 
                 //add dades a biblioteca
-                GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+                /*GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
                 ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
                 BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
                 bibliotecaComboBox.getItems().addAll(listaBiblio);
-                bibliotecaComboBox.setConverter(bibliotecaStringConverter);
+                bibliotecaComboBox.setConverter(bibliotecaStringConverter);*/
 
 
 
@@ -459,8 +455,8 @@ public class PrestecController implements Initializable
                 gridPane.addRow(0,new Label("Treballdor Actual: "),new Label(worker.getNom() +" "+ worker.getCognom()));
                 gridPane.addRow(1,new Label("Usuari Actual: "),new Label(prestec.getUsuari().getNom() +" " + prestec.getUsuari().getCognom()));
                 gridPane.addRow(2,new Label("Digues el nou usuari ") ,userComboBox);
-                gridPane.addRow(3,new Label("Biblioteca Actual :") ,new Label(prestec.getBiblio().getNomBiblioteca()));
-                gridPane.addRow(4, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
+               // gridPane.addRow(3,new Label("Biblioteca Actual :") ,new Label(prestec.getBiblio().getNomBiblioteca()));
+               // gridPane.addRow(4, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
                 gridPane.addRow(5,new Label("Titol del llibre actual: ") ,new Label(prestec.getLlibre().getTitol()));
                 gridPane.addRow(6, new Label("Digues el llibre:  "),llibreComboBox);
                 gridPane.addRow(7, new Label("Data de inicio"), datePickerStart);
@@ -480,7 +476,7 @@ public class PrestecController implements Initializable
                 {
 
 
-                    if(bibliotecaComboBox.getSelectionModel().getSelectedItem() != null && userComboBox.getSelectionModel().getSelectedItem() != null && llibreComboBox.getSelectionModel().getSelectedItem() != null)
+                   /* if(bibliotecaComboBox.getSelectionModel().getSelectedItem() != null && userComboBox.getSelectionModel().getSelectedItem() != null && llibreComboBox.getSelectionModel().getSelectedItem() != null)
                     {
                         System.out.println("Actualizat");
                         prestec.setBiblio(bibliotecaComboBox.getValue());
@@ -514,7 +510,7 @@ public class PrestecController implements Initializable
                         wrong.setHeaderText("Els camps son buits");
                         wrong.setContentText("Torna a provar de modifcar el prestec");
                         wrong.show();
-                    }
+                    }*/
 
 
 
