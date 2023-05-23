@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = passwordField.getText().toString();
 
 
-        if(dni.isEmpty() || nom.isEmpty() || cognom.isEmpty()  || dataText.isEmpty() || email.isEmpty()|| password.isEmpty())
+        if(dni.isEmpty() &&  nom.isEmpty() &&  cognom.isEmpty()  && dataText.isEmpty() &&  email.isEmpty() && password.isEmpty())
         {
             // posar els editext en error
             String erroMsg = "Emplena aquest camps";
