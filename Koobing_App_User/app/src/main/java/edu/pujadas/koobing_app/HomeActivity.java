@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         setBottom_navigation();
 
         //loadBookInfoToViewPage();
-
+        loadInfoBook();
 
 
 
