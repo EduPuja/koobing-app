@@ -4,7 +4,11 @@ function getAllBooksWithBiblioteca(req,res)
 {
     console.log("\nGetting all libraries with books")
 
-    const query = "select  * from biblio_llibre";
+    /**
+     * 
+     */
+
+    const query = "SELECT biblio_llibre.id ,llibre.ISBN ,llibre.titol,biblioteca.id_biblioteca ,biblioteca.nom_biblio ,biblio_llibre.stock FROM llibre INNER JOIN biblio_llibre ON llibre.ISBN = biblio_llibre.ISBN INNER JOIN biblioteca ON biblioteca.id_biblioteca = biblio_llibre.id_biblioteca";
 
     connection.query(query ,function(error,result){
 
