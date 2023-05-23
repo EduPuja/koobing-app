@@ -1,18 +1,18 @@
 package edu.pujadas.koobing_app.Models;
 
+
+
 import java.sql.Date;
-import java.sql.Timestamp;
+
 
 public class Reserva
 {
     int idReserva;
 
-    int idUsuari;
-    int idTreballador;
-    int idBiblioteca;
-
-    long ISBN;
-
+    Usuari usuari;
+    Treballador treballador;
+    Biblioteca biblioteca;
+    Llibre llibre;
     Date dataInici;
     Date dataFI;
 
@@ -20,12 +20,12 @@ public class Reserva
     {
     }
 
-    public Reserva(int idReserva, int idUsuari, int idTreballador, int idBiblioteca, long ISBN, Date dataInici, Date dataFI) {
+    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblioteca, Llibre llibre, Date dataInici, Date dataFI) {
         this.idReserva = idReserva;
-        this.idUsuari = idUsuari;
-        this.idTreballador = idTreballador;
-        this.idBiblioteca = idBiblioteca;
-        this.ISBN = ISBN;
+        this.usuari = usuari;
+        this.treballador = treballador;
+        this.biblioteca = biblioteca;
+        this.llibre = llibre;
         this.dataInici = dataInici;
         this.dataFI = dataFI;
     }
@@ -38,36 +38,36 @@ public class Reserva
         this.idReserva = idReserva;
     }
 
-    public int getIdUsuari() {
-        return idUsuari;
+    public Usuari getUsuari() {
+        return usuari;
     }
 
-    public void setIdUsuari(int idUsuari) {
-        this.idUsuari = idUsuari;
+    public void setUsuari(Usuari usuari) {
+        this.usuari = usuari;
     }
 
-    public int getIdTreballador() {
-        return idTreballador;
+    public Treballador getTreballador() {
+        return treballador;
     }
 
-    public void setIdTreballador(int idTreballador) {
-        this.idTreballador = idTreballador;
+    public void setTreballador(Treballador treballador) {
+        this.treballador = treballador;
     }
 
-    public int getIdBiblioteca() {
-        return idBiblioteca;
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
     }
 
-    public void setIdBiblioteca(int idBiblioteca) {
-        this.idBiblioteca = idBiblioteca;
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
     }
 
-    public long getISBN() {
-        return ISBN;
+    public Llibre getLlibre() {
+        return llibre;
     }
 
-    public void setISBN(long ISBN) {
-        this.ISBN = ISBN;
+    public void setLlibre(Llibre llibre) {
+        this.llibre = llibre;
     }
 
     public Date getDataInici() {
