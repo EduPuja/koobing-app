@@ -254,7 +254,7 @@ public class GestioLlibre
      * @param ISBN numero de llibre
      * @return Objecte Llibre
      */
-    public Llibre findLLibre(long ISBN)
+    public Llibre findLlibreByISBN(long ISBN)
     {
 
         try {
