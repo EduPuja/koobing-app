@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         Toast.makeText(getApplicationContext(),"Benvingut: "+ usuari.getNom() +" "+usuari.getCognom(),Toast.LENGTH_SHORT).show();
                         //guardar la sessio del usuari en el shared preferences
-
+                        UsuarioSingleton.getInstance().setUsuario(usuari);
 
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);
