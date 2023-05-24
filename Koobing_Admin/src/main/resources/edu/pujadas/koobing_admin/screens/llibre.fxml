@@ -80,10 +80,10 @@
                                 <Button fx:id="addBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onAddBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onModifyBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onDeleteBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <ComboBox prefWidth="200.0" promptText="Escull el que veus" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
+                        <ComboBox fx:id="llibreComboxDispo" prefWidth="200.0" promptText="Escull el que veus" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
 
                             <items>
-                                <FXCollections fx:factory="observableArrayList">
+                                <FXCollections  fx:factory="observableArrayList">
                                     <String fx:value="Disponible"/>
                                     <String fx:value="No disponible" />
                                 </FXCollections>

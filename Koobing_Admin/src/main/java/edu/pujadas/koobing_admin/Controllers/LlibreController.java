@@ -62,6 +62,7 @@ public class LlibreController implements Initializable
     public TableColumn<Llibre,Date> dataPubliColum;
     public TableColumn <Llibre,String>stockColum;
     public TableColumn<Llibre,String> disponibleColum;
+    public ComboBox<String > llibreComboxDispo;
 
 
     // llibre
@@ -80,7 +81,23 @@ public class LlibreController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Book Screen");
         loadWorkerInfo();
-        onLoadInfoLlibre();
+
+
+        llibreComboxDispo.setValue("Disponible");
+        onLoadInfoLlibreWithStock();
+        llibreComboxDispo.setOnAction(event ->{
+            String valor = llibreComboxDispo.getValue();
+            if(valor.equals("Disponible"))
+            {
+                System.out.println("Mostrar dispponibles");
+                onLoadInfoLlibreWithStock();
+            }
+            else if(valor.equals("No disponible"))
+            {
+                System.out.println("Mostar no dispo");
+                onLoadInoLLibreWithoutStock();
+            }
+        });
         
 
     }
@@ -129,9 +146,9 @@ public class LlibreController implements Initializable
 
 
     /**
-     * Metode carregar la info del llibre
+     * Metode carregar la info del llibre amb stock
      */
-    public void onLoadInfoLlibre()
+    public void onLoadInfoLlibreWithStock()
     {
         try
         {
@@ -195,6 +212,73 @@ public class LlibreController implements Initializable
         {
             System.out.println("Error loading book info : "+ e.getMessage());
         }
+    }
+
+    public void onLoadInoLLibreWithoutStock()
+    {
+        try
+        {
+            GestioLlibre gestioLlibre = new GestioLlibre();
+            listLlibres = gestioLlibre.consultarLlibresOutStock();
+
+            ObservableList<Llibre> observableList = FXCollections.observableArrayList(listLlibres);
+            taulaLlibres.setItems(observableList);
+
+            isbnColum.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+            titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
+            autorColum.setCellValueFactory(cellData->
+            {
+                String nomAutor =cellData.getValue().getAutor().getNomAutor();
+                return new SimpleStringProperty(nomAutor);
+            });
+            editorColum.setCellValueFactory(cellData->
+            {
+                String nomEditor = cellData.getValue().getEditor().getNomEditor();
+                return  new SimpleStringProperty(nomEditor);
+            });
+
+            idiomaColum.setCellValueFactory(cellData->
+            {
+                String idioma = cellData.getValue().getIdioma().getNomIdioma();
+                return new SimpleStringProperty(idioma);
+            });
+            genereColum.setCellValueFactory(cellData->
+            {
+                String genere = cellData.getValue().getGenere().getNomGenere();
+                return new SimpleStringProperty(genere);
+            });
+            edicioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
+            dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
+            //stockColum.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            stockColum.setCellValueFactory(cellData->
+            {
+                int stock = cellData.getValue().getStock();
+                if(stock == 0)
+                {
+                    disponibleColum.setCellValueFactory(cellData2 ->
+                    {
+                        return new SimpleStringProperty("No disponible");
+                    });
+                }
+                else
+                {
+                    disponibleColum.setCellValueFactory(cellData2 ->{
+                        return new SimpleStringProperty("Disponible");
+                    });
+                }
+                return new SimpleStringProperty(String.valueOf(stock));
+            });
+
+
+
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error loading book info withOut stock : "+ e.getMessage());
+        }
+
     }
 
 
