@@ -102,7 +102,7 @@ public class GestioLlibre
     }
 
     /**
-     * Metode que et consulta tots els llibres de la base de dades
+     * Metode que et consulta tots els llibres de la base de dades qu tenen el stock mes gran que 0
      * @return ArrayList de llibres
      */
     public ArrayList<Llibre> consultarLlibresAmbStock()
@@ -172,6 +172,72 @@ public class GestioLlibre
         return null;
     }
 
+    /**
+     * Metode per consultar els llibres que el seu stock = 0
+     * @return arraylist de llibres amb stock 0
+     */
+    public ArrayList<Llibre> consultarLlibresOutStock()
+    {
+        ArrayList<Llibre> llibresList = new ArrayList<Llibre>();
+
+
+        //gestions
+        GestioAutor gestioAutor = new GestioAutor();
+        GestioEditorial gestioEditorial = new GestioEditorial();
+        GestioIdioma gestioIdioma = new GestioIdioma();
+        GestioGenere gestioGenere = new GestioGenere();
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+            String query = "SELECT * from llibre where stock =0";
+
+            ResultSet rs = stat.executeQuery(query);
+
+            while (rs.next())
+            {
+                Llibre llibre = new Llibre();
+                // isbn
+                llibre.setISBN(rs.getLong("ISBN"));
+
+                //buscant el autor , editorials, idioma and genere per poder crear un objeto de cada
+
+                Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
+                Editorial editor =gestioEditorial.findEditorial(rs.getInt("id_editor"));
+                Idioma idioma = gestioIdioma.findIdioma(rs.getInt("id_idioma"));
+                Genere genere = gestioGenere.findGenere(rs.getInt("id_genere"));
+
+                //afegint tot les dades el objecte llibre
+                llibre.setAutor(autor);
+                llibre.setEditor(editor);
+                llibre.setIdioma(idioma);
+                llibre.setGenere(genere);
+
+                //afegint les dades que falten
+                llibre.setTitol(rs.getString("titol"));
+                llibre.setVersio(rs.getInt("versio"));
+                llibre.setDataPubli(rs.getDate("data_publi"));
+
+                llibre.setStock(rs.getInt("stock"));
+
+                //afegint tots els llibres al arraylist
+                llibresList.add(llibre);
+            }
+
+
+            con.desconectar();
+
+            return llibresList;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error consultat llibres wihtout stock: " + e.getMessage());
+        }
+        return null;
+    }
+
+
 
 
 
@@ -198,10 +264,6 @@ public class GestioLlibre
 
 
            Statement stat = con.conectar();
-
-            /*String query = "SELECT l.isbn,a.nom_autor,e.nom_editorial,i.nom_idioma,g.descrip,l.titol,l.versio,l.data_publi FROM llibre l " +
-                    "INNER JOIN autor a ON a.id_autor = l.id_autor INNER JOIN editorial e ON e.id_editorial = l.id_editor " +
-                    "INNER JOIN idioma i ON i.id_idioma = l.id_idioma INNER JOIN genere g ON g.id_genere = l.id_genere  Limit 10";*/
 
             String query2 = "SELECT * from llibre limit 10 where stock >0";
 
