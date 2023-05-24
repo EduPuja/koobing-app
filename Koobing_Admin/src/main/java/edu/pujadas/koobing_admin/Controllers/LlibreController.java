@@ -3,7 +3,6 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.*;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
@@ -138,7 +136,7 @@ public class LlibreController implements Initializable
         try
         {
             GestioLlibre gestioLlibre = new GestioLlibre();
-            listLlibres = gestioLlibre.consultarLlibres();
+            listLlibres = gestioLlibre.consultarLlibresAmbStock();
 
             ObservableList<Llibre> observableList = FXCollections.observableArrayList(listLlibres);
             taulaLlibres.setItems(observableList);

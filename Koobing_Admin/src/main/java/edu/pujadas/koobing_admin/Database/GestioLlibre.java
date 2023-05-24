@@ -2,7 +2,6 @@ package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.*;
 
-import java.io.StringWriter;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -106,7 +105,7 @@ public class GestioLlibre
      * Metode que et consulta tots els llibres de la base de dades
      * @return ArrayList de llibres
      */
-    public ArrayList<Llibre>consultarLlibres()
+    public ArrayList<Llibre> consultarLlibresAmbStock()
     {
         ArrayList<Llibre> llibresList = new ArrayList<Llibre>();
 
@@ -125,7 +124,7 @@ public class GestioLlibre
             Statement stat = con.conectar();
 
 
-            String query2 = "SELECT * from llibre";
+            String query2 = "SELECT * from llibre where stock >0";
 
 
             ResultSet rs = stat.executeQuery(query2);
