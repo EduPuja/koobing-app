@@ -83,6 +83,22 @@ public class LlibreController implements Initializable
         loadWorkerInfo();
         onLoadInfoLlibre();
 
+
+
+        // doble click tabla
+        taulaLlibres.setOnMouseClicked(event ->{
+            if(event.getClickCount()== 2)
+            {
+                Llibre libro = taulaLlibres.getSelectionModel().getSelectedItem();
+                if(libro != null)
+                {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Informació del llibre");
+                    
+                }
+            }
+        });
+
     }
     /**
      * Metode que carrega la info del treballador
