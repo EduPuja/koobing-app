@@ -66,7 +66,6 @@
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
                                 <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#switchToHome" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE" />
@@ -74,10 +73,10 @@
                                 <Button fx:id="trebaladorBtn" mnemonicParsing="false" onAction="#switchToTreballador" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
                                 <Button fx:id="llibreBtn" mnemonicParsing="false" onAction="#switchToLlibre" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
                                 <Button fx:id="autorBtn" mnemonicParsing="false" onAction="#switchToAutor" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />
-                                <Button fx:id="idiomaBtn" mnemonicParsing="false" onAction="#switchToIdioma" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="6" />
-                                <Button fx:id="genereBtn" mnemonicParsing="false" onAction="#switchToGenere" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="7" />
-                                <Button fx:id="editioralBtn" mnemonicParsing="false" onAction="#switchToEditorial" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="8" />
-                                <Button fx:id="reservaBtn" mnemonicParsing="false" onAction="#switchToReserva" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Prestec" textFill="WHITE" GridPane.rowIndex="9" />
+                                <Button fx:id="idiomaBtn" mnemonicParsing="false" onAction="#switchToIdioma" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="5" />
+                                <Button fx:id="genereBtn" mnemonicParsing="false" onAction="#switchToGenere" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="6" />
+                                <Button fx:id="editioralBtn" mnemonicParsing="false" onAction="#switchToEditorial" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="7" />
+                                <Button fx:id="reservaBtn" mnemonicParsing="false" onAction="#switchToReserva" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Prestec" textFill="WHITE" GridPane.rowIndex="8" />
                             </children>
                         </GridPane>
                     </children>
@@ -106,7 +105,7 @@
                                         <Image url="@../img/libro.png" />
                                     </image>
                                 </ImageView>
-                        <Button onAction="#onLogout" fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: black;" text="Tencar Sessió" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLogout" style="-fx-background-color: black;" text="Tencar Sessió" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                         <!--Tabpane-->
@@ -143,7 +142,7 @@
                                                 <TableColumn fx:id="titolColum" prefWidth="90.0" text="Titol" />
                                                 <TableColumn fx:id="versioColum" prefWidth="90.0" text="Versio" />
                                                 <TableColumn fx:id="dataPubliColum" prefWidth="95.0" text="Data Publi" />
-                                                <TableColumn fx:id="stockColum" prefWidth="90.0" text="Stock"/>
+                                                <TableColumn fx:id="stockColum" prefWidth="90.0" text="Stock" />
                                             </columns>
                                         </TableView2>
                                     </content>

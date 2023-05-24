@@ -17,7 +17,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.tableview2.TableView2?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.LlibreController">
     <children>
         <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
@@ -46,7 +45,6 @@
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
                                 <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#switchToHome" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Home" textFill="WHITE" />
@@ -54,10 +52,10 @@
                                 <Button fx:id="trebaladorBtn" mnemonicParsing="false" onAction="#switchToTreballador" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Treballador" textFill="WHITE" GridPane.rowIndex="2" />
                                 <Button fx:id="llibreBtn" mnemonicParsing="false" onAction="#switchToLlibre" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Llibre" textFill="WHITE" GridPane.rowIndex="3" />
                                 <Button fx:id="autorBtn" mnemonicParsing="false" onAction="#switchToAutor" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Autor" textFill="WHITE" GridPane.rowIndex="4" />
-                                <Button fx:id="idiomaBtn" mnemonicParsing="false" onAction="#switchToIdioma" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="6" />
-                                <Button fx:id="genereBtn" mnemonicParsing="false" onAction="#switchToGenere" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="7" />
-                                <Button fx:id="editioralBtn" mnemonicParsing="false" onAction="#switchToEditorial" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="8" />
-                                <Button fx:id="reservaBtn" mnemonicParsing="false" onAction="#switchToReserva" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Prestec" textFill="WHITE" GridPane.rowIndex="9" />
+                                <Button fx:id="idiomaBtn" mnemonicParsing="false" onAction="#switchToIdioma" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Idioma" textFill="WHITE" GridPane.rowIndex="5" />
+                                <Button fx:id="genereBtn" mnemonicParsing="false" onAction="#switchToGenere" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Genere" textFill="WHITE" GridPane.rowIndex="6" />
+                                <Button fx:id="editioralBtn" mnemonicParsing="false" onAction="#switchToEditorial" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Editorial" textFill="WHITE" GridPane.rowIndex="7" />
+                                <Button fx:id="reservaBtn" mnemonicParsing="false" onAction="#switchToReserva" prefHeight="25.0" prefWidth="450.0" style="-fx-background-color: black;" text="Prestec" textFill="WHITE" GridPane.rowIndex="8" />
                             </children>
                         </GridPane>
                     </children>
@@ -85,23 +83,23 @@
                                         <Image url="@../img/libro.png" />
                                     </image>
                                 </ImageView>
-                                <Button fx:id="addBtn" onAction="#onAddBook" alignment="CENTER" mnemonicParsing="false"  prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                <Button fx:id="modifyBtn" onAction="#onModifyBook" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                <Button fx:id="deleteBtn" onAction="#onDeleteBook" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <Button fx:id="addBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onAddBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onModifyBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onDeleteBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                         <TableView2 fx:id="taulaLlibres">
                             <columns>
-                                <TableColumn fx:id="isbnColum" prefWidth="60" text="ISBN"/>
-                                <TableColumn fx:id="titolColum"  prefWidth="130" text="Titol"/>
-                                <TableColumn fx:id="autorColum" prefWidth="100" text="Autor"/>
-                                <TableColumn fx:id="editorColum" prefWidth="50"  text="Editorial"/>
-                                <TableColumn fx:id="idiomaColum" prefWidth="50" text="Idioma"/>
-                                <TableColumn fx:id="genereColum" prefWidth="70" text="Genere"/>
-                                <TableColumn fx:id="edicioColum" prefWidth="70" text="Edicio"/>
-                                <TableColumn fx:id="dataPubliColum" prefWidth="70" text="DataPublicacio"/>
-                                <TableColumn fx:id="stockColum" prefWidth="70"  text="Stock"/>
-                                <TableColumn fx:id="disponibleColum" prefWidth="70" text="Disponible"/>
+                                <TableColumn fx:id="isbnColum" prefWidth="60" text="ISBN" />
+                                <TableColumn fx:id="titolColum" prefWidth="130" text="Titol" />
+                                <TableColumn fx:id="autorColum" prefWidth="100" text="Autor" />
+                                <TableColumn fx:id="editorColum" prefWidth="50" text="Editorial" />
+                                <TableColumn fx:id="idiomaColum" prefWidth="50" text="Idioma" />
+                                <TableColumn fx:id="genereColum" prefWidth="70" text="Genere" />
+                                <TableColumn fx:id="edicioColum" prefWidth="70" text="Edicio" />
+                                <TableColumn fx:id="dataPubliColum" prefWidth="70" text="DataPublicacio" />
+                                <TableColumn fx:id="stockColum" prefWidth="70" text="Stock" />
+                                <TableColumn fx:id="disponibleColum" prefWidth="70" text="Disponible" />
                             </columns>
                         </TableView2>
                     </children>
