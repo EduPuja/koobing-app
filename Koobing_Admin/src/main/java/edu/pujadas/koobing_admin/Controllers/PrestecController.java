@@ -69,7 +69,7 @@ public class PrestecController implements Initializable
         System.out.println("Reserva Screen!");
         loadWorkerInfo();
         filtreTaulaComboBox.setValue("Tota Inforamció");
-        //loadInfoReserves();
+        loadInfoReserves();
     }
 
     /**

@@ -85,21 +85,21 @@ public class GestioPrestec
             Statement stat = con.conectar();
 
 
-            String query = "SELECT * FROM reserves WHERE estat = 0";
+            String query = "SELECT * FROM reserva";
 
             ResultSet rs = stat.executeQuery(query);
 
             while (rs.next())
             {
                 Prestec prestec = new Prestec();
-                prestec.setIdReserva(rs.getInt("id_reserva"));
+                prestec.setIdReserva(rs.getInt("id_prestec"));
+                prestec.setLlibre(new GestioLlibre().findLlibreByISBN(rs.getLong("ISBN")));
                 prestec.setUsuari(new GestioUsuari().findUserID(rs.getInt("id_usuari")));
                 prestec.setTreballador(new GestioTreballador().findTreballador(rs.getInt("id_treballador")));
-                //prestec.setBiblio(new GestioBiblioteca().findBiblioteca(rs.getInt("id_biblioteca")));
-                prestec.setLlibre(new GestioLlibre().findLlibreByISBN(rs.getLong("ISBN")));
                 prestec.setDataInici(rs.getDate("data_inici"));
                 prestec.setDataFI(rs.getDate("data_fi"));
                 prestec.setEstat(rs.getInt("id_estat"));
+
                 //addin the object into the arraylist
                 listPrestec.add(prestec);
             }
