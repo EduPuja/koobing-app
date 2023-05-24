@@ -62,7 +62,7 @@ public class GestioLlibre
         }
         catch (Exception e)
         {
-            System.out.println("Error LLibre:"+ e.getMessage());
+            System.out.println("Error LLibre Modify :"+ e.getMessage());
         }
     }
 
