@@ -173,6 +173,8 @@ public class GestioLlibre
     }
 
 
+
+
     /**
      * Metode que et retorna nomes els 10 primers llibres de la base de dades
      * @return ArrayList dels 10 primers llibres
@@ -201,7 +203,7 @@ public class GestioLlibre
                     "INNER JOIN autor a ON a.id_autor = l.id_autor INNER JOIN editorial e ON e.id_editorial = l.id_editor " +
                     "INNER JOIN idioma i ON i.id_idioma = l.id_idioma INNER JOIN genere g ON g.id_genere = l.id_genere  Limit 10";*/
 
-            String query2 = "SELECT * from llibre limit 10";
+            String query2 = "SELECT * from llibre limit 10 where stock >0";
 
 
             ResultSet rs = stat.executeQuery(query2);
