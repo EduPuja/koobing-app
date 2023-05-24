@@ -484,7 +484,7 @@ public class LlibreController implements Initializable
                         items.remove(llibre);
 
                         //eliminare de la base de dadecs de la taula llibre && de biblio
-                        //gestioLlibre.eliminarLlibre(llibre.getISBN());
+                        gestioLlibre.eliminarLlibre(llibre.getISBN());
                     }
 
 
