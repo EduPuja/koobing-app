@@ -108,13 +108,13 @@
                         </GridPane>
                         <TableView2 fx:id="taulaReserves">
                             <columns>
-                                <TableColumn fx:id="idReservaColum" prefWidth="70.0" text="ID Reserva" />
-                                <TableColumn fx:id="nomUserColum" prefWidth="112.0" text="Nom Usuari" />
-                                <TableColumn fx:id="nomWorkerColum" prefWidth="112.0" text="Nom treballador" />
-                                <TableColumn fx:id="nomBiblioColum" prefWidth="112.0" text="Nom Biblioteca" />
-                                <TableColumn fx:id="bookTitleColum" prefWidth="112.0" text="Titol" />
+                                <TableColumn fx:id="idReservaColum" prefWidth="50.0" text="ID Prestec" />
+                                <TableColumn fx:id="bookTitleColum" prefWidth="112.0" text="Titol Llibre" />
+                                <TableColumn fx:id="nomUserColum" prefWidth="100.0" text="Usuari" />
+                                <TableColumn fx:id="nomWorkerColum" prefWidth="100.0" text="Treballador" />
                                 <TableColumn fx:id="dataInici" prefWidth="112.0" text="Data  Inici" />
                                 <TableColumn fx:id="dataFi" prefWidth="112.0" text="Data  Fi" />
+                                <TableColumn fx:id="estat" prefWidth="112.0" text="Estat" />
                             </columns>
                         </TableView2>
                     </children>
