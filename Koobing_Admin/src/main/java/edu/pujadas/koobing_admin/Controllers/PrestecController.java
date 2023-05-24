@@ -466,6 +466,7 @@ public class PrestecController implements Initializable
                 prestec.setEstat(1);
                 GestioPrestec gestioPrestec= new GestioPrestec();
                 gestioPrestec.modificarEstatReserva(prestec);
+                switchToReserva(event);
             }
         }
         catch (Exception e)
@@ -488,6 +489,8 @@ public class PrestecController implements Initializable
                 prestec.setEstat(2);
                 GestioPrestec gestioPrestec= new GestioPrestec();
                 gestioPrestec.modificarEstatReserva(prestec);
+
+                switchToReserva(event);
             }
         }
         catch (Exception e)
@@ -511,6 +514,7 @@ public class PrestecController implements Initializable
                 prestec.setEstat(3);
                 GestioPrestec gestioPrestec= new GestioPrestec();
                 gestioPrestec.modificarEstatReserva(prestec);
+                switchToReserva(event);
             }
 
         }
@@ -535,6 +539,7 @@ public class PrestecController implements Initializable
                 prestec.setEstat(4);
                 GestioPrestec gestioPrestec= new GestioPrestec();
                 gestioPrestec.modificarEstatReserva(prestec);
+                switchToReserva(event);
             }
         }
         catch (Exception e)
