@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.TableView2;
@@ -37,6 +38,8 @@ public class PrestecController implements Initializable
     public Button bibliotecaBtn;
     public Button genereBtn;
     public Button editioralBtn;
+    public ComboBox<String> filtreTaulaComboBox;
+
     Parent root;
     Stage stage;
     Scene scene;
@@ -54,6 +57,7 @@ public class PrestecController implements Initializable
     public TableColumn<Prestec,String> bookTitleColum;
     public TableColumn<Prestec, Date> dataInici;
     public TableColumn<Prestec,Date> dataFi;
+    public TableColumn<Prestec,String> estat;
 
 
 
@@ -64,6 +68,7 @@ public class PrestecController implements Initializable
 
         System.out.println("Reserva Screen!");
         loadWorkerInfo();
+        filtreTaulaComboBox.setValue("Tota Inforamció");
         //loadInfoReserves();
     }
 
@@ -119,32 +124,76 @@ public class PrestecController implements Initializable
        // System.out.println("Loading info reserva"); // debug testing
         try
         {
-            GestioPrestec gestioPrestec = new GestioPrestec();
-            listReserves = gestioPrestec.consultarReserves();
-            ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
-                    listReserves
-            );
-            //afegint el observable list en el tableview
-            taulaReserves.setItems(observableListPrestec);
-            idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
-            nomUserColum.setCellValueFactory(cellData ->{
-                Usuari usuari = cellData.getValue().getUsuari();
-                String nom = usuari.getNom();
-                return new SimpleStringProperty(nom);
-            });
-            nomWorkerColum.setCellValueFactory(cellData->{
-                Treballador treballador = cellData.getValue().getTreballador();
-                String nom = treballador.getNom();
-                return new SimpleStringProperty(nom);
-            });
+            String valorCombo = filtreTaulaComboBox.getValue();
 
-            bookTitleColum.setCellValueFactory(cellData ->{
-                Llibre book = cellData.getValue().getLlibre();
-                String titol = book.getTitol();
-              return new SimpleStringProperty(titol);
-            });
-            dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
-            dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
+            if(valorCombo.equals("Tota Inforamció"))
+            {
+                GestioPrestec gestioPrestec = new GestioPrestec();
+                listReserves = gestioPrestec.consultarReserves();
+                ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
+                        listReserves
+                );
+                //afegint el observable list en el tableview
+                taulaReserves.setItems(observableListPrestec);
+                idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+                nomUserColum.setCellValueFactory(cellData ->{
+                    Usuari usuari = cellData.getValue().getUsuari();
+                    String nom = usuari.getNom();
+                    return new SimpleStringProperty(nom);
+                });
+                nomWorkerColum.setCellValueFactory(cellData->{
+                    Treballador treballador = cellData.getValue().getTreballador();
+                    String nom = treballador.getNom();
+                    return new SimpleStringProperty(nom);
+                });
+
+                bookTitleColum.setCellValueFactory(cellData ->{
+                    Llibre book = cellData.getValue().getLlibre();
+                    String titol = book.getTitol();
+                    return new SimpleStringProperty(titol);
+                });
+                dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
+                dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
+                estat.setCellValueFactory(cellData ->{
+                   int estat =cellData.getValue().getEstat();
+                   switch (estat)
+                   {
+                       case 1 :
+                           return new SimpleStringProperty("Reservat");
+
+                       case 2 :
+                           return new SimpleStringProperty("Cancelat");
+
+                       case 3:
+                           return new SimpleStringProperty("Tornat");
+
+                       case 4 :
+                           return new SimpleStringProperty("En Prèstec");
+
+                       default:
+                           return new SimpleStringProperty(" ");
+                 
+
+
+                   }
+                   /*if(estat == 1)
+                   {
+                       return new SimpleStringProperty("Reservat");
+                   }
+                   else if(estat == 2)
+                   {
+                       return new SimpleStringProperty("Cancelat");
+                   }
+                   else if(estat== 3)
+                   {
+                       return new SimpleStringProperty("Tornat");
+                   }
+                   else
+                   {
+                       return new SimpleStringProperty("En Prèstec");
+                   }*/
+                });
+            }
 
 
 
@@ -252,7 +301,7 @@ public class PrestecController implements Initializable
                 Prestec prestec = new Prestec();
                 //prestec.setBiblio(bibliotecaComboBox.getValue());
                 prestec.setTreballador(worker);
-                prestec.setEstat(false);
+                //prestec.setEstat(false);
                 prestec.setUsuari(usuariComboBox.getValue());
                 prestec.setLlibre(llibreComboBox.getValue());
 
