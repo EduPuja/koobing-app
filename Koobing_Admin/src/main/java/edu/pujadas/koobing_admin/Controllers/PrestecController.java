@@ -73,7 +73,7 @@ public class PrestecController implements Initializable
 
 
         filtreTaulaComboBox.setValue("Tota Inforamció"); // poso per default que carregi tota la inforamció
-      //  carregarTotaInforamcio(); // carrego tota la informacio
+        carregarTotaInforamcio(); // carrego tota la informacio
 
         filtreTaulaComboBox.setOnAction(event -> {
             String valor = filtreTaulaComboBox.getValue();
