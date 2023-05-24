@@ -44,6 +44,7 @@ public class PrestecController implements Initializable
     public Button afegirReserva;
     public Button cancelarBtn;
     public Button tornatBtn;
+    public Button reservarBtn;
 
     Parent root;
     Stage stage;
@@ -77,13 +78,17 @@ public class PrestecController implements Initializable
         loadWorkerInfo();
 
 
-        filtreTaulaComboBox.setValue("Tota Inforamció"); // poso per default que carregi tota la inforamció
-        carregarTotaInforamcio(); // carrego tota la informacio
+        filtreTaulaComboBox.setValue("Reservats"); // poso per default que carregi tota la inforamció
+        carregarInforamcioEstat(1);
 
         filtreTaulaComboBox.setOnAction(event -> {
             String valor = filtreTaulaComboBox.getValue();
             if(valor.equals("Reservats"))
             {
+                cancelarBtn.setDisable(false);
+                tornatBtn.setDisable(false);
+                onPrestecBtn.setDisable(false);
+                reservarBtn.setDisable(false);
 
                 System.out.println("reservat");
                 carregarInforamcioEstat(1);
@@ -91,23 +96,39 @@ public class PrestecController implements Initializable
             else if(valor.equals("Cancelats"))
             {
 
+                cancelarBtn.setDisable(true);
+                tornatBtn.setDisable(true);
+                onPrestecBtn.setDisable(true);
+                reservarBtn.setDisable(true);
+
                 System.out.println("cacnelats");
                 carregarInforamcioEstat(2);
             }
             else if(valor.equals("Tornats"))
             {
-
+                cancelarBtn.setDisable(true);
+                tornatBtn.setDisable(true);
+                onPrestecBtn.setDisable(true);
+                reservarBtn.setDisable(true);
                 System.out.println("tornats");
                 carregarInforamcioEstat(3);
             }
             else if (valor.equals("En Prèstec"))
             {
+                cancelarBtn.setDisable(false);
+                tornatBtn.setDisable(false);
+                onPrestecBtn.setDisable(false);
+                reservarBtn.setDisable(false);
 
                 System.out.println("prestec");
                 carregarInforamcioEstat(4);
             }
             else if(valor.equals("Tota Informació"))
             {
+                cancelarBtn.setDisable(true);
+                tornatBtn.setDisable(true);
+                onPrestecBtn.setDisable(true);
+                reservarBtn.setDisable(true);
                 System.out.println("Tota Informació");
                 carregarTotaInforamcio();
             }
