@@ -289,7 +289,11 @@ public class PrestecController implements Initializable
 
 
             ComboBox<Llibre> llibreComboBox = new ComboBox<>();
-            llibreComboBox.setDisable(true);
+            GestioLlibre gestioLlibre = new GestioLlibre();
+            ArrayList<Llibre> llistatLlbires = gestioLlibre.consultarLlibresAmbStock();
+            LlibreStringConverter stringBookConverter = new LlibreStringConverter();
+            llibreComboBox.setConverter(stringBookConverter);
+            llibreComboBox.getItems().addAll(llistatLlbires);
 
 
 
@@ -304,6 +308,12 @@ public class PrestecController implements Initializable
             );
             dataEndComboBox.setItems(dies);
 
+            ComboBox<String> estats= new ComboBox<String>();
+
+            ObservableList<String> observableList = FXCollections.observableArrayList(
+                    "Reservat" ,"Cancelat ","Tornat","En Prèstec"
+            );
+            estats.setItems(observableList);
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
@@ -317,12 +327,13 @@ public class PrestecController implements Initializable
             gridPane.addRow(2, new Label("Seleciona el llibre: "),llibreComboBox);
             gridPane.addRow(3,new Label("Data d'inici: "),new Label(formatStartDate));
             gridPane.addRow(4,new Label("Data de finalizació: "),dataEndComboBox);
+            gridPane.addRow(5,new Label("Estats:"),estats);
 
 
             // Mostrar los dos diálogos en la misma ventana
             Alert alert = new Alert(Alert.AlertType.NONE);
 
-            alert.setTitle("Modificar Treballador");
+            alert.setTitle("Afegir Reserva");
             alert.setHeaderText("Introduïu les noves dades del treballador:");
             alert.getDialogPane().setContent(gridPane);
             alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
