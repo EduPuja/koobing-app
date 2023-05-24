@@ -93,14 +93,14 @@
                         <TableView2 fx:id="taulaLlibres">
                             <columns>
                                 <TableColumn fx:id="isbnColum" prefWidth="60" text="ISBN"/>
-                                <TableColumn fx:id="titolColum"  prefWidth="100" text="Titol"/>
-                                <TableColumn fx:id="autorColum" prefWidth="50" text="Autor"/>
+                                <TableColumn fx:id="titolColum"  prefWidth="130" text="Titol"/>
+                                <TableColumn fx:id="autorColum" prefWidth="100" text="Autor"/>
                                 <TableColumn fx:id="editorColum" prefWidth="50"  text="Editorial"/>
                                 <TableColumn fx:id="idiomaColum" prefWidth="50" text="Idioma"/>
-                                <TableColumn fx:id="genereColum" prefWidth="60" text="Genere"/>
-                                <TableColumn fx:id="edicioColum" prefWidth="50" text="Edicio"/>
-                                <TableColumn fx:id="dataPubliColum" prefWidth="50" text="DataPublicacio"/>
-                                <TableColumn fx:id="stockColum" prefWidth="50"  text="Stock"/>
+                                <TableColumn fx:id="genereColum" prefWidth="70" text="Genere"/>
+                                <TableColumn fx:id="edicioColum" prefWidth="70" text="Edicio"/>
+                                <TableColumn fx:id="dataPubliColum" prefWidth="70" text="DataPublicacio"/>
+                                <TableColumn fx:id="stockColum" prefWidth="70"  text="Stock"/>
                             </columns>
                         </TableView2>
                     </children>
