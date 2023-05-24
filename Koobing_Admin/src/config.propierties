@@ -1,0 +1,13 @@
+# Configuración de la aplicación
+
+# Dirección IP del host
+host=localhost
+
+# Puerto de conexión
+puerto=3306
+
+# Nombre de usuario de la base de datos
+usuario=root
+
+# Contraseña de la base de datos
+password=

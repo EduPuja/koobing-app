@@ -1,44 +1,54 @@
 package edu.pujadas.koobing_admin.Database;
+
 import javafx.scene.control.Alert;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-public class ConnexioMYSQL
-{
+import java.util.Properties;
+
+public class ConnexioMYSQL {
     private Connection conexion;
+    private final String configFileName = "config.properties";
 
-    // Servidor institut : jdbc:mysql://192.168.2.143:3306/koobing_app
-    //servidor home :
-    //localhost  "jdbc:mysql://localhost:3306/koobing_app";
-    private final String url = "jdbc:mysql://localhost:3306/koobing_app";
-    private final String usuario = "root";
-    private final String password = "";
-
-
-    public Statement conectar()
-    {
+    public Statement conectar() {
         Alert wrong = new Alert(Alert.AlertType.ERROR);
-        try
-        {
+        try {
+            Path currentPath = Paths.get("");
+            String filePath = currentPath.toAbsolutePath().toString() + "/" + configFileName;
+            Properties prop = new Properties();
+            prop.load(new FileInputStream(filePath));
+
+            String host = prop.getProperty("host");
+            int puerto = Integer.parseInt(prop.getProperty("puerto"));
+            String url = "jdbc:mysql://" + host + ":" + puerto + "/koobing_app";
+            String usuario = prop.getProperty("usuario");
+            String password = prop.getProperty("password");
+
             conexion = DriverManager.getConnection(url, usuario, password);
             //System.out.println("Conexión establecida correctamente ✓");
             return conexion.createStatement();
-        }
-        catch (SQLException ex) {
+        } catch (IOException ex) {
+            System.out.println("Error al cargar el archivo de configuración: " + ex.getMessage());
+            return null;
+        } catch (SQLException ex) {
             wrong.setTitle("Error al conectar amb el servidor");
-            wrong.setHeaderText("La connexio no s'h establert correctament");
-            wrong.setContentText("Prova de obrir el servidor de BASE DE DADES");
+            wrong.setHeaderText("La connexio no s'ha establert correctament");
+            wrong.setContentText("Prova d'obrir el servidor de BASE DE DADES");
             wrong.show();
             return null;
         }
     }
+
     /**
-     * Metode per poder desconectar de la base de datos
+     * Método para desconectar de la base de datos
      */
-    public void desconectar()
-    {
+    public void desconectar() {
         try {
             if (conexion != null) {
                 conexion.close();
@@ -49,8 +59,7 @@ public class ConnexioMYSQL
         }
     }
 
-    public Connection getConexion()
-    {
+    public Connection getConexion() {
         return conexion;
     }
 }
