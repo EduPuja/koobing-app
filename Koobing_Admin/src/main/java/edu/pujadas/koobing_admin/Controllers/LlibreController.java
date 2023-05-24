@@ -461,32 +461,17 @@ public class LlibreController implements Initializable
 
 
                 if (llibre != null) {
-                   // esta reservat =
-                    int estat = gestioLlibre.getEstadoLlibre(llibre.getISBN());
-
-                    if(estat ==2 )
+                    //comprovar si te prestecs
+                    boolean hasState = gestioLlibre.canBeDeleted(llibre.getISBN());
+                    if(hasState)
                     {
-                        // esta cancelat el puc eliminar
-
-                        Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
-                        sucessAlert.setTitle("Success!");
-                        sucessAlert.setHeaderText("Has eliminat llibre!");
-                        sucessAlert.setContentText("Llibre s'ha eliminat correctament");
-                        sucessAlert.show();
-
-
-                        //delte to memory
-                        ObservableList<Llibre> items = taulaLlibres.getItems();
-                        items.remove(llibre);
-
-                        //eliminare de la base de dadecs de la taula llibre && de biblio
-                        //gestioLlibre.eliminarLlibre(llibre.getISBN());
-
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("Aquest llibre no es pot eliminar");
+                        wrong.setContentText("El seu estat pot esta es: Reservat");
+                        wrong.show();
                     }
-                    else if(estat == 3)
+                    else
                     {
-                        // esta toranat el puc eliminar
-
                         Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
                         sucessAlert.setTitle("Success!");
                         sucessAlert.setHeaderText("Has eliminat llibre!");
@@ -501,28 +486,6 @@ public class LlibreController implements Initializable
                         //eliminare de la base de dadecs de la taula llibre && de biblio
                         //gestioLlibre.eliminarLlibre(llibre.getISBN());
                     }
-                    else if(estat == 1)
-                    {
-                        wrong.setTitle("Error");
-                        wrong.setHeaderText("Aquest llibre no es pot eliminar");
-                        wrong.setContentText("El seu estat pot esta es: Reservat");
-                        wrong.show();
-                    }
-                    else if(estat ==4)
-                    {
-                        wrong.setTitle("Error");
-                        wrong.setHeaderText("Aquest llibre no es pot eliminar");
-                        wrong.setContentText("El seu estat pot esta es: Reservat");
-                        wrong.show();
-                    }
-
-                    else {
-                        wrong.setTitle("Error");
-                        wrong.setHeaderText("Aquest llibre no es pot eliminar");
-                        wrong.setContentText("El seu estat pot esta es: ??");
-                        wrong.show();
-                    }
-
 
 
 
@@ -537,6 +500,9 @@ public class LlibreController implements Initializable
 
 
     }
+
+
+
 
     /**
      * Metode per modifcar un llibre

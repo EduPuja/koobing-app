@@ -2,6 +2,7 @@ package edu.pujadas.koobing_admin.Database;
 
 import edu.pujadas.koobing_admin.Models.*;
 
+import java.io.StringWriter;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class GestioLlibre
                     System.out.println("Llibre eliminado correctamente");
                 }
                 else System.out.println("Llibre no eliminado correctamente");
-
+                con.desconectar();
             }
             else{
                 System.out.println("Llibre Not found");
@@ -329,47 +330,11 @@ public class GestioLlibre
             Statement stat = con.conectar();
             String sql = "SELECT id_estat from reserva where  ISBN = " + ISBN;
             ResultSet result = stat.executeQuery(sql);
-            if(result.next()  ) {
+            if(result.next())
+            {
                 int valorEstat = result.getInt("id_estat");
+                return valorEstat;
 
-              if(valorEstat == 1)
-              {
-                  // DISPONIBLE - estado base
-
-                  return 1;
-
-              }
-              else if( valorEstat == 2)
-              {
-                //CANCELADO
-                  return 2 ;
-              }
-              else if( valorEstat == 3)
-              {
-                //EN PRESTAMO
-                  return 3;
-              }
-              else if(valorEstat == 4)
-              {
-                // DEVUELLTO / TORNAT
-                  return 4;
-              }
-              else if (valorEstat == 5)
-              {
-                //VENCUT
-                  return 5;
-              }
-              else if(valorEstat == 6)
-              {
-                    //RESERVAT
-                  return 6;
-              }
-              else if (valorEstat == 7)
-              {
-                  // no stock
-                  return  7;
-
-              }
 
             }
             con.desconectar();
@@ -378,6 +343,37 @@ public class GestioLlibre
 
         }
         return -1;
+    }
+
+    public boolean canBeDeleted(long isbn)
+    {
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            String sql = "SELECt count(id_estat) from reserva where ISBN ="+isbn;
+            Statement stat = con.conectar();
+            ResultSet rs = stat.executeQuery(sql);
+
+            if(rs.next())
+            {
+                int count = rs.getInt("count(id_estat)");
+                if (count >0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Checking the delete value :" +e.getMessage());
+        }
+        return false;
     }
 
 
