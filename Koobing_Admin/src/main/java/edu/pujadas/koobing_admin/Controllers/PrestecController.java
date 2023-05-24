@@ -101,9 +101,9 @@ public class PrestecController implements Initializable
                 System.out.println("prestec");
                 carregarInforamcioEstat(4);
             }
-            else if(valor.equals("Tota Inforamció"))
+            else if(valor.equals("Tota Informació"))
             {
-                System.out.println("Tota Inforamció");
+                System.out.println("Tota Informació");
                 carregarTotaInforamcio();
             }
 
