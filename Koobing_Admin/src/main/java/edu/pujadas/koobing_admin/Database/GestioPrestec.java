@@ -134,7 +134,7 @@ public class GestioPrestec
                 prestec.setLlibre(new GestioLlibre().findLlibreByISBN(rs.getLong("ISBN")));
                 prestec.setDataInici(rs.getDate("data_inici"));
                 prestec.setDataFI(rs.getDate("data_fi"));
-                prestec.setEstat(rs.getBoolean("estat"));
+                prestec.setEstat(rs.getInt("id_estat"));
 
                 con.desconectar();
 
