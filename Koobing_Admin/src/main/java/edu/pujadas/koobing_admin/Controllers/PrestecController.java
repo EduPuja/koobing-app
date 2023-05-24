@@ -355,34 +355,22 @@ public class PrestecController implements Initializable
                     Date dateInici = Date.valueOf(LocalDate.now());
                     prestec.setDataInici(dateInici);
 
-                    switch (estatComboBox.getValue())
-                    {
-                        case "Reservat", "Cancelat", "En Prèstec", "Tornat" ->
-                        {
+                   if(estatComboBox.getValue().equals("Reservat"))
+                   {
+                       prestec.setEstat(1);
+                   }
+                   else if(estatComboBox.getValue().equals("Cancelat"))
+                   {
+                        prestec.setEstat(2);
+                   }
+                   else if(estatComboBox.getValue().equals("Tornat"))
+                   {
+                       
+                   }
+                   else if(estatComboBox.getValue().equals("En Prèstec"))
+                   {
 
-                            //comprovacio del combobox data end
-                            if(dataEndComboBox.getValue().equals("1 mes"))
-                            {
-                                repetico(prestec,event);
-
-
-                            }
-                            else if(dataEndComboBox.getValue().equals("10 dies"))
-                            {
-                                repetico(prestec,event);
-
-                            }
-                            else if(dataEndComboBox.getValue().equals("5 dies"))
-                            {
-                                repetico(prestec,event);
-
-                            }
-
-                        }
-
-
-                    }
-
+                   }
 
 
                 }
