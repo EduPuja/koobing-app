@@ -457,18 +457,17 @@ public class LlibreController implements Initializable
             Optional<ButtonType> resultado = alerta.showAndWait();
             if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
 
-                //LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
+                Llibre llibre = taulaLlibres.getSelectionModel().getSelectedItem();
 
 
-                /* if (llibreBiblio != null) {
-                    boolean isReserved = gestioLlibre.hayReservasActivas(llibreBiblio.getBook().getISBN());
+                if (llibre != null) {
+                   // esta reservat =
+                    int estat = gestioLlibre.getEstadoLlibre(llibre.getISBN());
 
-                    if (isReserved) {
-                        wrong.setTitle("Error");
-                        wrong.setHeaderText(null);
-                        wrong.setContentText("Aquest llibre no es pot eliminar, esta en una reserva activa");
-                        wrong.show();
-                    } else {
+                    if(estat ==2 )
+                    {
+                        // esta cancelat el puc eliminar
+
                         Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
                         sucessAlert.setTitle("Success!");
                         sucessAlert.setHeaderText("Has eliminat llibre!");
@@ -477,16 +476,58 @@ public class LlibreController implements Initializable
 
 
                         //delte to memory
-                        ObservableList<LlibreBiblio> items = taulaBiblioLlibre.getItems();
-                        items.remove(llibreBiblio);
+                        ObservableList<Llibre> items = taulaLlibres.getItems();
+                        items.remove(llibre);
 
                         //eliminare de la base de dadecs de la taula llibre && de biblio
-                        gestioLlibreBiblioteca.eliminarLlibreBiblioteca(llibreBiblio.getId());
-                        gestioLlibre.eliminarLlibre(llibreBiblio.getBook().getISBN());
-
+                        //gestioLlibre.eliminarLlibre(llibre.getISBN());
 
                     }
-                }*/
+                    else if(estat == 3)
+                    {
+                        // esta toranat el puc eliminar
+
+                        Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
+                        sucessAlert.setTitle("Success!");
+                        sucessAlert.setHeaderText("Has eliminat llibre!");
+                        sucessAlert.setContentText("Llibre s'ha eliminat correctament");
+                        sucessAlert.show();
+
+
+                        //delte to memory
+                        ObservableList<Llibre> items = taulaLlibres.getItems();
+                        items.remove(llibre);
+
+                        //eliminare de la base de dadecs de la taula llibre && de biblio
+                        //gestioLlibre.eliminarLlibre(llibre.getISBN());
+                    }
+                    else if(estat == 1)
+                    {
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("Aquest llibre no es pot eliminar");
+                        wrong.setContentText("El seu estat pot esta es: Reservat");
+                        wrong.show();
+                    }
+                    else if(estat ==4)
+                    {
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("Aquest llibre no es pot eliminar");
+                        wrong.setContentText("El seu estat pot esta es: Reservat");
+                        wrong.show();
+                    }
+
+                    else {
+                        wrong.setTitle("Error");
+                        wrong.setHeaderText("Aquest llibre no es pot eliminar");
+                        wrong.setContentText("El seu estat pot esta es: ??");
+                        wrong.show();
+                    }
+
+
+
+
+                }
+
             }
         }
         catch (Exception e)
