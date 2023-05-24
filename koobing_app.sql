@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2023 a las 19:22:13
+-- Tiempo de generación: 24-05-2023 a las 23:22:47
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -162,9 +162,9 @@ CREATE TABLE `llibre` (
 
 INSERT INTO `llibre` (`ISBN`, `id_autor`, `id_editor`, `id_idioma`, `id_genere`, `titol`, `versio`, `data_publi`, `stock`) VALUES
 (765434231123, 8, 3, 1, 5, '1984', 1, '2023-05-02', 10),
-(9780807286005, 4, 4, 3, 6, 'Harry Potter y la piedra filosofal', 3, '2023-05-24', 3),
-(9789510445365, 2, 3, 4, 2, 'Cien años de soledad', 1, '2023-05-16', 1),
-(12312312312312, 2, 1, 2, 2, 'Les Tres Bassones', 1, '2023-05-10', 0),
+(9780807286005, 2, 3, 1, 1, 'Harry Potter y la piedra filosofal', 3, '2023-05-24', 4),
+(9789510445365, 2, 3, 4, 2, 'Cien años de soledad', 1, '2023-05-16', 0),
+(12312312312312, 2, 3, 1, 2, 'Les Tres Bassones', 1, '2023-05-10', 3),
 (12376217637612, 10, 3, 2, 2, 'Camps de Meduixes', 1, '2023-05-11', 10);
 
 -- --------------------------------------------------------
@@ -188,24 +188,33 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`id_prestec`, `ISBN`, `id_usuari`, `id_treballador`, `data_inici`, `data_fi`, `id_estat`) VALUES
-(1, 9789510445365, 12, 1, '2023-05-17', '2023-05-11', 3);
+(18, 9780807286005, 12, 1, '2023-05-24', '2023-05-29', 2),
+(19, 9780807286005, 12, 1, '2023-05-24', '2023-05-29', 3);
 
 --
 -- Disparadores `reserva`
 --
 DELIMITER $$
-CREATE TRIGGER `restar_stock` AFTER INSERT ON `reserva` FOR EACH ROW BEGIN
-    IF (SELECT stock FROM llibre WHERE isbn = NEW.isbn) > 0 THEN
+CREATE TRIGGER `restar_stock_insert` AFTER INSERT ON `reserva` FOR EACH ROW BEGIN
+  IF NEW.id_estat = 1 THEN
         UPDATE llibre SET stock = stock - 1 WHERE isbn = NEW.isbn;
+    END IF;
+        IF NEW.id_estat = 4 THEN
+          UPDATE llibre SET stock = stock - 1 WHERE isbn = NEW.isbn;
     END IF;
 END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `sumar_stock_tornat` AFTER UPDATE ON `reserva` FOR EACH ROW BEGIN
-    IF NEW.id_estat = 3 THEN
+CREATE TRIGGER `sumar_stock_update` AFTER UPDATE ON `reserva` FOR EACH ROW BEGIN
+
+  IF NEW.id_estat = 2 THEN
         UPDATE llibre SET stock = stock + 1 WHERE isbn = NEW.isbn;
     END IF;
+        IF NEW.id_estat = 3 THEN
+          UPDATE llibre SET stock = stock + 1 WHERE isbn = NEW.isbn;
+    END IF;
+
 END
 $$
 DELIMITER ;
@@ -370,7 +379,7 @@ ALTER TABLE `idioma`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_prestec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_prestec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `treballador`
