@@ -114,19 +114,17 @@ public class LlibreController implements Initializable
                            alert.setContentText("Llibre: "+libro.getTitol()+" TORNAT");
                            break;
                        case 5:
-                       alert.setContentText("Llibre: "+libro.getTitol()+" Vençut");
+                           alert.setContentText("Llibre: "+libro.getTitol()+" Vençut");
                        break;
                        case 6:
                            alert.setContentText("Llibre: "+libro.getTitol()+" Reservat");
                        break;
-
                        case 7:
                            alert.setContentText("Llibre: "+libro.getTitol()+" No Stock");
                            break;
-
                        default:
                            alert.setContentText("No tenim aquesta opcio");
-                           break;
+                       break;
 
 
                    }
