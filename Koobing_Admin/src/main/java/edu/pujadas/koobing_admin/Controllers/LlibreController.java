@@ -62,8 +62,8 @@ public class LlibreController implements Initializable
     public TableColumn<Llibre,String> genereColum;
     public TableColumn<Llibre,Integer> edicioColum;
     public TableColumn<Llibre,Date> dataPubliColum;
-    public TableColumn <Llibre,Integer>stockColum;
-
+    public TableColumn <Llibre,String>stockColum;
+    public TableColumn<Llibre,String> disponibleColum;
 
 
     // llibre
@@ -217,7 +217,44 @@ public class LlibreController implements Initializable
             });
             edicioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
             dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
-            stockColum.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            //stockColum.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            stockColum.setCellValueFactory(cellData->
+            {
+                int stock = cellData.getValue().getStock();
+                if(stock == 0)
+                {
+                    disponibleColum.setCellValueFactory(cellData2 ->
+                    {
+                        return new SimpleStringProperty("No disponible");
+                    });
+                }
+                else
+                {
+                    disponibleColum.setCellValueFactory(cellData2 ->{
+                        return new SimpleStringProperty("Disponible");
+                    });
+                }
+                return new SimpleStringProperty(String.valueOf(stock));
+            });
+
+            /*for (int i = 0; i <listLlibres.size(); i++)
+            {
+                if(listLlibres.get(i).getStock() == 0)
+                {
+                    disponibleColum.setCellValueFactory(cellData ->
+                    {
+                        return new SimpleStringProperty("No Disponible");
+
+                    });
+                }
+                else
+                {
+                    disponibleColum.setCellValueFactory(cellData ->
+                    {
+                        return new SimpleStringProperty("Disponible");
+                    });
+                }
+            }*/
 
 
 

@@ -101,6 +101,7 @@
                                 <TableColumn fx:id="edicioColum" prefWidth="70" text="Edicio"/>
                                 <TableColumn fx:id="dataPubliColum" prefWidth="70" text="DataPublicacio"/>
                                 <TableColumn fx:id="stockColum" prefWidth="70"  text="Stock"/>
+                                <TableColumn fx:id="disponibleColum" prefWidth="70" text="Disponible"/>
                             </columns>
                         </TableView2>
                     </children>
