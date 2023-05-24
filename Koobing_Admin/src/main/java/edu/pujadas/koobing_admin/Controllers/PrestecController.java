@@ -206,63 +206,60 @@ public class PrestecController implements Initializable
         });
     }
 
+
     /**
-     * Metode per carregar les dades de la reserva
+     * metode que carrega la informacio filtrada en la taula de prestec depenen de quin estat tiguis
+     * @param idEstat 1 resevat , 2 cancelat
      */
-    public void loadInfoReserves()
+    private void carregarInforamcioEstat(int idEstat)
     {
-       // System.out.println("Loading info reserva"); // debug testing
-        try
-        {
-            String valorCombo = filtreTaulaComboBox.getValue();
+        GestioPrestec gestioPrestec = new GestioPrestec();
+        listReserves = gestioPrestec.consultarReservesByEstat(idEstat);
+        ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
+                listReserves
+        );
+        //afegint el observable list en el tableview
+        taulaReserves.setItems(observableListPrestec);
+        idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+        nomUserColum.setCellValueFactory(cellData ->{
+            Usuari usuari = cellData.getValue().getUsuari();
+            String nom = usuari.getNom();
+            return new SimpleStringProperty(nom);
+        });
+        nomWorkerColum.setCellValueFactory(cellData->{
+            Treballador treballador = cellData.getValue().getTreballador();
+            String nom = treballador.getNom();
+            return new SimpleStringProperty(nom);
+        });
 
-
-            if(valorCombo.equals("Tota Inforamció"))
+        bookTitleColum.setCellValueFactory(cellData ->{
+            Llibre book = cellData.getValue().getLlibre();
+            String titol = book.getTitol();
+            return new SimpleStringProperty(titol);
+        });
+        dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
+        dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
+        estat.setCellValueFactory(cellData ->{
+            int estat =cellData.getValue().getEstat();
+            switch (estat)
             {
-                System.out.println("Tota la info");
+                case 1 :
+                    return new SimpleStringProperty("Reservat");
 
+                case 2 :
+                    return new SimpleStringProperty("Cancelat");
+
+                case 3:
+                    return new SimpleStringProperty("Tornat");
+
+                case 4 :
+                    return new SimpleStringProperty("En Prèstec");
+
+                default:
+                    return new SimpleStringProperty(" ");
             }
 
-            else if(valorCombo.equals("Reservat"))
-            {
-                System.out.println("Filtrant per reservat ");
-                    // ressevat es el 1
-                GestioPrestec gestioPrestec = new GestioPrestec();
-                listReserves = gestioPrestec.consultarReservesByEstat(1);
-                ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
-                        listReserves
-                );
-                //afegint el observable list en el tableview
-                taulaReserves.setItems(observableListPrestec);
-                idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
-                nomUserColum.setCellValueFactory(cellData ->{
-                    Usuari usuari = cellData.getValue().getUsuari();
-                    String nom = usuari.getNom();
-                    return new SimpleStringProperty(nom);
-                });
-                nomWorkerColum.setCellValueFactory(cellData->{
-                    Treballador treballador = cellData.getValue().getTreballador();
-                    String nom = treballador.getNom();
-                    return new SimpleStringProperty(nom);
-                });
-
-                bookTitleColum.setCellValueFactory(cellData ->{
-                    Llibre book = cellData.getValue().getLlibre();
-                    String titol = book.getTitol();
-                    return new SimpleStringProperty(titol);
-                });
-                dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
-                dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
-                estat.setCellValueFactory(new PropertyValueFactory<>("estat"));
-            }
-
-
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();    //degub error
-        }
+        });
     }
 
 
