@@ -67,9 +67,36 @@ public class PrestecController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         System.out.println("Reserva Screen!");
+
+        //carregar informacio del treballador
         loadWorkerInfo();
-        //filtreTaulaComboBox.setValue("Tota Inforamció");
-        loadInfoReserves();
+
+
+        filtreTaulaComboBox.setValue("Tota Inforamció"); // poso per default que carregi tota la inforamció
+        filtreTaulaComboBox.setOnAction(event -> {
+            String valor = filtreTaulaComboBox.getValue();
+            if(valor.equals("Reservats"))
+            {
+                // todo carregar reservats
+            }
+            else if(valor.equals("Cancelats"))
+            {
+            //todo carrecagar cacnelat
+            }
+            else if(valor.equals("Tornats"))
+            {
+            // todo carregar tornats
+            }
+            else if (valor.equals("En Prèstec"))
+            {
+                // todo carregar en prestec
+            }
+            else {
+                carregarTotaInforamcio();
+            }
+        });
+
+
     }
 
     /**
@@ -116,69 +143,75 @@ public class PrestecController implements Initializable
     }
 
 
+    private void carregarTotaInforamcio()
+    {
+        GestioPrestec gestioPrestec = new GestioPrestec();
+        listReserves = gestioPrestec.consultarReserves();
+        ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
+                listReserves
+        );
+        //afegint el observable list en el tableview
+        taulaReserves.setItems(observableListPrestec);
+        idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+        nomUserColum.setCellValueFactory(cellData ->{
+            Usuari usuari = cellData.getValue().getUsuari();
+            String nom = usuari.getNom();
+            return new SimpleStringProperty(nom);
+        });
+        nomWorkerColum.setCellValueFactory(cellData->{
+            Treballador treballador = cellData.getValue().getTreballador();
+            String nom = treballador.getNom();
+            return new SimpleStringProperty(nom);
+        });
+
+        bookTitleColum.setCellValueFactory(cellData ->{
+            Llibre book = cellData.getValue().getLlibre();
+            String titol = book.getTitol();
+            return new SimpleStringProperty(titol);
+        });
+        dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
+        dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
+        estat.setCellValueFactory(cellData ->{
+            int estat =cellData.getValue().getEstat();
+            switch (estat)
+            {
+                case 1 :
+                    return new SimpleStringProperty("Reservat");
+
+                case 2 :
+                    return new SimpleStringProperty("Cancelat");
+
+                case 3:
+                    return new SimpleStringProperty("Tornat");
+
+                case 4 :
+                    return new SimpleStringProperty("En Prèstec");
+
+                default:
+                    return new SimpleStringProperty(" ");
+
+
+
+            }
+
+        });
+    }
+
     /**
      * Metode per carregar les dades de la reserva
      */
     public void loadInfoReserves()
     {
        // System.out.println("Loading info reserva"); // debug testing
-        try 
+        try
         {
             String valorCombo = filtreTaulaComboBox.getValue();
+
 
             if(valorCombo.equals("Tota Inforamció"))
             {
                 System.out.println("Tota la info");
-                GestioPrestec gestioPrestec = new GestioPrestec();
-                listReserves = gestioPrestec.consultarReserves();
-                ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
-                        listReserves
-                );
-                //afegint el observable list en el tableview
-                taulaReserves.setItems(observableListPrestec);
-                idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
-                nomUserColum.setCellValueFactory(cellData ->{
-                    Usuari usuari = cellData.getValue().getUsuari();
-                    String nom = usuari.getNom();
-                    return new SimpleStringProperty(nom);
-                });
-                nomWorkerColum.setCellValueFactory(cellData->{
-                    Treballador treballador = cellData.getValue().getTreballador();
-                    String nom = treballador.getNom();
-                    return new SimpleStringProperty(nom);
-                });
 
-                bookTitleColum.setCellValueFactory(cellData ->{
-                    Llibre book = cellData.getValue().getLlibre();
-                    String titol = book.getTitol();
-                    return new SimpleStringProperty(titol);
-                });
-                dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
-                dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
-                estat.setCellValueFactory(cellData ->{
-                   int estat =cellData.getValue().getEstat();
-                   switch (estat)
-                   {
-                       case 1 :
-                           return new SimpleStringProperty("Reservat");
-
-                       case 2 :
-                           return new SimpleStringProperty("Cancelat");
-
-                       case 3:
-                           return new SimpleStringProperty("Tornat");
-
-                       case 4 :
-                           return new SimpleStringProperty("En Prèstec");
-
-                       default:
-                           return new SimpleStringProperty(" ");
-                 
-
-
-                   }
-
-                });
             }
 
             else if(valorCombo.equals("Reservat"))
