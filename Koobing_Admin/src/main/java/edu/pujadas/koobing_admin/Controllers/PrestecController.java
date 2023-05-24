@@ -290,32 +290,7 @@ public class PrestecController implements Initializable
 
             ComboBox<Llibre> llibreComboBox = new ComboBox<>();
             llibreComboBox.setDisable(true);
-            /*ComboBox<Biblioteca> bibliotecaComboBox= new ComboBox<>();
-            bibliotecaComboBox.setOnAction(actionEvent ->
-            {
-                if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
-                {
-                    llibreComboBox.getItems().clear();
-                    llibreComboBox.setDisable(false);
-                    Biblioteca bibliotecaSelected = bibliotecaComboBox.getSelectionModel().getSelectedItem();
 
-                    System.out.println("INFO BIBLIOTECA: "+ bibliotecaSelected.getIdBiblioteca());
-                    //afegir dades llibre
-                    GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
-                    LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-
-                    ArrayList<Llibre> llistatLlibresByBiblio = gestioLlibreBiblioteca.getLlibreBibliotecaByBilio(bibliotecaSelected.getIdBiblioteca());
-                    llibreComboBox.getItems().addAll(llistatLlibresByBiblio);
-                    llibreComboBox.setConverter(llibreStringConverter);
-                }
-            });*/
-
-            //add dades a biblioteca
-            /*GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-            ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
-            BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
-            bibliotecaComboBox.getItems().addAll(listaBiblio);
-            bibliotecaComboBox.setConverter(bibliotecaStringConverter);*/
 
 
 
@@ -339,10 +314,9 @@ public class PrestecController implements Initializable
 
             gridPane.addRow(0,new Label("Digues el usuari: ") ,usuariComboBox);
             gridPane.addRow(1, new Label("Nom del treballador :"), new Label(worker.getNom()));
-            //gridPane.addRow(2, new Label("Seleciona la biblioteca: "),bibliotecaComboBox);
-            gridPane.addRow(3, new Label("Seleciona el llibre: "),llibreComboBox);
-            gridPane.addRow(4,new Label("Data d'inici: "),new Label(formatStartDate));
-            gridPane.addRow(5,new Label("Data de finalizació: "),dataEndComboBox);
+            gridPane.addRow(2, new Label("Seleciona el llibre: "),llibreComboBox);
+            gridPane.addRow(3,new Label("Data d'inici: "),new Label(formatStartDate));
+            gridPane.addRow(4,new Label("Data de finalizació: "),dataEndComboBox);
 
 
             // Mostrar los dos diálogos en la misma ventana
