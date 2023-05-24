@@ -358,17 +358,69 @@ public class PrestecController implements Initializable
                    if(estatComboBox.getValue().equals("Reservat"))
                    {
                        prestec.setEstat(1);
+                       Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
+                       prestec.setDataFI(endDate);
+
+                       //afegir a memoria
+                       listReserves.add(prestec);
+                       ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+                       taulaReserves.setItems(prestecObservableList);
+
+                       GestioPrestec  gestioPrestec = new GestioPrestec();
+                       gestioPrestec.crearReserva(prestec);
+
+                       switchToReserva(event);
                    }
                    else if(estatComboBox.getValue().equals("Cancelat"))
                    {
                         prestec.setEstat(2);
+                       Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
+                       prestec.setDataFI(endDate);
+
+                       //afegir a memoria
+                       listReserves.add(prestec);
+                       ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+                       taulaReserves.setItems(prestecObservableList);
+
+                       GestioPrestec  gestioPrestec = new GestioPrestec();
+                       gestioPrestec.crearReserva(prestec);
+
+                       switchToReserva(event);
                    }
                    else if(estatComboBox.getValue().equals("Tornat"))
                    {
-                       
+                       prestec.setEstat(3);
+                       Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
+                       prestec.setDataFI(endDate);
+
+                       //afegir a memoria
+                       listReserves.add(prestec);
+                       ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+                       taulaReserves.setItems(prestecObservableList);
+
+                       //update the database
+                       GestioPrestec  gestioPrestec = new GestioPrestec();
+                       gestioPrestec.crearReserva(prestec);
+
+                       switchToReserva(event);
                    }
                    else if(estatComboBox.getValue().equals("En Prèstec"))
                    {
+                        prestec.setEstat(4);
+                       Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
+                       prestec.setDataFI(endDate);
+
+                       //afegir a memoria
+                       listReserves.add(prestec);
+                       ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+                       taulaReserves.setItems(prestecObservableList);
+
+
+                       //actualizar la base de datos
+                       GestioPrestec  gestioPrestec = new GestioPrestec();
+                       gestioPrestec.crearReserva(prestec);
+
+                       switchToReserva(event);
 
                    }
 
@@ -383,35 +435,19 @@ public class PrestecController implements Initializable
                     wromg.show();
                 }
 
-
             }
 
         }
         catch (Exception e)
         {
             System.out.println("Error adding Reserva: " + e.getMessage());
-            //e.printStackTrace();
+
         }
 
 
     }
 
 
-    private void repetico(Prestec prestec ,ActionEvent event) throws Exception
-    {
-        Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
-        prestec.setDataFI(endDate);
-
-        //afegir a memoria
-        listReserves.add(prestec);
-        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
-        taulaReserves.setItems(prestecObservableList);
-
-        GestioPrestec  gestioPrestec = new GestioPrestec();
-        gestioPrestec.crearReserva(prestec);
-
-        switchToReserva(event);
-    }
 
     /**
      * Metode que canvia el estat de la reserva a tornat
