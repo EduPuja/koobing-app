@@ -367,9 +367,7 @@ public class PrestecController implements Initializable
                         ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
                         taulaReserves.setItems(prestecObservableList);
 
-                        //base de dades
-                    /*GestioPrestec gestioPrestec = new GestioPrestec();
-                    gestioPrestec.crearReserva(prestec);*/
+
                     }
                     else if(dataEndComboBox.getValue().equals("10 dies"))
                     {
@@ -382,8 +380,7 @@ public class PrestecController implements Initializable
                         taulaReserves.setItems(prestecObservableList);
 
                         //base de dades
-                    /*GestioPrestec gestioPrestec = new GestioPrestec();
-                    gestioPrestec.crearReserva(prestec);*/
+
                     }
                     else if(dataEndComboBox.getValue().equals("5 dies"))
                     {
@@ -396,9 +393,7 @@ public class PrestecController implements Initializable
                         taulaReserves.setItems(prestecObservableList);
 
 
-                        //base de dades
-                    /*GestioPrestec gestioPrestec = new GestioPrestec();
-                    gestioPrestec.crearReserva(prestec);*/
+
                     }
 
 
@@ -411,7 +406,6 @@ public class PrestecController implements Initializable
                 else
                 {
                     Alert wromg = new Alert(Alert.AlertType.ERROR);
-
                     wromg.setTitle("Emplena els camps");
                     wromg.setHeaderText("Els camps estan vuits");
                     wromg.setContentText("Torna a emplenar els camps");
@@ -419,249 +413,21 @@ public class PrestecController implements Initializable
                 }
 
 
-
-
-
-
-
-            }
-
-
-
-        }
-        catch (Exception e)
-        {
-            //System.out.println("Error adding Reserva: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public void onDeleteReserva(ActionEvent event )
-    {
-        try {
-
-            GestioPrestec gestioPrestec = new GestioPrestec();
-            //confirmacion
-            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-            //error
-            Alert wrong = new Alert(Alert.AlertType.ERROR);
-
-            // mostrar el una alerta de tipus confirmacio per poder eliminar el llibre
-            alerta.setTitle("Confirmación");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Estàs segur de que vols continuar?");
-
-
-            Optional<ButtonType> resultado = alerta.showAndWait();
-
-
-            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-                Prestec prestec =taulaReserves.getSelectionModel().getSelectedItem();
-                if(prestec !=null)
-                {
-                    Alert sucessAlert = new Alert(Alert.AlertType.INFORMATION);
-                    sucessAlert.setTitle("Success!");
-                    sucessAlert.setHeaderText("Has eliminat una reserva!");
-                    sucessAlert.setContentText("La reserva s'ha eliminat correctament!");
-                    sucessAlert.show();
-
-
-                    //delte to memory
-                    ObservableList<Prestec> itemsReserves = taulaReserves.getItems();
-                    itemsReserves.remove(prestec);
-
-
-
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error Delete Reserva: " + e.getMessage());
-        }
-
-
-    }
-    public void onModifyReserva(ActionEvent event)
-    {
-        try {
-            Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
-            Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
-            if(prestec !=null){
-                ComboBox<Usuari> userComboBox= new ComboBox<>();
-                //ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<>();
-                ComboBox<Llibre> llibreComboBox= new ComboBox<>();
-                llibreComboBox.setDisable(true);
-
-                //afegir dades usuari
-                GestioUsuari gestioUsuari = new GestioUsuari();
-                ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
-                UsuariStringConverter userConverter = new UsuariStringConverter();
-                userComboBox.setConverter(userConverter);
-                userComboBox.getItems().addAll(listaUsuarios);
-
-
-                //afegit dades biblioteca
-                /*bibliotecaComboBox.setOnAction(actionEvent ->
-                {
-                    if((bibliotecaComboBox.getSelectionModel().getSelectedItem() != null))
-                    {
-                        llibreComboBox.getItems().clear();
-                        llibreComboBox.setDisable(false);
-                        Biblioteca bibliotecaSelected = bibliotecaComboBox.getSelectionModel().getSelectedItem();
-
-                        System.out.println("INFO BIBLIOTECA: "+ bibliotecaSelected.getIdBiblioteca());
-                        //afegir dades llibre
-                        GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
-                        LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-
-                        ArrayList<Llibre> llistatLlibresByBiblio = gestioLlibreBiblioteca.getLlibreBibliotecaByBilio(bibliotecaSelected.getIdBiblioteca());
-                        llibreComboBox.getItems().addAll(llistatLlibresByBiblio);
-                        llibreComboBox.setConverter(llibreStringConverter);
-                    }
-                });*/
-
-                //add dades a biblioteca
-                /*GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-                ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
-                BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
-                bibliotecaComboBox.getItems().addAll(listaBiblio);
-                bibliotecaComboBox.setConverter(bibliotecaStringConverter);*/
-
-
-
-                DatePicker datePickerStart = new DatePicker(prestec.getDataInici().toLocalDate());
-                DatePicker datePickerEnd = new DatePicker(prestec.getDataFI().toLocalDate());
-                CheckBox isRetornart = new CheckBox();
-
-
-
-
-
-
-                //crear el gridpane per posar els 2 camps a l'hora
-                GridPane gridPane = new GridPane();
-                gridPane.setHgap(10);
-                gridPane.setVgap(10);
-
-
-
-                gridPane.addRow(0,new Label("Treballdor Actual: "),new Label(worker.getNom() +" "+ worker.getCognom()));
-                gridPane.addRow(1,new Label("Usuari Actual: "),new Label(prestec.getUsuari().getNom() +" " + prestec.getUsuari().getCognom()));
-                gridPane.addRow(2,new Label("Digues el nou usuari ") ,userComboBox);
-               // gridPane.addRow(3,new Label("Biblioteca Actual :") ,new Label(prestec.getBiblio().getNomBiblioteca()));
-               // gridPane.addRow(4, new Label("Vols Canviar de biblioteca? : "), bibliotecaComboBox);
-                gridPane.addRow(5,new Label("Titol del llibre actual: ") ,new Label(prestec.getLlibre().getTitol()));
-                gridPane.addRow(6, new Label("Digues el llibre:  "),llibreComboBox);
-                gridPane.addRow(7, new Label("Data de inicio"), datePickerStart);
-                gridPane.addRow(8, new Label("Data de fin"), datePickerEnd);
-                gridPane.addRow(9, new Label("Estat :"),isRetornart);
-
-
-
-                Alert alert = new Alert(Alert.AlertType.NONE);
-
-                alert.setTitle("Modificar la reserva");
-                alert.setHeaderText("Introduïu les noves dades de la reserva");
-                alert.getDialogPane().setContent(gridPane);
-                alert.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-                Optional<ButtonType> resultat = alert.showAndWait();
-                if (resultat.isPresent() && resultat.get() == ButtonType.OK)
-                {
-
-
-                   /* if(bibliotecaComboBox.getSelectionModel().getSelectedItem() != null && userComboBox.getSelectionModel().getSelectedItem() != null && llibreComboBox.getSelectionModel().getSelectedItem() != null)
-                    {
-                        System.out.println("Actualizat");
-                        prestec.setBiblio(bibliotecaComboBox.getValue());
-                        prestec.setTreballador(worker);
-                        prestec.setEstat(false);
-                        prestec.setUsuari(userComboBox.getValue());
-                        prestec.setLlibre(llibreComboBox.getValue());
-
-                        Date dateInici = Date.valueOf(datePickerStart.getValue());
-                        prestec.setDataInici(dateInici);
-
-                        Date dataFi = Date.valueOf(datePickerEnd.getValue());
-                        prestec.setDataFI(dataFi);
-
-
-                        //actualizar memoria
-                        taulaReserves.refresh();
-
-
-                        //actualizar base de dades
-
-                        GestioPrestec gestioPrestec = new GestioPrestec();
-                        gestioPrestec.modificarReserva(prestec);
-                    }
-
-                    else
-                    {
-
-                        Alert wrong = new Alert(Alert.AlertType.ERROR);
-                        wrong.setTitle("Error");
-                        wrong.setHeaderText("Els camps son buits");
-                        wrong.setContentText("Torna a provar de modifcar el prestec");
-                        wrong.show();
-                    }*/
-
-
-
-
-
-
-
-
-
-
-
-
-                }
             }
 
         }
         catch (Exception e)
         {
-            System.out.println("Error Modify Reserva: " + e.getMessage());
+            System.out.println("Error adding Reserva: " + e.getMessage());
+            //e.printStackTrace();
         }
 
 
     }
 
 
-    /*
-    private void addDataComboxes(ComboBox<Usuari> usuariComboBox, ComboBox<Biblioteca> bibliotecaComboBox, ComboBox<Llibre> llibreComboBox)
-    {
-
-        //usuari
-        GestioUsuari gestioUsuari = new GestioUsuari();
-        ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
-        UsuariStringConverter userConverter = new UsuariStringConverter();
-        usuariComboBox.setConverter(userConverter);
-        usuariComboBox.getItems().addAll(listaUsuarios);
 
 
-
-        //biblioteca
-        GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
-        ArrayList<Biblioteca> listaBiblio = gestioBiblioteca.consultarBiblioteques();
-        BibliotecaStringConverter bibliotecaStringConverter = new BibliotecaStringConverter();
-        bibliotecaComboBox.getItems().addAll(listaBiblio);
-        bibliotecaComboBox.setConverter(bibliotecaStringConverter);
-
-
-        //llibre
-        GestioLlibre gestioLlibre = new GestioLlibre();
-        ArrayList<Llibre> listLlibres = gestioLlibre.consultarLlibres();
-        LlibreStringConverter llibreStringConverter = new LlibreStringConverter();
-        llibreComboBox.getItems().addAll(listLlibres);
-        llibreComboBox.setConverter(llibreStringConverter);
-
-
-    }*/
 
 
     public void onTornarLlibre(ActionEvent event)
@@ -693,8 +459,11 @@ public class PrestecController implements Initializable
             System.out.println("Tornar Llibre Error :" +e.getMessage());
         }
     }
-    // CANVIS DE PANTALLA
 
+
+    
+
+    // **** CANVIS DE PANTALLA **** //
 
     /**
      * Funcio per canviar a la pantalla de home
@@ -765,19 +534,7 @@ public class PrestecController implements Initializable
         stage.show();
     }
 
-    /**
-     * Funcio per canviar a la pantalla de Biblioteca
-     * @param event action evnet
-     * @throws Exception exeception
-     */
-    public void switchToBiblioteca(ActionEvent event) throws Exception
-    {
-        root = FXMLLoader.load(getClass().getResource("/edu/pujadas/koobing_admin/screens/biblioteca.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     /**
      * Funcio per canviar a la pantalla de usuari
