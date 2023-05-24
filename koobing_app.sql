@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2023 a las 18:07:38
+-- Tiempo de generación: 24-05-2023 a las 18:15:04
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -164,7 +164,7 @@ INSERT INTO `llibre` (`ISBN`, `id_autor`, `id_editor`, `id_idioma`, `id_genere`,
 (765434231123, 8, 3, 1, 5, '1984', 1, '2023-05-02', 10),
 (9780807286005, 4, 4, 3, 6, 'Harry Potter y la piedra filosofal', 3, '2023-05-24', 4),
 (9789510445365, 2, 3, 4, 2, 'Cien años de soledad', 1, '2023-05-16', 1),
-(12312312312312, 2, 1, 2, 2, 'Les Tres Bassones', 1, '2023-05-10', 9),
+(12312312312312, 2, 1, 2, 2, 'Les Tres Bassones', 1, '2023-05-10', 0),
 (12376217637612, 10, 3, 2, 2, 'Camps de Meduixes', 1, '2023-05-11', 10);
 
 -- --------------------------------------------------------
@@ -188,20 +188,17 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`id_prestec`, `ISBN`, `id_usuari`, `id_treballador`, `data_inici`, `data_fi`, `id_estat`) VALUES
-(1, 9789510445365, 12, 1, '2023-05-03', '2023-05-02', 1),
-(3, 9789510445365, 14, 1, '2023-05-02', '2023-05-03', 3);
+(1, 12312312312312, 12, 1, '2023-05-09', '2023-05-12', 1),
+(2, 12312312312312, 12, 1, '2023-05-24', '2023-05-11', 1);
 
 --
 -- Disparadores `reserva`
 --
 DELIMITER $$
 CREATE TRIGGER `restar_stock` AFTER INSERT ON `reserva` FOR EACH ROW BEGIN
-DECLARE stock_actual INT;
-    SET stock_actual = (SELECT llibre.stock FROM llibre WHERE llibre.ISBN = NEW.llibre.isbn);
-
-	IF stock_actual > 0 THEN
-        UPDATE llibre SET stock = stock - 1 WHERE ISBN = NEW.llibre.ISBN;
-	END IF;
+    IF (SELECT stock FROM llibre WHERE isbn = NEW.isbn) > 0 THEN
+        UPDATE llibre SET stock = stock - 1 WHERE isbn = NEW.isbn;
+    END IF;
 END
 $$
 DELIMITER ;
