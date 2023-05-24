@@ -15,12 +15,8 @@ public class GestioPrestec
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement statement = con.conectar();
-           /* String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`,`estat`) VALUES " +
-                    "('"+reserva.getUsuari().getId()+"','"+reserva.getTreballador().getId()+"','"+reserva.getBiblio().getIdBiblioteca()+"','"+reserva.getLlibre().getISBN()+"','"+reserva.getDataInici()+"','"+reserva.getDataFI()+"',"+reserva.isEstat()+") ";*/
-
-            //String sql = "INSERT INTO `reserves`( `id_usuari`, `id_treballador`, `id_biblioteca`, `ISBN`, `data_inici`, `data_fi`, `estat`) VALUES ('"+ prestec.getUsuari().getId()+"','"+ prestec.getTreballador().getId()+"','"+ prestec.getBiblio()+"','"+ prestec.getLlibre().getISBN()+"','"+ prestec.getDataInici()+"','"+ prestec.getDataFI()+"','"+ prestec.isEstat()+"')";
-
-            String sql = "";
+            String sql = "INSERT INTO `reserva`( `ISBN`, `id_usuari`, `id_treballador`, `data_inici`, `data_fi`, `id_estat`) VALUES ('"+prestec.getLlibre().getISBN()+"'," +
+                    "'"+prestec.getUsuari().getId()+"','"+prestec.getTreballador().getId()+"','"+prestec.getDataInici()+"','"+prestec.getDataFI()+"','"+prestec.getEstat()+"')";
             if(statement.executeUpdate(sql) == 1)
             {
                 System.out.println("Reserva inserted successfuly!");
