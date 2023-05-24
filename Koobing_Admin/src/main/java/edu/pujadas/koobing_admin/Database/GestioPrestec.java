@@ -193,24 +193,5 @@ public class GestioPrestec
     }
 
 
-    public void canviarEstat(int idPrestec)
-    {
-        try
-        {
-            ConnexioMYSQL con = new ConnexioMYSQL();
-            Statement stat = con.conectar();
-            String query = "UPDATE `reserves` SET `estat`='1' WHERE id_reserva= "+idPrestec;
-            if(stat.executeUpdate(query) == 1)
-            {
-                System.out.println("Se ha actualizat el estat");
-            }
-            else System.out.println("Estat de la reserva no actualizat");
-            con.desconectar();
-
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error changing the state of Reserva: " + e.getMessage());
-        }
-    }
+  
 }

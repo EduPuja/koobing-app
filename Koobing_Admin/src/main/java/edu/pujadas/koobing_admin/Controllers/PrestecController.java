@@ -426,32 +426,15 @@ public class PrestecController implements Initializable
     }
 
 
-
-
-
-
+    /**
+     * Metode que canvia el estat de la reserva a tornat
+     * @param event
+     */
     public void onTornarLlibre(ActionEvent event)
     {
         try
         {
-            Alert wrong = new Alert(Alert.AlertType.ERROR);
-            Alert success = new Alert(Alert.AlertType.INFORMATION);
-            Prestec res  = taulaReserves.getSelectionModel().getSelectedItem();
-            if(res != null)
-            {
-                GestioPrestec gestioPrestec = new GestioPrestec();
-                gestioPrestec.canviarEstat(res.getIdReserva());
-                success.setTitle("Se ha tornat el llibre");
-                success.setContentText(null);
-                success.setHeaderText("El llibre se ha tornat correctament!");
-                success.show();
-                switchToReserva(event);
-            }
-            else {
-                wrong.setTitle("Selecciona una reserva");
-                wrong.setHeaderText("Has de selecionar una reserva");
-                wrong.show();
-            }
+
 
         }
         catch (Exception e)
@@ -461,7 +444,7 @@ public class PrestecController implements Initializable
     }
 
 
-    
+
 
     // **** CANVIS DE PANTALLA **** //
 
