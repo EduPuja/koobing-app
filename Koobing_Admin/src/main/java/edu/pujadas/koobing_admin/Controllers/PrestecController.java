@@ -470,7 +470,7 @@ public class PrestecController implements Initializable
         }
         catch (Exception e)
         {
-            System.out.println("Error Canviant el estat a  Reservat: " +);
+            System.out.println("Error Canviant el estat a  Reservat: " +e.getMessage());
         }
     }
 

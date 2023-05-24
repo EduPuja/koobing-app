@@ -2,25 +2,16 @@
 
 <!-- Imports necessary for layout-->
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.tableview2.TableView2?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.tableview2.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.PrestecController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.PrestecController">
     <children>
         <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
             <items>
@@ -88,10 +79,10 @@
                                         <Image url="@../img/libro.png" />
                                     </image>
                                 </ImageView>
-                                <Button fx:id="tornarBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="Cancelar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                <Button fx:id="cancelarBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onPrestecCancelat" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="Cancelar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                                 <Button fx:id="afegirReserva" alignment="CENTER" mnemonicParsing="false" onAction="#onAddReserva" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                <Button fx:id="reservarBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="Tornat" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                <Button fx:id="cancelarBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="En Prèstec" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                <Button fx:id="tornatBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onPrestecTornat" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="Tornat" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                <Button fx:id="onPrestecBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onPrestecEnPrestat" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="En Prèstec" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                         <ComboBox fx:id="filtreTaulaComboBox" prefWidth="200.0" promptText="Escull que vols veure" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -105,7 +96,7 @@
 
 
                         </ComboBox>
-                        <Button fx:id="tornarBtn1" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="Reservat" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button fx:id="reservarBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onPrestecReservat" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: black;" text="Reservat" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                         <TableView2 fx:id="taulaReserves">
