@@ -79,25 +79,25 @@ public class PrestecController implements Initializable
             String valor = filtreTaulaComboBox.getValue();
             if(valor.equals("Reservats"))
             {
-                // todo carregar reservats
+
                 System.out.println("reservat");
                 carregarInforamcioEstat(1);
             }
             else if(valor.equals("Cancelats"))
             {
-            //todo carrecagar cacnelat
+
                 System.out.println("cacnelats");
                 carregarInforamcioEstat(2);
             }
             else if(valor.equals("Tornats"))
             {
-            // todo carregar tornats
+
                 System.out.println("tornats");
                 carregarInforamcioEstat(3);
             }
             else if (valor.equals("En Prèstec"))
             {
-                // todo carregar en prestec
+
                 System.out.println("prestec");
                 carregarInforamcioEstat(4);
             }

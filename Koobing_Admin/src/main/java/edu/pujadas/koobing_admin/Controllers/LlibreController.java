@@ -504,12 +504,12 @@ public class LlibreController implements Initializable
      */
    public void onModifyBook(ActionEvent event) throws Exception
     {
-        /*LlibreBiblio llibreBiblio = taulaBiblioLlibre.getSelectionModel().getSelectedItem();
-        if(llibreBiblio != null) {
+        Llibre llibre = taulaLlibres.getSelectionModel().getSelectedItem();
+        if(llibre != null) {
             // Creacio dels Textes
 
-            TextField titol = new TextField(llibreBiblio.getBook().getTitol());
-            TextField stock = new TextField(String.valueOf(llibreBiblio.getStock()));
+            TextField titol = new TextField(llibre.getTitol());
+            TextField stock = new TextField(String.valueOf(llibre.getStock()));
 
             TextFormatter<Integer> stockFormater = new TextFormatter<>(change -> {
                 if (change.getControlNewText().matches("\\d*")) {
@@ -525,7 +525,7 @@ public class LlibreController implements Initializable
             ComboBox<Editorial> editorialComboBox = new ComboBox<Editorial>();
             ComboBox<Idioma>idiomaComboBox = new ComboBox<Idioma>();
             ComboBox<Genere> genereComboBox = new ComboBox<Genere>();
-            ComboBox<Biblioteca> bibliotecaComboBox = new ComboBox<Biblioteca>();
+
 
 
             //afegint un tamany
@@ -534,14 +534,14 @@ public class LlibreController implements Initializable
             editorialComboBox.setMaxWidth(tamany);
             idiomaComboBox.setMaxWidth(tamany);
             genereComboBox.setMaxWidth(tamany);
-            bibliotecaComboBox.setMaxWidth(tamany);
+
 
             //afegint dades
-            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox,bibliotecaComboBox);
+            addDataAllComboBox(autorComboBox,editorialComboBox,idiomaComboBox,genereComboBox);
 
-            TextField version = new TextField(Integer.toString(llibreBiblio.getBook().getVersio()));
+            TextField version = new TextField(Integer.toString(llibre.getVersio()));
 
-            DatePicker dataPublicacio = new DatePicker(llibreBiblio.getBook().getDataPubli().toLocalDate());
+            DatePicker dataPublicacio = new DatePicker(llibre.getDataPubli().toLocalDate());
 
            // addDataAllComboBox(autors, editorials, idioma,genere);
             //crear el gridpane per posar els 2 camps a l'hora
@@ -551,19 +551,17 @@ public class LlibreController implements Initializable
             gridPane.setVgap(15);
 
             gridPane.addRow(0, new Label("Titol: "),titol);
-            gridPane.addRow(1,new Label("Autor actual: "),new Label(llibreBiblio.getBook().getAutor().getNomAutor()) );
+            gridPane.addRow(1,new Label("Autor actual: "),new Label(llibre.getAutor().getNomAutor()) );
             gridPane.addRow(2,new Label("Canvia el autor :"),autorComboBox);
-            gridPane.addRow(3, new Label("Editorial Actual: "),new Label(llibreBiblio.getBook().getEditor().getNomEditor()));
+            gridPane.addRow(3, new Label("Editorial Actual: "),new Label(llibre.getEditor().getNomEditor()));
             gridPane.addRow(4, new Label("Canvia l'editorial: "),editorialComboBox);
-            gridPane.addRow(5, new Label("Biblioteca Actual :"), new Label(llibreBiblio.getBiblioteca().getNomBiblioteca()));
-            gridPane.addRow(6, new Label("Canvi Biblioteca :"),bibliotecaComboBox);
-            gridPane.addRow(7, new Label("Idioma Actual : "),new Label(llibreBiblio.getBook().getIdioma().getNomIdioma()));
-            gridPane.addRow(8, new Label("Canvi Idioma: "),idiomaComboBox);
-            gridPane.addRow(9, new Label("Genere Actual: "),new Label(llibreBiblio.getBook().getGenere().getNomGenere()));
-            gridPane.addRow(10,new Label("Canvi Genere: "),genereComboBox);
-            gridPane.addRow(11, new Label("Versio: "),version);
-            gridPane.addRow(12, new Label("Data Publi "),dataPublicacio);
-            gridPane.addRow(13, new Label("Digues el stock: "),stock);
+            gridPane.addRow(5, new Label("Idioma Actual : "),new Label(llibre.getIdioma().getNomIdioma()));
+            gridPane.addRow(6, new Label("Canvi Idioma: "),idiomaComboBox);
+            gridPane.addRow(7, new Label("Genere Actual: "),new Label(llibre.getGenere().getNomGenere()));
+            gridPane.addRow(8,new Label("Canvi Genere: "),genereComboBox);
+            gridPane.addRow(9, new Label("Versio: "),version);
+            gridPane.addRow(10, new Label("Data Publi "),dataPublicacio);
+            gridPane.addRow(11, new Label("Digues el stock: "),stock);
 
 
 
@@ -586,7 +584,7 @@ public class LlibreController implements Initializable
 
 
                 if(autorComboBox.getValue() != null && editorialComboBox.getValue() != null &&
-                genereComboBox.getValue() != null && idiomaComboBox.getValue()!=null && bibliotecaComboBox.getValue()!=null)
+                genereComboBox.getValue() != null && idiomaComboBox.getValue()!=null )
                 {
                     //Actualizar les dades del llibre selecionat
 
@@ -595,64 +593,57 @@ public class LlibreController implements Initializable
                     GestioEditorial gestioEditorial = new GestioEditorial();
                     GestioIdioma  gestioIdioma = new GestioIdioma();
                     GestioGenere gestioGenere = new GestioGenere();
-                    GestioBiblioteca gestioBiblioteca = new GestioBiblioteca();
+
 
                     //converters
                     AutorStringConverter converterAutor = new AutorStringConverter();
                     EditorialStringConverter converterEditorial = new EditorialStringConverter();
                     GenereStringConverter converterGenere = new GenereStringConverter();
                     IdiomaStringConverter converterIdioma = new IdiomaStringConverter();
-                    BibliotecaStringConverter converterBiblioteca = new BibliotecaStringConverter();
+
 
                     //titol
-                    llibreBiblio.getBook().setTitol(titol.getText());
+                    llibre.setTitol(titol.getText());
 
                     //autor
                     int idAutor = converterAutor.getIdAutor(autorComboBox.getValue());
                     Autor a = gestioAutor.findAutor(idAutor);
-                    llibreBiblio.getBook().setAutor(a);
+                    llibre.setAutor(a);
 
                     //editorial
                     int idEditorial = converterEditorial.getIdEditor(editorialComboBox.getValue());
                     Editorial e = gestioEditorial.findEditorial(idEditorial);
-                    llibreBiblio.getBook().setEditor(e);
+                    llibre.setEditor(e);
 
                     //genere
                     int idGenere = converterGenere.getIdGenere(genereComboBox.getValue());
                     Genere g = gestioGenere.findGenere(idGenere);
-                    llibreBiblio.getBook().setGenere(g);
+                    llibre.setGenere(g);
 
                     //idioma
                     int idIdioma = converterIdioma.getIdIdioma(idiomaComboBox.getValue());
                     Idioma i = gestioIdioma.findIdioma(idIdioma);
-                    llibreBiblio.getBook().setIdioma(i);
+                    llibre.setIdioma(i);
 
                     //versio
-                    llibreBiblio.getBook().setVersio(Integer.parseInt(version.getText()));
+                    llibre.setVersio(Integer.parseInt(version.getText()));
                     //data
                     LocalDate data = dataPublicacio.getValue();
                     Date d = Date.valueOf(data);
-                    llibreBiblio.getBook().setDataPubli(d);
+                    llibre.setDataPubli(d);
 
                     //stock
-                    llibreBiblio.setStock(Integer.parseInt(stock.getText()));
-
-                    //biblitoeca
-                    int idBiblitoeca = converterBiblioteca.getIdBiblioteca(bibliotecaComboBox.getValue());
-                    Biblioteca b = gestioBiblioteca.findBiblioteca(idBiblitoeca);
-                    llibreBiblio.setBiblioteca(b);
+                    llibre.setStock(Integer.parseInt(stock.getText()));
 
 
                     //refresh
-                    taulaBiblioLlibre.refresh();
+                    taulaLlibres.refresh();
 
                     //modificar la relacio
-                   GestioLlibreBiblioteca gestioLlibreBiblioteca = new GestioLlibreBiblioteca();
-                    gestioLlibreBiblioteca.modificarLlibreBiblioteca(llibreBiblio);
+                   GestioLlibre gestioLlibreBiblioteca = new GestioLlibre();
+                    gestioLlibreBiblioteca.modificarLlibre(llibre);
 
-                        //modificar el llibre
-                    GestioLlibre gestioLlibre = new GestioLlibre();
-                    gestioLlibre.modificarLlibre(llibreBiblio.getBook());
+                  switchToLlibre(event);
                 }
 
                 else
@@ -667,7 +658,7 @@ public class LlibreController implements Initializable
 
 
             }
-        }*/
+        }
     }
 
 
