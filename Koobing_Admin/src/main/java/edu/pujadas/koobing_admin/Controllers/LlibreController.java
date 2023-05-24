@@ -467,7 +467,7 @@ public class LlibreController implements Initializable
                     {
                         wrong.setTitle("Error");
                         wrong.setHeaderText("Aquest llibre no es pot eliminar");
-                        wrong.setContentText("El seu estat pot esta es: Reservat");
+                        wrong.setContentText("Aquest llibre pot tenir reserves");
                         wrong.show();
                     }
                     else
