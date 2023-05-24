@@ -12,21 +12,20 @@ public class Prestec
     Date dataInici;
     Date dataFI;
 
-    boolean estat;
+    int estat ;
 
     public Prestec()
     {
     }
 
-    public Prestec(int idReserva, Usuari usuari, Treballador treballador, Llibre llibre, Date dataInici, Date dataFi)
-    {
+    public Prestec(int idReserva, Usuari usuari, Treballador treballador, Llibre llibre, Date dataInici, Date dataFI, int estat) {
         this.idReserva = idReserva;
         this.usuari = usuari;
         this.treballador = treballador;
-
         this.llibre = llibre;
         this.dataInici = dataInici;
-        this.dataFI = dataFi;
+        this.dataFI = dataFI;
+        this.estat = estat;
     }
 
     public int getIdReserva()
@@ -89,17 +88,12 @@ public class Prestec
         this.dataFI = dataFI;
     }
 
-    public int isEstat() {
-        if(estat)
-        {
-            return 1;
-        }
-        else  return 0;
 
-
+    public int getEstat() {
+        return estat;
     }
 
-    public void setEstat(boolean estat) {
+    public void setEstat(int estat) {
         this.estat = estat;
     }
 }
