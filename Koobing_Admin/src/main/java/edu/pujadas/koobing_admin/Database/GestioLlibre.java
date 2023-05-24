@@ -324,7 +324,7 @@ public class GestioLlibre
      * @return retrna -1 en cas d'error , 1 en cas de que "no tornat" , 2
      */
     public int getEstadoLlibre(long ISBN) {
-        boolean existe = false;
+
         try {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
@@ -333,36 +333,45 @@ public class GestioLlibre
             if(result.next()  ) {
                 int valorEstat = result.getInt("id_estat");
 
-                if(valorEstat == 1)
-                {
-                    // esta reservat :
-                    // Este estado indicaría que el libro ha sido reservado por el usuario, pero aún no se ha prestado.
-                    System.out.println("Estat Llibre : RESERVAT");
-                    return 1;
-                }
-                else if(valorEstat == 2)
-                {
-                    // CANCELAT . EL usuario o admin ha cancelat la reserva del llibre
-                    System.out.println("Estat llibre: Cancelat ");
-                    return 2;
-                }
-                else if( valorEstat == 3)
-                {
-                    // EN PRESTEC . Resulta que l'usuari  té el llibre
-                    System.out.println("Estat llibre: En prestec ");
-                    return 3;
-                }
-                else if(valorEstat ==4)
-                {
-                    // retornats
+              if(valorEstat == 1)
+              {
+                  // DISPONIBLE - estado base
 
-                    System.out.println("Estat llibre: RETORNAT");
-                    return 4;
-                }
-                else
-                {
+                  return 1;
 
-                }
+              }
+              else if( valorEstat == 2)
+              {
+                //CANCELADO
+                  return 2 ;
+              }
+              else if( valorEstat == 3)
+              {
+                //EN PRESTAMO
+                  return 3;
+              }
+              else if(valorEstat == 4)
+              {
+                // DEVUELLTO / TORNAT
+                  return 4;
+              }
+              else if (valorEstat == 5)
+              {
+                //VENCUT
+                  return 5;
+              }
+              else if(valorEstat == 6)
+              {
+                    //RESERVAT
+                  return 6;
+              }
+              else if (valorEstat == 7)
+              {
+                  // no stock
+                  return  7;
+
+              }
+
             }
             con.desconectar();
         } catch(Exception e) {
