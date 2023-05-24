@@ -462,6 +462,10 @@ public class PrestecController implements Initializable
      */
     public void onPrestecReservat(ActionEvent event)
     {
+        cancelarBtn.setDisable(false);
+        tornatBtn.setDisable(false);
+        reservarBtn.setDisable(false);
+        onPrestecBtn.setDisable(false);
         try {
 
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
@@ -499,6 +503,10 @@ public class PrestecController implements Initializable
      */
     public void onPrestecCancelat(ActionEvent event)
     {
+        cancelarBtn.setDisable(false);
+        tornatBtn.setDisable(false);
+        reservarBtn.setDisable(false);
+        onPrestecBtn.setDisable(false);
         try {
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
 
@@ -538,6 +546,10 @@ public class PrestecController implements Initializable
      */
     public void onPrestecTornat(ActionEvent event)
     {
+        cancelarBtn.setDisable(false);
+        tornatBtn.setDisable(false);
+        reservarBtn.setDisable(false);
+        onPrestecBtn.setDisable(false);
         try
         {
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
@@ -578,7 +590,12 @@ public class PrestecController implements Initializable
      */
     public void onPrestecEnPrestat(ActionEvent event)
     {
+        cancelarBtn.setDisable(false);
+        tornatBtn.setDisable(false);
+        reservarBtn.setDisable(false);
+        onPrestecBtn.setDisable(false);
         try {
+
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
             if(prestec!=null)
             {
