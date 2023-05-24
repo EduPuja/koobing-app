@@ -14,35 +14,20 @@ import java.util.Properties;
 
 public class ConnexioMYSQL {
     private Connection conexion;
-    private final String configFileName = "config.properties";
+
+    private final String url = "jdbc:mysql://localhost:3306/koobing_app";
+    private final String usuario = "root";
+    private final String password = "";
 
     public Statement conectar() {
         Alert wrong = new Alert(Alert.AlertType.ERROR);
         try {
-            Path currentPath = Paths.get("");
-            String filePath = currentPath.toAbsolutePath().toString() + "/" + configFileName;
-            Properties prop = new Properties();
-            prop.load(new FileInputStream(filePath));
 
-            String host = prop.getProperty("host");
-            int puerto = Integer.parseInt(prop.getProperty("puerto"));
-            String url = "jdbc:mysql://" + host + ":" + puerto + "/koobing_app";
-            String usuario = prop.getProperty("usuario");
-            String password = prop.getProperty("password");
 
             conexion = DriverManager.getConnection(url, usuario, password);
-            //System.out.println("Conexión establecida correctamente ✓");
             return conexion.createStatement();
-        } catch (IOException ex) {
-          //  System.out.println("Error al cargar el archivo de configuración: " + ex.getMessage());
-            wrong.setTitle("Error al connectar l'arxiu de configuración");
-            wrong.setHeaderText("La connexio no s'ha establert correctament");
-            wrong.setContentText("No he trobat el archiu de config");
-            wrong.show();
-
-            System.out.println("Error findig the file: "+ex.getMessage());
-            return null;
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             wrong.setTitle("Error al conectar amb el servidor");
             wrong.setHeaderText("La connexio no s'ha establert correctament");
             wrong.setContentText("Prova d'obrir el servidor de BASE DE DADES");
