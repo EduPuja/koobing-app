@@ -276,18 +276,15 @@ public class PrestecController implements Initializable
             //treballador
             Treballador worker = TrabajadorSingleton.getInstance().getTrabajador();
 
-            //comboboxes
+            //usari combobox
             ComboBox<Usuari> usuariComboBox= new ComboBox<>();
-            //usuari
             GestioUsuari gestioUsuari = new GestioUsuari();
             ArrayList<Usuari> listaUsuarios = gestioUsuari.consultarUsuaris();
             UsuariStringConverter userConverter = new UsuariStringConverter();
             usuariComboBox.setConverter(userConverter);
             usuariComboBox.getItems().addAll(listaUsuarios);
 
-
-
-
+            // llibre combobox
             ComboBox<Llibre> llibreComboBox = new ComboBox<>();
             GestioLlibre gestioLlibre = new GestioLlibre();
             ArrayList<Llibre> llistatLlbires = gestioLlibre.consultarLlibresAmbStock();
@@ -296,41 +293,38 @@ public class PrestecController implements Initializable
             llibreComboBox.getItems().addAll(llistatLlbires);
 
 
-
-
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String formatStartDate = LocalDate.now().format(formatter);
 
-
+            //data finalizacio
             ComboBox<String> dataEndComboBox = new ComboBox<String>();
             ObservableList<String> dies = FXCollections.observableArrayList(
                     "1 mes" ,"10 dies ","5 dies"
             );
             dataEndComboBox.setItems(dies);
 
-            ComboBox<String> estats= new ComboBox<String>();
 
+            //combobox de estatComboBox
+            ComboBox<String> estatComboBox= new ComboBox<String>();
             ObservableList<String> observableList = FXCollections.observableArrayList(
                     "Reservat" ,"Cancelat ","Tornat","En Prèstec"
             );
-            estats.setItems(observableList);
+            estatComboBox.setItems(observableList);
 
             //crear el gridpane per posar els 2 camps a l'hora
             GridPane gridPane = new GridPane();
             gridPane.setHgap(10);
             gridPane.setVgap(10);
 
-
-
             gridPane.addRow(0,new Label("Digues el usuari: ") ,usuariComboBox);
             gridPane.addRow(1, new Label("Nom del treballador :"), new Label(worker.getNom()));
             gridPane.addRow(2, new Label("Seleciona el llibre: "),llibreComboBox);
             gridPane.addRow(3,new Label("Data d'inici: "),new Label(formatStartDate));
             gridPane.addRow(4,new Label("Data de finalizació: "),dataEndComboBox);
-            gridPane.addRow(5,new Label("Estats:"),estats);
+            gridPane.addRow(5,new Label("Estats:"),estatComboBox);
 
 
-            // Mostrar los dos diálogos en la misma ventana
+            //alerta
             Alert alert = new Alert(Alert.AlertType.NONE);
 
             alert.setTitle("Afegir Reserva");
@@ -345,62 +339,51 @@ public class PrestecController implements Initializable
 
             if (resultat.isPresent() && resultat.get() == ButtonType.OK)
             {
-                Prestec prestec = new Prestec();
-                //prestec.setBiblio(bibliotecaComboBox.getValue());
-                prestec.setTreballador(worker);
-                //prestec.setEstat(false);
-                prestec.setUsuari(usuariComboBox.getValue());
-                prestec.setLlibre(llibreComboBox.getValue());
 
-                Date dateInici = Date.valueOf(LocalDate.now());
-                prestec.setDataInici(dateInici);
+                // si els combooxes no estan buits
+                if(dataEndComboBox.getValue() != null && estatComboBox.getValue() != null &&
+                        usuariComboBox.getValue()!=null && llibreComboBox.getValue()!=null) {
 
-                if(dataEndComboBox.getValue() != null)
-                {
-                    if(dataEndComboBox.getValue().equals("1 mes"))
+                    //creacio del prestec
+                    Prestec prestec = new Prestec();
+
+                    prestec.setTreballador(worker); // afegieixo el treballador
+                    prestec.setUsuari(usuariComboBox.getValue());   // el usuari
+                    prestec.setLlibre(llibreComboBox.getValue()); // el llibre
+
+                    //afegixio la data de avui com a data d'inici
+                    Date dateInici = Date.valueOf(LocalDate.now());
+                    prestec.setDataInici(dateInici);
+
+                    switch (estatComboBox.getValue())
                     {
-                        Date endDate = Date.valueOf(LocalDate.now().plusMonths(1));
-                        prestec.setDataFI(endDate);
+                        case "Reservat", "Cancelat", "En Prèstec", "Tornat" ->
+                        {
 
-                        //afegir a memoria
-                        listReserves.add(prestec);
-                        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
-                        taulaReserves.setItems(prestecObservableList);
+                            //comprovacio del combobox data end
+                            if(dataEndComboBox.getValue().equals("1 mes"))
+                            {
+                                repetico(prestec,event);
 
 
-                    }
-                    else if(dataEndComboBox.getValue().equals("10 dies"))
-                    {
-                        Date endDate = Date.valueOf(LocalDate.now().plusDays(10));
-                        prestec.setDataFI(endDate);
+                            }
+                            else if(dataEndComboBox.getValue().equals("10 dies"))
+                            {
+                                repetico(prestec,event);
 
-                        //afegir a memoria
-                        listReserves.add(prestec);
-                        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
-                        taulaReserves.setItems(prestecObservableList);
+                            }
+                            else if(dataEndComboBox.getValue().equals("5 dies"))
+                            {
+                                repetico(prestec,event);
 
-                        //base de dades
+                            }
 
-                    }
-                    else if(dataEndComboBox.getValue().equals("5 dies"))
-                    {
-                        Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
-                        prestec.setDataFI(endDate);
-
-                        //afegir a memoria
-                        listReserves.add(prestec);
-                        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
-                        taulaReserves.setItems(prestecObservableList);
-
+                        }
 
 
                     }
 
 
-                    GestioPrestec  gestioPrestec = new GestioPrestec();
-                    gestioPrestec.crearReserva(prestec);
-
-                    switchToReserva(event);
 
                 }
                 else
@@ -425,6 +408,22 @@ public class PrestecController implements Initializable
 
     }
 
+
+    private void repetico(Prestec prestec ,ActionEvent event) throws Exception
+    {
+        Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
+        prestec.setDataFI(endDate);
+
+        //afegir a memoria
+        listReserves.add(prestec);
+        ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
+        taulaReserves.setItems(prestecObservableList);
+
+        GestioPrestec  gestioPrestec = new GestioPrestec();
+        gestioPrestec.crearReserva(prestec);
+
+        switchToReserva(event);
+    }
 
     /**
      * Metode que canvia el estat de la reserva a tornat
