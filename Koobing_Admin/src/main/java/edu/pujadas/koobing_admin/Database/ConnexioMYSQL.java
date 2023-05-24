@@ -34,7 +34,13 @@ public class ConnexioMYSQL {
             //System.out.println("Conexión establecida correctamente ✓");
             return conexion.createStatement();
         } catch (IOException ex) {
-            System.out.println("Error al cargar el archivo de configuración: " + ex.getMessage());
+          //  System.out.println("Error al cargar el archivo de configuración: " + ex.getMessage());
+            wrong.setTitle("Error al connectar l'arxiu de configuración");
+            wrong.setHeaderText("La connexio no s'ha establert correctament");
+            wrong.setContentText("No he trobat el archiu de config");
+            wrong.show();
+
+            System.out.println("Error findig the file: "+ex.getMessage());
             return null;
         } catch (SQLException ex) {
             wrong.setTitle("Error al conectar amb el servidor");
