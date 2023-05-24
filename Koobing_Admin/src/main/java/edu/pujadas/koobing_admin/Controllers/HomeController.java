@@ -3,6 +3,7 @@ package edu.pujadas.koobing_admin.Controllers;
 import edu.pujadas.koobing_admin.Database.*;
 import edu.pujadas.koobing_admin.Models.*;
 import edu.pujadas.koobing_admin.Utilities.TrabajadorSingleton;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,7 +99,7 @@ public class HomeController implements Initializable
     public TableColumn <Llibre,String>titolColum;
     public TableColumn <Llibre,Integer>versioColum;
     public TableColumn <Llibre, Date>dataPubliColum;
-    public TableColumn <Llibre,Integer> stockColum;
+    public TableColumn <Llibre, String > stockColum;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -288,7 +289,11 @@ public class HomeController implements Initializable
             titolColum.setCellValueFactory(new PropertyValueFactory<>("titol"));
             versioColum.setCellValueFactory(new PropertyValueFactory<>("versio"));
             dataPubliColum.setCellValueFactory(new PropertyValueFactory<>("dataPubli"));
-            stockColum.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            stockColum.setCellValueFactory(cellData->
+            {
+                int stock = cellData.getValue().getStock();
+               return  new SimpleStringProperty(String.valueOf(stock));
+            });
 
 
 

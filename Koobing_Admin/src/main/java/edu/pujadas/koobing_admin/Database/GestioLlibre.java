@@ -217,7 +217,6 @@ public class GestioLlibre
                 llibre.setTitol(rs.getString("titol"));
                 llibre.setVersio(rs.getInt("versio"));
                 llibre.setDataPubli(rs.getDate("data_publi"));
-
                 llibre.setStock(rs.getInt("stock"));
 
                 //afegint tots els llibres al arraylist
@@ -265,7 +264,7 @@ public class GestioLlibre
 
            Statement stat = con.conectar();
 
-            String query2 = "SELECT * from llibre limit 10 where stock >0";
+            String query2 = "SELECT * from llibre where stock >0 limit 10";
 
 
             ResultSet rs = stat.executeQuery(query2);
@@ -276,8 +275,7 @@ public class GestioLlibre
                 // isbn
                 llibre.setISBN(rs.getLong("ISBN"));
 
-                //buscant el autor , editorials, idioma and genere per poder crear un objeto de cada
-                //System.out.println("Buscant Autors ... editorials etc..\n");
+
 
                 Autor autor = gestioAutor.findAutor(rs.getInt("id_autor"));
                 Editorial editor =gestioEditorial.findEditorial(rs.getInt("id_editor"));
@@ -294,6 +292,7 @@ public class GestioLlibre
                 llibre.setTitol(rs.getString("titol"));
                 llibre.setVersio(rs.getInt("versio"));
                 llibre.setDataPubli(rs.getDate("data_publi"));
+                llibre.setStock(rs.getInt("stock"));
 
                 //afegint tots els llibres al arraylist
                 llibresList.add(llibre);
