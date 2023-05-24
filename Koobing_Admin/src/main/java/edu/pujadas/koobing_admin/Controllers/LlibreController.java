@@ -237,24 +237,7 @@ public class LlibreController implements Initializable
                 return new SimpleStringProperty(String.valueOf(stock));
             });
 
-            /*for (int i = 0; i <listLlibres.size(); i++)
-            {
-                if(listLlibres.get(i).getStock() == 0)
-                {
-                    disponibleColum.setCellValueFactory(cellData ->
-                    {
-                        return new SimpleStringProperty("No Disponible");
-
-                    });
-                }
-                else
-                {
-                    disponibleColum.setCellValueFactory(cellData ->
-                    {
-                        return new SimpleStringProperty("Disponible");
-                    });
-                }
-            }*/
+           
 
 
 
