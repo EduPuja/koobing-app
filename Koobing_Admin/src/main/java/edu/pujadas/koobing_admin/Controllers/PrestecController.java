@@ -68,7 +68,7 @@ public class PrestecController implements Initializable
 
         System.out.println("Reserva Screen!");
         loadWorkerInfo();
-        filtreTaulaComboBox.setValue("Tota Inforamció");
+        //filtreTaulaComboBox.setValue("Tota Inforamció");
         loadInfoReserves();
     }
 
@@ -122,12 +122,13 @@ public class PrestecController implements Initializable
     public void loadInfoReserves()
     {
        // System.out.println("Loading info reserva"); // debug testing
-        try
+        try 
         {
             String valorCombo = filtreTaulaComboBox.getValue();
 
             if(valorCombo.equals("Tota Inforamció"))
             {
+                System.out.println("Tota la info");
                 GestioPrestec gestioPrestec = new GestioPrestec();
                 listReserves = gestioPrestec.consultarReserves();
                 ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
@@ -176,23 +177,41 @@ public class PrestecController implements Initializable
 
 
                    }
-                   /*if(estat == 1)
-                   {
-                       return new SimpleStringProperty("Reservat");
-                   }
-                   else if(estat == 2)
-                   {
-                       return new SimpleStringProperty("Cancelat");
-                   }
-                   else if(estat== 3)
-                   {
-                       return new SimpleStringProperty("Tornat");
-                   }
-                   else
-                   {
-                       return new SimpleStringProperty("En Prèstec");
-                   }*/
+
                 });
+            }
+
+            else if(valorCombo.equals("Reservat"))
+            {
+                System.out.println("Filtrant per reservat ");
+                    // ressevat es el 1
+                GestioPrestec gestioPrestec = new GestioPrestec();
+                listReserves = gestioPrestec.consultarReservesByEstat(1);
+                ObservableList<Prestec> observableListPrestec = FXCollections.observableArrayList(
+                        listReserves
+                );
+                //afegint el observable list en el tableview
+                taulaReserves.setItems(observableListPrestec);
+                idReservaColum.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+                nomUserColum.setCellValueFactory(cellData ->{
+                    Usuari usuari = cellData.getValue().getUsuari();
+                    String nom = usuari.getNom();
+                    return new SimpleStringProperty(nom);
+                });
+                nomWorkerColum.setCellValueFactory(cellData->{
+                    Treballador treballador = cellData.getValue().getTreballador();
+                    String nom = treballador.getNom();
+                    return new SimpleStringProperty(nom);
+                });
+
+                bookTitleColum.setCellValueFactory(cellData ->{
+                    Llibre book = cellData.getValue().getLlibre();
+                    String titol = book.getTitol();
+                    return new SimpleStringProperty(titol);
+                });
+                dataInici.setCellValueFactory(new PropertyValueFactory<>("dataInici"));
+                dataFi.setCellValueFactory(new PropertyValueFactory<>("dataFI"));
+                estat.setCellValueFactory(new PropertyValueFactory<>("estat"));
             }
 
 

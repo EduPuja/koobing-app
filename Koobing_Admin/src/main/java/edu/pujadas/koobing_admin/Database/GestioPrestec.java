@@ -115,6 +115,51 @@ public class GestioPrestec
         return null;
     }
 
+    /**
+     * Metode que et retonra totala inforamacio depenent del estat en que estigui
+     * @param idEstat
+     */
+    public ArrayList<Prestec> consultarReservesByEstat(int idEstat)
+    {     ArrayList<Prestec> listPrestec = new ArrayList<>();
+
+
+        try
+        {
+            ConnexioMYSQL con = new ConnexioMYSQL();
+            Statement stat = con.conectar();
+
+
+            String query = "SELECT * FROM reserva where id_estat= "+idEstat;
+
+            ResultSet rs = stat.executeQuery(query);
+
+            while (rs.next())
+            {
+                Prestec prestec = new Prestec();
+                prestec.setIdReserva(rs.getInt("id_prestec"));
+                prestec.setLlibre(new GestioLlibre().findLlibreByISBN(rs.getLong("ISBN")));
+                prestec.setUsuari(new GestioUsuari().findUserID(rs.getInt("id_usuari")));
+                prestec.setTreballador(new GestioTreballador().findTreballador(rs.getInt("id_treballador")));
+                prestec.setDataInici(rs.getDate("data_inici"));
+                prestec.setDataFI(rs.getDate("data_fi"));
+                prestec.setEstat(rs.getInt("id_estat"));
+
+                //addin the object into the arraylist
+                listPrestec.add(prestec);
+            }
+            con.desconectar();
+
+            return listPrestec;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error consutarReserves: " + e.getMessage());
+        }
+
+        return null;
+
+    }
+
     public Prestec findReserva(int idReserva)
     {
         // RETORNA LA RESERVA INDEPENDENT DEL STAT
