@@ -2,22 +2,16 @@
 
 <!-- Imports necessary for layout-->
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.tableview2.TableView2?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.tableview2.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.LlibreController">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pujadas.koobing_admin.Controllers.LlibreController">
     <children>
         <SplitPane dividerPositions="0.25" prefHeight="610.0" prefWidth="1010.0">
             <items>
@@ -86,7 +80,16 @@
                                 <Button fx:id="addBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onAddBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Afegir" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onModifyBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Modificar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Button fx:id="deleteBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onDeleteBook" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: black;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                            </children>
+                        <ComboBox prefWidth="200.0" promptText="Escull el que veus" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
+
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Disponible"/>
+                                    <String fx:value="No disponible" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </children>
                         </GridPane>
                         <TableView2 fx:id="taulaLlibres">
                             <columns>
