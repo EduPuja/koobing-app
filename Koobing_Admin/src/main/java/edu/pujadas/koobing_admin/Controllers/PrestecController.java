@@ -64,7 +64,7 @@ public class PrestecController implements Initializable
 
         System.out.println("Reserva Screen!");
         loadWorkerInfo();
-        loadInfoReserves();
+        //loadInfoReserves();
     }
 
     /**
