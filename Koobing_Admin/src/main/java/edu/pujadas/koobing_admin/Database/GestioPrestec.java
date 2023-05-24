@@ -29,28 +29,39 @@ public class GestioPrestec
         }
     }
 
-    public void modificarReserva(Prestec prestec)
+
+    /**
+     * Metode quee modifia el estat de la reserva a la base de dades
+     * @param prestec objecte de tipus prestec
+     */
+    public void modificarEstatReserva(Prestec prestec)
     {
         try
         {
             ConnexioMYSQL con = new ConnexioMYSQL();
             Statement stat = con.conectar();
-            String sql ="";
-
-
-            if(stat.executeUpdate(sql) == 1)
+            String query = "UPDATE `reserva` SET `id_estat`='"+prestec.getEstat()+"' WHERE id_prestec ="+prestec.getIdReserva();
+            if(stat.executeUpdate(query) == 1)
             {
-                System.out.println("Reseva update successfully");
+                System.out.println("El estat s'ha modificat correctament");
             }
-            else System.out.println("Reserva not updated ;(");
+            else{
+                System.out.println("EL estat no s'ha modificat ");
+            }
 
+            con.desconectar();
         }
         catch (Exception e)
         {
-            System.out.println("Modificar Reserva Error: "+e.getMessage());
+            System.out.println("Error al modificar el estat reserva: " +e.getMessage());
         }
     }
 
+
+    /**
+     * Metode per eliminar de la base de dades una reserva
+     * @param idReserva idetificador de la reserva
+     */
     public void eliminarReserva(int idReserva)
     {
         try
@@ -70,6 +81,11 @@ public class GestioPrestec
         }
     }
 
+
+    /**
+     * Metode per consultat totes les reseves de la base de dades
+     * @return un arraylist de tipus prestec
+     */
     public ArrayList<Prestec> consultarReserves()
     {
         ArrayList<Prestec> listPrestec = new ArrayList<>();
@@ -156,6 +172,11 @@ public class GestioPrestec
 
     }
 
+    /**
+     * Metode per buscar una reserva per el id
+     * @param idReserva  identificador de la reserva
+     * @return una objtece de tipus reserva
+     */
     public Prestec findReserva(int idReserva)
     {
         // RETORNA LA RESERVA INDEPENDENT DEL STAT
