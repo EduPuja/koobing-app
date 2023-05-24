@@ -83,54 +83,7 @@ public class LlibreController implements Initializable
         System.out.println("Book Screen");
         loadWorkerInfo();
         onLoadInfoLlibre();
-
-
-
-        // doble click tabla
-        taulaLlibres.setOnMouseClicked(event ->{
-            if(event.getClickCount()== 2)
-            {
-                Llibre libro = taulaLlibres.getSelectionModel().getSelectedItem();
-                if(libro != null)
-                {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informació del llibre");
-
-                    alert.setHeaderText(null);
-                    GestioLlibre gestioLlibre = new GestioLlibre();
-                   int estat = gestioLlibre.getEstadoLlibre(libro.getISBN());
-                   switch(estat)
-                   {
-                       case  1:
-                           alert.setContentText("Llibre: "+libro.getTitol()+" DISPONIBLE");
-                           break;
-                       case 2:
-                           alert.setContentText("Llibre: "+libro.getTitol()+" CANCELAT");
-                           break;
-                       case 3:
-                           alert.setContentText("Llibre: "+libro.getTitol()+" PRESTEC");
-                           break;
-                       case 4:
-                           alert.setContentText("Llibre: "+libro.getTitol()+" TORNAT");
-                           break;
-                       case 5:
-                           alert.setContentText("Llibre: "+libro.getTitol()+" Vençut");
-                       break;
-                       case 6:
-                           alert.setContentText("Llibre: "+libro.getTitol()+" Reservat");
-                       break;
-                       case 7:
-                           alert.setContentText("Llibre: "+libro.getTitol()+" No Stock");
-                           break;
-                       default:
-                           alert.setContentText("No tenim aquesta opcio");
-                       break;
-
-
-                   }
-                }
-            }
-        });
+        
 
     }
     /**
