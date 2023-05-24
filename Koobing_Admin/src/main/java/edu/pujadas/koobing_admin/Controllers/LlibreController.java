@@ -335,9 +335,14 @@ public class LlibreController implements Initializable
                 llibre.setDataPubli(d);
 
 
+                // refrescar la taula
+                taulaLlibres.refresh();
                 GestioLlibre gestioLlibre = new GestioLlibre();
 
                 gestioLlibre.crearLlibre(llibre);
+
+                //tornaar a carregar la pantalla
+                switchToLlibre(event);
 
 
             }
