@@ -40,6 +40,11 @@ public class PrestecController implements Initializable
     public Button genereBtn;
     public Button editioralBtn;
     public ComboBox<String> filtreTaulaComboBox;
+    public Button onPrestecBtn;
+    public Button afegirReserva;
+    public Button cancelarBtn;
+    public Button tornatBtn;
+    public Button reservarBtn;
 
     Parent root;
     Stage stage;
@@ -462,11 +467,24 @@ public class PrestecController implements Initializable
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
             if(prestec!=null)
             {
-                // cambio el estat a 1
-                prestec.setEstat(1);
-                GestioPrestec gestioPrestec= new GestioPrestec();
-                gestioPrestec.modificarEstatReserva(prestec);
-                switchToReserva(event);
+                if(prestec.getEstat() ==2 )
+                {
+                    // esta canscelat no puc cambiar res
+                    cancelarBtn.setDisable(true);
+                    tornatBtn.setDisable(true);
+                    reservarBtn.setDisable(true);
+                    onPrestecBtn.setDisable(true);
+
+                }
+                else
+                {
+                    // cambio el estat a 1
+                    prestec.setEstat(1);
+                    GestioPrestec gestioPrestec= new GestioPrestec();
+                    gestioPrestec.modificarEstatReserva(prestec);
+                    switchToReserva(event);
+                }
+
             }
         }
         catch (Exception e)
@@ -483,14 +501,29 @@ public class PrestecController implements Initializable
     {
         try {
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
+
             if(prestec!=null)
             {
-                // cambio el estat a 2
-                prestec.setEstat(2);
-                GestioPrestec gestioPrestec= new GestioPrestec();
-                gestioPrestec.modificarEstatReserva(prestec);
 
-                switchToReserva(event);
+                if(prestec.getEstat() ==2 )
+                {
+                    // esta canscelat no puc cambiar res
+                    cancelarBtn.setDisable(true);
+                    tornatBtn.setDisable(true);
+                    reservarBtn.setDisable(true);
+                    onPrestecBtn.setDisable(true);
+
+                }
+                else
+                {
+                    // cambio el estat a 2
+                    prestec.setEstat(2);
+                    GestioPrestec gestioPrestec= new GestioPrestec();
+                    gestioPrestec.modificarEstatReserva(prestec);
+
+                    switchToReserva(event);
+                }
+
             }
         }
         catch (Exception e)
@@ -510,11 +543,25 @@ public class PrestecController implements Initializable
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
             if(prestec!=null)
             {
-                // cambio el estat a 3
-                prestec.setEstat(3);
-                GestioPrestec gestioPrestec= new GestioPrestec();
-                gestioPrestec.modificarEstatReserva(prestec);
-                switchToReserva(event);
+
+                if(prestec.getEstat() ==2 )
+                {
+                    // esta canscelat no puc cambiar res
+                    cancelarBtn.setDisable(true);
+                    tornatBtn.setDisable(true);
+                    reservarBtn.setDisable(true);
+                    onPrestecBtn.setDisable(true);
+
+                }
+                else
+                {
+                    // cambio el estat a 3
+                    prestec.setEstat(3);
+                    GestioPrestec gestioPrestec= new GestioPrestec();
+                    gestioPrestec.modificarEstatReserva(prestec);
+                    switchToReserva(event);
+                }
+
             }
 
         }
@@ -535,11 +582,25 @@ public class PrestecController implements Initializable
             Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
             if(prestec!=null)
             {
-                // cambio el estat a 4
-                prestec.setEstat(4);
-                GestioPrestec gestioPrestec= new GestioPrestec();
-                gestioPrestec.modificarEstatReserva(prestec);
-                switchToReserva(event);
+                if(prestec.getEstat() ==2 )
+                {
+                    // esta canscelat no puc cambiar res
+                    cancelarBtn.setDisable(true);
+                    tornatBtn.setDisable(true);
+                    reservarBtn.setDisable(true);
+                    onPrestecBtn.setDisable(true);
+
+                }
+                else
+                {
+                    // cambio el estat a 4
+                    prestec.setEstat(4);
+                    GestioPrestec gestioPrestec= new GestioPrestec();
+                    gestioPrestec.modificarEstatReserva(prestec);
+                    switchToReserva(event);
+                }
+
+
             }
         }
         catch (Exception e)
