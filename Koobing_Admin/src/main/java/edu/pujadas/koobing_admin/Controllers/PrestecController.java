@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.controlsfx.control.spreadsheet.SpreadsheetCell;
 import org.controlsfx.control.tableview2.TableView2;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -267,8 +268,10 @@ public class PrestecController implements Initializable
     }
 
 
-
-
+    /**
+     * Metode afgir una reserva
+     * @param event Action Event
+     */
     public void onAddReserva(ActionEvent event)
     {
         try
@@ -448,21 +451,95 @@ public class PrestecController implements Initializable
     }
 
 
+    /**
+     * Metode que el que fa es canviar el estat de la prestec selecionat
+     * @param event actionevent
+     */
+    public void onPrestecReservat(ActionEvent event)
+    {
+        try {
+
+            Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
+            if(prestec!=null)
+            {
+                // cambio el estat a 1
+                prestec.setEstat(1);
+                GestioPrestec gestioPrestec= new GestioPrestec();
+                gestioPrestec.modificarEstatReserva(prestec);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Canviant el estat a  Reservat: " +);
+        }
+    }
+
+    /**
+     * Metode per canvia el estat de la prestec selecionat a cancelat
+     * @param event action event
+     */
+    public void onPrestecCancelat(ActionEvent event)
+    {
+        try {
+            Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
+            if(prestec!=null)
+            {
+                // cambio el estat a 2
+                prestec.setEstat(2);
+                GestioPrestec gestioPrestec= new GestioPrestec();
+                gestioPrestec.modificarEstatReserva(prestec);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error canceled prestec: " +e.getMessage());
+        }
+    }
 
     /**
      * Metode que canvia el estat de la reserva a tornat
      * @param event
      */
-    public void onTornarLlibre(ActionEvent event)
+    public void onPrestecTornat(ActionEvent event)
     {
         try
         {
-
+            Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
+            if(prestec!=null)
+            {
+                // cambio el estat a 3
+                prestec.setEstat(3);
+                GestioPrestec gestioPrestec= new GestioPrestec();
+                gestioPrestec.modificarEstatReserva(prestec);
+            }
 
         }
         catch (Exception e)
         {
             System.out.println("Tornar Llibre Error :" +e.getMessage());
+        }
+    }
+
+
+    /**
+     * metode per canvia  el estat de la reserva a EN PRÈSTEC
+     * @param event actionevent
+     */
+    public void onPrestecEnPrestat(ActionEvent event)
+    {
+        try {
+            Prestec prestec = taulaReserves.getSelectionModel().getSelectedItem();
+            if(prestec!=null)
+            {
+                // cambio el estat a 4
+                prestec.setEstat(4);
+                GestioPrestec gestioPrestec= new GestioPrestec();
+                gestioPrestec.modificarEstatReserva(prestec);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error EN PRESTEC  la reserva: " +e.getMessage());
         }
     }
 
