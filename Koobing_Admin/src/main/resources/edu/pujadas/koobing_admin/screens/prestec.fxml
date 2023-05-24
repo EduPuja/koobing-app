@@ -94,6 +94,7 @@
                         <ComboBox fx:id="filtreTaulaComboBox" prefWidth="200.0" promptText="Escull que vols veure" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Tota Inforamció"/>
                                     <String fx:value="Reservats" />
                                     <String fx:value="Cancelats" />
                                     <String fx:value="Tornats" />
