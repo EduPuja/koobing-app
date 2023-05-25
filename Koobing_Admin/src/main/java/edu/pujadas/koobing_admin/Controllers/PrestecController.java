@@ -75,7 +75,7 @@ public class PrestecController implements Initializable
 
         //carregar informacio del treballador
         loadWorkerInfo();
-
+        reservarBtn.setDisable(true);
 
         filtreTaulaComboBox.setValue("Reservats"); // poso per default que carregi tota la inforamció
         carregarInforamcioEstat(1);
@@ -87,7 +87,7 @@ public class PrestecController implements Initializable
                 cancelarBtn.setDisable(false);
                 tornatBtn.setDisable(false);
                 onPrestecBtn.setDisable(false);
-                reservarBtn.setDisable(true);
+
 
                 System.out.println("reservat");
                 carregarInforamcioEstat(1);
@@ -114,12 +114,12 @@ public class PrestecController implements Initializable
             }
             else if (valor.equals("En Prèstec"))
             {
-                cancelarBtn.setDisable(false);
+                cancelarBtn.setDisable(true);
                 tornatBtn.setDisable(false);
                 onPrestecBtn.setDisable(false);
                 reservarBtn.setDisable(false);
 
-                System.out.println("prestec");
+                System.out.println("En prestecs");
                 carregarInforamcioEstat(4);
             }
             else if(valor.equals("Tota Informació"))
@@ -334,7 +334,7 @@ public class PrestecController implements Initializable
             //combobox de estatComboBox
             ComboBox<String> estatComboBox= new ComboBox<String>();
             ObservableList<String> observableList = FXCollections.observableArrayList(
-                    "Reservat" ,"Cancelat ","Tornat","En Prèstec"
+                    "Reservat" ,"En Prèstec"
             );
             estatComboBox.setItems(observableList);
 
@@ -398,39 +398,7 @@ public class PrestecController implements Initializable
 
                        switchToReserva(event);
                    }
-                   else if(estatComboBox.getValue().equals("Cancelat"))
-                   {
-                        prestec.setEstat(2);
-                       Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
-                       prestec.setDataFI(endDate);
 
-                       //afegir a memoria
-                       listReserves.add(prestec);
-                       ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
-                       taulaReserves.setItems(prestecObservableList);
-
-                       GestioPrestec  gestioPrestec = new GestioPrestec();
-                       gestioPrestec.crearReserva(prestec);
-
-                       switchToReserva(event);
-                   }
-                   else if(estatComboBox.getValue().equals("Tornat"))
-                   {
-                       prestec.setEstat(3);
-                       Date endDate = Date.valueOf(LocalDate.now().plusDays(5));
-                       prestec.setDataFI(endDate);
-
-                       //afegir a memoria
-                       listReserves.add(prestec);
-                       ObservableList<Prestec> prestecObservableList = FXCollections.observableArrayList(listReserves);
-                       taulaReserves.setItems(prestecObservableList);
-
-                       //update the database
-                       GestioPrestec  gestioPrestec = new GestioPrestec();
-                       gestioPrestec.crearReserva(prestec);
-
-                       switchToReserva(event);
-                   }
                    else if(estatComboBox.getValue().equals("En Prèstec"))
                    {
                         prestec.setEstat(4);
