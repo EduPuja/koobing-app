@@ -31,9 +31,9 @@ public class HomeActivity extends AppCompatActivity {
 
     TextView homeLabel;
 
-    //loader per carrgear tota la info en un list
+
     LlibreLoader bookBiblioLoader;
-    LlibreBiblioLoader biblioLoader;
+
     ArrayList<LlibreBiblioteca> listBiblios = new ArrayList<LlibreBiblioteca>();
 
 
@@ -56,9 +56,8 @@ public class HomeActivity extends AppCompatActivity {
         // Posar el home como activat
         bottom_navigation.setSelectedItemId(R.id.navigation_home);
         setBottom_navigation();
+        loadBookInfo();
 
-        //loadBookInfoToViewPage();
-        loadInfoBook();
 
 
 
@@ -85,10 +84,10 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(HomeActivity.this, SearchActivity.class));
 
                     return true;
-                } else if (itemId == R.id.navigation_map) {
+                } else if (itemId == R.id.profile) {
                     // Navegar a la actividad MapActivity
                     //Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(HomeActivity.this, MapsActivity.class));
+                    startActivity(new Intent(HomeActivity.this, ProfileActivit.class));
 
                     return true;
                 }
@@ -100,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public void loadBookInfoToViewPage()
+    public void loadBookInfo()
     {
         bookBiblioLoader = new LlibreLoader();
 
@@ -133,30 +132,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public void loadInfoBook()
-    {
-        biblioLoader = new LlibreBiblioLoader();
-        biblioLoader.obtenirLlibresBiblio(new ApiCallback<List<LlibreBiblioteca>>() {
-            @Override
-            public void onSuccess(List<LlibreBiblioteca> data) {
-                if(data!= null && !data.isEmpty())
-                {
-                    carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
-                    viewPager.setAdapter(carouselAdapter);
-                }
-            }
-
-            @Override
-            public void onError(int statusCode) {
-                System.out.println("Error: "+ statusCode);
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                System.out.println("ON FAILURE LOADING BOOKG: " +throwable.getMessage());
-            }
-        });
-    }
 
 
 
