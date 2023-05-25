@@ -8,7 +8,7 @@ const controllerUsuario = require("./controllers/controllerUsuario");
 const controllerBiblio = require("./controllers/controllerBiblioteca");
 const controllerLlibre = require("./controllers/controllerLLibre");
 const reservaController = require("./controllers/controllerReserva");
-const controllerBookBiblio = require("./controllers/controllerBookBiblio");
+
 
 
 
@@ -21,7 +21,7 @@ app.get("/users", controllerUsuario.getAllUsers);
 app.get("/user/:email", controllerUsuario.getUserByEmail);
 app.get("/biblioteques", controllerBiblio.getAllBiblioteques);
 app.get("/books", controllerLlibre.getAllLlibres);
-app.get("/booksBiblio",controllerBookBiblio.getAllBooksWithBiblioteca);
+
 app.post("/reservarLlibre",reservaController.setReserva);
 
 

@@ -4,30 +4,29 @@ const connection = require("../database/conexio");
 
 function setReserva(req, res) {
   console.log("\nCreando una reserva");
-  const reserva = req.body;
+  const reserva = req.body.reserva;
 
   console.log("Info reserva: ",reserva);
 
   
-  const libroISBN = reserva.llibre.ISBN;
+  //const libroISBN = reserva.llibre.ISBN;
 
 
  
   const data_inici = new Date();
-  const data_fi = new Date();
+  //const data_fi = new Date();
 
-  data_fi.setMonth(data_fi.getMonth() + 1);
+  //data_fi.setMonth(data_fi.getMonth() + 1);
 
   // Insertar los valores en la consulta
-  const query = "INSERT INTO reserves (id_reserva, id_usuari, id_treballador, id_biblioteca, ISBN, data_inici, data_fi) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  //const query = "INSERT INTO reserves (id_reserva, id_usuari, id_treballador, id_biblioteca, ISBN, data_inici, data_fi) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 
   // Definir los valores de la reserva
-  const valores = [
+  /*const valores = [
     reserva.idReserva,
     reserva.usuari.id,
     reserva.treballador.id,
-    reserva.biblioteca.idBiblioteca,
     libroISBN,
     data_inici,
     data_fi
@@ -43,7 +42,7 @@ function setReserva(req, res) {
       console.log("Reserva insertada correctamente");
       res.status(200).json({ message: "Reserva insertada correctamente" });
     }
-  });
+  });*/
 
 
 }
