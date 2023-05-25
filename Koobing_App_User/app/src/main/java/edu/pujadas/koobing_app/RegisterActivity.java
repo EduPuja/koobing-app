@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         cognomField = findViewById(R.id.cognomField);
         dataNaixField = findViewById(R.id.dataNaixField);
         correuField =  findViewById(R.id.correuField);
-        passwordField = findViewById(R.id.passwordField);
+        passwordField = findViewById(R.id.contrassenyaField);
 
     }
 
