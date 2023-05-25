@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
-import edu.pujadas.koobing_app.Loaders.LlibreBiblioLoader;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.LlibreBiblioteca;

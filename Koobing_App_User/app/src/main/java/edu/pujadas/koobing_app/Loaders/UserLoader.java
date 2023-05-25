@@ -11,7 +11,7 @@ import java.util.TimeZone;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Services.ApiCallback;
-import edu.pujadas.koobing_app.Utilites.RetrofitConection;
+import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 public class UserLoader {
 
     private UserService userService;
-    private RetrofitConection retrofit;
+    private RetrofitConnection retrofit;
 
     //private String url = "http://192.168.0.33:3000/users/";
 
@@ -38,7 +38,7 @@ public class UserLoader {
 
        //String url ="http://192.168.0.33:3000/users/";
 
-        retrofit = new RetrofitConection(url);
+        retrofit = new RetrofitConnection(url);
         userService = retrofit.getRetrofit().create(userService.getClass());
 
         Call<List<Usuari>> call = userService.getUsuaris();
@@ -68,7 +68,7 @@ public class UserLoader {
        // String url = "http://192.168.0.33:3000/user/" + correo+"/";
         String url = "http://192.168.16.254:3000/user/"+correo+"/";
 
-        retrofit = new RetrofitConection(url);
+        retrofit = new RetrofitConnection(url);
 
         userService = retrofit.getRetrofit().create(UserService.class);
 
