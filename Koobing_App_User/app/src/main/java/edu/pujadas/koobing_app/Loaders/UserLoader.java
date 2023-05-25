@@ -11,16 +11,16 @@ import java.util.TimeZone;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Services.ApiCallback;
+import edu.pujadas.koobing_app.Utilites.RetrofitConection;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserLoader {
 
     private UserService userService;
+    private RetrofitConection retrofit;
 
     //private String url = "http://192.168.0.33:3000/users/";
 
@@ -34,17 +34,12 @@ public class UserLoader {
     public void obtenerUsuarios(final ApiCallback<List<Usuari>> callback) {
 
 
-        //String url ="http://192.168.16.254:3000/users/";
+        String url ="http://192.168.16.254:3000/users/";
 
-       String url ="http://192.168.0.33:3000/users/";
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+       //String url ="http://192.168.0.33:3000/users/";
 
-
-        userService = retrofit.create(UserService.class);
-
+        retrofit = new RetrofitConection(url);
+        userService = retrofit.getRetrofit().create(userService.getClass());
 
         Call<List<Usuari>> call = userService.getUsuaris();
         call.enqueue(new Callback<List<Usuari>>() {
@@ -70,16 +65,12 @@ public class UserLoader {
     public Usuari obtenerUsuarioPorCorreo(String correo, final ApiCallback<Usuari> callback) {
 
 
-        String url = "http://192.168.0.33:3000/user/" + correo+"/";
-        //String url = "http://192.168.16.254:3000/user/"+correo+"/";
+       // String url = "http://192.168.0.33:3000/user/" + correo+"/";
+        String url = "http://192.168.16.254:3000/user/"+correo+"/";
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        retrofit = new RetrofitConection(url);
 
-
-        userService = retrofit.create(UserService.class);
+        userService = retrofit.getRetrofit().create(UserService.class);
 
 
         Call<ResponseBody> call = userService.getUserByEmail(correo);
