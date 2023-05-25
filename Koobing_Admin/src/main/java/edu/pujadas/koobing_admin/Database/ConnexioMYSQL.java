@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -14,20 +15,34 @@ import java.util.Properties;
 
 public class ConnexioMYSQL {
     private Connection conexion;
+    Properties prop = new Properties();
+    InputStream input = null;
 
-    private final String url = "jdbc:mysql://localhost:3306/koobing_app";
-    private final String usuario = "root";
-    private final String password = "";
+
+
 
     public Statement conectar() {
         Alert wrong = new Alert(Alert.AlertType.ERROR);
         try {
 
+            String filename = "C:/koobing_app_config/config.properties";
+            input = new FileInputStream(filename);
+
+            prop.load(input);
+
+
+            String usuario = prop.getProperty("user");
+            String password = prop.getProperty("password");
+            String host = prop.getProperty("host");
+            String puerto = prop.getProperty("port");
+
+
+            String url = "jdbc:mysql://" + host + ":" + puerto + "/koobing_app";
 
             conexion = DriverManager.getConnection(url, usuario, password);
             return conexion.createStatement();
         }
-        catch (SQLException ex) {
+        catch (Exception ex) {
             wrong.setTitle("Error al conectar amb el servidor");
             wrong.setHeaderText("La connexio no s'ha establert correctament");
             wrong.setContentText("Prova d'obrir el servidor de BASE DE DADES");
