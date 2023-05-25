@@ -59,7 +59,6 @@ public class PrestecController implements Initializable
     public TableColumn<Prestec,String> nomUserColum;
     public TableColumn<Prestec,Integer> idReservaColum;
     public TableColumn<Prestec,String> nomWorkerColum;
-    public TableColumn<Prestec,String> nomBiblioColum;
     public TableColumn<Prestec,String> bookTitleColum;
     public TableColumn<Prestec, Date> dataInici;
     public TableColumn<Prestec,Date> dataFi;
@@ -88,7 +87,7 @@ public class PrestecController implements Initializable
                 cancelarBtn.setDisable(false);
                 tornatBtn.setDisable(false);
                 onPrestecBtn.setDisable(false);
-                reservarBtn.setDisable(false);
+                reservarBtn.setDisable(true);
 
                 System.out.println("reservat");
                 carregarInforamcioEstat(1);
