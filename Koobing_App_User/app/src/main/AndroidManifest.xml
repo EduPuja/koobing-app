@@ -27,10 +27,6 @@
             android:value="AIzaSyBB0KizOiZqjB90xyrIC2tiJTsvjYQIVx4" />
 
         <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
