@@ -97,11 +97,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Metode per carregar la informacio del llibre en el carrusel de la homeActivity
+     */
     public void loadBookInfo()
     {
         bookBiblioLoader = new LlibreLoader();
 
-        bookBiblioLoader.obtenerLibrosfinal(new ApiCallback<List<Llibre>>() {
+        //mostar els 10 llibres de la base de dades en el carrusel
+        bookBiblioLoader.obtenir10Llibres(new ApiCallback<List<Llibre>>() {
             @Override
             public void onSuccess(List<Llibre> data) {
                 if(data!=null && !data.isEmpty())

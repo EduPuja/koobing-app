@@ -34,6 +34,37 @@ public class LlibreLoader {
      */
     public void obtenerLibrosfinal  (final ApiCallback<List<Llibre>> callback)
     {
+
+        String url = "http://192.168.0.33:3000/books/";
+
+        //String url ="http://192.168.16.254:3000/books/";
+        Call <List<Llibre>> call = llibreService.getAllBooks();
+        call.enqueue(new Callback<List<Llibre>>() {
+
+            @Override
+            public void onResponse(Call<List<Llibre>> call, Response<List<Llibre>> response) {
+                if (response.isSuccessful()) {
+                    List<Llibre> librosBiblioteca = response.body();
+
+                    callback.onSuccess(librosBiblioteca);
+                }
+                else {
+                    callback.onError(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Llibre>> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+    }
+
+    public void obtenir10Llibres(final ApiCallback<List<Llibre>>callback)
+    {
+        String url = "http://192.168.0.33:3000/books_10/";
+
+        //String url ="http://192.168.16.254:3000/books/";
         Call <List<Llibre>> call = llibreService.getAllBooks();
         call.enqueue(new Callback<List<Llibre>>() {
 
