@@ -12,7 +12,7 @@ function getAllLlibres(req, res) {
 
   connection.query(sql, function (error, result) {
     if (error) {
-        console.error("Error al obtener toda la inforamcion de la biblioteca: ", error);
+        console.error("Error al obtener toda la inforamcion de la llibre: ", error);
         res.status(500).send("Error interno del servidor");
     }
     else
@@ -22,6 +22,24 @@ function getAllLlibres(req, res) {
   });
 }
 
+
+//funcio que et retorna nomes el top 10 de llibers en fromat json 
+function getTop10Llibres(req,res)
+{
+  console.log("\nRetornat el llistat dels 10 primers llibres")
+  const sql = "select * from llibre limit 10"
+  connection.query(sql, function(error ,result) {
+    if(error)
+    { 
+      console.error("Error al obtener toda la información dels top 10 llibres: ", error.message);
+    }
+    else{
+      res.json(result);
+    }
+  })
+}
+
 module.exports = {
   getAllLlibres,
+  getTop10Llibres
 };

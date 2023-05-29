@@ -21,6 +21,7 @@ app.get("/users", controllerUsuario.getAllUsers);
 app.get("/user/:email", controllerUsuario.getUserByEmail);
 
 app.get("/books", controllerLlibre.getAllLlibres);
+app.get("/books_10", controllerLlibre.getTop10Llibres);
 
 app.post("/reservarLlibre",reservaController.setReserva);
 
