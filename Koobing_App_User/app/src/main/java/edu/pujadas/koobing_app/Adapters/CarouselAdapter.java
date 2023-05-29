@@ -10,13 +10,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Biblioteca;
 import edu.pujadas.koobing_app.Models.Llibre;
-import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Models.Reserva;
 import edu.pujadas.koobing_app.Models.Treballador;
 import edu.pujadas.koobing_app.Models.Usuari;
@@ -32,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CarouselAdapter extends PagerAdapter {
 
-    private List<LlibreBiblioteca> listBiblioLlibre;
+    private List<Llibre> listLlibres;
 
     private LayoutInflater layoutInflater;
 
@@ -40,8 +37,8 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-    public CarouselAdapter(List<LlibreBiblioteca> listBiblioLlibre, LayoutInflater layoutInflater) {
-        this.listBiblioLlibre = listBiblioLlibre;
+    public CarouselAdapter(List<Llibre> listLlibres, LayoutInflater layoutInflater) {
+        this.listLlibres = listLlibres;
         this.layoutInflater = layoutInflater;
     }
 
@@ -57,8 +54,8 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-        Llibre book = listBiblioLlibre.get(position).getBook();
-        Biblioteca biblio = listBiblioLlibre.get(position).getBiblioteca();
+        Llibre book = listLlibres.get(position).getBook();
+        Biblioteca biblio = listLlibres.get(position).getBiblioteca();
 
         if(book !=null && biblio!=null)
         {
@@ -165,7 +162,7 @@ public class CarouselAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return listBiblioLlibre.size();
+        return listLlibres.size();
     }
 
     @Override

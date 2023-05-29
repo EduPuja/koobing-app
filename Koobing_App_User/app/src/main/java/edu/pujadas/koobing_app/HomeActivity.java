@@ -18,7 +18,6 @@ import java.util.List;
 import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
-import edu.pujadas.koobing_app.Models.LlibreBiblioteca;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 
 
@@ -110,10 +109,10 @@ public class HomeActivity extends AppCompatActivity {
                 {
 
                     // Crea una instancia del adaptador personalizado
-                    //carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
+                    carouselAdapter = new CarouselAdapter(data, getLayoutInflater());
 
                     // Asigna el adaptador al ViewPager
-                    //viewPager.setAdapter(carouselAdapter);
+                    viewPager.setAdapter(carouselAdapter);
 
 
                 }
