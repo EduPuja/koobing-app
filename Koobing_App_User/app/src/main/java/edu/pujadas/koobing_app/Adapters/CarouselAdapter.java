@@ -49,9 +49,9 @@ public class CarouselAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = layoutInflater.inflate(R.layout.carousel_item, container, false);
 
-        TextView bookTitleTextView = view.findViewById(R.id.bookTitleTextView);
+        TextView bookTitleTextView = view.findViewById(R.id.titolLlibre);
         Button readButton = view.findViewById(R.id.reservarBtn);
-        TextView libraryTitle = view.findViewById(R.id.libraryName);
+
 
 
 
