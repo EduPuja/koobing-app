@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 //controllers
 const controllerUsuario = require("./controllers/controllerUsuario");
-const controllerBiblio = require("./controllers/controllerBiblioteca");
+
 const controllerLlibre = require("./controllers/controllerLLibre");
 const reservaController = require("./controllers/controllerReserva");
 
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 // Rutas
 app.get("/users", controllerUsuario.getAllUsers);
 app.get("/user/:email", controllerUsuario.getUserByEmail);
-app.get("/biblioteques", controllerBiblio.getAllBiblioteques);
+
 app.get("/books", controllerLlibre.getAllLlibres);
 
 app.post("/reservarLlibre",reservaController.setReserva);
