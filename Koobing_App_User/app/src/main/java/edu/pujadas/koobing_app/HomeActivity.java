@@ -33,7 +33,6 @@ public class HomeActivity extends AppCompatActivity {
 
     LlibreLoader bookBiblioLoader;
 
-    ArrayList<LlibreBiblioteca> listBiblios = new ArrayList<LlibreBiblioteca>();
 
 
 
