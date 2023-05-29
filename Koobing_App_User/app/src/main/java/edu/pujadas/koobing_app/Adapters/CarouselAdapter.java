@@ -14,7 +14,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-import edu.pujadas.koobing_app.Models.Biblioteca;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.Reserva;
 import edu.pujadas.koobing_app.Models.Treballador;
