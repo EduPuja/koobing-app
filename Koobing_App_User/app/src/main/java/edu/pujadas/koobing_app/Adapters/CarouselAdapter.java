@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Biblioteca;
@@ -54,14 +56,14 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-        Llibre book = listLlibres.get(position).getBook();
-        Biblioteca biblio = listLlibres.get(position).getBiblioteca();
+        Llibre book = listLlibres.get(position);
 
-        if(book !=null && biblio!=null)
+
+        if(book !=null)
         {
 
             bookTitleTextView.setText(book.getTitol());
-            libraryTitle.setText(biblio.getNomBiblioteca());
+
             readButton.setOnClickListener(v -> {
 
                 Reserva reserva = new Reserva();
@@ -74,7 +76,7 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-                reserva.setBiblioteca(biblio);
+
                 Treballador administrador = new Treballador();
                 administrador.setId(1);
                 administrador.setNom("Admin");
@@ -82,18 +84,18 @@ public class CarouselAdapter extends PagerAdapter {
                 administrador.setAdmin(true);
 
                 reserva.setTreballador(administrador);
-                /*Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
-                Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));*/
+                Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
+                Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
 
 
                 //reserva.setDataInici(dataInici);
                 //reserva.setDataFI(dataFi);
 
                 //ip institut
-                String url = "http://192.168.16.254:3000/reservarLlibre/";
+                //String url = "http://192.168.16.254:3000/reservarLlibre/";
 
                 //ip home
-                //String url = "http://192.168.0.33:3000/reservarLlibre/";
+                String url = "http://192.168.0.33:3000/reservarLlibre/";
 
 
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
