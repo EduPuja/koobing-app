@@ -11,7 +11,7 @@ public class Reserva
 
     Usuari usuari;
     Treballador treballador;
-    Biblioteca biblioteca;
+
     Llibre llibre;
     Date dataInici;
     Date dataFI;
@@ -20,11 +20,11 @@ public class Reserva
     {
     }
 
-    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Biblioteca biblioteca, Llibre llibre, Date dataInici, Date dataFI) {
+    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Llibre llibre, Date dataInici, Date dataFI) {
         this.idReserva = idReserva;
         this.usuari = usuari;
         this.treballador = treballador;
-        this.biblioteca = biblioteca;
+
         this.llibre = llibre;
         this.dataInici = dataInici;
         this.dataFI = dataFI;
@@ -54,13 +54,8 @@ public class Reserva
         this.treballador = treballador;
     }
 
-    public Biblioteca getBiblioteca() {
-        return biblioteca;
-    }
 
-    public void setBiblioteca(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
-    }
+
 
     public Llibre getLlibre() {
         return llibre;
