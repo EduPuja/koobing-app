@@ -88,8 +88,8 @@ public class CarouselAdapter extends PagerAdapter {
                 Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
 
 
-                //reserva.setDataInici(dataInici);
-                //reserva.setDataFI(dataFi);
+                reserva.setDataInici(dataInici);
+                reserva.setDataFI(dataFi);
 
                 //ip institut
                 //String url = "http://192.168.16.254:3000/reservarLlibre/";
