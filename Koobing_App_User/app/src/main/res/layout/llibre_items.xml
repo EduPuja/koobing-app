@@ -5,7 +5,7 @@
     android:layout_height="match_parent" android:layout_width="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/portada"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:srcCompat="@drawable/libro"
@@ -13,7 +13,7 @@
         android:layout_marginLeft="10dp"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/titleBook"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -22,6 +22,7 @@
         android:textAlignment="center" />
 
     <Button
+        android:id="@+id/reservarButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
