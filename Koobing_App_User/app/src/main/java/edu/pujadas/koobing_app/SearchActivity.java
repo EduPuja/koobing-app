@@ -150,6 +150,10 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metode que busca el llibre si coinicdeix et mostra el contigut filtrat en el recicler view
+     * @param newText
+     */
     private void filterList(String newText) {
         List<Llibre> filtreredList = new ArrayList<Llibre>();
         for (Llibre l : listLlibres)
