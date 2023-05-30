@@ -26,9 +26,9 @@ public class SearchActivity extends AppCompatActivity {
 
 
     BottomNavigationView bottom_navigation;
-    private SearchView searchView;
+    SearchView searchView;
 
-    private List<Llibre> listLlibres;
+    List<Llibre> listLlibres;
 
 
 
@@ -75,6 +75,8 @@ public class SearchActivity extends AppCompatActivity {
     public void setBottom_navigation()
     {
         // menu inferior
+
+        bottom_navigation = findViewById(R.id.bottom_navigation);
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -82,6 +84,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (itemId == R.id.navigation_home) {
                     // Navegar a la actividad HomeActivity
                     startActivity(new Intent(SearchActivity.this, HomeActivity.class));
+                 
                     return true;
                 } else if (itemId == R.id.search_bar) {
                     // Navegar a la actividad SearchActivity
@@ -90,7 +93,7 @@ public class SearchActivity extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.profile) {
                     // Navegar a la actividad MapActivity
-                    //Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(SearchActivity.this, ProfileActivit.class));
 
                     return true;
