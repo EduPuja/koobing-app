@@ -25,13 +25,12 @@ import edu.pujadas.koobing_app.Services.ApiCallback;
 public class SearchActivity extends AppCompatActivity {
 
 
+
     BottomNavigationView bottom_navigation;
     SearchView searchView;
-
     List<Llibre> listLlibres;
 
-
-
+    //recilcer v
     RecyclerView recyclerView;
     LlibreAdapter llibreAdapter;
     LinearLayoutManager layoutManager ;
@@ -57,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-    
+
                 filterList(query);
                 return false;
             }
