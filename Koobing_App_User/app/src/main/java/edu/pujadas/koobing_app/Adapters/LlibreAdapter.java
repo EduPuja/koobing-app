@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_app.Adapters;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.R;
 
 public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreViewHolder> {
 
@@ -21,7 +23,9 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
     @NonNull
     @Override
     public LlibreAdapter.LlibreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.llibre_items ,parent,false);
+
+        return new LlibreViewHolder(vista);
     }
 
     @Override
