@@ -52,7 +52,6 @@ public class CarouselAdapter extends PagerAdapter {
 
 
 
-        ImageView bookImg = view.findViewById(R.id.bookImg);
         TextView bookTitleTextView = view.findViewById(R.id.titolLlibre);
         Button readButton = view.findViewById(R.id.reservarBtn);
 
