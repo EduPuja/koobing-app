@@ -23,6 +23,7 @@
         app:iconifiedByDefault="false"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="409dp"
         android:layout_height="601dp"
         android:layout_marginStart="5dp"

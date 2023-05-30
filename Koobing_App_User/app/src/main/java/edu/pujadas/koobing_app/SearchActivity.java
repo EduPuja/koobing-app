@@ -26,6 +26,11 @@ public class SearchActivity extends AppCompatActivity {
 
         //instanciantel arraylist
         listLlibres = new ArrayList<Llibre>();
+
+        //recicler view
+        recyclerView = findViewById(R.id.recyclerView);
+
+
         searchView = findViewById(R.id.searchView);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
