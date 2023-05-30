@@ -78,6 +78,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="100dp"
+        android:minHeight="48dp"
         android:onClick="onClickRegister"
         android:text="@string/labelRegister"
         app:layout_constraintEnd_toEndOf="parent"
