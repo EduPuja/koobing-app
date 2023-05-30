@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.pujadas.koobing_app.Adapters.LlibreAdapter;
 import edu.pujadas.koobing_app.Models.Llibre;
 
 public class SearchActivity extends AppCompatActivity {
@@ -17,8 +19,14 @@ public class SearchActivity extends AppCompatActivity {
     private SearchView searchView;
 
     private List<Llibre> listLlibres;
-    // recilcerview , layout inflanter y adapter
-    private RecyclerView recyclerView;
+
+
+
+    RecyclerView recyclerView;
+    LlibreAdapter llibreAdapter;
+    LinearLayoutManager layoutManager ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +35,9 @@ public class SearchActivity extends AppCompatActivity {
         //instanciantel arraylist
         listLlibres = new ArrayList<Llibre>();
 
-        //recicler view
-        recyclerView = findViewById(R.id.recyclerView);
+
+        initRecylcerView();
+
 
 
         searchView = findViewById(R.id.searchView);
@@ -49,6 +58,23 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Metode per inicialitzar el recylcerview
+     */
+    private void initRecylcerView() {
+        //recicleview
+        recyclerView = findViewById(R.id.recyclerView);
+
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        llibreAdapter = new LlibreAdapter(listLlibres);
+        recyclerView.setAdapter(llibreAdapter);
+
+
+    }
+
     private void filterList(String newText) {
         List<Llibre> filtreredList = new ArrayList<Llibre>();
         for (Llibre l : listLlibres)
@@ -67,7 +93,8 @@ public class SearchActivity extends AppCompatActivity {
         }
         else
         {
-            //todo adapter -> setFiltredList(filtreredList)
+            //posant el filtratj de llibres
+            llibreAdapter.setFiltredList(filtreredList);
         }
     }
 }
