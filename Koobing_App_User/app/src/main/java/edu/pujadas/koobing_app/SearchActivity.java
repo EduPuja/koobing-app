@@ -61,6 +61,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    /** Metode per carregar totes les dades de la base de dades **/
     private void initData()
     {
         LlibreLoader llibreLoader =new LlibreLoader();
