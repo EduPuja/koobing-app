@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.LlibreAdapter;
+import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Services.ApiCallback;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_activity);
-
+        initData();
         //instanciantel arraylist
         listLlibres = new ArrayList<Llibre>();
 
@@ -54,6 +56,31 @@ public class SearchActivity extends AppCompatActivity {
 
                 filterList(newText);
                 return false;
+            }
+        });
+    }
+
+
+    private void initData()
+    {
+        LlibreLoader llibreLoader =new LlibreLoader();
+        llibreLoader.obtenerLibrosfinal(new ApiCallback<List<Llibre>>() {
+            @Override
+            public void onSuccess(List<Llibre> data) {
+                if(data !=null  && !data.isEmpty())
+                {
+                    listLlibres = data;
+                }
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                Toast.makeText(getApplicationContext(),"Status code :  "+statusCode,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Toast.makeText(getApplicationContext(),"Fail carregant dades",Toast.LENGTH_SHORT).show();
             }
         });
     }
