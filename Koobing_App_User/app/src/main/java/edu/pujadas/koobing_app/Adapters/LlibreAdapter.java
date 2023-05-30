@@ -48,11 +48,16 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
         Button reservarBtn;
         public LlibreViewHolder(@NonNull View itemView) {
             super(itemView);
+            portada = itemView.findViewById(R.id.portada);
+            titol = itemView.findViewById(R.id.titleBook);
+            reservarBtn = itemView.findViewById(R.id.reservarButton);
+
 
         }
 
+        // metode per afegir les dades del reycler view
         public void setData(String title) {
-
+            this.titol.setText(title);
         }
     }
 }
