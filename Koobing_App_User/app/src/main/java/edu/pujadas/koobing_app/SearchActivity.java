@@ -1,12 +1,18 @@
 package edu.pujadas.koobing_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +24,8 @@ import edu.pujadas.koobing_app.Services.ApiCallback;
 
 public class SearchActivity extends AppCompatActivity {
 
+
+    BottomNavigationView bottom_navigation;
     private SearchView searchView;
 
     private List<Llibre> listLlibres;
@@ -33,15 +41,16 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_activity);
+        // per la barre de navegacio
+        setBottom_navigation();
+        //afegir dades
         initData();
         //instanciantel arraylist
         listLlibres = new ArrayList<Llibre>();
-
-
+        //inicialitzar el recicleryview
         initRecylcerView();
 
-
-
+        //buscador
         searchView = findViewById(R.id.searchView);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -58,6 +67,39 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+    }
+
+
+    public void setBottom_navigation()
+    {
+        // menu inferior
+        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.navigation_home) {
+                    // Navegar a la actividad HomeActivity
+                    startActivity(new Intent(SearchActivity.this, HomeActivity.class));
+                    return true;
+                } else if (itemId == R.id.search_bar) {
+                    // Navegar a la actividad SearchActivity
+                    startActivity(new Intent(SearchActivity.this, SearchActivity.class));
+
+                    return true;
+                } else if (itemId == R.id.profile) {
+                    // Navegar a la actividad MapActivity
+                    //Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SearchActivity.this, ProfileActivit.class));
+
+                    return true;
+                }
+                return false;
+
+            }
+        });
+
     }
 
 
