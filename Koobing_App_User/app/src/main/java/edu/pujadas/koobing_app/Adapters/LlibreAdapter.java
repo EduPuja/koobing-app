@@ -19,6 +19,11 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
 
     private List<Llibre> listLlibres;
 
+    public void setFiltredList(List<Llibre> filtredList)
+    {
+        this.listLlibres=filtredList;
+        notifyDataSetChanged();
+    }
     public LlibreAdapter(List<Llibre> listLlibres) {
         this.listLlibres = listLlibres;
     }
