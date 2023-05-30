@@ -57,13 +57,15 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                filterList(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                filterList(newText);
+                //filterList(newText);
                 return false;
             }
         });
@@ -84,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (itemId == R.id.navigation_home) {
                     // Navegar a la actividad HomeActivity
                     startActivity(new Intent(SearchActivity.this, HomeActivity.class));
-                 
+
                     return true;
                 } else if (itemId == R.id.search_bar) {
                     // Navegar a la actividad SearchActivity
