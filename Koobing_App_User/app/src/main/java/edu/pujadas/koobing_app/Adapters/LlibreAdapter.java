@@ -3,6 +3,9 @@ package edu.pujadas.koobing_app.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,17 +33,26 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
 
     @Override
     public void onBindViewHolder(@NonNull LlibreAdapter.LlibreViewHolder holder, int position) {
-
+        String title = listLlibres.get(position).getTitol();
+        holder.setData(title);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listLlibres.size();
     }
 
-    public class LlibreViewHolder extends RecyclerView.ViewHolder {
+    public static class  LlibreViewHolder extends RecyclerView.ViewHolder {
+        ImageView portada;
+        TextView titol;
+        Button reservarBtn;
         public LlibreViewHolder(@NonNull View itemView) {
             super(itemView);
+
+        }
+
+        public void setData(String title) {
+
         }
     }
 }
