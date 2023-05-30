@@ -57,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+    
                 filterList(query);
                 return false;
             }
