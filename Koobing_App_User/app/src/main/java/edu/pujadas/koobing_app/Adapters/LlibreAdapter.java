@@ -50,12 +50,11 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
     public static class  LlibreViewHolder extends RecyclerView.ViewHolder {
         ImageView portada;
         TextView titol;
-        Button reservarBtn;
+
         public LlibreViewHolder(@NonNull View itemView) {
             super(itemView);
             portada = itemView.findViewById(R.id.portada);
-            titol = itemView.findViewById(R.id.titleBook);
-            reservarBtn = itemView.findViewById(R.id.reservarButton);
+            titol = itemView.findViewById(R.id.bookTitle);
 
 
         }
