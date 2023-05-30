@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/bookImg"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
         android:contentDescription="@string/todo"

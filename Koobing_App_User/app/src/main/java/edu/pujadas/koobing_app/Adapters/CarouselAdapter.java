@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,9 @@ public class CarouselAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = layoutInflater.inflate(R.layout.carousel_item, container, false);
 
+
+
+        ImageView bookImg = view.findViewById(R.id.bookImg);
         TextView bookTitleTextView = view.findViewById(R.id.titolLlibre);
         Button readButton = view.findViewById(R.id.reservarBtn);
 
