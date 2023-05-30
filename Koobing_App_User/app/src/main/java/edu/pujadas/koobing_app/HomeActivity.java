@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
@@ -46,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         setTitle("Home");
 
         //find by id
-        homeLabel = findViewById(R.id.homeLabel);
+        homeLabel = findViewById(R.id.searchLabel);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.viewPager);
 
