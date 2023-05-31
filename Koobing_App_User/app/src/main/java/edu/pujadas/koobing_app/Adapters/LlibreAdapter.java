@@ -1,5 +1,6 @@
 package edu.pujadas.koobing_app.Adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 
+import edu.pujadas.koobing_app.BookActivity;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.R;
 
@@ -65,7 +68,9 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
                     if(position!=RecyclerView.NO_POSITION)
                     {
                         Llibre book = listLlibres.get(position);
-                        Toast.makeText(itemView.getContext(),"Hola soc un llibre",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(itemView.getContext(), BookActivity.class);
+                        intent.putExtra("llibre", (Serializable) book);
+                        itemView.getContext().startActivity(intent);
                     }
                 }
             });
