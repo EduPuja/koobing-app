@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,7 @@ import edu.pujadas.koobing_app.R;
 
 public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreViewHolder> {
 
-    private List<Llibre> listLlibres;
+    private static List<Llibre> listLlibres;
 
     public void setFiltredList(List<Llibre> filtredList)
     {
@@ -55,6 +56,19 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
             super(itemView);
             portada = itemView.findViewById(R.id.portada);
             titol = itemView.findViewById(R.id.bookTitle);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION)
+                    {
+                        Llibre book = listLlibres.get(position);
+                        Toast.makeText(itemView.getContext(),"Hola soc un llibre",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
 
         }
