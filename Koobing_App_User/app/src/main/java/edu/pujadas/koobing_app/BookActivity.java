@@ -2,11 +2,16 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.gson.reflect.TypeToken;
 
 import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 
 import edu.pujadas.koobing_app.Models.Llibre;
 
@@ -30,19 +35,24 @@ public class BookActivity extends AppCompatActivity {
         edicio= findViewById(R.id.edicio);
         dataPublicacio = findViewById(R.id.dataPubli);
 
+        /*SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
 
-        //recollint el intent en format json y transformant-lo a objecte
-        String jsonLlibre = getIntent().getStringExtra("llibreJson");
+        // Obtener la cadena JSON del objeto Libro
+        String jsonLibro = sharedPreferences.getString("libro", null);
+
+        // Convertir la cadena JSON a objeto Libro utilizando Gson
         Gson gson = new Gson();
-        Llibre llibre = gson.fromJson(jsonLlibre, Llibre.class);
+        Type tipoLibro = new TypeToken<Llibre>() {}.getType();
+        Llibre llibre = gson.fromJson(jsonLibro, tipoLibro);*/
 
 
 
-        /// todo fix this they are empty
+
 
         //afegint tots els camps de llibre
-        titolLlibre.setText(llibre.getTitol());
-        autorName.setText(llibre.getAutor().getNomAutor());
+
+        //titolLlibre.setText(llibre.getTitol());
+        //autorName.setText(llibre.getAutor().getNomAutor());
         //editorial.setText(llibre.getEditor().getNomEditor());
         //genere.setText(llibre.getGenere().getNomGenere());
         //idioma.setText(llibre.getIdioma().getNomIdioma());

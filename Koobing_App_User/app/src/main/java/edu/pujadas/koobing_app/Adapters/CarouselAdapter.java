@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,11 +76,18 @@ public class CarouselAdapter extends PagerAdapter {
             readButton.setOnClickListener(v -> {
                 Context context = v.getContext();
 
+                //shared preferneces per passar la info del llibre
+                SharedPreferences sharedPreferences = context.getSharedPreferences("bookInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
                 //convertir el llibre amb gson per poder-lo passar atraves de intent
                 Gson gson = new Gson();
                 String jsonBook = gson.toJson(book);
+
+                editor.putString("book",jsonBook);
+
                 Intent intent = new Intent(context, BookActivity.class);
-                intent.putExtra("llibreJson",jsonBook);
+
                 //start activity
                 context.startActivity(intent);
             }); // end lisenser
