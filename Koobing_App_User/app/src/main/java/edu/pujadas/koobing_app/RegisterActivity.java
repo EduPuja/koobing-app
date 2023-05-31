@@ -11,15 +11,12 @@ import android.widget.Toast;
 import java.sql.Date;
 
 import edu.pujadas.koobing_app.Models.Usuari;
-import edu.pujadas.koobing_app.Services.RegisterService;
 import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import edu.pujadas.koobing_app.Utilites.Validator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
