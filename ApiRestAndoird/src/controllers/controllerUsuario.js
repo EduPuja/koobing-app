@@ -1,4 +1,6 @@
 const connection = require("../database/conexio");
+const moment = require('moment');
+
 
 function getAllUsers(req, res) {
   console.log("\nObtenint tots els usuaris");
@@ -73,7 +75,7 @@ function registerUser(req,res)
 
   const query = "INSERT INTO usuari (dni, avatar, nom, cognom, data_naix, email, password) VALUES (?, NULL, ?, ?, ?, ?, ?)";
   //valors de la consulta
-  const values = [dni, avatar, nom, cognom, date, email, password];
+  const values = [dni, avatar, user.nom, cognom, date, email, password];
 
 
   connection.query(query,values ,(error,result) =>{
