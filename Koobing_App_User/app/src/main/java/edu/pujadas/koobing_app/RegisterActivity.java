@@ -8,9 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.Date;
+
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.RegisterService;
 import edu.pujadas.koobing_app.Services.UserService;
+import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
+import edu.pujadas.koobing_app.Utilites.Validator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private RegisterService registerService;
+    private UserService userService;
 
     EditText dniField ,nomField,cognomField,dataNaixField,correuField,passwordField;
     Button registerBtn;
@@ -68,6 +72,24 @@ public class RegisterActivity extends AppCompatActivity {
             correuField.setError(erroMsg);
             passwordField.setError(erroMsg);
         }
+        else
+        {
+            Usuari usuari = new Usuari();
+            usuari.setDni(dni);
+            usuari.setNom(nom);
+            usuari.setCognom(cognom);
+
+            //convertir la data de naixament amb un objetce java.sql.Date
+            Date dataNaixament = Date.valueOf(dataText);
+            usuari.setDataNaix(dataNaixament);
+            usuari.setEmail(email);
+            //encriptar la contrassenya
+            String hashedPasss =Validator.encryptPassword(password);
+            usuari.setPassword(hashedPasss);
+
+
+            sendUserPost(usuari);
+        }
 
 
 
@@ -80,19 +102,16 @@ public class RegisterActivity extends AppCompatActivity {
     {
 
         //ip instutut
-        String url = "http://192.168.16.254:3000/register/";
+        //String url = "http://192.168.16.254:3000/register/";
         //ip home
-        // String url ="http://192.168.0.33:3000/register/";
+        String url ="http://192.168.0.33:3000/register/";
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        RetrofitConnection retrofitConnection = new RetrofitConnection(url);
 
 
-        registerService = retrofit.create(RegisterService.class);
+        userService = retrofitConnection.getRetrofit().create(UserService.class);
 
-        Call<Void> call = registerService.register(usuari);
+        Call<Void> call = userService.register(usuari);
 
 
         call.enqueue(new Callback<Void>() {
