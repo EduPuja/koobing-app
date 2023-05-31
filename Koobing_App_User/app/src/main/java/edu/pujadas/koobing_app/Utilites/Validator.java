@@ -58,6 +58,8 @@ public class Validator {
         }
         String digitos = dni.substring(0, 8);
         if (!digitos.matches("[0-9]+")) {
+            return false;
+        }
         String letra = dni.substring(8).toUpperCase();
         int indice = Integer.parseInt(digitos) % 23;
         char letraValida = letrasValidas.charAt(indice);
