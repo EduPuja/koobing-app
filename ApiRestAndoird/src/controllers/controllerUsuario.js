@@ -56,7 +56,6 @@ function registerUser(req,res)
   const user = req.body;
 
 
-  console.log("Info User :" ,user)
 
 
   //valors usuari
@@ -68,27 +67,42 @@ function registerUser(req,res)
   const email = user.email;
   const password = user.password;
 
+  console.log("dni user: " + nom )
+
 
   //convertir la data de naixament
 
-  const date = moment(fechaNacimento,'MMM DD, YYYY').toDate();
+ const date = moment(fechaNacimento,'MMM DD, YYYY').toDate();
 
-  const query = "INSERT INTO usuari (dni, avatar, nom, cognom, data_naix, email, password) VALUES (?, NULL, ?, ?, ?, ?, ?)";
-  //valors de la consulta
-  const values = [dni, avatar, user.nom, cognom, date, email, password];
+ 
+
+  
+
+  if(nom.trim() !=="" && date)
+  {
+
+    //valors de la consulta
+    const values = [dni, avatar, nom, cognom, date, email, password];
+    const query = "INSERT INTO usuari (dni, avatar, nom, cognom, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+    connection.query(query,[dni, avatar, nom, cognom, email, password] ,(error,result) =>{
+      if(error)
+      {
+        console.error("Error al insertar el usuari :",error.message);
+        res.status(500).json({ message: 'Error al insertar el usuario' });
+      }
+      else {
+        console.log('Usuari insertat correctament');
+        res.status(200).json({ message: 'Usuari insertat correctament' });
+      }
+    })
+  }
+  else
+  {
+    console.error("Algun valor esta vuit")
+  }
 
 
-  connection.query(query,values ,(error,result) =>{
-    if(error)
-    {
-      console.error("Error al insertar el usuari :",error.message);
-      res.status(500).json({ message: 'Error al insertar el usuario' });
-    }
-    else {
-      console.log('Usuari insertat correctament');
-      res.status(200).json({ message: 'Usuari insertat correctament' });
-    }
-  })
+ 
 
 }
 
