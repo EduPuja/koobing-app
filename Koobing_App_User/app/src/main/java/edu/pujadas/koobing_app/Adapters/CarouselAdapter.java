@@ -17,6 +17,8 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -73,23 +75,23 @@ public class CarouselAdapter extends PagerAdapter {
 
             bookTitleTextView.setText(book.getTitol());
 
-            readButton.setOnClickListener(v -> {
+            readButton.setOnClickListener(v ->
+            {
+
                 Context context = v.getContext();
 
-                //shared preferneces per passar la info del llibre
-                SharedPreferences sharedPreferences = context.getSharedPreferences("bookInfo", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                //convertir el llibre amb gson per poder-lo passar atraves de intent
                 Gson gson = new Gson();
-                String jsonBook = gson.toJson(book);
+                String bookGSon = gson.toJson(book);
 
-                editor.putString("book",jsonBook);
+
+                System.out.println("BOOK GSON :" +bookGSon);
 
                 Intent intent = new Intent(context, BookActivity.class);
-
+                intent.putExtra("a",bookGSon);
                 //start activity
                 context.startActivity(intent);
+
+
             }); // end lisenser
         }
         else

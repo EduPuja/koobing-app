@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
+import java.net.Socket;
 
 import edu.pujadas.koobing_app.Models.Llibre;
 
@@ -35,15 +36,17 @@ public class BookActivity extends AppCompatActivity {
         edicio= findViewById(R.id.edicio);
         dataPublicacio = findViewById(R.id.dataPubli);
 
-        /*SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("bookInfo", Context.MODE_PRIVATE);
 
         // Obtener la cadena JSON del objeto Libro
-        String jsonLibro = sharedPreferences.getString("libro", null);
+        String jsonLibro = sharedPreferences.getString("book", "");
+
+        System.out.println("JSON libro: " + jsonLibro);
 
         // Convertir la cadena JSON a objeto Libro utilizando Gson
         Gson gson = new Gson();
         Type tipoLibro = new TypeToken<Llibre>() {}.getType();
-        Llibre llibre = gson.fromJson(jsonLibro, tipoLibro);*/
+        Llibre llibre = gson.fromJson(jsonLibro, tipoLibro);
 
 
 
@@ -51,7 +54,7 @@ public class BookActivity extends AppCompatActivity {
 
         //afegint tots els camps de llibre
 
-        //titolLlibre.setText(llibre.getTitol());
+        titolLlibre.setText(llibre.getTitol());
         //autorName.setText(llibre.getAutor().getNomAutor());
         //editorial.setText(llibre.getEditor().getNomEditor());
         //genere.setText(llibre.getGenere().getNomGenere());
