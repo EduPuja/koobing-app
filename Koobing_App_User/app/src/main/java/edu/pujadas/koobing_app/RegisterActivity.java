@@ -79,13 +79,28 @@ public class RegisterActivity extends AppCompatActivity {
             //convertir la data de naixament amb un objetce java.sql.Date
             Date dataNaixament = Date.valueOf(dataText);
             usuari.setDataNaix(dataNaixament);
-            usuari.setEmail(email);
-            //encriptar la contrassenya
-            String hashedPasss =Validator.encryptPassword(password);
-            usuari.setPassword(hashedPasss);
+
+            if(Validator.validarCorreoElectronico(email))
+            {
+
+                Toast.makeText(getApplicationContext(),"Correu Correcte ",Toast.LENGTH_SHORT).show();
+                usuari.setEmail(email);
 
 
-            sendUserPost(usuari);
+                //encriptar la contrassenya
+                String hashedPasss =Validator.encryptPassword(password);
+                usuari.setPassword(hashedPasss);
+
+                //enviar el usuari a treavés de peticio POST
+                sendUserPost(usuari);
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),"El correu és incorrecte \uD83D\uDE14",Toast.LENGTH_SHORT).show();
+            }
+
+
+
         }
 
 

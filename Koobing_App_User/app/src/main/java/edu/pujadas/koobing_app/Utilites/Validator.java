@@ -50,7 +50,7 @@ public class Validator {
      * @param dni String dni
      * @return true si es correcte i false si es incorrecte
      */
-    public boolean validarDNI(String dni) {
+    public static boolean validarDNI(String dni) {
         String letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
 
         if (dni.length() != 9) {
@@ -72,7 +72,7 @@ public class Validator {
      * @param correo correu electronic
      * @return true si es valid , si no retorna false
      */
-    public boolean validarCorreoElectronico(String correo) {
+    public static boolean validarCorreoElectronico(String correo) {
 
         String patron = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return correo.matches(patron);
