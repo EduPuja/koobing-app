@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-               Toast.makeText(getApplicationContext(), "Hi ha hagut un error \uD83D\uDE14", Toast.LENGTH_SHORT).show();;
+               Toast.makeText(getApplicationContext(), "L'usuari no s'ha pogut donar d'alta  \uD83D\uDE14", Toast.LENGTH_SHORT).show();;
 
                 System.out.println("On Failure: " + t.getMessage());
             }
