@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
+import edu.pujadas.koobing_app.Utilites.UsuarioSingleton;
 import edu.pujadas.koobing_app.Utilites.Validator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         dniField = findViewById(R.id.dniField);
         nomField = findViewById(R.id.nomField);
         cognomField = findViewById(R.id.cognomField);
-        dataNaixField = findViewById(R.id.dataNaixField);
+
         correuField =  findViewById(R.id.correuField);
         passwordField = findViewById(R.id.contrassenyaField);
 
@@ -54,12 +56,12 @@ public class RegisterActivity extends AppCompatActivity {
         String dni = dniField.getText().toString();
         String nom = nomField.getText().toString();
         String cognom = cognomField.getText().toString();
-        String dataText = dataNaixField.getText().toString();
+
         String email = correuField.getText().toString();
         String password = passwordField.getText().toString();
 
 
-        if(dni.isEmpty() &&  nom.isEmpty() &&  cognom.isEmpty()  && dataText.isEmpty() &&  email.isEmpty() && password.isEmpty())
+        if(dni.isEmpty() &&  nom.isEmpty() &&  cognom.isEmpty()  &&  email.isEmpty() && password.isEmpty())
         {
             // posar els editext en error
             String erroMsg = "Emplena aquest camps";
@@ -67,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             dniField.setError(erroMsg);
             nomField.setError(erroMsg);
             cognomField.setError(erroMsg);
-            dataNaixField.setError(erroMsg);
+
             correuField.setError(erroMsg);
             passwordField.setError(erroMsg);
         }
@@ -81,8 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
             //convertir la data de naixament amb un objetce java.sql.Date
 
 
-            Date dataNaixSql =convertDate(dataText);
-            usuari.setDataNaix(dataNaixSql);
+
 
             if(Validator.validarCorreoElectronico(email))
             {
@@ -153,6 +154,10 @@ public class RegisterActivity extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     Toast.makeText(getApplicationContext(), "T'has donat d'alta correctament ! "+usuari.getNom() +" "+usuari.getCognom(), Toast.LENGTH_SHORT).show();;
+                    UsuarioSingleton.getInstance().setUsuario(usuari);
+                    Toast.makeText(getApplicationContext(), "Benvingut : "  +usuari.getNom() +" "+usuari.getCognom(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this,HomeActivity.class);
+                    startActivity(intent);
                 }
 
             }
