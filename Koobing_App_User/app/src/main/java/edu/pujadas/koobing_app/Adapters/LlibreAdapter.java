@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -69,7 +71,12 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
                     {
                         Llibre book = listLlibres.get(position);
                         Intent intent = new Intent(itemView.getContext(), BookActivity.class);
-                        intent.putExtra("llibre", (Serializable) book);
+                        // convercio a json del objecte
+                        Gson gson = new Gson();
+                        String jsonBook = gson.toJson(book);
+
+
+                        intent.putExtra("llibreJson",jsonBook);
                         itemView.getContext().startActivity(intent);
                     }
                 }
