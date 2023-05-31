@@ -1,5 +1,8 @@
 package edu.pujadas.koobing_app.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +14,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.google.gson.Gson;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import edu.pujadas.koobing_app.BookActivity;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.Reserva;
 import edu.pujadas.koobing_app.Models.Treballador;
@@ -67,84 +73,16 @@ public class CarouselAdapter extends PagerAdapter {
             bookTitleTextView.setText(book.getTitol());
 
             readButton.setOnClickListener(v -> {
+                Context context = v.getContext();
 
-                Reserva reserva = new Reserva();
-
-                reserva.setLlibre(book);
-
-                Usuari user = UsuarioSingleton.getInstance().getUsuario();
-
-                reserva.setUsuari(user);
-
-
-
-
-                Treballador administrador = new Treballador();
-                administrador.setId(1);
-                administrador.setNom("Admin");
-                administrador.setEmail("administrador@mail.com");
-                administrador.setAdmin(true);
-
-                reserva.setTreballador(administrador);
-                Date dataInici = Date.valueOf(String.valueOf(LocalDate.now()));
-                Date dataFi = Date.valueOf(String.valueOf(LocalDate.now().plusMonths(1)));
-
-
-                reserva.setDataInici(dataInici);
-                reserva.setDataFI(dataFi);
-
-                //ip institut
-                //String url = "http://192.168.16.254:3000/reservarLlibre/";
-
-                //ip home
-                String url = "http://192.168.0.33:3000/reservarLlibre/";
-
-
-                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(url)
-                        .client(httpClient.build())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-
-                ReservaService reservaService = retrofit.create(ReservaService.class);
-                Call<Void> call = reservaService.hacerReserva(reserva);
-
-
-
-
-                //reserva.setBiblio();
-
-                call.enqueue(new Callback<Void>() {
-
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(response.isSuccessful())
-                        {
-                            System.out.println("Reserva creada ");
-                            Toast.makeText(container.getContext(), "El llibre s'ha reservat correctamet", Toast.LENGTH_SHORT).show();
-
-                        }
-                        else
-                        {
-                            Toast.makeText(container.getContext(), "Error al realizar la reserva", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        System.out.println("onFailure :" + t.getMessage());
-                        Toast.makeText(container.getContext(), "Error en la solicitud ", Toast.LENGTH_SHORT).show();
-                    }
-                }); //end call
-
-
-
-
-
-            });
+                //convertir el llibre amb gson per poder-lo passar atraves de intent
+                Gson gson = new Gson();
+                String jsonBook = gson.toJson(book);
+                Intent intent = new Intent(context, BookActivity.class);
+                intent.putExtra("llibreJson",jsonBook);
+                //start activity
+                context.startActivity(intent);
+            }); // end lisenser
         }
         else
         {
@@ -155,6 +93,9 @@ public class CarouselAdapter extends PagerAdapter {
         container.addView(view);
         return view;
     }
+
+
+
 
 
 
