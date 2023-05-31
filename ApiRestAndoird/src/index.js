@@ -24,7 +24,7 @@ app.get("/books", controllerLlibre.getAllLlibres);
 app.get("/books_10", controllerLlibre.getTop10Llibres);
 
 app.post("/reservarLlibre",reservaController.setReserva);
-
+app.post("/register",controllerUsuario.registerUser);
 
 
 const port = 3000;

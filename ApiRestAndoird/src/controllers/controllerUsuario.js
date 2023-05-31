@@ -48,8 +48,18 @@ function getUserByEmail(req, res) {
 }
 
 
+function registerUser(req,res)
+{
+  console.log("\nRegister user")
+  const user = req.body.user;
+
+  console.log("Usuari ? :" ,user)
+}
+
+
 module.exports = {
   getAllUsers,
   getUserByEmail
+  ,registerUser
 };
 
