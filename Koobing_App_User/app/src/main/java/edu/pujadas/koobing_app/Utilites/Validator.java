@@ -66,4 +66,17 @@ public class Validator {
         return letra.equals(String.valueOf(letraValida));
     }
 
+
+    /**
+     * Metode per validar el correu electronic si escorrecte
+     * @param correo correu electronic
+     * @return true si es valid , si no retorna false
+     */
+    public boolean validarCorreoElectronico(String correo) {
+
+        String patron = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return correo.matches(patron);
+    }
+
+
 }
