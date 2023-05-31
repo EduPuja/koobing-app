@@ -53,9 +53,30 @@ function registerUser(req,res)
   console.log("\nRegister user")
   const user = req.body;
 
-  const sql = "INSERT INTO usuari (dni, avatar, nom, cognom, data_naix, email, password) VALUES (?, NULL, ?, ?, ?, ?, ?)";
 
-  connection.query(sql, [user.dni, user.nom, user.cognom, user.data_naix, user.email, user.password],(error,result) =>{
+  console.log("Info User :" ,user)
+
+
+  //valors usuari
+  const dni = user.dni;
+  const avatar = null;  
+  const nom = user.nom;
+  const cognom = user.cognom;
+  const fechaNacimento = user.data_naix;
+  const email = user.email;
+  const password = user.password;
+
+
+  //convertir la data de naixament
+  const dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+  const date = dateFormat.parse(fechaNacimiento);
+
+  const query = "INSERT INTO usuari (dni, avatar, nom, cognom, data_naix, email, password) VALUES (?, NULL, ?, ?, ?, ?, ?)";
+  //valors de la consulta
+  const values = [dni, avatar, nom, cognom, date, email, password];
+
+
+  connection.query(query,values ,(error,result) =>{
     if(error)
     {
       console.error("Error al insertar el usuari :",error.message);
@@ -66,7 +87,7 @@ function registerUser(req,res)
       res.status(200).json({ message: 'Usuari insertat correctament' });
     }
   })
-  //console.log("Usuari ? :" ,user)
+
 }
 
 
