@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
@@ -77,8 +79,10 @@ public class RegisterActivity extends AppCompatActivity {
             usuari.setCognom(cognom);
 
             //convertir la data de naixament amb un objetce java.sql.Date
-            Date dataNaixament = Date.valueOf(dataText);
-            usuari.setDataNaix(dataNaixament);
+
+
+            Date dataNaixSql =convertDate(dataText);
+            usuari.setDataNaix(dataNaixSql);
 
             if(Validator.validarCorreoElectronico(email))
             {
@@ -101,6 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+
         }
 
 
@@ -108,6 +113,21 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    private Date convertDate(String date)
+    {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date fechaUtil = dateFormat.parse(date);
+
+            Date dataNaixSql = new Date(fechaUtil.getTime());
+
+            return dataNaixSql;
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void sendUserPost(Usuari usuari)
@@ -129,12 +149,19 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(getApplicationContext(), "T'has donat d'alta correctament ! "+usuari.getNom() +" "+usuari.getCognom(), Toast.LENGTH_SHORT).show();;
+
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(), "T'has donat d'alta correctament ! "+usuari.getNom() +" "+usuari.getCognom(), Toast.LENGTH_SHORT).show();;
+                }
+
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Hi ha hagut un error \uD83D\uDE14", Toast.LENGTH_SHORT).show();;
+               Toast.makeText(getApplicationContext(), "Hi ha hagut un error \uD83D\uDE14", Toast.LENGTH_SHORT).show();;
+
+                System.out.println("On Failure: " + t.getMessage());
             }
         });
     }
