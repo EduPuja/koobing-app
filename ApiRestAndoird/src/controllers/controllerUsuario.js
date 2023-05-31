@@ -68,8 +68,8 @@ function registerUser(req,res)
 
 
   //convertir la data de naixament
-  const dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-  const date = dateFormat.parse(fechaNacimiento);
+
+  const date = moment(fechaNacimento,'MMM DD, YYYY').toDate();
 
   const query = "INSERT INTO usuari (dni, avatar, nom, cognom, data_naix, email, password) VALUES (?, NULL, ?, ?, ?, ?, ?)";
   //valors de la consulta
