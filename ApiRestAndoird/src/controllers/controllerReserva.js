@@ -4,7 +4,7 @@ const connection = require("../database/conexio");
 
 function setReserva(req, res) {
   console.log("\nCreando una reserva");
-  const reserva = req.body.reserva;
+  const reserva = req.body;
 
   console.log("Info reserva: ",reserva);
 
