@@ -51,7 +51,7 @@ function getUserByEmail(req, res) {
 function registerUser(req,res)
 {
   console.log("\nRegister user")
-  const user = req.body.user;
+  const user = req.body;
 
   console.log("Usuari ? :" ,user)
 }
