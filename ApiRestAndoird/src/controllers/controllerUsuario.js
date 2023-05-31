@@ -53,7 +53,20 @@ function registerUser(req,res)
   console.log("\nRegister user")
   const user = req.body;
 
-  console.log("Usuari ? :" ,user)
+  const sql = "INSERT INTO usuari (dni, avatar, nom, cognom, data_naix, email, password) VALUES (?, NULL, ?, ?, ?, ?, ?)";
+
+  connection.query(sql, [user.dni, user.nom, user.cognom, user.data_naix, user.email, user.password],(error,result) =>{
+    if(error)
+    {
+      console.error("Error al insertar el usuari :",error.message);
+      res.status(500).json({ message: 'Error al insertar el usuario' });
+    }
+    else {
+      console.log('Usuari insertat correctament');
+      res.status(200).json({ message: 'Usuari insertat correctament' });
+    }
+  })
+  //console.log("Usuari ? :" ,user)
 }
 
 
