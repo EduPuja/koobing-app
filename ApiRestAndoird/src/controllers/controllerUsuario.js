@@ -56,35 +56,25 @@ function registerUser(req,res)
   const user = req.body;
 
 
-
-
   //valors usuari
   const dni = user.dni;
   const avatar = null;  
   const nom = user.nom;
   const cognom = user.cognom;
-  const fechaNacimento = user.data_naix;
+  //const fechaNacimento = user.data_naix;
   const email = user.email;
   const password = user.password;
 
-  console.log("dni user: " + nom )
-
-
-  //convertir la data de naixament
-
- const date = moment(fechaNacimento,'MMM DD, YYYY').toDate();
-
- 
 
   
 
-  if(nom.trim() !=="" && date)
+  if(nom.trim() !=="")
   {
 
     //valors de la consulta
-    const values = [dni, avatar, nom, cognom, date, email, password];
+    const values = [dni, avatar, nom, cognom, email, password];
     const query = "INSERT INTO usuari (dni, avatar, nom, cognom, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-    connection.query(query,[dni, avatar, nom, cognom, email, password] ,(error,result) =>{
+    connection.query(query,values ,(error,result) =>{
       if(error)
       {
         console.error("Error al insertar el usuari :",error.message);
