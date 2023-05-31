@@ -16,4 +16,7 @@
     <string name="data_naixament">Data Naixament</string>
     <string name="correu">Correu</string>
     <string name="contrassenya">Contrassenya</string>
+    <string name="autor">Autor</string>
+    <string name="genere">genere</string>
+    <string name="editorial">editorial</string>
 </resources>
