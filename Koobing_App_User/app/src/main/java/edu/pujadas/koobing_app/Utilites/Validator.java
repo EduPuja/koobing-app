@@ -43,4 +43,25 @@ public class Validator {
         }
         return false;
     }
+
+
+    /**
+     * Metode que valida el dni si es correcte
+     * @param dni String dni
+     * @return true si es correcte i false si es incorrecte
+     */
+    public boolean validarDNI(String dni) {
+        String letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+        if (dni.length() != 9) {
+            return false;
+        }
+        String digitos = dni.substring(0, 8);
+        if (!digitos.matches("[0-9]+")) {
+        String letra = dni.substring(8).toUpperCase();
+        int indice = Integer.parseInt(digitos) % 23;
+        char letraValida = letrasValidas.charAt(indice);
+        return letra.equals(String.valueOf(letraValida));
+    }
+
 }
