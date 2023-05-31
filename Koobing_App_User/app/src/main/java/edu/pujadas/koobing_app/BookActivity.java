@@ -41,7 +41,7 @@ public class BookActivity extends AppCompatActivity {
         /// todo fix this they are empty
 
         //afegint tots els camps de llibre
-       titolLlibre.setText(llibre.getTitol());
+        titolLlibre.setText(llibre.getTitol());
         autorName.setText(llibre.getAutor().getNomAutor());
         //editorial.setText(llibre.getEditor().getNomEditor());
         //genere.setText(llibre.getGenere().getNomGenere());
