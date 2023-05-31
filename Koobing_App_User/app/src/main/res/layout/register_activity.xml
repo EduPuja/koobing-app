@@ -28,15 +28,14 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/dni"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerLabel"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/registerLabel" />
 
     <EditText
         android:id="@+id/nomField"
@@ -45,15 +44,14 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/nom"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dniField"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/dniField" />
 
     <EditText
         android:id="@+id/cognomField"
@@ -62,16 +60,15 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/cognom"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomField"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/dataNaixField"
@@ -80,16 +77,15 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/data_naixament"
         android:inputType="date"
         android:minHeight="48dp"
-        android:textAlignment="center"
         android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cognomField"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/cognomField" />
 
     <EditText
         android:id="@+id/correuField"
@@ -98,15 +94,14 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/correu"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataNaixField"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/dataNaixField" />
 
     <EditText
         android:id="@+id/contrassenyaField"
@@ -115,17 +110,16 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/contrassenya"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:textAlignment="center"
         android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correuField"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/registerBtn"
