@@ -71,23 +71,6 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/dataNaixField"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="100dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/data_naixament"
-        android:inputType="date"
-        android:minHeight="48dp"
-        android:textColorHint="#8D6E63"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cognomField" />
-
-    <EditText
         android:id="@+id/correuField"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -101,7 +84,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataNaixField" />
+        app:layout_constraintTop_toBottomOf="@+id/cognomField" />
 
     <EditText
         android:id="@+id/contrassenyaField"
