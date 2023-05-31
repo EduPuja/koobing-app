@@ -36,6 +36,14 @@ public class BookActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Llibre llibre = gson.fromJson(jsonLlibre, Llibre.class);
 
+        //afegint tots els camps de llibre
         titolLlibre.setText(llibre.getTitol());
+        autorName.setText(llibre.getAutor().getNomAutor());
+        editorial.setText(llibre.getEditor().getNomEditor());
+        genere.setText(llibre.getGenere().getNomGenere());
+        idioma.setText(llibre.getIdioma().getNomIdioma());
+        edicio.setText(llibre.getVersio());
+        dataPublicacio.setText(llibre.getDataPubli().toString());
+
     }
 }
