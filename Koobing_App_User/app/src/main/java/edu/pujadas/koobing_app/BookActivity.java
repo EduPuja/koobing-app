@@ -23,6 +23,7 @@ import edu.pujadas.koobing_app.Models.Autor;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.LlibreService;
+import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,26 +71,9 @@ public class BookActivity extends AppCompatActivity {
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
 
-            LlibreLoader loader = new LlibreLoader();
-            loader.findBookByISBN(isbn, new ApiCallback<Llibre>() {
-                @Override
-                public void onSuccess(Llibre data) {
-                    if(data != null)
-                    {
-                        Toast.makeText(BookActivity.this, "No es null", Toast.LENGTH_SHORT).show();
-                    }
-                }
 
-                @Override
-                public void onError(int statusCode) {
-                    Toast.makeText(BookActivity.this, "Error "+statusCode, Toast.LENGTH_SHORT).show();
-                }
 
-                @Override
-                public void onFailure(Throwable throwable) {
-                    Toast.makeText(BookActivity.this, "Failure "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+
 
 
         }
