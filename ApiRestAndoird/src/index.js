@@ -8,6 +8,7 @@ const controllerUsuario = require("./controllers/controllerUsuario");
 const controllerLlibre = require("./controllers/controllerLLibre");
 const reservaController = require("./controllers/controllerReserva");
 const controllerAutor= require("./controllers/controllerAutor");
+const controllerEditorial = require("./controllers/controllerEditorial");
 
 
 
@@ -34,6 +35,9 @@ app.post("/register",controllerUsuario.registerUser);
 
 //autor
 app.get("/autor/:idAutor", controllerAutor.getAutorByID);
+
+//editorail
+app.get("/editor/:idEditorial",controllerEditorial.getEditroialById);
 
 
 const port = 3000;
