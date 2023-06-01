@@ -225,6 +225,28 @@ public class LlibreLoader {
                             }
                         });
 
+                        //genere loader
+
+                        genereLoader.getGenereById(jsonObject.getInt("id_genere"),new ApiCallback<Genere>(){
+
+                            @Override
+                            public void onSuccess(Genere genere) {
+                                if(genere!=null){
+                                    llibre.setGenere(genere);
+                                }
+                            }
+
+                            @Override
+                            public void onError(int statusCode) {
+                                System.out.println("Error genere: " +statusCode);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                System.out.println("Failure genere: " + throwable.getMessage());
+                            }
+                        });
+
 
                         //data publicacio
                         String fecha = jsonObject.getString("data_publi");
