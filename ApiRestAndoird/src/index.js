@@ -25,7 +25,7 @@ app.get("/user/:email", controllerUsuario.getUserByEmail);
 //llibres
 app.get("/books", controllerLlibre.getAllLlibres);
 app.get("/books_10", controllerLlibre.getTop10Llibres);
-app.get("book/:isbn", controllerLlibre.getLlibreByIsbn)
+app.get("/book/:isbn", controllerLlibre.getLlibreByIsbn)
 
 //reserva
 app.post("/reservarLlibre",reservaController.setReserva);

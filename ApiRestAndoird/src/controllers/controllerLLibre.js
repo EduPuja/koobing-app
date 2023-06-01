@@ -42,6 +42,7 @@ function getTop10Llibres(req,res)
 
 function getLlibreByIsbn(req,res)
 {
+  console.log("\nBuscant el llibre per ISBN")
   //isbn que li passes per parametre en el get
   const isbn = req.params.isbn;
 
