@@ -111,7 +111,7 @@ public class LlibreLoader {
 
     public void findBookByISBN(long isbn ,final ApiCallback<Llibre> callback)
     {
-        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
+        String url = "http://192.168.0.33:3000/";
 
        RetrofitConnection retrofit = new RetrofitConnection(url);
        LlibreService llibreService = retrofit.getRetrofit().create(LlibreService.class);
@@ -151,7 +151,7 @@ public class LlibreLoader {
 
                             //autor
                             AutorLoader autorLoader = new AutorLoader();
-                            autorLoader.getAutorByID(jsonObject.getInt("id_aturo"), new ApiCallback<Autor>() {
+                            autorLoader.getAutorByID(jsonObject.getInt("id_autor"), new ApiCallback<Autor>() {
                                 @Override
                                 public void onSuccess(Autor data) {
                                     if(data!=null)
