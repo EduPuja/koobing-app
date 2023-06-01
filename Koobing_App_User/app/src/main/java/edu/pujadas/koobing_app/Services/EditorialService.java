@@ -7,6 +7,6 @@ import retrofit2.http.Path;
 
 public interface EditorialService {
 
-    @GET("/editorial/{id}")
+    @GET("/editor/{id}")
     Call<ResponseBody> getEditorialById(@Path("id") int id);
 }
