@@ -23,7 +23,7 @@ public class AutorLoader {
 
 
     public void getAutorById(int id, final ApiCallback<Autor> callback) {
-        String url = "http://localhost:3000/author/" + id+"/";
+        String url = "http://192.168.0.33:3000/author/" + id+"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
