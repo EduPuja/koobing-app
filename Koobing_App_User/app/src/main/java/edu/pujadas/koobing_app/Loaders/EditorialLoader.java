@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EditorialLoader {
 
     public void getEditorialById(int id, final ApiCallback<Editorial> callback) {
-        String url = "http://localhost:3000/editor/" + id;
+        String url = "http://localhost:3000/editor/" + id+"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
