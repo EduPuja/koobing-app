@@ -154,7 +154,7 @@ public class LlibreLoader {
                             java.util.Date utilDate = formatoFecha.parse(fecha);
                             Date sqlDate = new java.sql.Date(utilDate.getTime());
                             llibre.setDataPubli(sqlDate);
-                        
+
                             llibre.setStock(jsonObject.getInt("stock"));
                             llibre.setVersio(jsonObject.getInt("versio"));
 
