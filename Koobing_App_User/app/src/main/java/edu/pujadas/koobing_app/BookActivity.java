@@ -18,8 +18,10 @@ import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import java.net.Socket;
 
+import edu.pujadas.koobing_app.Loaders.EditorialLoader;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Autor;
+import edu.pujadas.koobing_app.Models.Editorial;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.LlibreService;
@@ -69,25 +71,24 @@ public class BookActivity extends AppCompatActivity {
             Llibre book = gson.fromJson(llibreGson, Llibre.class);
             long isbn = book.getISBN();
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
-            LlibreLoader loader = new LlibreLoader();
-            loader.findByEmail(isbn, new ApiCallback<Llibre>() {
+
+            EditorialLoader editorialLoader = new EditorialLoader();
+            editorialLoader.getEditorialById(1, new ApiCallback<Editorial>() {
                 @Override
-                public void onSuccess(Llibre data) {
-                    Toast.makeText(view.getContext(),"Success",Toast.LENGTH_SHORT).show();
+                public void onSuccess(Editorial data) {
+                    Toast.makeText(getApplicationContext(), "Succes editor", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onError(int statusCode) {
-                    Toast.makeText(view.getContext(),"Error " +statusCode,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "error editor " +statusCode, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    Toast.makeText(view.getContext(),"Failure",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "failure edior "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
                 }
             });
-
-
 
 
 
