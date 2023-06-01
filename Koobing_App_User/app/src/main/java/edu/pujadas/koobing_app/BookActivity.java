@@ -70,6 +70,28 @@ public class BookActivity extends AppCompatActivity {
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
 
+            LlibreLoader loader = new LlibreLoader();
+            loader.findBookByISBN(isbn, new ApiCallback<Llibre>() {
+                @Override
+                public void onSuccess(Llibre data) {
+                    if(data != null)
+                    {
+                        Toast.makeText(BookActivity.this, "No es null", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onError(int statusCode) {
+                    Toast.makeText(BookActivity.this, "Error "+statusCode, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Toast.makeText(BookActivity.this, "Failure "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
         }
     }
 
