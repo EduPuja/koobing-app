@@ -57,6 +57,7 @@ public class BookActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Llibre llibreOnlyIsbn = gson.fromJson(bookGson, Llibre.class);
 
+            //Toast.makeText(getApplicationContext(),"ISBN ? "+ llibreOnlyIsbn.getISBN(),Toast.LENGTH_SHORT).show();
             LlibreLoader llibreLoader = new LlibreLoader();
 
             llibreLoader.findBookByISBN(llibreOnlyIsbn.getISBN(), new ApiCallback<Llibre>() {
