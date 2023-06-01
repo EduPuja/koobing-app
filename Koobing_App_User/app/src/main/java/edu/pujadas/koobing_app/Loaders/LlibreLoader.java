@@ -86,4 +86,17 @@ public class LlibreLoader {
             }
         });
     }
+
+
+    public Llibre findBookByISBN(long isbn)
+    {
+        try
+        {
+            String url = "http://192.168.0.33:3000/book"
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error finding book by ISBN: "+e.getMessage());
+        }
+    }
 }
