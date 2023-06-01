@@ -149,6 +149,33 @@ public class LlibreLoader {
                             //afegim la data
                             llibre.setDataPubli(sqlDate);
 
+                            //autor
+                            AutorLoader autorLoader = new AutorLoader();
+                            autorLoader.getAutorByID(jsonObject.getInt("id_aturo"), new ApiCallback<Autor>() {
+                                @Override
+                                public void onSuccess(Autor data) {
+                                    if(data!=null)
+                                    {
+
+                                        System.out.println("EL autor no esta vuit!!!");
+                                        llibre.setAutor(data);
+                                    }
+                                }
+
+                                @Override
+                                public void onError(int statusCode) {
+                                    System.out.println("erro al posar el autor");
+                                }
+
+                                @Override
+                                public void onFailure(Throwable throwable) {
+                                    System.out.println("Failure al posar el autor :" +throwable.getMessage());
+                                }
+                            });
+
+
+
+
                             //todo buscar autor per id ...
                             //cridar el loader de autor
 
