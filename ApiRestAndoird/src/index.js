@@ -5,9 +5,9 @@ const bodyParser = require('body-parser');
 
 //controllers
 const controllerUsuario = require("./controllers/controllerUsuario");
-
 const controllerLlibre = require("./controllers/controllerLLibre");
 const reservaController = require("./controllers/controllerReserva");
+const controllerAutor= require("./controllers/controllerAutor");
 
 
 
@@ -30,6 +30,10 @@ app.get("/book/:isbn", controllerLlibre.getLlibreByIsbn)
 //reserva
 app.post("/reservarLlibre",reservaController.setReserva);
 app.post("/register",controllerUsuario.registerUser);
+
+
+//autor
+app.get("/autor/:idAutor", controllerAutor.getAutorByID);
 
 
 const port = 3000;
