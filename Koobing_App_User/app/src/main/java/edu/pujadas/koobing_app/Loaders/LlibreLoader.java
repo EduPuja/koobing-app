@@ -2,7 +2,10 @@ package edu.pujadas.koobing_app.Loaders;
 
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 
 import edu.pujadas.koobing_app.Models.Autor;
 import edu.pujadas.koobing_app.Models.Editorial;
@@ -134,9 +137,27 @@ public class LlibreLoader {
                             llibre.setISBN(jsonObject.getLong("ISBN"));
                             llibre.setTitol(jsonObject.getString("titol"));
                             llibre.setVersio(jsonObject.getInt("versio"));
-                            llibre.se
+                            llibre.setStock(jsonObject.getInt("stock"));
+
+                            //conversio a date
+
+                            String fecha = jsonObject.getString("data_naix");
+                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                            formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
+                            java.util.Date utilDate = formatoFecha.parse(fecha);
+                            Date sqlDate = new java.sql.Date(utilDate.getTime());
+                            //afegim la data
+                            llibre.setDataPubli(sqlDate);
 
                             //todo buscar autor per id ...
+                            //cridar el loader de autor
+
+
+
+
+
+                            //finalment poso el llibre al callback
+                            callback.onSuccess(llibre);
                         }
 
                     }
@@ -145,13 +166,19 @@ public class LlibreLoader {
                         e.printStackTrace();
                     }
                 }
+
+                else
+                {
+                    callback.onError(response.code());
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                callback.onFailure(t);
             }
-        });
+        }));
+
     }
 
 
