@@ -1,5 +1,10 @@
 package edu.pujadas.koobing_app.Loaders;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -29,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LlibreLoader {
 
 
+    //looders per poder carregar la inforamcio dels objectes necessaris
 
 
 
@@ -115,10 +121,16 @@ public class LlibreLoader {
     public Llibre findByEmail(long isbn, final ApiCallback<Llibre> callback) {
 
 
-        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
-        // String url = "http://192.168.16.254:3000/book/"+isbn+"/";
+        //loaderes necessaries per carregar la inforamcio
+        AutorLoader autorLoader = new AutorLoader();
+        EditorialLoader editorialLoader =new EditorialLoader();
+        GenereLoader genereLoader =new GenereLoader();
+        IdiomaLoader idiomaLoader =new IdiomaLoader();
 
-       RetrofitConnection retrofit = new RetrofitConnection(url);
+        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
+        //String url = "http://192.168.16.254:3000/book/"+isbn+"/";
+
+        RetrofitConnection retrofit = new RetrofitConnection(url);
 
         LlibreService llibreService = retrofit.getRetrofit().create(LlibreService.class);
 
@@ -132,36 +144,108 @@ public class LlibreLoader {
             {
                 if(response.isSuccessful())
                 {
-                    String jsonResponse = null;
+
                     try {
-                        jsonResponse = response.body().string();
-
-                        if(jsonResponse != null) {
-
-                            JSONObject jsonObject = new JSONObject(jsonResponse);
-
-                            Llibre llibre = new Llibre();
-                            llibre.setISBN(jsonObject.getLong("ISBN"));
-                            llibre.setTitol(jsonObject.getString("titol"));
-
-                            //todo falta el autor , editorial, genere, idioma
+                        String jsonResponse = response.body().string();
 
 
-                            //data publicacio
-                            String fecha = jsonObject.getString("data_publi");
-                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                            formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
-                            java.util.Date utilDate = formatoFecha.parse(fecha);
-                            Date sqlDate = new java.sql.Date(utilDate.getTime());
-                            llibre.setDataPubli(sqlDate);
+                        JSONObject jsonObject = new JSONObject(jsonResponse);
 
-                            llibre.setStock(jsonObject.getInt("stock"));
-                            llibre.setVersio(jsonObject.getInt("versio"));
+                        Llibre llibre = new Llibre();
+                        llibre.setISBN(jsonObject.getLong("ISBN"));
+                        llibre.setTitol(jsonObject.getString("titol"));
+
+                        //todo falta el autor , editorial, genere, idioma
 
 
-                            callback.onSuccess(llibre);
+                        //autor loader
 
-                        }
+                        autorLoader.getAutorById(jsonObject.getInt("id_autor"), new ApiCallback<Autor>() {
+                            @Override
+                            public void onSuccess(Autor autor) {
+                                if(autor!=null)
+                                {
+                                    llibre.setAutor(autor);
+                                }
+                            }
+
+                            @Override
+                            public void onError(int statusCode) {
+                                System.out.println("Error autor: " + statusCode);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                System.out.println("Failure autor: " + throwable.getMessage());
+                            }
+                        });
+
+                        // editorail
+                        editorialLoader.getEditorialById(jsonObject.getInt("id_editor"),new ApiCallback<Editorial>() {
+
+                            @Override
+                            public void onSuccess(Editorial editorial) {
+                                if(editorial!=null)
+                                {
+                                    llibre.setEditor(editorial);
+                                }
+                            }
+
+                            @Override
+                            public void onError(int statusCode) {
+                                System.out.println("Error editor: " + statusCode);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                System.out.println("Failure editor: " + throwable.getMessage());
+                            }
+                        });
+
+
+                        // idioma loader
+
+                        idiomaLoader.getIdiomaById(jsonObject.getInt("id_idioma"),new ApiCallback<Idioma>(){
+
+                            @Override
+                            public void onSuccess(Idioma idioma) {
+                                if(idioma!=null){
+                                    llibre.setIdioma(idioma);
+                                }
+                            }
+
+                            @Override
+                            public void onError(int statusCode) {
+                                System.out.println("Error idioma: " +statusCode);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                System.out.println("Failure Idioma: " + throwable.getMessage());
+                            }
+                        });
+
+
+                        //data publicacio
+                        String fecha = jsonObject.getString("data_publi");
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                        formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
+                        java.util.Date utilDate = formatoFecha.parse(fecha);
+                        Date sqlDate = new java.sql.Date(utilDate.getTime());
+                        llibre.setDataPubli(sqlDate);
+
+                        llibre.setStock(jsonObject.getInt("stock"));
+                        llibre.setVersio(jsonObject.getInt("versio"));
+
+
+
+
+
+
+                        //finalment enviar el llire objecte llibre montat
+                        callback.onSuccess(llibre);
+
+
 
 
                     }
@@ -190,6 +274,11 @@ public class LlibreLoader {
 
 
         return null;
+
+    }
+
+
+    private void showErrorToast(String errorMessage) {
 
     }
 
