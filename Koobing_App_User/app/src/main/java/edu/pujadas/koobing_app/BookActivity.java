@@ -61,7 +61,7 @@ public class BookActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(int statusCode) {
-                    Toast.makeText(getApplicationContext(),"Error?",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Error? :" +statusCode,Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

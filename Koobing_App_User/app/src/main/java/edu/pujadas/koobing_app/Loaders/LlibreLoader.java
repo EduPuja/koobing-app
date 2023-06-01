@@ -124,7 +124,7 @@ public class LlibreLoader {
                    Llibre book = response.body();
 
                     System.out.println("Tota info Llibre: "+book.getAllInfoBook());
-                  callback.onSuccess(book);
+                     callback.onSuccess(book);
 
                 }
                 else {
