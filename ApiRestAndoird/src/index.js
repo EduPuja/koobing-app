@@ -16,13 +16,18 @@ const reservaController = require("./controllers/controllerReserva");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Rutas
+// ---- RUTAS ---- //
+
+//usuaris
 app.get("/users", controllerUsuario.getAllUsers);
 app.get("/user/:email", controllerUsuario.getUserByEmail);
 
+//llibres
 app.get("/books", controllerLlibre.getAllLlibres);
 app.get("/books_10", controllerLlibre.getTop10Llibres);
+app.get("book/:isbn", controllerLlibre.getLlibreByIsbn)
 
+//reserva
 app.post("/reservarLlibre",reservaController.setReserva);
 app.post("/register",controllerUsuario.registerUser);
 

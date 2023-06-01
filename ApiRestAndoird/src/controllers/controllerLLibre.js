@@ -39,7 +39,27 @@ function getTop10Llibres(req,res)
   })
 }
 
+
+function getLlibreByIsbn(req,res)
+{
+  //isbn que li passes per parametre en el get
+  const isbn = req.params.isbn;
+
+  const query = "select * from llibre where isbn = ?";
+  connection.query(query, isbn,(error, result) => {
+    if(error) {
+      console.error("Error al buscar la informacio del llibre :" + error.message);
+    }
+    else{
+      res.json(result);
+    }
+  });
+
+  
+}
+
 module.exports = {
   getAllLlibres,
-  getTop10Llibres
-};
+  getTop10Llibres,
+  getLlibreByIsbn
+}
