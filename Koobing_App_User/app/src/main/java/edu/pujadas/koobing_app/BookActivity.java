@@ -18,6 +18,7 @@ import java.lang.reflect.Type;
 import java.net.Socket;
 
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
+import edu.pujadas.koobing_app.Models.Autor;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.LlibreService;
@@ -55,6 +56,7 @@ public class BookActivity extends AppCompatActivity {
             String bookGson = intent.getStringExtra("bookGson");
             Gson gson = new Gson();
             Llibre llibreOnlyIsbn = gson.fromJson(bookGson, Llibre.class);
+
 
 
 
