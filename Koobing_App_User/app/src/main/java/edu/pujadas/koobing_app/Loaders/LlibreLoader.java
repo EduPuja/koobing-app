@@ -155,7 +155,7 @@ public class LlibreLoader {
                         llibre.setISBN(jsonObject.getLong("ISBN"));
                         llibre.setTitol(jsonObject.getString("titol"));
 
-                        //todo falta el autor , editorial, genere, idioma
+                       
 
 
                         //autor loader
