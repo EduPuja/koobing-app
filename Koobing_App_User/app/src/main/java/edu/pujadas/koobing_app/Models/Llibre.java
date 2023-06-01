@@ -13,12 +13,13 @@ public class Llibre
     String titol;
     int versio;
     Date dataPubli;
+    int stock;
 
     public Llibre()
     {
     }
 
-    public Llibre(Long ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli)
+    public Llibre(Long ISBN, Autor autor, Editorial editor, Idioma idioma, Genere genere, String titol, int versio, Date dataPubli,int stock)
     {
         this.ISBN = ISBN;
         this.autor = autor;
@@ -28,6 +29,7 @@ public class Llibre
         this.titol = titol;
         this.versio = versio;
         this.dataPubli = dataPubli;
+        this.stock = stock;
     }
 
     public String getAllInfoBook()
@@ -114,5 +116,14 @@ public class Llibre
     public void setDataPubli(Date dataPubli)
     {
         this.dataPubli = dataPubli;
+    }
+
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }
