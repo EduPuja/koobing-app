@@ -1,5 +1,7 @@
 package edu.pujadas.koobing_app.Loaders;
 
+import org.json.JSONObject;
+
 import edu.pujadas.koobing_app.Models.Genere;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.GenereService;
@@ -12,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GenereLoader {
 
-    public void getGenereById(int id, final ApiCallback<ResponseBody> callback) {
+    public void getGenereById(int id, final ApiCallback<Genere> callback) {
         String url = "http://192.168.0.33:3000/genere/" + id +"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -24,7 +26,22 @@ public class GenereLoader {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful())
+                {
+                    try
+                    {
+                        String json = response.body().string();
+                        JSONObject jsonObject = new JSONObject(json);
+                        Genere genere =new Genere();
+                        genere.setIdGenere(jsonObject.getInt("id_genere"));
+                        genere.setNomGenere(jsonObject.getString("descrip"));
+
+                        callback.onSuccess(genere);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
                 else {
                     callback.onError(response.code());
