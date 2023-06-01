@@ -21,10 +21,12 @@ import java.net.Socket;
 import edu.pujadas.koobing_app.Loaders.AutorLoader;
 import edu.pujadas.koobing_app.Loaders.EditorialLoader;
 import edu.pujadas.koobing_app.Loaders.GenereLoader;
+import edu.pujadas.koobing_app.Loaders.IdiomaLoader;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Autor;
 import edu.pujadas.koobing_app.Models.Editorial;
 import edu.pujadas.koobing_app.Models.Genere;
+import edu.pujadas.koobing_app.Models.Idioma;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.LlibreService;
@@ -75,21 +77,21 @@ public class BookActivity extends AppCompatActivity {
             long isbn = book.getISBN();
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
-            AutorLoader loader = new AutorLoader();
-            loader.getAutorById(1, new ApiCallback<Autor>() {
+            IdiomaLoader loader = new IdiomaLoader();
+            loader.getIdiomaById(1, new ApiCallback<Idioma>() {
                 @Override
-                public void onSuccess(Autor data) {
-                    Toast.makeText(getApplicationContext(), "Succes Autor", Toast.LENGTH_SHORT).show();
+                public void onSuccess(Idioma data) {
+                    Toast.makeText(getApplicationContext(), "Succes Idioma", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onError(int statusCode) {
-                    Toast.makeText(getApplicationContext(), "error autor " +statusCode, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "error Idioma " +statusCode, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    Toast.makeText(getApplicationContext(), "failure autor "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "failure Idioma "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
                 }
             });
 
