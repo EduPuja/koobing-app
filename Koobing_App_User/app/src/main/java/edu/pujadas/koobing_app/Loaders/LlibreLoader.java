@@ -5,6 +5,7 @@ import java.util.List;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.LlibreService;
+import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,17 +15,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LlibreLoader {
     private LlibreService  llibreService;
 
-    private String url = "http://192.168.0.33:3000/books/";
-    //private String url ="http://192.168.16.254:3000/books/";
+
 
     public LlibreLoader() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url) // Reemplaza con la URL base de tu API
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-
-        llibreService = retrofit.create(LlibreService.class);
     }
 
 
@@ -37,7 +31,14 @@ public class LlibreLoader {
 
         String url = "http://192.168.0.33:3000/books/";
 
-        //String url ="http://192.168.16.254:3000/books/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+
         Call <List<Llibre>> call = llibreService.getAllBooks();
         call.enqueue(new Callback<List<Llibre>>() {
 
@@ -88,15 +89,38 @@ public class LlibreLoader {
     }
 
 
-    public Llibre findBookByISBN(long isbn)
+    public void findBookByISBN(final ApiCallback<Llibre>callback,long isbn)
     {
-        try
-        {
-            String url = "http://192.168.0.33:3000/book"
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error finding book by ISBN: "+e.getMessage());
-        }
+
+        String url = "http://192.168.0.33:3000/book/"+isbn+"/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        LlibreService apiService = retrofit.create(LlibreService.class);
+
+        Call<Llibre> call = apiService.getBookByISBN(isbn);
+        call.enqueue(new Callback<Llibre>() {
+            @Override
+            public void onResponse(Call<Llibre> call, Response<Llibre> response) {
+                if (response.isSuccessful()) {
+                   Llibre book = response.body();
+
+                    System.out.println("Tota info Llibre: "+book.getAllInfoBook());
+                  callback.onSuccess(book);
+
+                }
+                else {
+                    callback.onError(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Llibre> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
     }
 }
