@@ -57,6 +57,31 @@ public class BookActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Llibre llibreOnlyIsbn = gson.fromJson(bookGson, Llibre.class);
 
+            LlibreLoader llibreLoader = new LlibreLoader();
+
+            llibreLoader.findBookByISBN(llibreOnlyIsbn.getISBN(), new ApiCallback<Llibre>() {
+                @Override
+                public void onSuccess(Llibre data) {
+                    if(data !=null)
+                    {
+                        System.out.println("INFO LLIBRE GOOD");
+
+                        Toast.makeText(getApplicationContext(),"llibre good",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onError(int statusCode) {
+                    System.out.println("Info llibre error: " + statusCode);
+                    Toast.makeText(getApplicationContext(),"llibre error " +statusCode,Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    System.out.println("On faliure : " + throwable.getMessage());
+                    Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
+                }
+            });
 
 
 
