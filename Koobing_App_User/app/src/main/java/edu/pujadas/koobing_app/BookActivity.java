@@ -76,7 +76,7 @@ public class BookActivity extends AppCompatActivity {
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
             AutorLoader loader = new AutorLoader();
-            loader.getAutorByID(1, new ApiCallback<Autor>() {
+            loader.getAutorById(1, new ApiCallback<Autor>() {
                 @Override
                 public void onSuccess(Autor data) {
                     Toast.makeText(getApplicationContext(), "Succes Autor", Toast.LENGTH_SHORT).show();
