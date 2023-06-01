@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,42 +51,26 @@ public class BookActivity extends AppCompatActivity {
         dataPublicacio = findViewById(R.id.dataPubli);
 
 
+
+
+
+
+    }
+
+
+
+    public void onProvar(View view) {
         Intent intent = getIntent();
-
-        if (intent.hasExtra("bookGson")) {
-            String bookGson = intent.getStringExtra("bookGson");
+        if(intent.hasExtra("bookGson"))
+        {
+            String llibreGson = intent.getStringExtra("bookGson");
             Gson gson = new Gson();
-            Llibre llibreOnlyIsbn = gson.fromJson(bookGson, Llibre.class);
-
-            //Toast.makeText(getApplicationContext(),"ISBN ? "+ llibreOnlyIsbn.getISBN(),Toast.LENGTH_SHORT).show();
-            LlibreLoader llibreLoader = new LlibreLoader();
-
-            llibreLoader.findBookByISBN(llibreOnlyIsbn.getISBN(), new ApiCallback<Llibre>() {
-                @Override
-                public void onSuccess(Llibre data) {
-                    if(data !=null)
-                    {
-                        System.out.println("INFO LLIBRE GOOD");
-
-                        Toast.makeText(getApplicationContext(),"llibre good",Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onError(int statusCode) {
-                    System.out.println("Info llibre error: " + statusCode);
-                    Toast.makeText(getApplicationContext(),"llibre error " +statusCode,Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Throwable throwable) {
-                    System.out.println("On faliure : " + throwable.getMessage());
-                    Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
-                }
-            });
-
+            Llibre book = gson.fromJson(llibreGson, Llibre.class);
+            long isbn = book.getISBN();
+            Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
 
         }
     }
+
 }
