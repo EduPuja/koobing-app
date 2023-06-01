@@ -43,18 +43,28 @@ function getTop10Llibres(req,res)
 function getLlibreByIsbn(req,res)
 {
   console.log("\nBuscant el llibre per ISBN")
-  //isbn que li passes per parametre en el get
   const isbn = req.params.isbn;
 
-  const query = "select * from llibre where isbn = ?";
-  connection.query(query, isbn,(error, result) => {
-    if(error) {
-      console.error("Error al buscar la informacio del llibre :" + error.message);
+  const query = `SELECT * FROM llibre WHERE ISBN = ${isbn}`;
+  connection.query(query, (err,results) => {
+    if(err) {
+      console.error('Error al realizar la consulta: ', err);
+      res.status(500).json({ error: 'Error en el servidor' });
     }
     else{
-      res.json(result[0]);
+      if(results.length >0)
+      {
+        const book = results[0];
+        res.json(book);
+      }
+      else{
+        //not foun de book
+        console.error("NO se encontro el libro");
+        res.end()
+      }
     }
   });
+
 
   
 }
