@@ -30,6 +30,12 @@ public class Llibre
         this.dataPubli = dataPubli;
     }
 
+    public String getAllInfoBook()
+    {
+        return this.ISBN+" "+this.titol +" "+this.autor.getNomAutor() +" "+this.editor.getNomEditor() +" "+
+                this.genere.getNomGenere() +" "+this.versio +" "+ this.dataPubli.toString();
+    }
+
     public Long getISBN()
     {
         return ISBN;
