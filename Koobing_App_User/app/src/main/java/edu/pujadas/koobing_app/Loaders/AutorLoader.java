@@ -6,6 +6,9 @@ import org.json.JSONObject;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 import edu.pujadas.koobing_app.Models.Autor;
@@ -23,7 +26,7 @@ public class AutorLoader {
 
 
     public void getAutorById(int id, final ApiCallback<Autor> callback) {
-        String url = "http://192.168.0.33:3000/author/" + id+"/";
+        String url = "http://192.168.0.33:3000/autor/" + id+"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -47,10 +50,9 @@ public class AutorLoader {
                         autor.setNomAutor(jsonObject.getString("nom_autor"));
                         //convertir data naix
                         String fecha = jsonObject.getString("data_naix");
-                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                        formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
-                        java.util.Date utilDate = formatoFecha.parse(fecha);
-                        Date sqlDate = new java.sql.Date(utilDate.getTime());
+                        Instant instant = Instant.parse(fecha);
+                        Date sqlDate = new java.sql.Date(instant.toEpochMilli());
+
 
                         autor.setDataNaixAutor(sqlDate);
                         callback.onSuccess(autor);
