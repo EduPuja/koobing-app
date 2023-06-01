@@ -10,6 +10,7 @@ const reservaController = require("./controllers/controllerReserva");
 const controllerAutor= require("./controllers/controllerAutor");
 const controllerEditorial = require("./controllers/controllerEditorial");
 const controllerIdioma = require("./controllers/controllerIdioma");
+const controllerGenere = require("./controllers/controllerGenere");
 
 
 
@@ -41,6 +42,9 @@ app.get("/editor/:idEditorial",controllerEditorial.getEditroialById);
 
 //idioma
 app.get("/idioma/:idIdioma",controllerIdioma.getIdiomaById);
+
+//genere
+app.get("/genere/:idGenere",controllerGenere.getGenereById);
 
 
 const port = 3000;

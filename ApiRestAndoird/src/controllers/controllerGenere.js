@@ -2,8 +2,9 @@ const connection = require("../database/conexio");
 
 function getGenereById(req,res)
 {
+    console.log("\nBuscant el genere per id");
     const idGenere = req.params.idGenere;  
-    const query = "SELECT * from genre where id_genere = ?";
+    const query = "SELECT * from genere where id_genere = ?";
 
     connection.query(query, idGenere , (error, result) => {
         if(error) 
