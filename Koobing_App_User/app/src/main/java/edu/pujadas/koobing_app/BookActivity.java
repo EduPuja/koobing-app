@@ -77,21 +77,21 @@ public class BookActivity extends AppCompatActivity {
             long isbn = book.getISBN();
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
-            IdiomaLoader loader = new IdiomaLoader();
-            loader.getIdiomaById(1, new ApiCallback<Idioma>() {
+            LlibreLoader loader = new LlibreLoader();
+            loader.findBookByISBN(book.getISBN(), new ApiCallback<Llibre>() {
                 @Override
-                public void onSuccess(Idioma data) {
-                    Toast.makeText(getApplicationContext(), "Succes Idioma", Toast.LENGTH_SHORT).show();
+                public void onSuccess(Llibre data) {
+                    Toast.makeText(getApplicationContext(), "Succes Llibre", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onError(int statusCode) {
-                    Toast.makeText(getApplicationContext(), "error Idioma " +statusCode, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "error LLibre " +statusCode, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    Toast.makeText(getApplicationContext(), "failure Idioma "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "failure LLibre "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
                 }
             });
 
