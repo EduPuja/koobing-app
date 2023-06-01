@@ -2,8 +2,13 @@ package edu.pujadas.koobing_app.Loaders;
 
 import java.util.List;
 
+import edu.pujadas.koobing_app.Models.Autor;
+import edu.pujadas.koobing_app.Models.Editorial;
+import edu.pujadas.koobing_app.Models.Genere;
+import edu.pujadas.koobing_app.Models.Idioma;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
+import edu.pujadas.koobing_app.Services.AutorService;
 import edu.pujadas.koobing_app.Services.LlibreService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import retrofit2.Call;
@@ -104,29 +109,47 @@ public class LlibreLoader {
      * @param callback callback per si hi ha erros
      * @param isbn isbn per filtrar
      */
-    public void findBookByISBN(final ApiCallback<Llibre>callback,long isbn)
-    {
-        //base url per el llibre
-        String url = "http://192.168.0.33:3000/book/";
-
+    public void findAuthorByISBN(final ApiCallback<Autor> callback, long isbn) {
+        String baseUrl = "http://192.168.0.33:3000/";
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        LlibreService apiService = retrofit.create(LlibreService.class);
+        LlibreService llibreService = retrofit.create(LlibreService.class);
 
-        Call<Llibre> call = apiService.getBookByISBN(isbn);
-        call.enqueue(new Callback<Llibre>() {
+        Call<Llibre> llibreCall = llibreService.getBookByISBN(isbn);
+        llibreCall.enqueue(new Callback<Llibre>() {
             @Override
             public void onResponse(Call<Llibre> call, Response<Llibre> response) {
                 if (response.isSuccessful()) {
-                   Llibre book = response.body();
-                   callback.onSuccess(book);
+                    Llibre llibre = response.body();
 
-                }
-                else {
+                    // Obtener el autor del libro
+                    Autor autor = llibre.getAutor();
+                    int autorId = autor.getIdAutor();
+
+                    // Crear el servicio de Autor
+                    AutorService autorService = retrofit.create(AutorService.class);
+                    Call<Autor> autorCall = autorService.getAutorById(autorId);
+                    autorCall.enqueue(new Callback<Autor>() {
+                        @Override
+                        public void onResponse(Call<Autor> call, Response<Autor> response) {
+                            if (response.isSuccessful()) {
+                                Autor autor = response.body();
+                                callback.onSuccess(autor);
+                            } else {
+                                callback.onError(response.code());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Autor> call, Throwable t) {
+                            callback.onFailure(t);
+                        }
+                    });
+                } else {
                     callback.onError(response.code());
                 }
             }
@@ -137,4 +160,6 @@ public class LlibreLoader {
             }
         });
     }
+
+
 }
