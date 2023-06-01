@@ -111,74 +111,35 @@ public class LlibreLoader {
 
     public void findBookByISBN(long isbn ,final ApiCallback<Llibre> callback)
     {
-        String url = "http://192.168.0.33:3000/";
+        String url = "http://192.168.0.33:3000/book/"+isbn+"/";
 
-       RetrofitConnection retrofit = new RetrofitConnection(url);
-       LlibreService llibreService = retrofit.getRetrofit().create(LlibreService.class);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
 
-        call.enqueue((new Callback<ResponseBody>() {
+        LlibreService llibreService = retrofit.create(LlibreService.class);
+        Call<Llibre> call = llibreService.getBookByISBN(isbn);
+
+        call.enqueue((new Callback<Llibre>() {
+
 
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful())
-                {
-                    String jsonResponse = null;
-                    try
-                    {
-                        jsonResponse = response.body().string();
+            public void onResponse(Call<Llibre> call, Response<Llibre> response) {
+                if(response.isSuccessful()) {
+                    Llibre book = response.body();
 
-                        // si aquest repsonse ha donat valor de tipus json començo a consturir el llibre...
-                        if(jsonResponse !=null)
-                        {
-                            JSONObject jsonObject = new JSONObject(jsonResponse);
-                            Llibre llibre = new Llibre();
-                            llibre.setISBN(jsonObject.getLong("ISBN"));
-                            llibre.setTitol(jsonObject.getString("titol"));
-                            llibre.setVersio(jsonObject.getInt("versio"));
-                            llibre.setStock(jsonObject.getInt("stock"));
-
-                            //conversio a date
-
-                            String fecha = jsonObject.getString("data_naix");
-                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                            formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
-                            java.util.Date utilDate = formatoFecha.parse(fecha);
-                            Date sqlDate = new java.sql.Date(utilDate.getTime());
-                            //afegim la data
-                            llibre.setDataPubli(sqlDate);
-
-                            callback.onSuccess(llibre);
-
-
-
-                            //todo buscar autor per id ...
-                            //cridar el loader de autor
-
-
-
-
-
-
-                        }
-
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
+                    callback.onSuccess(book);
                 }
-
-                else
-                {
+                else {
                     callback.onError(response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                callback.onFailure(t);
+            public void onFailure(Call<Llibre> call, Throwable t) {
+
             }
         }));
 
