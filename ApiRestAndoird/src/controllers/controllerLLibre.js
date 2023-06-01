@@ -47,7 +47,7 @@ function getLlibreByIsbn(req,res)
   const isbn = req.params.isbn;
 
   const query = "select * from llibre where isbn = ?";
-  connection.query(query, [isbn],(error, result) => {
+  connection.query(query, isbn,(error, result) => {
     if(error) {
       console.error("Error al buscar la informacio del llibre :" + error.message);
     }
