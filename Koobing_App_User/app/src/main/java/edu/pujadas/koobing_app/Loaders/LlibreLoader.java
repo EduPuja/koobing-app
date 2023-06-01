@@ -106,8 +106,9 @@ public class LlibreLoader {
      */
     public void findBookByISBN(final ApiCallback<Llibre>callback,long isbn)
     {
+        //base url per el llibre
+        String url = "http://192.168.0.33:3000/book/";
 
-        String url = "http://192.168.0.33:3000/book/"+isbn+"/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -122,9 +123,7 @@ public class LlibreLoader {
             public void onResponse(Call<Llibre> call, Response<Llibre> response) {
                 if (response.isSuccessful()) {
                    Llibre book = response.body();
-
-                    System.out.println("Tota info Llibre: "+book.getAllInfoBook());
-                     callback.onSuccess(book);
+                   callback.onSuccess(book);
 
                 }
                 else {
