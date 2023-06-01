@@ -56,35 +56,7 @@ public class BookActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Llibre llibreOnlyIsbn = gson.fromJson(bookGson, Llibre.class);
 
-            String url = "http://192.168.0.33:3000/book/" + llibreOnlyIsbn.getISBN() + "/";
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            LlibreService apiService = retrofit.create(LlibreService.class);
-            Call<Llibre> call = apiService.getBookByISBN(llibreOnlyIsbn.getISBN());
-            call.enqueue(new Callback<Llibre>() {
-                @Override
-                public void onResponse(Call<Llibre> call, Response<Llibre> response) {
-                    if (response.isSuccessful()) {
-                        Llibre book = response.body();
-
-                        System.out.println("Tota info Llibre: "+book.getAllInfoBook());
-
-
-                    }
-                    else {
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Llibre> call, Throwable t) {
-
-                }
-            });
 
         }
     }
