@@ -3,6 +3,7 @@ const connection = require("../database/conexio");
 
 function getIdiomaById(req,res)
 {
+    console.log("\nBuscant idioma per el id")
     const idIdioma = req.params.idIdioma;
 
     const query = "SELECT * from idioma WHERE idIdioma= ?";
