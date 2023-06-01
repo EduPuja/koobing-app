@@ -118,7 +118,7 @@ public class LlibreLoader {
         });
     }
 
-    public void findBookByISBN(long isbn, final ApiCallback<Llibre> callback) {
+    public void findBookByISBN(String isbn, final ApiCallback<Llibre> callback) {
 
 
         //loaderes necessaries per carregar la inforamcio

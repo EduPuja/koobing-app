@@ -78,7 +78,9 @@ public class BookActivity extends AppCompatActivity {
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
             LlibreLoader loader = new LlibreLoader();
-            loader.findBookByISBN(book.getISBN(), new ApiCallback<Llibre>() {
+
+            String isbnForced = "765434231123";
+            loader.findBookByISBN(isbnForced, new ApiCallback<Llibre>() {
                 @Override
                 public void onSuccess(Llibre data) {
                     Toast.makeText(getApplicationContext(), "Succes Llibre", Toast.LENGTH_SHORT).show();
