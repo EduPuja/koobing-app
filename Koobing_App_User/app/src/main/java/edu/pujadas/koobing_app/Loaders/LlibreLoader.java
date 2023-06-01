@@ -1,5 +1,7 @@
 package edu.pujadas.koobing_app.Loaders;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import edu.pujadas.koobing_app.Models.Autor;
@@ -11,6 +13,7 @@ import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.AutorService;
 import edu.pujadas.koobing_app.Services.LlibreService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -103,60 +106,50 @@ public class LlibreLoader {
         });
     }
 
+    public void findBookByISBN(long isbn ,final ApiCallback<Llibre> callback)
+    {
+        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
 
-    /**
-     * Metode per obtenir tot el llibre per isbn
-     * @param callback callback per si hi ha erros
-     * @param isbn isbn per filtrar
-     */
-    public void findAuthorByISBN(final ApiCallback<Autor> callback, long isbn) {
-        String baseUrl = "http://192.168.0.33:3000/";
+       RetrofitConnection retrofit = new RetrofitConnection(url);
+       LlibreService llibreService = retrofit.getRetrofit().create(LlibreService.class);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
 
-        LlibreService llibreService = retrofit.create(LlibreService.class);
+        call.enqueue((new Callback<ResponseBody>() {
 
-        Call<Llibre> llibreCall = llibreService.getBookByISBN(isbn);
-        llibreCall.enqueue(new Callback<Llibre>() {
             @Override
-            public void onResponse(Call<Llibre> call, Response<Llibre> response) {
-                if (response.isSuccessful()) {
-                    Llibre llibre = response.body();
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful())
+                {
+                    String jsonResponse = null;
+                    try
+                    {
+                        jsonResponse = response.body().string();
 
-                    // Obtener el autor del libro
-                    Autor autor = llibre.getAutor();
-                    int autorId = autor.getIdAutor();
+                        // si aquest repsonse ha donat valor de tipus json començo a consturir el llibre...
+                        if(jsonResponse !=null)
+                        {
+                            JSONObject jsonObject = new JSONObject(jsonResponse);
+                            Llibre llibre = new Llibre();
+                            llibre.setISBN(jsonObject.getLong("ISBN"));
+                            llibre.setTitol(jsonObject.getString("titol"));
+                            llibre.setVersio(jsonObject.getInt("versio"));
+                            llibre.se
 
-                    // Crear el servicio de Autor
-                    AutorService autorService = retrofit.create(AutorService.class);
-                    Call<Autor> autorCall = autorService.getAutorById(autorId);
-                    autorCall.enqueue(new Callback<Autor>() {
-                        @Override
-                        public void onResponse(Call<Autor> call, Response<Autor> response) {
-                            if (response.isSuccessful()) {
-                                Autor autor = response.body();
-                                callback.onSuccess(autor);
-                            } else {
-                                callback.onError(response.code());
-                            }
+                            //todo buscar autor per id ...
                         }
 
-                        @Override
-                        public void onFailure(Call<Autor> call, Throwable t) {
-                            callback.onFailure(t);
-                        }
-                    });
-                } else {
-                    callback.onError(response.code());
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<Llibre> call, Throwable t) {
-                callback.onFailure(t);
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }
