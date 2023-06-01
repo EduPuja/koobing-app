@@ -118,7 +118,7 @@ public class LlibreLoader {
         });
     }
 
-    public Llibre findByEmail(long isbn, final ApiCallback<Llibre> callback) {
+    public void findBookByISBN(long isbn, final ApiCallback<Llibre> callback) {
 
 
         //loaderes necessaries per carregar la inforamcio
@@ -295,7 +295,7 @@ public class LlibreLoader {
         });//end callback
 
 
-        return null;
+
 
     }
 
