@@ -36,31 +36,14 @@ public class BookActivity extends AppCompatActivity {
         edicio= findViewById(R.id.edicio);
         dataPublicacio = findViewById(R.id.dataPubli);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("bookInfo", Context.MODE_PRIVATE);
-
-        // Obtener la cadena JSON del objeto Libro
-        String jsonLibro = sharedPreferences.getString("book", "");
-
-        System.out.println("JSON libro: " + jsonLibro);
-
-        // Convertir la cadena JSON a objeto Libro utilizando Gson
-        Gson gson = new Gson();
-        Type tipoLibro = new TypeToken<Llibre>() {}.getType();
-        Llibre llibre = gson.fromJson(jsonLibro, tipoLibro);
 
 
 
 
 
-        //afegint tots els camps de llibre
 
-        titolLlibre.setText(llibre.getTitol());
-        //autorName.setText(llibre.getAutor().getNomAutor());
-        //editorial.setText(llibre.getEditor().getNomEditor());
-        //genere.setText(llibre.getGenere().getNomGenere());
-        //idioma.setText(llibre.getIdioma().getNomIdioma());
-        //edicio.setText(llibre.getVersio());
-       //dataPublicacio.setText(llibre.getDataPubli().toString());
+
+
 
     }
 }
