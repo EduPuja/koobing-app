@@ -8,6 +8,6 @@ import retrofit2.http.Path;
 
 public interface AutorService {
 
-    @GET("/author/{id}")
+    @GET("/autor/{id}")
     Call<ResponseBody> getAutorById(@Path("id") int id);
 }
