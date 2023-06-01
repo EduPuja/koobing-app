@@ -2,6 +2,7 @@ package edu.pujadas.koobing_app.Loaders;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -12,9 +13,11 @@ import edu.pujadas.koobing_app.Models.Editorial;
 import edu.pujadas.koobing_app.Models.Genere;
 import edu.pujadas.koobing_app.Models.Idioma;
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.AutorService;
 import edu.pujadas.koobing_app.Services.LlibreService;
+import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -109,39 +112,84 @@ public class LlibreLoader {
         });
     }
 
-    public void findBookByISBN(long isbn ,final ApiCallback<Llibre> callback)
-    {
-        String url = "http://192.168.0.33:3000/book/"+isbn+"/";
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    public Llibre findByEmail(long isbn, final ApiCallback<Llibre> callback) {
 
 
-        LlibreService llibreService = retrofit.create(LlibreService.class);
-        Call<Llibre> call = llibreService.getBookByISBN(isbn);
+        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
+        // String url = "http://192.168.16.254:3000/book/"+isbn+"/";
 
-        call.enqueue((new Callback<Llibre>() {
+       RetrofitConnection retrofit = new RetrofitConnection(url);
 
+        LlibreService llibreService = retrofit.getRetrofit().create(LlibreService.class);
+
+
+        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
+
+        call.enqueue(new Callback<ResponseBody>() {
 
             @Override
-            public void onResponse(Call<Llibre> call, Response<Llibre> response) {
-                if(response.isSuccessful()) {
-                    Llibre book = response.body();
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
+            {
+                if(response.isSuccessful())
+                {
+                    String jsonResponse = null;
+                    try {
+                        jsonResponse = response.body().string();
 
-                    callback.onSuccess(book);
+                        if(jsonResponse != null) {
+
+                            JSONObject jsonObject = new JSONObject(jsonResponse);
+
+                            Llibre llibre = new Llibre();
+                            llibre.setISBN(jsonObject.getLong("ISBN"));
+                            llibre.setTitol(jsonObject.getString("titol"));
+
+                            //todo falta el autor , editorial, genere, idioma
+
+
+                            //data publicacio
+                            String fecha = jsonObject.getString("data_publi");
+                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                            formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
+                            java.util.Date utilDate = formatoFecha.parse(fecha);
+                            Date sqlDate = new java.sql.Date(utilDate.getTime());
+                            llibre.setDataPubli(sqlDate);
+                        
+                            llibre.setStock(jsonObject.getInt("stock"));
+                            llibre.setVersio(jsonObject.getInt("versio"));
+
+
+                            callback.onSuccess(llibre);
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
-                else {
+                else
+                {
+                    //en cas d'error envio el codi d'error
                     callback.onError(response.code());
                 }
+
+
             }
+
+
 
             @Override
-            public void onFailure(Call<Llibre> call, Throwable t) {
-
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                callback.onFailure(t);
             }
-        }));
+        });//end callback
+
+
+        return null;
 
     }
 
