@@ -79,7 +79,7 @@ public class BookActivity extends AppCompatActivity {
 
             LlibreLoader loader = new LlibreLoader();
 
-            String isbnForced = "765434231123";
+            long isbnForced = 765434231123L;
             loader.findBookByISBN(isbnForced, new ApiCallback<Llibre>() {
                 @Override
                 public void onSuccess(Llibre data) {
