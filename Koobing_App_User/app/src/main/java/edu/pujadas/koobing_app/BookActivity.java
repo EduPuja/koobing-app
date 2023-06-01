@@ -19,6 +19,7 @@ import java.net.Socket;
 
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Services.ApiCallback;
 
 public class BookActivity extends AppCompatActivity {
 
@@ -52,7 +53,24 @@ public class BookActivity extends AppCompatActivity {
 
             LlibreLoader bookLoader = new LlibreLoader();
 
-           // Toast.makeText(this,"ISBN: " +llibreOnlyIsbn.getISBN(),Toast.LENGTH_SHORT).show();
+            bookLoader.findBookByISBN(new ApiCallback<Llibre>() {
+                @Override
+                public void onSuccess(Llibre data) {
+                    Toast.makeText(getApplicationContext(),"Succes?",Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError(int statusCode) {
+                    Toast.makeText(getApplicationContext(),"Error?",Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Toast.makeText(getApplicationContext(),"Failure?",Toast.LENGTH_SHORT).show();
+                }
+            }, llibreOnlyIsbn.getISBN());
+
+            Toast.makeText(this,"ISBN: " +llibreOnlyIsbn.getISBN(),Toast.LENGTH_SHORT).show();
         }
 
 
