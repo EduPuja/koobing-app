@@ -84,10 +84,10 @@ public class CarouselAdapter extends PagerAdapter {
                 String bookGSon = gson.toJson(book);
 
 
-                System.out.println("BOOK GSON :" +bookGSon);
+               // System.out.println("BOOK GSON :" +bookGSon);
 
                 Intent intent = new Intent(context, BookActivity.class);
-                intent.putExtra("a",bookGSon);
+                intent.putExtra("bookGson",bookGSon);
                 //start activity
                 context.startActivity(intent);
 
