@@ -13,13 +13,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LlibreLoader {
-    private LlibreService  llibreService;
 
 
 
-    public LlibreLoader() {
-
-    }
 
 
     /**
@@ -37,7 +33,7 @@ public class LlibreLoader {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-
+        LlibreService llibreService = retrofit.create(LlibreService.class);
 
         Call <List<Llibre>> call = llibreService.getAllBooks();
         call.enqueue(new Callback<List<Llibre>>() {
@@ -61,9 +57,23 @@ public class LlibreLoader {
         });
     }
 
+
+    /**
+     * Metode per obtenir el llistat del 10 primers llibres
+     * @param callback
+     */
     public void obtenir10Llibres(final ApiCallback<List<Llibre>>callback)
     {
         String url = "http://192.168.0.33:3000/books_10/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        LlibreService llibreService = retrofit.create(LlibreService.class);
+
+
 
         //String url ="http://192.168.16.254:3000/books/";
         Call <List<Llibre>> call = llibreService.getAllBooks();
@@ -89,6 +99,11 @@ public class LlibreLoader {
     }
 
 
+    /**
+     * Metode per obtenir tot el llibre per isbn
+     * @param callback callback per si hi ha erros
+     * @param isbn isbn per filtrar
+     */
     public void findBookByISBN(final ApiCallback<Llibre>callback,long isbn)
     {
 
