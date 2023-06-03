@@ -56,12 +56,8 @@ public class LlibreDeserializer implements JsonDeserializer<Llibre> {
        // llibre.setDataPubli(dataPubli);
         llibre.setStock(stock);
 
-        // -- Obtenit els objectes dels loaders
-
+        // -- Obtenit els objectes dels loader
         //autor
-
-        // Obtener el objeto Autor utilizando el AutorLoader
-
         AutorLoader autorLoader = new AutorLoader();
         autorLoader.getAutorById(idAutor, new ApiCallback<Autor>() {
             @Override
