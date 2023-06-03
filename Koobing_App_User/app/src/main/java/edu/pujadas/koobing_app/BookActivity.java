@@ -2,9 +2,12 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -139,9 +142,24 @@ public class BookActivity extends AppCompatActivity {
 
 
     public void onReservar(View view) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        // Crea un diálogo DatePicker
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
+                // Aquí obtienes la fecha seleccionada
+                String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + selectedYear;
+                // Haz lo que quieras con la fecha seleccionada
 
-        Intent intent = new Intent(this,ReservarActivity.class);
-        startActivity(intent);
+            }
+        }, year, month, day);
+
+        // Muestra el diálogo DatePicker
+        datePickerDialog.show();
+
         /*RetrofitConnection connection = new RetrofitConnection(BASE_URL);
         ReservaService reservaService = connection.getRetrofit().create(ReservaService.class);
 
@@ -199,6 +217,62 @@ public class BookActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void sendReservaPOST()
+    {
+        RetrofitConnection connection = new RetrofitConnection(BASE_URL);
+        ReservaService reservaService = connection.getRetrofit().create(ReservaService.class);
+
+        Reserva reserva = new Reserva();
+
+        //afegint el treballadro
+        Treballador treballador = new Treballador();
+        treballador.setId(1);   // es el adminsitrador del sistema
+        treballador.setAdmin(true);
+        treballador.setEmail("admin@mail.com");
+        treballador.setNom("Admin");
+        //usuari
+        Usuari user = UsuarioSingleton.getInstance().getUsuario();
+
+
+        //llibre
+        Intent intent =getIntent();
+        if(intent.hasExtra("bookGson"))
+        {
+            String bookGson = intent.getStringExtra("bookGson");
+            Gson gson = new Gson();
+            Llibre bookIntent = gson.fromJson(bookGson, Llibre.class);
+            reserva.setLlibre(bookIntent);
+        }
+        reserva.setTreballador(treballador);
+        reserva.setUsuari(user);
+
+
+
+        // todo falta data inici data fi
+
+
+
+        reserva.setEstat(1);
+        Call<Void> call = reservaService.hacerReserva(reserva);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(), "succes Reserva", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Error :" +response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failure Reserva " +t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
