@@ -2,40 +2,18 @@ package edu.pujadas.koobing_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.reflect.TypeToken;
-
-import com.google.gson.Gson;
-
-import java.lang.reflect.Type;
 import java.net.Socket;
 
-import edu.pujadas.koobing_app.Loaders.AutorLoader;
-import edu.pujadas.koobing_app.Loaders.EditorialLoader;
-import edu.pujadas.koobing_app.Loaders.GenereLoader;
-import edu.pujadas.koobing_app.Loaders.IdiomaLoader;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
-import edu.pujadas.koobing_app.Models.Autor;
-import edu.pujadas.koobing_app.Models.Editorial;
-import edu.pujadas.koobing_app.Models.Genere;
-import edu.pujadas.koobing_app.Models.Idioma;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
-import edu.pujadas.koobing_app.Services.LlibreService;
-import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BookActivity extends AppCompatActivity {
 
@@ -68,8 +46,28 @@ public class BookActivity extends AppCompatActivity {
 
 
 
-    public void onProvar(View view) {
+    public void onReservar(View view) {
 
+        LlibreLoader llibreLoader = new LlibreLoader();
+        llibreLoader.findBookByISBN("765434231123", new ApiCallback<Llibre>() {
+            @Override
+            public void onSuccess(Llibre data) {
+                if(data!=null)
+                {
+                    Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                Toast.makeText(getApplicationContext(), " error :" +statusCode, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Toast.makeText(getApplicationContext(), "Filure :" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
