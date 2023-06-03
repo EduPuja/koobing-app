@@ -32,7 +32,7 @@ app.get("/book/:isbn", controllerLlibre.getLlibreByIsbn)
 
 //reserva
 app.post("/reservarLlibre",reservaController.setReserva);
-app.get("/llibresReservats",reservaController.getLlibresReservats);
+app.get("/llibresReservats/:id_usuari",reservaController.getLlibresReservats);
 
 
 //autor
