@@ -23,6 +23,21 @@ function setReserva(req, res) {
   console.log("ID del Trabajador:", treballadorId);
   console.log("ID del Usuario:", usuariId);
 
+  //Consulta SQL
+  const query = `INSERT INTO reserva (id_prestec, ISBN, id_usuari, id_treballador, data_inici, data_fi, id_estat)  VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+  const valors = [dataFI, estat, idReserva, llibreISBN, treballadorId, usuariId];
+
+  connection.query(query,[dataFI, estat, idReserva, llibreISBN, treballadorId, usuariId],(error,result) =>{
+    if (error) {
+      console.error("Error al insertar reserva:", error.message);
+      res.status(500).json({ message: "Error al insertar reserva" });
+    } else {
+      console.log("Reserva insertada correctamente");
+      res.status(200).json({ message: "Reserva creada correctamente" });
+    }
+  })
+
   // Enviar una respuesta al cliente
   res.status(200).json({ message: "Reserva creada correctamente" });
 }
