@@ -140,7 +140,9 @@ public class BookActivity extends AppCompatActivity {
 
     public void onReservar(View view) {
 
-        RetrofitConnection connection = new RetrofitConnection(BASE_URL);
+        Intent intent = new Intent(this,ReservarActivity.class);
+        startActivity(intent);
+        /*RetrofitConnection connection = new RetrofitConnection(BASE_URL);
         ReservaService reservaService = connection.getRetrofit().create(ReservaService.class);
 
         Reserva reserva = new Reserva();
@@ -191,7 +193,7 @@ public class BookActivity extends AppCompatActivity {
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failure Reserva " +t.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
 
