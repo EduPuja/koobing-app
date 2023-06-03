@@ -42,7 +42,7 @@ public class LlibreLoader {
 
     public void findBookByISBN(String isbn,final ApiCallback<Llibre> callback) {
 
-     
+
 
        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
         call.enqueue(new Callback<ResponseBody>() {
@@ -58,7 +58,7 @@ public class LlibreLoader {
 
 
                         Llibre book = gson.fromJson(jsonBook,Llibre.class);
-
+                        System.out.println("info llibre :" + book.getAllInfoBook());
                         callback.onSuccess(book);
                     }
                     catch (Exception e) {
