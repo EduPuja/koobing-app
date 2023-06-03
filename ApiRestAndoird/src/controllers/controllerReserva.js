@@ -13,7 +13,7 @@ function setReserva(req, res) {
 
 
  
-  const data_inici = new Date();
+  
   //const data_fi = new Date();
 
   //data_fi.setMonth(data_fi.getMonth() + 1);
