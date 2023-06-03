@@ -21,6 +21,9 @@ import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.AutorService;
+import edu.pujadas.koobing_app.Services.EditorialService;
+import edu.pujadas.koobing_app.Services.GenereService;
+import edu.pujadas.koobing_app.Services.IdiomaService;
 import edu.pujadas.koobing_app.Services.LlibreService;
 import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
@@ -33,10 +36,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LlibreLoader {
 
+    //ip home
+    private  String url = "http://192.168.0.33:3000";
 
     //looders per poder carregar la inforamcio dels objectes necessaris
+    private LlibreService llibreService;
+    private AutorService autorService;
+    private EditorialService editorialService;
+    private IdiomaService idiomaService;
+    private GenereService genereService;
+
+    public LlibreLoader() {
+        RetrofitConnection retrofitConnection =new RetrofitConnection(url);
 
 
+        llibreService = retrofitConnection.getRetrofit().create(LlibreService.class);
+        autorService = retrofitConnection.getRetrofit().create(AutorService.class);
+        editorialService = retrofitConnection.getRetrofit().create(EditorialService.class);
+        idiomaService = retrofitConnection.getRetrofit().create(IdiomaService.class);
+        genereService = retrofitConnection.getRetrofit().create(GenereService.class);
+
+    }
 
     /**
      * Metode per obtenir tots els llibres de la API
@@ -118,7 +138,7 @@ public class LlibreLoader {
         });
     }
 
-    public void findBookByISBN(long isbn, final ApiCallback<Llibre> callback) {
+  /*  public void findBookByISBN(long isbn, final ApiCallback<Llibre> callback) {
 
 
         //loaderes necessaries per carregar la inforamcio
@@ -297,12 +317,10 @@ public class LlibreLoader {
 
 
 
-    }
+    }*/
 
 
-    private void showErrorToast(String errorMessage) {
 
-    }
 
 
 }
