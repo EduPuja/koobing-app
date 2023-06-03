@@ -69,4 +69,11 @@ public class LlibreDeserializer implements JsonDeserializer<Llibre> {
 
         return llibre;
     }
+
+
+    private Editorial obtenerEditorialPorId(int idEditor) {
+        // Lógica para obtener la editorial por ID a través de una llamada a la API o una consulta a la base de datos
+        // ...
+        return editorial;
+    }
 }
