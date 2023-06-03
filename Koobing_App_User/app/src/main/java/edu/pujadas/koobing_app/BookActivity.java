@@ -22,8 +22,14 @@ import java.util.Locale;
 
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Models.Reserva;
+import edu.pujadas.koobing_app.Models.Treballador;
+import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.LlibreService;
+import edu.pujadas.koobing_app.Services.ReservaService;
+import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
+import edu.pujadas.koobing_app.Utilites.UsuarioSingleton;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +45,8 @@ public class BookActivity extends AppCompatActivity {
     LlibreLoader llibreLoader;
 
     LlibreService llibreService;
+
+    private String BASE_URL= "http://192.168.0.33:3000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +88,7 @@ public class BookActivity extends AppCompatActivity {
     {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.33:3000/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         llibreService = retrofit.create(LlibreService.class);
@@ -132,8 +140,43 @@ public class BookActivity extends AppCompatActivity {
 
     public void onReservar(View view) {
 
+        RetrofitConnection connection = new RetrofitConnection(BASE_URL);
+        ReservaService reservaService = connection.getRetrofit().create(ReservaService.class);
 
-       // todo fer peticio post per fer reserva en estat RESERVAT
+        Reserva reserva = new Reserva();
+
+        //afegint el treballadro
+        Treballador treballador = new Treballador();
+        treballador.setId(1);   // es el adminsitrador del sistema
+
+        //usuari
+        Usuari user = UsuarioSingleton.getInstance().getUsuario();
+
+
+        //llibre
+        Intent intent =getIntent();
+        if(intent.hasExtra("bookGson"))
+        {
+            String bookGson = intent.getStringExtra("bookGson");
+            Gson gson = new Gson();
+            Llibre bookIntent = gson.fromJson(bookGson, Llibre.class);
+            reserva.setLlibre(bookIntent);
+        }
+        reserva.setTreballador(treballador);
+        reserva.setUsuari(user);
+
+
+
+        // todo falta data inici data fi
+
+
+        
+        reserva.setEstat(1);
+        reservaService.hacerReserva(reserva);
+
+
+
+
 
     }
 
