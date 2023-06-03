@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -25,22 +26,14 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottom_navigation;
     ViewPager viewPager;
     CarouselAdapter carouselAdapter;
-
-
     TextView homeLabel;
-
-
-    LlibreLoader bookBiblioLoader;
-
-
-
-
-
-
+    LlibreLoader llibreLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        llibreLoader = new LlibreLoader();
         setContentView(R.layout.home_activity);
         setTitle("Home");
 
@@ -49,19 +42,36 @@ public class HomeActivity extends AppCompatActivity {
         bottom_navigation = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.viewPager);
 
-
         // Posar el home como activat
         bottom_navigation.setSelectedItemId(R.id.navigation_home);
         setBottom_navigation();
         loadBookInfo();
 
+        //peticio llibre
+        test();
 
 
+    }
 
+    //test fer petcio llibre
+    public void test()
+    {
+        llibreLoader.findBookByISBN(12376217637612L, new ApiCallback<Llibre>() {
+            @Override
+            public void onSuccess(Llibre data) {
+                Toast.makeText(getApplicationContext(),"Succes", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onError(int statusCode) {
+                Toast.makeText(getApplicationContext(),"Error :"+statusCode ,Toast.LENGTH_SHORT).show();
+            }
 
-
-
+            @Override
+            public void onFailure(Throwable throwable) {
+                Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -101,10 +111,10 @@ public class HomeActivity extends AppCompatActivity {
      */
     public void loadBookInfo()
     {
-        bookBiblioLoader = new LlibreLoader();
+
 
         //mostar els 10 llibres de la base de dades en el carrusel
-        bookBiblioLoader.obtenir10Llibres(new ApiCallback<List<Llibre>>() {
+        llibreLoader.obtenir10Llibres(new ApiCallback<List<Llibre>>() {
             @Override
             public void onSuccess(List<Llibre> data) {
                 if(data!=null && !data.isEmpty())
