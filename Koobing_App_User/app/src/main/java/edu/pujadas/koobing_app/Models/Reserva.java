@@ -8,7 +8,6 @@ import java.sql.Date;
 public class Reserva
 {
     int idReserva;
-
     Usuari usuari;
     Treballador treballador;
 
@@ -16,52 +15,63 @@ public class Reserva
     Date dataInici;
     Date dataFI;
 
+    int estat ;
+
     public Reserva()
     {
     }
 
-    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Llibre llibre, Date dataInici, Date dataFI) {
+    public Reserva(int idReserva, Usuari usuari, Treballador treballador, Llibre llibre, Date dataInici, Date dataFI, int estat) {
         this.idReserva = idReserva;
         this.usuari = usuari;
         this.treballador = treballador;
-
         this.llibre = llibre;
         this.dataInici = dataInici;
         this.dataFI = dataFI;
+        this.estat = estat;
     }
 
-    public int getIdReserva() {
+    public int getIdReserva()
+    {
         return idReserva;
     }
 
-    public void setIdReserva(int idReserva) {
+    public void setIdReserva(int idReserva)
+    {
         this.idReserva = idReserva;
     }
 
-    public Usuari getUsuari() {
+    public Usuari getUsuari()
+    {
         return usuari;
     }
 
-    public void setUsuari(Usuari usuari) {
+    public void setUsuari(Usuari usuari)
+    {
         this.usuari = usuari;
     }
 
-    public Treballador getTreballador() {
+    public Treballador getTreballador()
+    {
         return treballador;
     }
 
-    public void setTreballador(Treballador treballador) {
+    public void setTreballador(Treballador treballador)
+    {
         this.treballador = treballador;
     }
 
 
 
 
-    public Llibre getLlibre() {
+
+    public Llibre getLlibre()
+    {
         return llibre;
     }
 
-    public void setLlibre(Llibre llibre) {
+    public void setLlibre(Llibre llibre)
+    {
         this.llibre = llibre;
     }
 
@@ -79,5 +89,14 @@ public class Reserva
 
     public void setDataFI(Date dataFI) {
         this.dataFI = dataFI;
+    }
+
+
+    public int getEstat() {
+        return estat;
+    }
+
+    public void setEstat(int estat) {
+        this.estat = estat;
     }
 }
