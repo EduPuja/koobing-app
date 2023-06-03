@@ -80,7 +80,7 @@ public class BookActivity extends AppCompatActivity {
             LlibreLoader loader = new LlibreLoader();
 
             long isbnForced = 765434231123L;
-            loader.findBookByISBN(isbnForced, new ApiCallback<Llibre>() {
+           /* loader.findBookByISBN(isbnForced, new ApiCallback<Llibre>() {
                 @Override
                 public void onSuccess(Llibre data) {
                     Toast.makeText(getApplicationContext(), "Succes Llibre", Toast.LENGTH_SHORT).show();
@@ -95,7 +95,7 @@ public class BookActivity extends AppCompatActivity {
                 public void onFailure(Throwable throwable) {
                     Toast.makeText(getApplicationContext(), "failure LLibre "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
                 }
-            });
+            });*/
 
 
 

@@ -58,6 +58,12 @@ public class LlibreLoader {
 
     }
 
+
+    public void buscarLlibreISBN(long isbn ,final ApiCallback<Llibre> callback)
+    {
+
+    }
+
     /**
      * Metode per obtenir tots els llibres de la API
      * @param callback callback de tipus llibreBiblioteca on hi h totala inforamcio del llibre i la biblioteca
