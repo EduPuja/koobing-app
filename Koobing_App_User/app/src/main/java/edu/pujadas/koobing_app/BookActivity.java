@@ -59,23 +59,6 @@ public class BookActivity extends AppCompatActivity {
         dataPublicacio = findViewById(R.id.dataPubli);
 
 
-        LlibreLoader bookLoader = new LlibreLoader();
-        bookLoader.findBookByISBN(12376217637612L, new ApiCallback<Llibre>() {
-            @Override
-            public void onSuccess(Llibre data) {
-                Toast.makeText(getApplicationContext(),"Succes",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(int statusCode) {
-                Toast.makeText(getApplicationContext(),"Error :"+statusCode ,Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
 
