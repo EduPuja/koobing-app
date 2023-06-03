@@ -160,6 +160,7 @@ public class BookActivity extends AppCompatActivity {
             }
         }, year, month, day);
 
+        datePickerDialog.setTitle("Seleciona la data de retorn");
         // Muestra el diálogo DatePicker
         datePickerDialog.show();
 
