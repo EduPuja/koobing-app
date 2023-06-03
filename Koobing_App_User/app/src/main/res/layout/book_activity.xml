@@ -6,110 +6,101 @@
     android:layout_height="match_parent"
     tools:context=".BookActivity">
 
-    <ImageView
-        android:id="@+id/logoLlibre"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="35dp"
-        android:importantForAccessibility="no"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/libro" />
 
-    <TextView
-        android:id="@+id/nomLlibre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/book_title"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoLlibre" />
 
-    <TextView
-        android:id="@+id/autorName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/autor"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomLlibre" />
-
-    <TextView
-        android:id="@+id/genereName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/genere"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editorialName" />
-
-    <TextView
-        android:id="@+id/editorialName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/editorial"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autorName" />
-
-    <TextView
-        android:id="@+id/idioma"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="idioma"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/genereName" />
-
-    <TextView
-        android:id="@+id/edicio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="edició"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idioma" />
-
-    <TextView
-        android:id="@+id/dataPubli"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="dataPublicacio"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edicio" />
-
-    <Button
-        android:id="@+id/reservarButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="60dp"
-        android:onClick="onReservar"
-        android:text="@string/reservar"
+    <androidx.cardview.widget.CardView
+        android:layout_width="330dp"
+        android:layout_height="435dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataPubli" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/logoLlibre"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:importantForAccessibility="no"
+            android:layout_marginStart="140dp"
+  
+            app:srcCompat="@drawable/libro" />
+
+        <TextView
+            android:id="@+id/nomLlibre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="225dp"
+            android:text="@string/book_title"
+            android:textAlignment="center"
+           />
+
+        <TextView
+            android:id="@+id/autorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="225dp"
+            android:text="@string/autor"
+            android:textAlignment="center"
+             />
+
+        <TextView
+            android:id="@+id/genereName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="225dp"
+            android:text="@string/genere"
+            android:textAlignment="center"
+        />
+
+        <TextView
+            android:id="@+id/editorialName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="225dp"
+            android:text="@string/editorial"
+            android:textAlignment="center"
+          />
+
+        <TextView
+            android:id="@+id/idioma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="225dp"
+            android:text="idioma"
+            android:textAlignment="center"
+           />
+
+        <TextView
+            android:id="@+id/edicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="225dp"
+            android:text="edició"
+            android:textAlignment="center"
+           />
+
+        <TextView
+            android:id="@+id/dataPubli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="225dp"
+            android:text="dataPublicacio"
+            android:textAlignment="center"
+             />
+
+        <Button
+            android:id="@+id/reservarButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="60dp"
+            android:onClick="onReservar"
+            android:text="@string/reservar" />
+
+
+    </androidx.cardview.widget.CardView>
 
 
 
