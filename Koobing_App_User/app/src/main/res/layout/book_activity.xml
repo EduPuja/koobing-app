@@ -40,7 +40,7 @@
             android:id="@+id/autorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="225dp"
+            android:layout_marginTop="105dp"
             android:text="@string/autor"
             android:textAlignment="center"
              />
@@ -49,7 +49,7 @@
             android:id="@+id/genereName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="225dp"
+            android:layout_marginTop="124dp"
             android:text="@string/genere"
             android:textAlignment="center"
         />
