@@ -13,6 +13,8 @@ import java.util.List;
 import edu.pujadas.koobing_app.Adapters.LlibreAdapter;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Models.Usuari;
+import edu.pujadas.koobing_app.Utilites.UsuarioSingleton;
 
 public class ProfileActivit extends AppCompatActivity {
 
@@ -43,6 +45,12 @@ public class ProfileActivit extends AppCompatActivity {
         bookAdapter = new LlibreAdapter(listLlibres);
         recyclerView.setAdapter(bookAdapter);
 
+        Usuari usuari =UsuarioSingleton.getInstance().getUsuario();
+
+        nom.setText(usuari.getNom());
+        cognom.setText(usuari.getCognom());
+        email.setText(usuari.getEmail());
+        dni.setText(usuari.getDni());
     }
 
 }
