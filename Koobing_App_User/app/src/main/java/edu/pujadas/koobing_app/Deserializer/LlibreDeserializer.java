@@ -11,11 +11,13 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import edu.pujadas.koobing_app.Loaders.AutorLoader;
 import edu.pujadas.koobing_app.Models.Autor;
 import edu.pujadas.koobing_app.Models.Editorial;
 import edu.pujadas.koobing_app.Models.Genere;
 import edu.pujadas.koobing_app.Models.Idioma;
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.AutorService;
 import edu.pujadas.koobing_app.Services.EditorialService;
 import edu.pujadas.koobing_app.Services.GenereService;
@@ -45,25 +47,44 @@ public class LlibreDeserializer implements JsonDeserializer<Llibre> {
         String dataPubliStr = jsonObject.get("data_publi").getAsString();
         int stock = jsonObject.get("stock").getAsInt();
 
-        // obteneir els objectes
-        /*Autor autor = autorService.getAutorById(idAutor);
-        Editorial editorial = obtenerEditorialPorId(idEditor);
-        Genere genere = genereService.getGenereById(idGenere);
-        Idioma idioma = idiomaService.getIdiomaById(idIdioma);
 
-        // Crear el objeto Llibre y asignar los valores correspondientes
+        // Construir el objeto Llibre
         Llibre llibre = new Llibre();
         llibre.setISBN(isbn);
-        llibre.setAutor(autor);
-        llibre.setEditor(editorial);
-        llibre.setIdioma(idioma);
-        llibre.setGenere(genere);
         llibre.setTitol(titol);
         llibre.setVersio(versio);
-        //llibre.setDataPubli(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).parse(dataPubliStr));
+       // llibre.setDataPubli(dataPubli);
         llibre.setStock(stock);
-            */
-        return null;
+
+        // -- Obtenit els objectes dels loaders
+
+        //autor
+
+        // Obtener el objeto Autor utilizando el AutorLoader
+
+        AutorLoader autorLoader = new AutorLoader();
+        autorLoader.getAutorById(idAutor, new ApiCallback<Autor>() {
+            @Override
+            public void onSuccess(Autor autor) {
+                llibre.setAutor(autor);
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                // Manejar el error si la obtención del Autor falla
+                System.out.println("Error BOOK_DESERIALIZE Autor:" +statusCode);
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                // Manejar la falla si ocurre algún error de comunicación
+                System.out.println("Failure BOOK_DESERIALIZE Autor: " + throwable.getMessage());
+            }
+        });
+
+
+
+        return llibre;
     }
 
 
