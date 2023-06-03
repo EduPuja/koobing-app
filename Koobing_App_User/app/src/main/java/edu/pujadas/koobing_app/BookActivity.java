@@ -59,6 +59,24 @@ public class BookActivity extends AppCompatActivity {
         dataPublicacio = findViewById(R.id.dataPubli);
 
 
+        LlibreLoader bookLoader = new LlibreLoader();
+        bookLoader.findBookByISBN(12376217637612L, new ApiCallback<Llibre>() {
+            @Override
+            public void onSuccess(Llibre data) {
+                Toast.makeText(getApplicationContext(),"Succes",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                Toast.makeText(getApplicationContext(),"Error :"+statusCode ,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
 
@@ -68,40 +86,7 @@ public class BookActivity extends AppCompatActivity {
 
 
     public void onProvar(View view) {
-        Intent intent = getIntent();
-        if(intent.hasExtra("bookGson"))
-        {
-            String llibreGson = intent.getStringExtra("bookGson");
-            Gson gson = new Gson();
-            Llibre book = gson.fromJson(llibreGson, Llibre.class);
-            long isbn = book.getISBN();
-            Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
-            LlibreLoader loader = new LlibreLoader();
-
-            //long isbnForced = 765434231123L;
-            loader.findBookByISBN(1, new ApiCallback<Llibre>() {
-
-                @Override
-                public void onSuccess(Llibre data) {
-                    Toast.makeText(getApplicationContext(), "Succes LLibre : " , Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onError(int statusCode) {
-                    Toast.makeText(getApplicationContext(), "Error LLibre : " +statusCode, Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onFailure(Throwable throwable) {
-                    Toast.makeText(getApplicationContext(), "Failure LLibre : " +throwable.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-
-
-
-
-        }
     }
 
 }
