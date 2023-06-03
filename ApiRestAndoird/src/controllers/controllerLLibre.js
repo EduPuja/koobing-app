@@ -44,10 +44,12 @@ function getLlibreByIsbn(req,res)
 {
   console.log("\nBuscant el llibre per ISBN")
   const isbn = req.params.isbn;
+  //select l.ISBN,a.id_autor,a.nom_autor,a.data_naix,e.id_editorial,e.nom_editorial,g.id_genere,g.descrip, i.id_idioma,i.nom_idioma,l.titol,l.versio,l.data_publi,l.stock FROM llibre l INNER JOIN autor a on a.id_autor= l.id_autor INNER JOIN editorial e on e.id_editorial = l.id_editor  INNER JOIN idioma i on i.id_idioma = l.id_idioma INNER JOIN genere g on g.id_genere =l.id_genere where ISBN =1;
+  const query3 = `SELECT l.ISBN, a.id_autor, a.nom_autor, a.data_naix, e.id_editorial, e.nom_editorial, g.id_genere, g.descrip, i.id_idioma, i.nom_idioma, l.titol, l.versio, l.data_publi, l.stock FROM llibre l INNER JOIN autor a ON a.id_autor = l.id_autor INNER JOIN editorial e ON e.id_editorial = l.id_editor INNER JOIN idioma i ON i.id_idioma = l.id_idioma INNER JOIN genere g ON g.id_genere = l.id_genere WHERE ISBN = ${isbn}`;
 
-  const query2 = `select l.ISBN,a.id_autor,a.nom_autor,a.data_naix,e.id_editorial,e.nom_editorial,l.titol,l.versio,l.data_publi,l.stock FROM llibre l INNER JOIN autor a on a.id_autor= l.id_autor  INNER JOIN editorial e  on e.id_editorial = l.id_editor where ISBN = ${isbn}`;
+ // const query2 = `select l.ISBN,a.id_autor,a.nom_autor,a.data_naix,e.id_editorial,e.nom_editorial,l.titol,l.versio,l.data_publi,l.stock FROM llibre l INNER JOIN autor a on a.id_autor= l.id_autor  INNER JOIN editorial e  on e.id_editorial = l.id_editor where ISBN = ${isbn}`;
   const query = `SELECT * FROM llibre WHERE ISBN = ${isbn}`;
-  connection.query(query2, (err,results) => {
+  connection.query(query3, (err,results) => {
     if(err) {
       console.error('Error al realizar la consulta: ', err);
       res.status(500).json({ error: 'Error en el servidor' });
