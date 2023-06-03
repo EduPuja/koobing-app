@@ -1,31 +1,14 @@
 package edu.pujadas.koobing_app.Loaders;
 
-import android.content.Context;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.TimeZone;
 
-import edu.pujadas.koobing_app.Models.Autor;
-import edu.pujadas.koobing_app.Models.Editorial;
-import edu.pujadas.koobing_app.Models.Genere;
-import edu.pujadas.koobing_app.Models.Idioma;
 import edu.pujadas.koobing_app.Models.Llibre;
-import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.AutorService;
 import edu.pujadas.koobing_app.Services.EditorialService;
 import edu.pujadas.koobing_app.Services.GenereService;
 import edu.pujadas.koobing_app.Services.IdiomaService;
 import edu.pujadas.koobing_app.Services.LlibreService;
-import edu.pujadas.koobing_app.Services.UserService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -61,6 +44,21 @@ public class LlibreLoader {
 
     public void buscarLlibreISBN(long isbn ,final ApiCallback<Llibre> callback)
     {
+       Call<ResponseBody> call =  llibreService.getBookByISBN(isbn);
+        call.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+
 
     }
 
