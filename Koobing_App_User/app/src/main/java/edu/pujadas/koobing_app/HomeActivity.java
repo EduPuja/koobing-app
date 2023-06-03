@@ -12,13 +12,23 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.CarouselAdapter;
+import edu.pujadas.koobing_app.Deserializer.LlibreDeserializer;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
+import edu.pujadas.koobing_app.Services.LlibreService;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -48,28 +58,68 @@ public class HomeActivity extends AppCompatActivity {
         loadBookInfo();
 
         //peticio llibre
-        test();
+        test("12376217637612", new ApiCallback<Llibre>() {
+            @Override
+            public void onSuccess(Llibre data) {
+                if(data!=null){
+                    Toast.makeText(getApplicationContext(),"Succes", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                Toast.makeText(getApplicationContext(),"Error", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Toast.makeText(getApplicationContext(),"Failure", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
 
     //test fer petcio llibre
-    public void test()
+    public void test(String isbn,final ApiCallback<Llibre> callback)
     {
-        llibreLoader.findBookByISBN("12376217637612", new ApiCallback<Llibre>() {
+        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
+        Retrofit retrofit =new Retrofit.Builder().
+                baseUrl(url).
+                addConverterFactory(GsonConverterFactory.create()).build();
+
+
+        LlibreService llibreService =  retrofit.create(LlibreService.class);
+        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onSuccess(Llibre data) {
-                Toast.makeText(getApplicationContext(),"Succes", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String jsonBook = response.body().string();
+
+                        GsonBuilder gsonBuilder = new GsonBuilder();
+                        gsonBuilder.registerTypeAdapter(Llibre.class, new LlibreDeserializer());
+                        Gson gson = gsonBuilder.create();
+
+
+                        Llibre book = gson.fromJson(jsonBook,Llibre.class);
+
+                        callback.onSuccess(book);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    callback.onError(response.code());
+                }
             }
 
             @Override
-            public void onError(int statusCode) {
-                Toast.makeText(getApplicationContext(),"Error :"+statusCode ,Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                callback.onFailure(t);
             }
         });
     }
