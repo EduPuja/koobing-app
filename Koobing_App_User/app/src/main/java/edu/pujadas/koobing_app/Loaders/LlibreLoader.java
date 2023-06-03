@@ -25,37 +25,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LlibreLoader {
 
     //ip home
-   // private  String url = "http://192.168.0.33:3000/";
+   private  String url = "http://192.168.0.33:3000/";
 
-    //looders per poder carregar la inforamcio dels objectes necessaris
-
-    private AutorService autorService;
-    private EditorialService editorialService;
-    private IdiomaService idiomaService;
-    private GenereService genereService;
+    private  LlibreService llibreService;
 
     public LlibreLoader() {
-        /*RetrofitConnection retrofitConnection =new RetrofitConnection(url);
+        RetrofitConnection retrofitConnection =new RetrofitConnection(url);
 
 
 
-        autorService = retrofitConnection.getRetrofit().create(AutorService.class);
-        editorialService = retrofitConnection.getRetrofit().create(EditorialService.class);
-        idiomaService = retrofitConnection.getRetrofit().create(IdiomaService.class);
-        genereService = retrofitConnection.getRetrofit().create(GenereService.class);*/
+        llibreService = retrofitConnection.getRetrofit().create(LlibreService.class);
+
 
     }
 
 
     public void findBookByISBN(String isbn,final ApiCallback<Llibre> callback) {
 
-        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
-        Retrofit retrofit =new Retrofit.Builder().
-                baseUrl(url).
-                addConverterFactory(GsonConverterFactory.create()).build();
+     
 
-
-        LlibreService llibreService =  retrofit.create(LlibreService.class);
        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
