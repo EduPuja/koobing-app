@@ -148,7 +148,9 @@ public class BookActivity extends AppCompatActivity {
         //afegint el treballadro
         Treballador treballador = new Treballador();
         treballador.setId(1);   // es el adminsitrador del sistema
-
+        treballador.setAdmin(true);
+        treballador.setEmail("admin@mail.com");
+        treballador.setNom("Admin");
         //usuari
         Usuari user = UsuarioSingleton.getInstance().getUsuario();
 
