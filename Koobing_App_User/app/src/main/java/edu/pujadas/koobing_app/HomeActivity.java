@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
     //test fer petcio llibre
     public void test()
     {
-        llibreLoader.findBookByISBN(12376217637612L, new ApiCallback<Llibre>() {
+        llibreLoader.findBookByISBN("12376217637612", new ApiCallback<Llibre>() {
             @Override
             public void onSuccess(Llibre data) {
                 Toast.makeText(getApplicationContext(),"Succes", Toast.LENGTH_SHORT).show();

@@ -47,7 +47,7 @@ public class LlibreLoader {
     }
 
 
-    public void findBookByISBN(long isbn,final ApiCallback<Llibre> callback) {
+    public void findBookByISBN(String isbn,final ApiCallback<Llibre> callback) {
 
         String url = "http://192.168.0.33:3000/book/"+isbn+"/";
         Retrofit retrofit =new Retrofit.Builder().

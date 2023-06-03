@@ -13,5 +13,5 @@ public interface LlibreService {
     @GET("/books")
     Call<List<Llibre>> getAllBooks();
     @GET("/books/{isbn}")
-    Call<ResponseBody> getBookByISBN(@Path("isbn") long isbn);
+    Call<ResponseBody> getBookByISBN(@Path("isbn") String isbn);
 }
