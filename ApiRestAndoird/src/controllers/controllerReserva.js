@@ -47,8 +47,25 @@ function setReserva(req, res) {
 
 }
 
+function getLlibresReservats(req,res)
+{
+  console.log("\nLlistat de llibres en estat reservat");
+  const query = "Select * from reserva where id_estat = 1";
+  connection.query(query, (error, results) => {
+    if(error)
+    {
+      console.error("Error al buscar el llistat de llibres reservats:" + error.message);
+    }
+    else{
+      res.json(results)
+    }
+
+  });
+}
+
 
 module.exports = {
   setReserva,
+  getLlibresReservats
 };
 

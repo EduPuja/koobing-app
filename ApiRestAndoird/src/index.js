@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 //usuaris
 app.get("/users", controllerUsuario.getAllUsers);
 app.get("/user/:email", controllerUsuario.getUserByEmail);
+app.post("/register",controllerUsuario.registerUser);
 
 //llibres
 app.get("/books", controllerLlibre.getAllLlibres);
@@ -31,7 +32,7 @@ app.get("/book/:isbn", controllerLlibre.getLlibreByIsbn)
 
 //reserva
 app.post("/reservarLlibre",reservaController.setReserva);
-app.post("/register",controllerUsuario.registerUser);
+app.get("/llibresReservats",reservaController.getLlibresReservats);
 
 
 //autor
