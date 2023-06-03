@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import edu.pujadas.koobing_app.Loaders.AutorLoader;
+import edu.pujadas.koobing_app.Loaders.EditorialLoader;
 import edu.pujadas.koobing_app.Models.Autor;
 import edu.pujadas.koobing_app.Models.Editorial;
 import edu.pujadas.koobing_app.Models.Genere;
@@ -78,6 +79,24 @@ public class LlibreDeserializer implements JsonDeserializer<Llibre> {
             }
         });
 
+        // EDITORIAl
+        EditorialLoader editorialLoader = new EditorialLoader();
+        editorialLoader.getEditorialById(idEditor, new ApiCallback<Editorial>() {
+            @Override
+            public void onSuccess(Editorial editorial) {
+                llibre.setEditor(editorial);
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                System.out.println("Error BOOK_DESERIALIZE Editorial:" +statusCode);
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                System.out.println("Failure BOOK_DESERIALIZE Editorial: " + throwable.getMessage());
+            }
+        });
 
 
         return llibre;
