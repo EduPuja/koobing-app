@@ -77,25 +77,25 @@ public class BookActivity extends AppCompatActivity {
             long isbn = book.getISBN();
             Toast.makeText(this, "ISBN :"+isbn, Toast.LENGTH_SHORT).show();
 
-            LlibreLoader loader = new LlibreLoader();
+            EditorialLoader loader = new EditorialLoader();
 
             long isbnForced = 765434231123L;
-           /* loader.findBookByISBN(isbnForced, new ApiCallback<Llibre>() {
+            loader.getEditorialById(1, new ApiCallback<Editorial>() {
                 @Override
-                public void onSuccess(Llibre data) {
-                    Toast.makeText(getApplicationContext(), "Succes Llibre", Toast.LENGTH_SHORT).show();
+                public void onSuccess(Editorial data) {
+                    Toast.makeText(getApplicationContext(), "Succes Editorial : " + data.getIdEditorial()+" "+data.getNomEditor(), Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onError(int statusCode) {
-                    Toast.makeText(getApplicationContext(), "error LLibre " +statusCode, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "error EDIT " +statusCode, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    Toast.makeText(getApplicationContext(), "failure LLibre "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "failure EDIT "+throwable.getMessage() , Toast.LENGTH_SHORT).show();
                 }
-            });*/
+            });
 
 
 
