@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LlibreLoader {
 
     //ip home
-    private  String url = "http://192.168.0.33:3000";
+    private  String url = "http://192.168.0.33:3000/";
 
     //looders per poder carregar la inforamcio dels objectes necessaris
     private LlibreService llibreService;
@@ -42,25 +42,27 @@ public class LlibreLoader {
     }
 
 
-    public void buscarLlibreISBN(long isbn ,final ApiCallback<Llibre> callback)
-    {
-       Call<ResponseBody> call =  llibreService.getBookByISBN(isbn);
-        call.enqueue(new Callback<ResponseBody>() {
+    public void findBookByISBN(long isbn,final ApiCallback<Llibre> callback) {
 
+
+        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
 
+                } else {
+                  callback.onError(response.code());
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+              callback.onFailure(t);
             }
         });
-
-
-
     }
+
 
     /**
      * Metode per obtenir tots els llibres de la API
