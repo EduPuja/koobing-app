@@ -170,9 +170,26 @@ public class BookActivity extends AppCompatActivity {
         // todo falta data inici data fi
 
 
-        
+
         reserva.setEstat(1);
-        reservaService.hacerReserva(reserva);
+        Call<Void> call = reservaService.hacerReserva(reserva);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(), "succes Reserva", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Error :" +response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failure Reserva " +t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
