@@ -22,7 +22,7 @@ public class GenereLoader {
                 .build();
 
         GenereService service = retrofit.create(GenereService.class);
-        Call<ResponseBody> call = service.getGenerelById(id);
+        Call<ResponseBody> call = service.getGenereById(id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

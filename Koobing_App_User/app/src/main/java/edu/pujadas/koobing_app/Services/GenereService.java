@@ -8,5 +8,5 @@ import retrofit2.http.Path;
 public interface GenereService {
 
     @GET("/genere/{id}")
-    Call<ResponseBody> getGenerelById(@Path("id") int id);
+    Call<ResponseBody> getGenereById(@Path("id") int id);
 }
