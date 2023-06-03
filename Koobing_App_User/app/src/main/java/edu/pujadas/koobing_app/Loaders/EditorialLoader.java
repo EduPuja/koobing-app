@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EditorialLoader {
 
-    /*public void getEditorialById(int id, final ApiCallback<Editorial> callback) {
+    public void getEditorialById(int id, final ApiCallback<Editorial> callback) {
         String url = "http://192.168.0.33:3000/editor/" + id+"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -57,9 +57,9 @@ public class EditorialLoader {
                 callback.onFailure(t);
             }
         });
-    }*/
+    }
 
-    public void getEditorialById(int id, final ApiCallback<Editorial> callback) {
+   /* public void getEditorialById(int id, final ApiCallback<Editorial> callback) {
         String url = "http://192.168.0.33:3000/editor/" + id+"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -98,6 +98,6 @@ public class EditorialLoader {
                 callback.onFailure(t);
             }
         });
-    }
+    }*/
 
 }
