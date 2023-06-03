@@ -49,7 +49,7 @@ public class LlibreDeserializer implements JsonDeserializer<Llibre> {
         llibre.setISBN(isbn);
         llibre.setTitol(titol);
         llibre.setVersio(versio);
-       llibre.setDataPubli(parseFechaPublicacion(dataPubliStr));
+        llibre.setDataPubli(parseFechaPublicacion(dataPubliStr));
         llibre.setStock(stock);
 
         // -- Obtenit els objectes dels loader
