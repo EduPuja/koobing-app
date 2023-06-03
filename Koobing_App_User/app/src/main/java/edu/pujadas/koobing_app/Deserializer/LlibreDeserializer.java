@@ -24,16 +24,6 @@ import edu.pujadas.koobing_app.Models.Genere;
 import edu.pujadas.koobing_app.Models.Idioma;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
-import edu.pujadas.koobing_app.Services.AutorService;
-import edu.pujadas.koobing_app.Services.EditorialService;
-import edu.pujadas.koobing_app.Services.GenereService;
-import edu.pujadas.koobing_app.Services.IdiomaService;
-import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LlibreDeserializer implements JsonDeserializer<Llibre> {
 
