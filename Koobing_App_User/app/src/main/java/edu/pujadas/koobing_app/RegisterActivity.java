@@ -76,33 +76,43 @@ public class RegisterActivity extends AppCompatActivity {
         else
         {
             Usuari usuari = new Usuari();
-            usuari.setDni(dni);
+
             usuari.setNom(nom);
             usuari.setCognom(cognom);
 
             //convertir la data de naixament amb un objetce java.sql.Date
 
-
-
-
-            if(Validator.validarCorreoElectronico(email))
+            if(Validator.validarDni(dni))
             {
+                Toast.makeText(getApplicationContext(),"Dni Correcte ",Toast.LENGTH_SHORT).show();
+                usuari.setDni(dni);
+                if(Validator.validarCorreoElectronico(email))
+                {
 
-                Toast.makeText(getApplicationContext(),"Correu Correcte ",Toast.LENGTH_SHORT).show();
-                usuari.setEmail(email);
+                    Toast.makeText(getApplicationContext(),"Correu Correcte ",Toast.LENGTH_SHORT).show();
+                    usuari.setEmail(email);
 
 
-                //encriptar la contrassenya
-                String hashedPasss =Validator.encryptPassword(password);
-                usuari.setPassword(hashedPasss);
+                    //encriptar la contrassenya
+                    String hashedPasss =Validator.encryptPassword(password);
+                    usuari.setPassword(hashedPasss);
 
-                //enviar el usuari a treavés de peticio POST
-                sendUserPost(usuari);
+                    //enviar el usuari a treavés de peticio POST
+                    sendUserPost(usuari);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"El correu és incorrecte \uD83D\uDE14",Toast.LENGTH_SHORT).show();
+                    cognomField.setError("Incorrect");
+                }
             }
-            else
-            {
-                Toast.makeText(getApplicationContext(),"El correu és incorrecte \uD83D\uDE14",Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(getApplicationContext(),"DNI Incorrecte ",Toast.LENGTH_SHORT).show();
+                dniField.setError("DNI Incorrecte");
             }
+
+
+
 
 
 
