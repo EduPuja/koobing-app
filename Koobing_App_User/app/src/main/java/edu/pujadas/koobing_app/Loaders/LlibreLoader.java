@@ -1,7 +1,12 @@
 package edu.pujadas.koobing_app.Loaders;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
 import java.util.List;
 
+import edu.pujadas.koobing_app.Deserializer.LlibreDeserializer;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Services.ApiCallback;
 import edu.pujadas.koobing_app.Services.AutorService;
@@ -50,6 +55,21 @@ public class LlibreLoader {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
+                    try {
+                        String jsonBook = response.body().string();
+
+                        GsonBuilder gsonBuilder = new GsonBuilder();
+                        gsonBuilder.registerTypeAdapter(Llibre.class, new LlibreDeserializer());
+                        Gson gson = gsonBuilder.create();
+
+
+                        Llibre book = gson.fromJson(jsonBook,Llibre.class);
+
+                        callback.onSuccess(book);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 } else {
                   callback.onError(response.code());
