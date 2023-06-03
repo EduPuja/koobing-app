@@ -51,6 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/booksRecycler"
         android:layout_width="388dp"
         android:layout_height="318dp"
         android:layout_marginStart="1dp"
