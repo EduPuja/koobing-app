@@ -50,22 +50,30 @@ public class Validator {
      * @param dni String dni
      * @return true si es correcte i false si es incorrecte
      */
-    public static boolean validarDNI(String dni) {
-        String letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
+    public static boolean validarDni(String dni)
+    {
+        String codiValidacioDNI="TRWAGMYFPDXBNJZSQVHLCKE";
 
-        if (dni.length() != 9) {
-            return false;
+        boolean valid=true;
+
+        if (dni.length()==9) {
+            //primer mirem si hi ha 8 nombres
+            int i=0;
+            while(valid&&i<8) {
+                if(!Character.isDigit(dni.charAt(i))) valid=false;
+                else i++;
+            }
+
+            //i ara comprovem la lletra
+            long valorDniLong=(Long.parseLong(dni.substring(0,8)))%23;// els 8 numeros del dni son massa per integer, hem de fer servir long
+            int valorDni=(int)valorDniLong;	// Ara convertim el resultat a enter.
+            if(!(dni.charAt(8)==codiValidacioDNI.charAt(valorDni))) valid=false;
         }
-        String digitos = dni.substring(0, 8);
-        if (!digitos.matches("[0-9]+")) {
-            return false;
-        }
-        String letra = dni.substring(8).toUpperCase();
-        int indice = Integer.parseInt(digitos) % 23;
-        char letraValida = letrasValidas.charAt(indice);
-        return letra.equals(String.valueOf(letraValida));
+        else valid = false;
+
+        return valid;
+
     }
-
 
     /**
      * Metode per validar el correu electronic si escorrecte
