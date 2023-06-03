@@ -20,7 +20,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Locale;
 
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
@@ -117,7 +118,7 @@ public class BookActivity extends AppCompatActivity {
                         SimpleDateFormat formatoDeseado = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
 
-                        Date fecha = formatoOriginal.parse(dataPubli);
+                        java.util.Date fecha = formatoOriginal.parse(dataPubli);
                         String fechaFormateada = formatoDeseado.format(fecha);
                         dataPublicacio.setText(fechaFormateada);
 
@@ -151,8 +152,10 @@ public class BookActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
                 // Aquí obtienes la fecha seleccionada
-                String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + selectedYear;
+               LocalDate dataEnd = LocalDate.of(selectedYear, monthOfYear,dayOfMonth);
+                Date sqlDate = Date.valueOf(dataEnd.toString());
                 // Haz lo que quieras con la fecha seleccionada
+                sendReservaPOST(sqlDate);
 
             }
         }, year, month, day);
@@ -160,58 +163,6 @@ public class BookActivity extends AppCompatActivity {
         // Muestra el diálogo DatePicker
         datePickerDialog.show();
 
-        /*RetrofitConnection connection = new RetrofitConnection(BASE_URL);
-        ReservaService reservaService = connection.getRetrofit().create(ReservaService.class);
-
-        Reserva reserva = new Reserva();
-
-        //afegint el treballadro
-        Treballador treballador = new Treballador();
-        treballador.setId(1);   // es el adminsitrador del sistema
-        treballador.setAdmin(true);
-        treballador.setEmail("admin@mail.com");
-        treballador.setNom("Admin");
-        //usuari
-        Usuari user = UsuarioSingleton.getInstance().getUsuario();
-
-
-        //llibre
-        Intent intent =getIntent();
-        if(intent.hasExtra("bookGson"))
-        {
-            String bookGson = intent.getStringExtra("bookGson");
-            Gson gson = new Gson();
-            Llibre bookIntent = gson.fromJson(bookGson, Llibre.class);
-            reserva.setLlibre(bookIntent);
-        }
-        reserva.setTreballador(treballador);
-        reserva.setUsuari(user);
-
-
-
-        // todo falta data inici data fi
-
-
-
-        reserva.setEstat(1);
-        Call<Void> call = reservaService.hacerReserva(reserva);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful())
-                {
-                    Toast.makeText(getApplicationContext(), "succes Reserva", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Error :" +response.code(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Failure Reserva " +t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
 
 
@@ -219,7 +170,7 @@ public class BookActivity extends AppCompatActivity {
 
     }
 
-    public void sendReservaPOST()
+    public void sendReservaPOST(java.sql.Date dataEnd)
     {
         RetrofitConnection connection = new RetrofitConnection(BASE_URL);
         ReservaService reservaService = connection.getRetrofit().create(ReservaService.class);
@@ -251,6 +202,8 @@ public class BookActivity extends AppCompatActivity {
 
 
         // todo falta data inici data fi
+
+        reserva.setDataFI(dataEnd);
 
 
 
