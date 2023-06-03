@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -19,20 +20,15 @@ import edu.pujadas.koobing_app.Services.AutorService;
 import edu.pujadas.koobing_app.Services.EditorialService;
 import edu.pujadas.koobing_app.Services.GenereService;
 import edu.pujadas.koobing_app.Services.IdiomaService;
+import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LlibreDeserializer implements JsonDeserializer<Llibre> {
 
-    private AutorService autorService;
-    private EditorialService editorialService;
-    private IdiomaService idiomaService;
-    private GenereService genereService;
-
-    public LlibreDeserializer(AutorService autorService, EditorialService editorialService, IdiomaService idiomaService, GenereService genereService) {
-        this.autorService = autorService;
-        this.editorialService = editorialService;
-        this.idiomaService = idiomaService;
-        this.genereService = genereService;
-    }
 
     @Override
     public Llibre deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException  {
@@ -49,9 +45,9 @@ public class LlibreDeserializer implements JsonDeserializer<Llibre> {
         String dataPubliStr = jsonObject.get("data_publi").getAsString();
         int stock = jsonObject.get("stock").getAsInt();
 
-        // Crear los objetos Autor, Editorial, Genere e Idioma utilizando los IDs correspondientes
-        Autor autor = autorService.getAutorById(idAutor);
-        Editorial editorial = editorialService.getEditorialById(idEditor);
+        // obteneir els objectes
+        /*Autor autor = autorService.getAutorById(idAutor);
+        Editorial editorial = obtenerEditorialPorId(idEditor);
         Genere genere = genereService.getGenereById(idGenere);
         Idioma idioma = idiomaService.getIdiomaById(idIdioma);
 
@@ -66,14 +62,11 @@ public class LlibreDeserializer implements JsonDeserializer<Llibre> {
         llibre.setVersio(versio);
         //llibre.setDataPubli(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).parse(dataPubliStr));
         llibre.setStock(stock);
-
-        return llibre;
+            */
+        return null;
     }
 
 
-    private Editorial obtenerEditorialPorId(int idEditor) {
-        // Lógica para obtener la editorial por ID a través de una llamada a la API o una consulta a la base de datos
-        // ...
-        return editorial;
-    }
+
+
 }
