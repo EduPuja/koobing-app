@@ -69,13 +69,7 @@ public class UserLoader {
                             usuari.setNom(jsonObject.getString("nom"));
                             usuari.setCognom(jsonObject.getString("cognom"));
 
-                            //datanaix
-                            String fecha = jsonObject.getString("data_naix");
-                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                            formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
-                            java.util.Date utilDate = formatoFecha.parse(fecha);
-                            Date sqlDate = new java.sql.Date(utilDate.getTime());
-                            usuari.setDataNaix(sqlDate);
+                            
 
                             usuari.setEmail(jsonObject.getString("email"));
                             usuari.setPassword(jsonObject.getString("password"));
