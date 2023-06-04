@@ -6,6 +6,7 @@ function setReserva(req, res) {
   console.log("\nCreando una reserva");
   const reserva = req.body;
 
+  console.log("INFO reserva: ", reserva);
   // Obtener los valores de la reserva
   const dataInici = new Date();
   //convertirn la data de finalizacio en un tipus date per que es pugui insertar correctament
@@ -19,12 +20,12 @@ function setReserva(req, res) {
   const usuariId = reserva.usuari.id;
 
   // Mostrar los valores específicos de la reserva
-  console.log("Data FI:", dataFI);
+  /*console.log("Data FI:", dataFI);
   console.log("Estat:", estat);
   console.log("ID de Reserva:", idReserva);
   console.log("ISBN del Libro:", llibreISBN);
   console.log("ID del Trabajador:", treballadorId);
-  console.log("ID del Usuario:", usuariId);
+  console.log("ID del Usuario:", usuariId);*/
 
   // Consulta SQL con placeholders
   const query = `INSERT INTO reserva (id_prestec, ISBN, id_usuari, id_treballador, data_inici, data_fi, id_estat) 
