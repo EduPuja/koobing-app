@@ -3,7 +3,10 @@ package edu.pujadas.koobing_app.Utilites;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 
 public class Validator {
 
@@ -84,6 +87,18 @@ public class Validator {
 
         String patron = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return correo.matches(patron);
+    }
+
+    public static java.sql.Date convertirStringADateSQL(String fechaString) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            Date fechaUtil = sdf.parse(fechaString);
+            return new java.sql.Date(fechaUtil.getTime());
+        } catch (ParseException e) {
+            // Manejar la excepción en caso de error al analizar la fecha
+            e.printStackTrace();
+            return null; // o lanzar una excepción personalizada, según sea necesario
+        }
     }
 
 
