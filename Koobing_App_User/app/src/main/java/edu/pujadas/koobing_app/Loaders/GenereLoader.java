@@ -16,6 +16,8 @@ public class GenereLoader {
 
     public void getGenereById(int id, final ApiCallback<Genere> callback) {
         String url = "http://192.168.0.33:3000/genere/" + id +"/";
+
+        //String url = "http://192.168.16.254:3000/genere/" + id+"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
