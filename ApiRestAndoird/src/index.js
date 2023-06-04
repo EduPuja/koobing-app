@@ -32,8 +32,10 @@ app.get("/book/:isbn", controllerLlibre.getLlibreByIsbn)
 
 //reserva
 app.post("/reservarLlibre",reservaController.setReserva);
-app.get("/llibresReservats/:id_usuari",reservaController.getLlibresReservats); //llibres reservats
-app.get("/llibresCancelats/:id_usuari",reservaController.getLlibresCancelats); // llibres cancelts
+app.get("/llibresReservats/:id_usuari",reservaController.getLlibresReservats);  //llibres reservats
+app.get("/llibresCancelats/:id_usuari",reservaController.getLlibresCancelats);  // llibres cancelts
+app.get("/llibresTornats/:id_usuari",reservaController.getLlibresTornats);       // llibres tornats
+app.get("/llibresPrestec/:id_usuari",reservaController.getLlibresPrestec);       // llibres prestec
 
 
 //autor

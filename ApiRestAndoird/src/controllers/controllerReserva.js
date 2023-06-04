@@ -76,7 +76,46 @@ function getLlibresCancelats(req, res)
   connection.query(query,usuari,(error, results) => {
     if(error)
     {
-      console.error("Error al buscar el llistat de llibres reservats:" + error.message);
+      console.error("Error al buscar el llistat de llibres Cancelats:" + error.message);
+    }
+    else{
+      res.json(results)
+    }
+
+  });
+}
+
+//funcio per veure els llistat de llibres TORNATS
+function getLlibresTornats(req, res)
+{
+  console.log("\nLlistat de llibres estat : Tornat");
+  const usuari = req.params.id_usuari;
+  
+  const query = "select r.id_prestec,l.isbn,l.titol,r.data_inici,r.data_fi from llibre l inner join reserva r on r.ISBN=l.ISBN where r.id_estat=3 AND r.id_usuari=?";
+  connection.query(query,usuari,(error, results) => {
+    if(error)
+    {
+      console.error("Error al buscar el llistat de llibres Tornats:" + error.message);
+    }
+    else{
+      res.json(results)
+    }
+
+  });
+}
+
+
+//funcio per veure els llistat de llibres En prestec
+function getLlibresPrestec(req,res)
+{
+  console.log("\nLlistat de llibres estat : Prestec");
+  const usuari = req.params.id_usuari;
+  
+  const query = "select r.id_prestec,l.isbn,l.titol,r.data_inici,r.data_fi from llibre l inner join reserva r on r.ISBN=l.ISBN where r.id_estat=4 AND r.id_usuari=?";
+  connection.query(query,usuari,(error, results) => {
+    if(error)
+    {
+      console.error("Error al buscar el llistat de llibres Prestec:" + error.message);
     }
     else{
       res.json(results)
@@ -90,5 +129,7 @@ module.exports = {
   setReserva,
   getLlibresReservats,
   getLlibresCancelats,
+  getLlibresTornats,
+  getLlibresPrestec
 };
 
