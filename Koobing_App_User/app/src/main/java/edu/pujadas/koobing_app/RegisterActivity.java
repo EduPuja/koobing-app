@@ -56,12 +56,11 @@ public class RegisterActivity extends AppCompatActivity {
         String dni = dniField.getText().toString();
         String nom = nomField.getText().toString();
         String cognom = cognomField.getText().toString();
-        String dataNaixString = dataNaixField.getText().toString();
         String email = correuField.getText().toString();
         String password = passwordField.getText().toString();
 
 
-        if(dni.isEmpty() &&  nom.isEmpty() &&  dataNaixString.isEmpty() &&  cognom.isEmpty()  &&  email.isEmpty() && password.isEmpty())
+        if(dni.isEmpty() &&  nom.isEmpty() &&   cognom.isEmpty()  &&  email.isEmpty() && password.isEmpty())
         {
             // posar els editext en error
             String erroMsg = "Emplena aquest camps";
@@ -69,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
             dniField.setError(erroMsg);
             nomField.setError(erroMsg);
             cognomField.setError(erroMsg);
-            dataNaixField.setError(erroMsg);
             correuField.setError(erroMsg);
             passwordField.setError(erroMsg);
         }
@@ -92,11 +90,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Correu Correcte ",Toast.LENGTH_SHORT).show();
                     usuari.setEmail(email);
 
-
                     //encriptar la contrassenya
                     String hashedPasss =Validator.encryptPassword(password);
                     usuari.setPassword(hashedPasss);
-
                     //enviar el usuari a treavés de peticio POST
                     sendUserPost(usuari);
                 }
@@ -121,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
     {
 
         //ip instutut
-       // String url = "http://192.168.16.254:3000/register/";
+        // String url = "http://192.168.16.254:3000/register/";
         //ip home
         String url ="http://192.168.0.33:3000/register/";
 
