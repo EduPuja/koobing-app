@@ -53,7 +53,7 @@ function getLlibresReservats(req,res)
   console.log("\nLlistat de llibres en Estat: reservat");
   const usuari = req.params.id_usuari;
   
-  const query = "Select * from reserva where id_estat = 1 and id_usuari= ?";
+  const query = "select r.id_prestec,l.isbn,l.titol,r.data_inici,r.data_fi from llibre l inner join reserva r on r.ISBN=l.ISBN where r.id_estat=1 AND r.id_usuari=?";
   connection.query(query,usuari,(error, results) => {
     if(error)
     {
