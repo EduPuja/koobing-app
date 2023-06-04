@@ -40,42 +40,6 @@ public class LlibreLoader {
     }
 
 
-    public void findBookByISBN(String isbn,final ApiCallback<Llibre> callback) {
-
-
-
-       Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    try {
-                        String jsonBook = response.body().string();
-
-                        GsonBuilder gsonBuilder = new GsonBuilder();
-                        gsonBuilder.registerTypeAdapter(Llibre.class, new LlibreDeserializer());
-                        Gson gson = gsonBuilder.create();
-
-
-                        Llibre book = gson.fromJson(jsonBook,Llibre.class);
-                        System.out.println("info llibre :" + book.getAllInfoBook());
-                        callback.onSuccess(book);
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } else {
-                  callback.onError(response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-              callback.onFailure(t);
-            }
-        });
-    }
 
 
     /**
@@ -86,6 +50,8 @@ public class LlibreLoader {
     {
 
         String url = "http://192.168.0.33:3000/books/";
+        //ip institutç
+        //String url = "http://192.168.16.254:3000/books/";
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -125,6 +91,8 @@ public class LlibreLoader {
     public void obtenir10Llibres(final ApiCallback<List<Llibre>>callback)
     {
         String url = "http://192.168.0.33:3000/books_10/";
+        //ip institutç
+        //String url = "http://192.168.16.254:3000/books_10/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -135,7 +103,7 @@ public class LlibreLoader {
 
 
 
-        //String url ="http://192.168.16.254:3000/books/";
+
         Call <List<Llibre>> call = llibreService.getAllBooks();
         call.enqueue(new Callback<List<Llibre>>() {
 
@@ -158,189 +126,7 @@ public class LlibreLoader {
         });
     }
 
-  /*  public void findBookByISBN(long isbn, final ApiCallback<Llibre> callback) {
-
-
-        //loaderes necessaries per carregar la inforamcio
-        AutorLoader autorLoader = new AutorLoader();
-        EditorialLoader editorialLoader =new EditorialLoader();
-        GenereLoader genereLoader =new GenereLoader();
-        IdiomaLoader idiomaLoader =new IdiomaLoader();
-
-        String url = "http://192.168.0.33:3000/book/" + isbn+"/";
-        //String url = "http://192.168.16.254:3000/book/"+isbn+"/";
-
-        RetrofitConnection retrofit = new RetrofitConnection(url);
-
-        LlibreService llibreService = retrofit.getRetrofit().create(LlibreService.class);
-
-
-        Call<ResponseBody> call = llibreService.getBookByISBN(isbn);
-
-        call.enqueue(new Callback<ResponseBody>() {
-
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
-            {
-                if(response.isSuccessful())
-                {
-
-                    try {
-                        String jsonResponse = response.body().string();
-
-
-                        JSONObject jsonObject = new JSONObject(jsonResponse);
-
-                        Llibre llibre = new Llibre();
-                        llibre.setISBN(jsonObject.getLong("ISBN"));
-                        llibre.setTitol(jsonObject.getString("titol"));
-
-                       
-
-
-                        //autor loader
-
-                        autorLoader.getAutorById(jsonObject.getInt("id_autor"), new ApiCallback<Autor>() {
-                            @Override
-                            public void onSuccess(Autor autor) {
-                                if(autor!=null)
-                                {
-                                    llibre.setAutor(autor);
-                                }
-                            }
-
-                            @Override
-                            public void onError(int statusCode) {
-                                System.out.println("Error autor: " + statusCode);
-                            }
-
-                            @Override
-                            public void onFailure(Throwable throwable) {
-                                System.out.println("Failure autor: " + throwable.getMessage());
-                            }
-                        });
-
-                        // editorail
-                        editorialLoader.getEditorialById(jsonObject.getInt("id_editor"),new ApiCallback<Editorial>() {
-
-                            @Override
-                            public void onSuccess(Editorial editorial) {
-                                if(editorial!=null)
-                                {
-                                    llibre.setEditor(editorial);
-                                }
-                            }
-
-                            @Override
-                            public void onError(int statusCode) {
-                                System.out.println("Error editor: " + statusCode);
-                            }
-
-                            @Override
-                            public void onFailure(Throwable throwable) {
-                                System.out.println("Failure editor: " + throwable.getMessage());
-                            }
-                        });
-
-
-                        // idioma loader
-
-                        idiomaLoader.getIdiomaById(jsonObject.getInt("id_idioma"),new ApiCallback<Idioma>(){
-
-                            @Override
-                            public void onSuccess(Idioma idioma) {
-                                if(idioma!=null){
-                                    llibre.setIdioma(idioma);
-                                }
-                            }
-
-                            @Override
-                            public void onError(int statusCode) {
-                                System.out.println("Error idioma: " +statusCode);
-                            }
-
-                            @Override
-                            public void onFailure(Throwable throwable) {
-                                System.out.println("Failure Idioma: " + throwable.getMessage());
-                            }
-                        });
-
-                        //genere loader
-
-                        genereLoader.getGenereById(jsonObject.getInt("id_genere"),new ApiCallback<Genere>(){
-
-                            @Override
-                            public void onSuccess(Genere genere) {
-                                if(genere!=null){
-                                    llibre.setGenere(genere);
-                                }
-                            }
-
-                            @Override
-                            public void onError(int statusCode) {
-                                System.out.println("Error genere: " +statusCode);
-                            }
-
-                            @Override
-                            public void onFailure(Throwable throwable) {
-                                System.out.println("Failure genere: " + throwable.getMessage());
-                            }
-                        });
-
-
-                        //data publicacio
-                        String fecha = jsonObject.getString("data_publi");
-                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                        formatoFecha.setTimeZone(TimeZone.getTimeZone("UTC"));
-                        java.util.Date utilDate = formatoFecha.parse(fecha);
-                        Date sqlDate = new java.sql.Date(utilDate.getTime());
-                        llibre.setDataPubli(sqlDate);
-
-                        llibre.setStock(jsonObject.getInt("stock"));
-                        llibre.setVersio(jsonObject.getInt("versio"));
-
-
-
-
-
-
-                        //finalment enviar el llire objecte llibre montat
-                        callback.onSuccess(llibre);
-
-
-
-
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-                else
-                {
-                    //en cas d'error envio el codi d'error
-                    callback.onError(response.code());
-                }
-
-
-            }
-
-
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                callback.onFailure(t);
-            }
-        });//end callback
-
-
-
-
-    }*/
-
-
-
+  
 
 
 }
