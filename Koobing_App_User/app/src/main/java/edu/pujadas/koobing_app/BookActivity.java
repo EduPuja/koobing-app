@@ -50,7 +50,9 @@ public class BookActivity extends AppCompatActivity {
 
     LlibreService llibreService;
 
-    private String BASE_URL= "http://192.168.0.33:3000/";
+    //private String BASE_URL= "http://192.168.0.33:3000/";
+    private  String BASE_URL = "http://192.168.16.254:3000/";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
