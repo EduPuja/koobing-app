@@ -73,7 +73,7 @@ function registerUser(req,res)
 
     //valors de la consulta
     const values = [dni, avatar, nom, cognom, email, password];
-    const query = "INSERT INTO usuari (dni, avatar, nom, cognom, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+    const query = "INSERT INTO usuari (dni, avatar, nom, cognom, data_naix, email, password) VALUES (?, ?, ?, ?, CURRENT_DATE, ?, ?)";
     connection.query(query,values ,(error,result) =>{
       if(error)
       {
