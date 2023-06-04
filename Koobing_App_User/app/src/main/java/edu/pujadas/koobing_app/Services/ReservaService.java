@@ -18,4 +18,10 @@ public interface ReservaService {
     @GET("/llibresCancelats/{id_usuari}")
     Call<ResponseBody> obtenirLlibresCancelats(@Path("id_usuari") int id_usuari);
 
+    @GET("/llibresTornats/{id_usuari}")
+    Call<ResponseBody> obtenirLlibresTorants(@Path("id_usuari") int id_usuari);
+    @GET("/llibresPrestec/{id_usuari}")
+    Call<ResponseBody> obtenirLlibresPrestec(@Path("id_usuari") int id_usuari);
+
+
 }
