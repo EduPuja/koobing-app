@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -138,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "T'has donat d'alta correctament ! "+usuari.getNom() +" "+usuari.getCognom(), Toast.LENGTH_SHORT).show();;
                     UsuarioSingleton.getInstance().setUsuario(usuari);
                     Toast.makeText(getApplicationContext(), "Benvingut : "  +usuari.getNom() +" "+usuari.getCognom(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this,HomeActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
 

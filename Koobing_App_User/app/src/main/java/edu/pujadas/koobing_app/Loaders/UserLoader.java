@@ -69,7 +69,7 @@ public class UserLoader {
                             usuari.setNom(jsonObject.getString("nom"));
                             usuari.setCognom(jsonObject.getString("cognom"));
 
-                            
+
 
                             usuari.setEmail(jsonObject.getString("email"));
                             usuari.setPassword(jsonObject.getString("password"));
