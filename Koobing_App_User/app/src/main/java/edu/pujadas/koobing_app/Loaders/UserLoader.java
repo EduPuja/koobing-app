@@ -22,8 +22,9 @@ public class UserLoader {
     private UserService userService;
     private RetrofitConnection retrofit;
 
-    //private String url = "http://192.168.0.33:3000/users/";
+    private String url = "http://192.168.0.33:3000/users/";
 
+    //ip institut
     //private String url = "http://192.168.16.254:3000/users/";
 
     public UserLoader()
@@ -31,42 +32,8 @@ public class UserLoader {
 
     }
 
-    public void obtenerUsuarios(final ApiCallback<List<Usuari>> callback) {
 
-
-        String url ="http://192.168.16.254:3000/users/";
-
-       //String url ="http://192.168.0.33:3000/users/";
-
-        retrofit = new RetrofitConnection(url);
-        userService = retrofit.getRetrofit().create(userService.getClass());
-
-        Call<List<Usuari>> call = userService.getUsuaris();
-        call.enqueue(new Callback<List<Usuari>>() {
-            @Override
-            public void onResponse(Call<List<Usuari>> call, Response<List<Usuari>> response) {
-                if (response.isSuccessful()) {
-
-
-                    List<Usuari> usuarios = response.body();
-                    callback.onSuccess(usuarios);
-                } else {
-                    callback.onError(response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Usuari>> call, Throwable t) {
-                callback.onFailure(t);
-            }
-        });
-    }
-
-    public Usuari obtenerUsuarioPorCorreo(String correo, final ApiCallback<Usuari> callback) {
-
-
-        String url = "http://192.168.0.33:3000/user/" + correo+"/";
-       // String url = "http://192.168.16.254:3000/user/"+correo+"/";
+    public void obtenerUsuarioPorCorreo(String correo, final ApiCallback<Usuari> callback) {
 
         retrofit = new RetrofitConnection(url);
 
@@ -123,8 +90,6 @@ public class UserLoader {
                         catch (Exception e) {
                           e.printStackTrace();
                         }
-
-
                     }
 
                 }
@@ -137,16 +102,12 @@ public class UserLoader {
 
             }
 
-
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 callback.onFailure(t);
             }
         });//end callback
 
-
-        return null;
 
     }
 
