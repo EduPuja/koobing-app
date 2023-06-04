@@ -76,7 +76,7 @@ public class LlibreAdapter extends RecyclerView.Adapter<LlibreAdapter.LlibreView
                         String jsonBook = gson.toJson(book);
 
 
-                        intent.putExtra("llibreJson",jsonBook);
+                        intent.putExtra("bookGson",jsonBook);
                         itemView.getContext().startActivity(intent);
                     }
                 }
