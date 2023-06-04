@@ -13,6 +13,8 @@ import android.widget.Toast;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Locale;
 
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.UserService;
@@ -93,6 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     //encriptar la contrassenya
                     String hashedPasss =Validator.encryptPassword(password);
+
+                    usuari.setDataNaix(Date.valueOf(LocalDate.now().toString()));
                     usuari.setPassword(hashedPasss);
                     //enviar el usuari a treavés de peticio POST
                     sendUserPost(usuari);
