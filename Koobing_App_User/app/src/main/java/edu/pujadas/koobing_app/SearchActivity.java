@@ -104,6 +104,8 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        bottom_navigation.getMenu().getItem(0).setChecked(true);
+
     }
 
 

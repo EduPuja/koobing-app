@@ -90,7 +90,10 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
 
             }
+
         });
+
+        bottom_navigation.getMenu().getItem(1).setChecked(true);
 
     }
 

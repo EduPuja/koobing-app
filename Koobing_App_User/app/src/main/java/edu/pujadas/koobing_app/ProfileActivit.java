@@ -63,13 +63,17 @@ public class ProfileActivit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-        setBottom_navigation();
+
         //find by id
         nom = findViewById(R.id.userName);
         cognom = findViewById(R.id.userSurname);
         email = findViewById(R.id.userEmail);
         dni = findViewById(R.id.userDni);
         spinner = findViewById(R.id.spinner);
+        bottom_navigation = findViewById(R.id.bottom_navigation);
+
+        setBottom_navigation();
+
         // load info user
         loadInfoUser();
         // start the spinner
@@ -102,14 +106,14 @@ public class ProfileActivit extends AppCompatActivity {
                     // Navegar a la actividad MapActivity
                     //Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ProfileActivit.this, ProfileActivit.class));
-            
+
                     return true;
                 }
                 return false;
 
             }
         });
-
+        bottom_navigation.getMenu().getItem(2).setChecked(true);
     }
 
 
