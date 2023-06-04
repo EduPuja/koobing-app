@@ -22,10 +22,10 @@ public class UserLoader {
     private UserService userService;
     private RetrofitConnection retrofit;
 
-  //  private String url = "http://192.168.0.33:3000/users/";
+   private String url = "http://192.168.0.33:3000/users/";
 
     //ip institut
-    private String url = "http://192.168.16.254:3000/users/";
+  //  private String url = "http://192.168.16.254:3000/users/";
 
     public UserLoader()
     {

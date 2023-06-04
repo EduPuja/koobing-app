@@ -17,8 +17,8 @@ public class EditorialLoader {
     public void getEditorialById(int id, final ApiCallback<Editorial> callback) {
 
 
-        //String url = "http://192.168.0.33:3000/editor/" + id+"/";
-        String url = "http://192.168.16.254:3000/editor/" + id+"/";
+        String url = "http://192.168.0.33:3000/editor/" + id+"/";
+        //String url = "http://192.168.16.254:3000/editor/" + id+"/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
