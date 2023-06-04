@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2023 a las 11:35:22
+-- Tiempo de generación: 04-06-2023 a las 16:42:18
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -161,8 +161,8 @@ CREATE TABLE `llibre` (
 --
 
 INSERT INTO `llibre` (`ISBN`, `id_autor`, `id_editor`, `id_idioma`, `id_genere`, `titol`, `versio`, `data_publi`, `stock`) VALUES
-(765434231123, 8, 3, 1, 5, '1984', 1, '2023-05-02', 6),
-(9780807286005, 2, 3, 1, 1, 'Harry Potter y la piedra filosofal', 3, '2023-05-24', 5),
+(765434231123, 8, 3, 1, 5, '1984', 1, '2023-05-02', 4),
+(9780807286005, 2, 3, 1, 1, 'Harry Potter y la piedra filosofal', 3, '2023-05-24', 4),
 (9789510445365, 2, 3, 4, 2, 'Cien años de soledad', 1, '2023-05-16', 5),
 (12312312312312, 2, 3, 1, 2, 'Les Tres Bassones', 1, '2023-05-10', 1),
 (12376217637612, 10, 3, 2, 2, 'Camps de Meduixes', 1, '2023-05-11', 10);
@@ -196,10 +196,10 @@ INSERT INTO `reserva` (`id_prestec`, `ISBN`, `id_usuari`, `id_treballador`, `dat
 (23, 12312312312312, 12, 1, '2023-05-25', '2023-05-30', 1),
 (24, 9780807286005, 14, 1, '2023-05-25', '2023-05-30', 3),
 (25, 9780807286005, 14, 1, '2023-05-25', '2023-05-30', 1),
-(28, 765434231123, 12, 1, '2023-06-03', '0000-00-00', 1),
-(29, 765434231123, 12, 1, '2023-06-03', '0000-00-00', 1),
 (30, 765434231123, 12, 1, '2023-06-03', '2023-05-17', 1),
-(31, 12312312312312, 12, 1, '2023-06-04', '2023-07-16', 1);
+(31, 12312312312312, 12, 1, '2023-06-04', '2023-07-16', 1),
+(32, 12376217637612, 12, 1, '2023-06-04', '2023-05-13', 4),
+(33, 765434231123, 12, 1, '2023-06-04', '2023-05-25', 1);
 
 --
 -- Disparadores `reserva`
@@ -389,7 +389,7 @@ ALTER TABLE `idioma`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_prestec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_prestec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `treballador`
@@ -401,7 +401,7 @@ ALTER TABLE `treballador`
 -- AUTO_INCREMENT de la tabla `usuari`
 --
 ALTER TABLE `usuari`
-  MODIFY `id_usuari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_usuari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas
