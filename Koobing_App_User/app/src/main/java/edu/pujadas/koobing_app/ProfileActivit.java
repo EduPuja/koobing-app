@@ -1,16 +1,22 @@
 package edu.pujadas.koobing_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,7 +45,7 @@ public class ProfileActivit extends AppCompatActivity {
 
     String baseUrl = "http://192.168.0.33:3000/";
     TextView nom,cognom,email,dni;
-
+    BottomNavigationView bottom_navigation;
 
     LlibreLoader llibreLoader;
     LlibreAdapter bookAdapter;
@@ -56,6 +62,8 @@ public class ProfileActivit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
+
+        setBottom_navigation();
         //find by id
         nom = findViewById(R.id.userName);
         cognom = findViewById(R.id.userSurname);
@@ -69,13 +77,38 @@ public class ProfileActivit extends AppCompatActivity {
 
         listLlibres = new ArrayList<Llibre>();
         listReserva = new ArrayList<Reserva>();
-        //initialiazing the recycler view
-        /*recyclerView = findViewById(R.id.booksRecycler);
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        bookAdapter = new LlibreAdapter(listLlibres);
-        recyclerView.setAdapter(bookAdapter);*/
+
+
+    }
+
+
+    public void setBottom_navigation()
+    {
+        // menu inferior
+        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.navigation_home) {
+                    // Navegar a la actividad HomeActivity
+                    startActivity(new Intent(ProfileActivit.this, HomeActivity.class));
+                    return true;
+                } else if (itemId == R.id.search_bar) {
+                    // Navegar a la actividad SearchActivity
+                    startActivity(new Intent(ProfileActivit.this, SearchActivity.class));
+
+                    return true;
+                } else if (itemId == R.id.profile) {
+                    // Navegar a la actividad MapActivity
+                    //Toast.makeText(getApplicationContext(),"Mapa",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProfileActivit.this, ProfileActivit.class));
+            
+                    return true;
+                }
+                return false;
+
+            }
+        });
 
     }
 
