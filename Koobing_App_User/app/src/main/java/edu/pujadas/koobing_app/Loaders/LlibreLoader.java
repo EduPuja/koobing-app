@@ -49,9 +49,9 @@ public class LlibreLoader {
     public void obtenerLibrosfinal  (final ApiCallback<List<Llibre>> callback)
     {
 
-        String url = "http://192.168.0.33:3000/books/";
+       // String url = "http://192.168.0.33:3000/books/";
         //ip institutç
-        //String url = "http://192.168.16.254:3000/books/";
+        String url = "http://192.168.16.254:3000/books/";
 
 
         Retrofit retrofit = new Retrofit.Builder()
