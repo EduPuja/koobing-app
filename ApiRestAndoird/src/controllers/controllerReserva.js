@@ -6,7 +6,7 @@ function setReserva(req, res) {
   console.log("\nCreando una reserva");
   const reserva = req.body;
 
-  console.log("INFO reserva: ", reserva);
+  //console.log("INFO reserva: ", reserva);
   // Obtener los valores de la reserva
   const dataInici = new Date();
   //convertirn la data de finalizacio en un tipus date per que es pugui insertar correctament
