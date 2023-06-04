@@ -16,5 +16,7 @@ public interface ReservaService {
 
     @GET("/llibresReservats/{id_usuari}")
     Call<ResponseBody> obtenirLlibresReservats(@Path("id_usuari") int id_usuari);
+    @GET("/llibresTornats/{id_usuari}")
+    Call<ResponseBody> obtenirLlibresTornats(@Path("id_usuari") int id_usuari);
 
 }
