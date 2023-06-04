@@ -66,9 +66,29 @@ function getLlibresReservats(req,res)
   });
 }
 
+//funcio per veure els llistat de llibres cancelats
+function getLlibresCancelats(req, res)
+{
+  console.log("\nLlistat de llibres estat : Cancelat");
+  const usuari = req.params.id_usuari;
+  
+  const query = "select r.id_prestec,l.isbn,l.titol,r.data_inici,r.data_fi from llibre l inner join reserva r on r.ISBN=l.ISBN where r.id_estat=2 AND r.id_usuari=?";
+  connection.query(query,usuari,(error, results) => {
+    if(error)
+    {
+      console.error("Error al buscar el llistat de llibres reservats:" + error.message);
+    }
+    else{
+      res.json(results)
+    }
+
+  });
+}
+
 
 module.exports = {
   setReserva,
-  getLlibresReservats
+  getLlibresReservats,
+  getLlibresCancelats,
 };
 
