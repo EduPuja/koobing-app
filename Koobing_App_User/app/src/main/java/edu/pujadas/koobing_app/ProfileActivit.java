@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class ProfileActivit extends AppCompatActivity {
     LlibreLoader llibreLoader;
     LlibreAdapter bookAdapter;
     RecyclerView recyclerView;
+
+    Spinner spinner;
     private LinearLayoutManager layoutManager;
 
     List<Llibre> listLlibres;
@@ -34,6 +37,14 @@ public class ProfileActivit extends AppCompatActivity {
         cognom = findViewById(R.id.userSurname);
         email = findViewById(R.id.userEmail);
         dni = findViewById(R.id.userDni);
+        spinner = findViewById(R.id.spinner);
+
+        List<String> opciones = new ArrayList<>();
+        opciones.add("O");
+        opciones.add("Opción 2");
+        opciones.add("Opción 3");
+
+
 
         listLlibres = new ArrayList<Llibre>();
 
