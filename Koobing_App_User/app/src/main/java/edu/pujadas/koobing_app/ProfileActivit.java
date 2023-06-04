@@ -114,6 +114,7 @@ public class ProfileActivit extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String opcionSelected = opciones.get(position);
+                sendRequest(opcionSelected);
             }
 
             @Override
@@ -179,6 +180,7 @@ public class ProfileActivit extends AppCompatActivity {
 
 
                             }
+                            initRecyclerReseva(listReserva);
                         }
                         catch (Exception e)
                         {
@@ -208,6 +210,16 @@ public class ProfileActivit extends AppCompatActivity {
         {
 
         }
+    }
+
+    private void initRecyclerReseva(List<Reserva> listReserva)
+    {
+        recyclerView = findViewById(R.id.booksRecycler);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        reservaAdapter = new ReservaAdapter(listReserva);
+        recyclerView.setAdapter(bookAdapter);
     }
 
 }
