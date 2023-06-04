@@ -14,16 +14,19 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.LlibreAdapter;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
+import edu.pujadas.koobing_app.Models.Reserva;
 import edu.pujadas.koobing_app.Models.Usuari;
 import edu.pujadas.koobing_app.Services.ReservaService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import edu.pujadas.koobing_app.Utilites.UsuarioSingleton;
+import edu.pujadas.koobing_app.Utilites.Validator;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -139,8 +142,17 @@ public class ProfileActivit extends AppCompatActivity {
 
 
                                 int idPrestec = jsonObject.getInt("id_prestec");
-                                long ISBN = jsonObject.getLong("ISBN");
-                                
+                                long isbn = jsonObject.getLong("isbn");
+                                String titol = jsonObject.getString("titol");
+                                String dateIniciString = jsonObject.getString("data_inici");
+                                String dataFiString = jsonObject.getString("data_fi");
+
+
+                                Date sqlDateStart =Validator.convertirStringADateSQL(dateIniciString);
+                                Date sqlDateEnd =Validator.convertirStringADateSQL(dataFiString);
+
+                                Reserva reserva = new Reserva();
+                                reserva.
                             }
                         }
                         catch (Exception e)
