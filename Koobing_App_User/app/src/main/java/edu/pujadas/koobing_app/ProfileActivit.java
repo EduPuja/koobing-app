@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -99,10 +100,10 @@ public class ProfileActivit extends AppCompatActivity {
     public void startSpinner()
     {
         List<String> opciones = new ArrayList<>();
-        opciones.add("1.Reservats");
-        opciones.add("2.Cancelats");
-        opciones.add("3.Tornats");
-        opciones.add("4.En Prèstec");
+        opciones.add("Reservat");
+        opciones.add("Cancelat");
+        opciones.add("Tornat");
+        opciones.add("En Prèstec");
 
         ArrayAdapter<String> adapterSipnner = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, opciones);
         adapterSipnner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -114,7 +115,60 @@ public class ProfileActivit extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String opcionSelected = opciones.get(position);
-                sendRequest(opcionSelected);
+
+                if (opcionSelected.equals("Reservat")) {
+
+                    RetrofitConnection retrofitConnection = new RetrofitConnection(baseUrl);
+                    ReservaService reservaService = retrofitConnection.getRetrofit().create(ReservaService.class);
+                    Usuari usuari = UsuarioSingleton.getInstance().getUsuario();
+                    Call<ResponseBody> callReserv = reservaService.obtenirLlibresReservats(usuari.getId());
+                    callReserv.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                try {
+                                    String responseString = response.body().string();
+                                    JSONArray jsonArray = new JSONArray(responseString);
+                                    List<Reserva> listReserva = new ArrayList<>();
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                        int idPrestec =jsonObject.getInt("id_prestec");
+                                        long isbn = jsonObject.getLong("isbn");
+                                        String titol = jsonObject.getString("titol");
+                                        String dataIniciString = jsonObject.getString("data_inici");
+                                        String dataFiString = jsonObject.getString("data_fi");
+
+                                        Date dataInici = Validator.convertirStringADateSQL(dataIniciString);
+                                        Date dataEnd = Validator.convertirStringADateSQL(dataFiString);
+
+                                        Reserva reserva = new Reserva();
+                                        reserva.setIdReserva(idPrestec);
+
+                                        Llibre llibre = new Llibre();
+                                        llibre.setISBN(isbn);
+                                        llibre.setTitol(titol);
+                                        reserva.setLlibre(llibre);
+
+                                        reserva.setDataInici(dataInici);
+                                        reserva.setDataFI(dataEnd);
+
+                                        listReserva.add(reserva);
+                                    }
+                                    initRecyclerReseva(listReserva);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            // Manejar la falla en la llamada a la API
+                        }
+                    });
+                }
+
+                //sendRequest(opcionSelected);
             }
 
             @Override
@@ -125,92 +179,7 @@ public class ProfileActivit extends AppCompatActivity {
     }
 
 
-    public void sendRequest(String option)
-    {
-        if(option.equals("1.Reservats")) {
 
-            // fent la peticio per els reservats
-            RetrofitConnection retrofitConnection = new RetrofitConnection(baseUrl);
-
-            ReservaService reservaService = retrofitConnection.getRetrofit().create(ReservaService.class);
-            Usuari usuari =UsuarioSingleton.getInstance().getUsuario();
-            Call<ResponseBody> callReserv = reservaService.obtenirLlibresReservats(usuari.getId());
-            callReserv.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if(response.isSuccessful())
-                    {
-                        try {
-                            String responseString= response.body().string();
-                            JSONArray jsonArray =   new JSONArray(responseString);
-                            for(int i=0; i<jsonArray.length();i++)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-
-                                int idPrestec = jsonObject.getInt("id_prestec");
-
-                                // part del llibre
-                                long isbn = jsonObject.getLong("isbn");
-                                String titol = jsonObject.getString("titol");
-                                Llibre llibre = new Llibre();
-                                llibre.setISBN(isbn);
-                                llibre.setTitol(titol);
-
-
-                                String dateIniciString = jsonObject.getString("data_inici");
-                                String dataFiString = jsonObject.getString("data_fi");
-
-
-                                Date sqlDateStart =Validator.convertirStringADateSQL(dateIniciString);
-                                Date sqlDateEnd =Validator.convertirStringADateSQL(dataFiString);
-
-                                Reserva reserva = new Reserva();
-
-
-                                reserva.setIdReserva(idPrestec);
-                                reserva.setDataInici(sqlDateStart);
-                                reserva.setDataInici(sqlDateEnd);
-                                reserva.setLlibre(llibre);
-                                reserva.setEstat(1);
-
-                                listReserva.add(reserva);
-
-
-
-
-                            }
-                            initRecyclerReseva(listReserva);
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                }
-            });
-
-
-
-        }
-        else if(option.equals("2.Cancelats"))
-        {
-
-        }
-        else if(option.equals("3.Tornats"))
-        {
-
-        }
-        else if (option.equals("4.En Prèstec"))
-        {
-
-        }
-    }
 
     private void initRecyclerReseva(List<Reserva> listReserva)
     {
@@ -219,7 +188,7 @@ public class ProfileActivit extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         reservaAdapter = new ReservaAdapter(listReserva);
-        recyclerView.setAdapter(bookAdapter);
+        recyclerView.setAdapter(reservaAdapter);
     }
 
 }

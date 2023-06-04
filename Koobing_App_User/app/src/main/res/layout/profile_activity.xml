@@ -80,6 +80,7 @@
         tools:ignore="TextSizeCheck" />
 
     <Spinner
+
         android:id="@+id/spinner"
         android:layout_width="301dp"
         android:layout_height="48dp"
