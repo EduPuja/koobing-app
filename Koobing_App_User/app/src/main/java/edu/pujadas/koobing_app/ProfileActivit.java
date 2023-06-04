@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +21,13 @@ import edu.pujadas.koobing_app.Adapters.LlibreAdapter;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.Usuari;
+import edu.pujadas.koobing_app.Services.ReservaService;
 import edu.pujadas.koobing_app.Utilites.RetrofitConnection;
 import edu.pujadas.koobing_app.Utilites.UsuarioSingleton;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileActivit extends AppCompatActivity {
 
@@ -113,6 +121,40 @@ public class ProfileActivit extends AppCompatActivity {
 
             // fent la peticio per els reservats
             RetrofitConnection retrofitConnection = new RetrofitConnection(baseUrl);
+
+            ReservaService reservaService = retrofitConnection.getRetrofit().create(ReservaService.class);
+            Usuari usuari =UsuarioSingleton.getInstance().getUsuario();
+            Call<ResponseBody> callReserv = reservaService.obtenirLlibresReservats(usuari.getId());
+            callReserv.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if(response.isSuccessful())
+                    {
+                        try {
+                            String responseString= response.body().string();
+                            JSONArray jsonArray =   new JSONArray(responseString);
+                            for(int i=0; i<jsonArray.length();i++)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+
+                                int idPrestec = jsonObject.getInt("id_prestec");
+                                long ISBN = jsonObject.getLong("ISBN");
+                                
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
 
 
 
