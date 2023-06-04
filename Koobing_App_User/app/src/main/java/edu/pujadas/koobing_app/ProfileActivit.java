@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,10 +41,14 @@ public class ProfileActivit extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
 
         List<String> opciones = new ArrayList<>();
-        opciones.add("O");
-        opciones.add("Opción 2");
-        opciones.add("Opción 3");
+        opciones.add("1.Reservats");
+        opciones.add("2.Cancelats");
+        opciones.add("3.Tornats");
+        opciones.add("4.En Prèstec");
 
+        ArrayAdapter<String> adapterSipnner = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, opciones);
+        adapterSipnner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterSipnner);
 
 
         listLlibres = new ArrayList<Llibre>();
