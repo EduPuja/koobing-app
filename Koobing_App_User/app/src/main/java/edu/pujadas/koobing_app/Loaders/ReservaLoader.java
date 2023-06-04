@@ -17,7 +17,8 @@ public class ReservaLoader {
     ReservaService reservaService;
     public void obtenriLlibresReservats(int idUsuari, ApiCallback<Reserva> callback)
     {
-        String url = "http://192.168.0.33:3000/llibresReservats/"+idUsuari+"/";
+        //String url = "http://192.168.0.33:3000/llibresReservats/"+idUsuari+"/";
+        String url = "http://192.168.16.254:3000/llibresReservats/"+idUsuari+"/";
         RetrofitConnection connectionRetro = new RetrofitConnection(url);
         reservaService = connectionRetro.getRetrofit().create(ReservaService.class);
 
@@ -32,8 +33,6 @@ public class ReservaLoader {
                     {
                         String json = response.body().string();
                         JSONObject jsonObject = new JSONObject(json);
-
-                        //todo emplnar la reserva...
 
                     }
                     catch (Exception e)

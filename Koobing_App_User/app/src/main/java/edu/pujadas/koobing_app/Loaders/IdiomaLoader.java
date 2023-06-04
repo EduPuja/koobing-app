@@ -21,7 +21,8 @@ public class IdiomaLoader {
      * @param callback callback de tipus idioma
      */
     public void getIdiomaById(int id, final ApiCallback<Idioma> callback) {
-        String url = "http://192.168.0.33:3000/idioma/" + id+"/";
+        //String url = "http://192.168.0.33:3000/idioma/" + id+"/";
+        String url = "http:// 192.168.16.254:3000/idioma/" + id +"/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
