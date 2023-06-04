@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pujadas.koobing_app.Adapters.LlibreAdapter;
+import edu.pujadas.koobing_app.Adapters.ReservaAdapter;
 import edu.pujadas.koobing_app.Loaders.LlibreLoader;
 import edu.pujadas.koobing_app.Models.Llibre;
 import edu.pujadas.koobing_app.Models.Reserva;
