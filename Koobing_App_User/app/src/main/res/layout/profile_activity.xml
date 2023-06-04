@@ -6,38 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivit">
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/nom"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDni" />
-
-    <TextView
-        android:id="@+id/userSurname"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/cognom"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
-
-    <TextView
-        android:id="@+id/userEmail"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/email"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userSurname" />
 
     <TextView
         android:id="@+id/userDni"
@@ -46,14 +14,61 @@
         android:layout_marginTop="50dp"
         android:text="@string/dni"
         android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/nom"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDni"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/userSurname"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/cognom"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/email"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userSurname"
+        tools:ignore="TextSizeCheck" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/booksRecycler"
-        android:layout_width="388dp"
-        android:layout_height="318dp"
+        android:layout_width="340dp"
+        android:layout_height="289dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -61,5 +76,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        tools:ignore="TextSizeCheck" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="301dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userEmail"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
