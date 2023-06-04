@@ -56,12 +56,12 @@ public class RegisterActivity extends AppCompatActivity {
         String dni = dniField.getText().toString();
         String nom = nomField.getText().toString();
         String cognom = cognomField.getText().toString();
-
+        String dataNaixString = dataNaixField.getText().toString();
         String email = correuField.getText().toString();
         String password = passwordField.getText().toString();
 
 
-        if(dni.isEmpty() &&  nom.isEmpty() &&  cognom.isEmpty()  &&  email.isEmpty() && password.isEmpty())
+        if(dni.isEmpty() &&  nom.isEmpty() &&  dataNaixString.isEmpty() &&  cognom.isEmpty()  &&  email.isEmpty() && password.isEmpty())
         {
             // posar els editext en error
             String erroMsg = "Emplena aquest camps";
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             dniField.setError(erroMsg);
             nomField.setError(erroMsg);
             cognomField.setError(erroMsg);
-
+            dataNaixField.setError(erroMsg);
             correuField.setError(erroMsg);
             passwordField.setError(erroMsg);
         }
@@ -112,42 +112,18 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 
-
-
-
-
-
         }
 
 
-
-
-
-
-    }
-
-
-    private Date convertDate(String date)
-    {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            java.util.Date fechaUtil = dateFormat.parse(date);
-
-            Date dataNaixSql = new Date(fechaUtil.getTime());
-
-            return dataNaixSql;
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void sendUserPost(Usuari usuari)
     {
 
         //ip instutut
-        String url = "http://192.168.16.254:3000/register/";
+       // String url = "http://192.168.16.254:3000/register/";
         //ip home
-       // String url ="http://192.168.0.33:3000/register/";
+        String url ="http://192.168.0.33:3000/register/";
 
         RetrofitConnection retrofitConnection = new RetrofitConnection(url);
 
