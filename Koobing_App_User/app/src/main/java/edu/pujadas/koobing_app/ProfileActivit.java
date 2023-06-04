@@ -37,14 +37,19 @@ public class ProfileActivit extends AppCompatActivity {
 
     String baseUrl = "http://192.168.0.33:3000/";
     TextView nom,cognom,email,dni;
+
+
     LlibreLoader llibreLoader;
     LlibreAdapter bookAdapter;
+    ReservaAdapter reservaAdapter;
+
     RecyclerView recyclerView;
 
     Spinner spinner;
     private LinearLayoutManager layoutManager;
 
     List<Llibre> listLlibres;
+    List<Reserva> listReserva;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +66,7 @@ public class ProfileActivit extends AppCompatActivity {
         startSpinner();
 
         listLlibres = new ArrayList<Llibre>();
-
+        listReserva = new ArrayList<Reserva>();
         //initialiazing the recycler view
         /*recyclerView = findViewById(R.id.booksRecycler);
         layoutManager = new LinearLayoutManager(this);
@@ -167,7 +172,11 @@ public class ProfileActivit extends AppCompatActivity {
                                 reserva.setLlibre(llibre);
                                 reserva.setEstat(1);
 
-                                
+                                listReserva.add(reserva);
+
+
+
+
                             }
                         }
                         catch (Exception e)
