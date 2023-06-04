@@ -91,7 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                         UsuarioSingleton.getInstance().setUsuario(usuari);
 
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+
                         startActivity(intent);
+                        finish();
                     }
                     else
                     {
