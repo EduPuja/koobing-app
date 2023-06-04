@@ -193,6 +193,7 @@ public class ProfileActivit extends AppCompatActivity {
         else if(opcionSelected.equals("Cancelat"))
         {
             //cancelats
+            cancelats(opcionSelected);
         }
         else if(opcionSelected.equals("Tornat")){
 
@@ -264,12 +265,16 @@ public class ProfileActivit extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metode que et crea els llistat de cancelats
+     * @param optionSelected cancelats
+     */
     public void cancelats(String optionSelected)
     {
         RetrofitConnection retrofitConnection = new RetrofitConnection(baseUrl);
         ReservaService reservaService = retrofitConnection.getRetrofit().create(ReservaService.class);
         Usuari usuari = UsuarioSingleton.getInstance().getUsuario();
-        Call<ResponseBody> callReserv = reservaService.obtenirLlibresReservats(usuari.getId());
+        Call<ResponseBody> callReserv = reservaService.obtenirLlibresCancelats(usuari.getId());
         callReserv.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
