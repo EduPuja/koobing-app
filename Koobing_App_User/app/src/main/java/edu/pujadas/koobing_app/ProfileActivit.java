@@ -142,8 +142,15 @@ public class ProfileActivit extends AppCompatActivity {
 
 
                                 int idPrestec = jsonObject.getInt("id_prestec");
+
+                                // part del llibre
                                 long isbn = jsonObject.getLong("isbn");
                                 String titol = jsonObject.getString("titol");
+                                Llibre llibre = new Llibre();
+                                llibre.setISBN(isbn);
+                                llibre.setTitol(titol);
+
+
                                 String dateIniciString = jsonObject.getString("data_inici");
                                 String dataFiString = jsonObject.getString("data_fi");
 
@@ -152,7 +159,15 @@ public class ProfileActivit extends AppCompatActivity {
                                 Date sqlDateEnd =Validator.convertirStringADateSQL(dataFiString);
 
                                 Reserva reserva = new Reserva();
-                                reserva.
+
+
+                                reserva.setIdReserva(idPrestec);
+                                reserva.setDataInici(sqlDateStart);
+                                reserva.setDataInici(sqlDateEnd);
+                                reserva.setLlibre(llibre);
+                                reserva.setEstat(1);
+
+                                
                             }
                         }
                         catch (Exception e)
