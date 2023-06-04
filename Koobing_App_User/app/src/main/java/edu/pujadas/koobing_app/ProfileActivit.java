@@ -187,17 +187,18 @@ public class ProfileActivit extends AppCompatActivity {
         if (opcionSelected.equals("Reservat")) {
 
 
-            reservats(opcionSelected);
+            reservats();
         }
 
         else if(opcionSelected.equals("Cancelat"))
         {
             //cancelats
-            cancelats(opcionSelected);
+            cancelats();
         }
         else if(opcionSelected.equals("Tornat")){
 
         //torrants
+            tornats();
         }
         else if(opcionSelected.equals("En Prèstec"))
         {
@@ -207,10 +208,67 @@ public class ProfileActivit extends AppCompatActivity {
 
 
     /**
-     * Metode que es dels llibres tornats
-     * @param opcionSelected
+     * Metode per els llibres tornat
      */
-    public void reservats(String opcionSelected)
+    private void tornats() {
+        RetrofitConnection retrofitConnection = new RetrofitConnection(baseUrl);
+        ReservaService reservaService = retrofitConnection.getRetrofit().create(ReservaService.class);
+        Usuari usuari = UsuarioSingleton.getInstance().getUsuario();
+        Call<ResponseBody> callReserv = reservaService.obtenirLlibresTorants(usuari.getId());
+        callReserv.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String responseString = response.body().string();
+                        JSONArray jsonArray = new JSONArray(responseString);
+                        List<Reserva> listReserva = new ArrayList<>();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            int idPrestec =jsonObject.getInt("id_prestec");
+                            long isbn = jsonObject.getLong("isbn");
+                            String titol = jsonObject.getString("titol");
+                            String dataIniciString = jsonObject.getString("data_inici");
+                            String dataFiString = jsonObject.getString("data_fi");
+
+                            Date dataInici = Validator.convertirStringADateSQL(dataIniciString);
+                            Date dataEnd = Validator.convertirStringADateSQL(dataFiString);
+
+                            Reserva reserva = new Reserva();
+                            reserva.setIdReserva(idPrestec);
+
+                            Llibre llibre = new Llibre();
+                            llibre.setISBN(isbn);
+                            llibre.setTitol(titol);
+                            reserva.setLlibre(llibre);
+
+                            reserva.setDataInici(dataInici);
+                            reserva.setDataFI(dataEnd);
+
+                            listReserva.add(reserva);
+                        }
+                        initRecyclerReseva(listReserva);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // Manejar la falla en la llamada a la API
+
+                Toast.makeText(getApplicationContext(),"Failure "+t.getMessage() , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+    /**
+     * Metode que es dels llibres tornats
+     */
+    public void reservats()
     {
 
         RetrofitConnection retrofitConnection = new RetrofitConnection(baseUrl);
@@ -267,9 +325,8 @@ public class ProfileActivit extends AppCompatActivity {
 
     /**
      * Metode que et crea els llistat de cancelats
-     * @param optionSelected cancelats
      */
-    public void cancelats(String optionSelected)
+    public void cancelats()
     {
         RetrofitConnection retrofitConnection = new RetrofitConnection(baseUrl);
         ReservaService reservaService = retrofitConnection.getRetrofit().create(ReservaService.class);
