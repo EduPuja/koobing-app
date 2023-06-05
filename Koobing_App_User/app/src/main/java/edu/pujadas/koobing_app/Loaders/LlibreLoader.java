@@ -91,7 +91,9 @@ public class LlibreLoader {
      */
     public void obtenir10Llibres(final ApiCallback<List<Llibre>>callback)
     {
-        String url = "http://192.168.0.33:3000/books_10/";
+        //String url = "http://192.168.0.33:3000/books_10/";
+        String url = "http://192.168.17.42:3000/books_10/";
+
         //ip institutç
         //String url = "http://192.168.16.254:3000/books_10/";
 
