@@ -52,7 +52,7 @@ public class LlibreLoader {
 
        //String url = "http://192.168.0.33:3000/books/";
         //ip institutç
-        String url = "http://192.168.16.254:3000/books/";
+        String url = "http://192.168.17.42:3000/books/";
 
 
         Retrofit retrofit = new Retrofit.Builder()
