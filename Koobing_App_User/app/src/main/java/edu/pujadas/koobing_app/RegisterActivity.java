@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
     {
 
         //ip instutut
-        String url = "http://192.168.16.254:3000/register/";
+        String url = "http://192.168.17.42:3000/register/";
         //ip home
         //String url ="http://192.168.0.33:3000/register/";
 

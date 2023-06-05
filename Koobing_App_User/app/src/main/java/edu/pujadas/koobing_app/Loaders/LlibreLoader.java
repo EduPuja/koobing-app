@@ -26,7 +26,7 @@ public class LlibreLoader {
 
     //ip home
  //  private  String url = "http://192.168.0.33:3000/";
-    String url = "http://192.168.16.254:3000/";
+    String url = "http://192.168.17.42:3000/";
 
     private  LlibreService llibreService;
 

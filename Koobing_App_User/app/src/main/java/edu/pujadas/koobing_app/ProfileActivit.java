@@ -46,7 +46,7 @@ public class ProfileActivit extends AppCompatActivity {
   // String baseUrl = "http://192.168.0.33:3000/";
 
 
-   String baseUrl = "http://192.168.16.254:3000/";
+   String baseUrl = "http://192.168.17.42:3000/";
     TextView nom,cognom,email,dni;
     BottomNavigationView bottom_navigation;
 
