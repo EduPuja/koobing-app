@@ -15,7 +15,7 @@ La aplicación Koobing App User ofrece una interfaz intuitiva y funcional para q
 ## Instrucciones de Uso
 1. Clonar este repositorio.
 2. Instalar la aplicación en un dispositivo Android compatible.
-3. IMPORTANTE Tener en ejecución la documentación [API REST](./ApiRestAndoird)
+3. IMPORTANTE Tener en ejecución la documentación [API REST](../ApiRestAndoird)
 
 ## Estructura de Directorios
 - `/app`: Contiene los archivos y recursos específicos de la aplicación Android.
