@@ -27,3 +27,9 @@ Esta aplicación administrativa, parte del conjunto Koobing App, está diseñada
                     - `Database`:  Controllers de la aplicación frontend
                     - `Models` : Todos los objetos de la aplicación
                     - `Utilities`: Utilidades varias para la aplicación
+        -`resourse`: Todos los recursos de la aplicación
+             - `/edu pujadas`: Package edu pujadas 
+             - `/koobing_admin`: Package también
+                - `css`: # Arcivos CSS de la app
+                - `img`: # Imagenes de la aplicación
+                - `screens`: #Pantallas de la aplicación
